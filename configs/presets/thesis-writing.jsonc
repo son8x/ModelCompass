@@ -1,0 +1,33 @@
+{
+  // ─────────────────────────────────────────────────────────────
+  //  PRESET: THESIS-WRITING (Viết luận văn)
+  //  👉 Ưu tiên văn phong hàn lâm, tiếng Việt mượt, ngữ cảnh dài,
+  //     biết trích dẫn IEEE, kiểm định lại công thức/bảng biểu.
+  //  Khuyến nghị:
+  //    - Văn phong tiếng Việt + tổng hợp lý thuyết  : Claude Sonnet, GLM
+  //    - Diễn dịch nội dung dài / nhiều chương        : GPT-5.6 Terra/Turbo
+  //    - Duyệt lại trích dẫn, đếm lỗi chính tả        : Gemini Flash Lite
+  //  Cách dùng: copy entry provider cần vào development/opencode.jsonc.
+  // ─────────────────────────────────────────────────────────────
+  "$schema": "https://opencode.ai/config.json",
+
+  "model": "teamoRouter/claude-sonnet-5",
+
+  "provider": {
+    "teamoRouter": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "TeamoRouter (Thesis)",
+      "options": {
+        "baseURL": "https://api.teamorouter.cn/v1",
+        "apiKey": "{env:TEAMO_API_KEY}"
+      },
+      "models": {
+        "claude-sonnet-5": { "name": "Claude Sonnet 5 (đỉnh về văn phong + code)" },
+        "glm-5.3": { "name": "GLM-5.3 (tổng hợp tài liệu tốt, rẻ hơn)" },
+        "gpt-5.6-terra": { "name": "GPT-5.6 Terra (sustained session - viết dài)" },
+        "gemini-3.1-pro-preview": { "name": "Gemini 3.1 Pro (2M context - đọc toàn bộ luận văn)" },
+        "gemini-3.5-flash-lite": { "name": "Gemini 3.5 Flash Lite (duyệt lại, rẻ)" }
+      }
+    }
+  }
+}

@@ -1,0 +1,239 @@
+// ═══════════════════════════════════════════════════════════════════
+//  MODEL COMPASS — DEVELOPMENT CONFIG (BẢN ĐANG PHÁT TRIỂN)
+// ═══════════════════════════════════════════════════════════════════
+//  📌 Mục đích: nơi bạn SOẠN THỬ cấu hình mới cho opencode.
+//  - File này KHÔNG được dùng trực tiếp bởi opencode đang chạy.
+//  - Mọi thay đổi ở đây chưa đụng tới phiên làm việc hiện tại.
+//  - Chỉ sau khi TEST OK (scripts/Test-ModelConnectivity.ps1 + dùng thử)
+//    mới Promote lên /configs/production bằng scripts/Publish-Config.ps1.
+//
+//  ⚠️ Quy ước:
+//    - KHÔNG nhét API key thật vào file. Luôn dùng {env:BIEN_MOI_TRUONG}.
+//    - Chạy lại script validate trước khi publish.
+//
+//  🧭 Cách dùng:
+//  1. Copy block "provider" từ /configs/presets/*.jsonc (hoặc viết tay).
+//  2. Đổi "model" mặc định theo nhu cầu.
+//  3. PS scripts/Publish-Config.ps1   (validate -> promote lên production)
+//  4. Restart opencode để nạp cấu hình mới.
+// ═══════════════════════════════════════════════════════════════════
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // Model mặc định khi mở opencode (provider/model-id).
+  // 👉 Giữ free (đã test OK): xkiro-free/deepseek/deepseek-v4-pro.
+  //    Muốn dùng model gói Max, đổi sang "xkiro-max/<model-id>".
+  //    Để biết model nào nhanh/ổn, chạy:
+  //    PS scripts/Test-ModelConnectivity.ps1 -ConfigPath .\configs\development\opencode.jsonc
+  //
+  //  🎯 THỨ TỰ HIỂN THỊ TRONG /model = THỨ TỰ KHAI BÁO block "provider" Ở ĐÂY
+  //     (opencode giữ nguyên thứ tự khai báo — KHÔNG cần số đánh trước key/name).
+  //     Muốn đổi thứ tự: chỉ cần kéo lên/xuống block, không phải sửa số.
+  //     Thứ tự ưu tiên hiện tại:
+  //       1. xkiro-free → 2. xkiro-max → 3. omniroute-free
+  //       → 4. openrouter-free → 5. 9router → 6. teamoRouter
+  "model": "xkiro-free/deepseek/deepseek-v4-pro",
+
+  // Plugin OmniRoute: router model nội bộ (chạy local tại cổng 20217).
+  "plugin": [
+    [
+      "./plugins/omniroute/dist/index.js",
+      {
+        "providerId": "omniroute",
+        "baseURL": "http://127.0.0.1:20217",
+        "features": { "logLevel": "error" }
+      }
+    ]
+  ],
+
+  "provider": {
+    // ─── xKiro Free (model miễn phí trên mọi gói) ─────────────────
+    //  key: XTROUTER_API_KEY
+    //  Lưu ý: các model "qwen/*:free" cũ đã bị xKiro gỡ (404) 16/09/2026
+    //  — danh sách dưới là các free model đã ping thực tế OK trên gói Max.
+    "xkiro-free": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "xKiro Free (Best‑price multi‑model)",
+      "options": {
+        "baseURL": "https://api.xkiro.com/v1",
+        "apiKey": "{env:XTROUTER_API_KEY}"
+      },
+      "models": {
+        "minimax/minimax-m2.7:free": { "name": "MiniMax M2.7 (Free)" },
+        "minimax/minimax-m2.7-highspeed:free": { "name": "MiniMax M2.7 Highspeed (Free)" },
+        "minimax/minimax-m2.5:free": { "name": "MiniMax M2.5 (Free)" },
+        "minimax/minimax-m2.5-highspeed:free": { "name": "MiniMax M2.5 Highspeed (Free)" },
+        "minimax/minimax-m3:free": { "name": "MiniMax M3 (Free)" },
+        "minimax/minimax-m2.1:free": { "name": "MiniMax M2.1 (Free)" },
+        "minimax/minimax-m2.1-highspeed:free": { "name": "MiniMax M2.1 Highspeed (Free)" },
+        "minimax/minimax-m2:free": { "name": "MiniMax M2 (Free)" },
+        "deepseek/deepseek-v4-pro": { "name": "DeepSeek V4 Pro (Free)" },
+        "deepseek/deepseek-v4-flash": { "name": "DeepSeek V4 Flash (Free)" },
+        "deepseek/deepseek-v4.1-flash:free": { "name": "DeepSeek V4.1 Flash (Free)" },
+        "deepseek/deepseek-v3.2": { "name": "DeepSeek V3.2 (Free)" },
+        "deepseek/deepseek-chat-v3.1": { "name": "DeepSeek Chat V3.1 (Free)" },
+        "mistralai/codestral-2508": { "name": "Codestral 2508 (Free - chuyên code)" },
+        "mistralai/devstral-medium": { "name": "Devstral Medium (Free - dev)" },
+        "mistralai/mistral-large-2512": { "name": "Mistral Large 2512 (Free)" },
+        "mistralai/mistral-medium-3.5": { "name": "Mistral Medium 3.5 (Free)" },
+        "mistralai/mistral-small-2603": { "name": "Mistral Small 2603 (Free)" },
+        "mistralai/ministral-14b": { "name": "Ministral 14B (Free)" },
+        "mistralai/ministral-8b": { "name": "Ministral 8B (Free)" },
+        "mistralai/ministral-3b": { "name": "Ministral 3B (Free)" },
+        "sensenova/sensenova-6.7-flash-lite": { "name": "SenseNova 6.7 Flash Lite (Free)" },
+        "sensenova/sensenova-6.8-flash-lite": { "name": "SenseNova 6.8 Flash Lite (Free - đang 503 tạm)" },
+        "openai/gpt-5.3-codex-spark": { "name": "GPT-5.3 Codex Spark (Free - code, đang 503 tạm)" }
+      }
+    },
+
+    // ─── xKiro Max (gói $20/tháng - model paid) ────────────────────
+    //  key: XTROUTER_API_KEY (cùng key, đã nâng cấp lên Max 16/09/2026)
+    //  Gói Max phủ toàn bộ model tier "paid" + "free".
+    //  ⚠️ KHÔNG nằm trong gói (cần nạp wallet / Ultra/Power):
+    //     gemini-*, qwen3.x-*max/plus, minimax-m3, kimi-k3, kimi-k2.7-code,
+    //     deepseek-v4-pro-0813, deepseek-v4.1-flash, gpt-6-astra.
+    "xkiro-max": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "xKiro Max (Paid - gói Max)",
+      "options": {
+        "baseURL": "https://api.xkiro.com/v1",
+        "apiKey": "{env:XTROUTER_API_KEY}"
+      },
+      "models": {
+        "anthropic/claude-sonnet-5": { "name": "Claude Sonnet 5 (In:$1.80 | Out:$9.00 - Agent coding đỉnh, 1M ctx)" },
+        "anthropic/claude-opus-5": { "name": "Claude Opus 5 (In:$4.50 | Out:$22.50 - Reasoning cao cấp)" },
+        "anthropic/claude-fable-5": { "name": "Claude Fable 5 (In:$9.00 | Out:$45.00 - Mạnh nhất Anthropic)" },
+        "anthropic/claude-haiku-4.5": { "name": "Claude Haiku 4.5 (In:$0.90 | Out:$4.50 - Nhanh, rẻ)" },
+        "anthropic/claude-opus-4.8": { "name": "Claude Opus 4.8 (In:$4.50 | Out:$22.50)" },
+        "anthropic/claude-sonnet-4.6": { "name": "Claude Sonnet 4.6 (In:$2.70 | Out:$13.50)" },
+        "openai/gpt-5.6-sol": { "name": "GPT-5.6 Sol (In:$4.50 | Out:$27.00 - Flagship OpenAI)" },
+        "openai/gpt-5.6-terra": { "name": "GPT-5.6 Terra (In:$1.00 | Out:$6.00 - Sustained context dài)" },
+        "openai/gpt-5.6-luna": { "name": "GPT-5.6 Luna (In:$0.10 | Out:$0.60 - Reasoning rẻ nhất paid)" },
+        "openai/gpt-5.5": { "name": "GPT-5.5 (In:$4.50 | Out:$27.00)" },
+        "openai/gpt-5.4": { "name": "GPT-5.4 (In:$2.25 | Out:$13.50)" },
+        "openai/gpt-5.4-mini": { "name": "GPT-5.4 Mini (In:$0.675 | Out:$4.05 - Rẻ còn mạnh)" },
+        "x-ai/grok-4.6": { "name": "Grok 4.6 (In:$1.00 | Out:$3.00 - Agentic fast)" },
+        "x-ai/grok-4.5": { "name": "Grok 4.5 (In:$1.00 | Out:$3.00)" },
+        "x-ai/grok-build-0.1": { "name": "Grok Build 0.1 (In:$0.50 | Out:$1.00 - Coding rẻ)" },
+        "z-ai/glm-5.3": { "name": "GLM-5.3 (In:$1.40 | Out:$4.40 - Coding / tiếng Việt tốt)" },
+        "z-ai/glm-5.2": { "name": "GLM-5.2 (In:$1.40 | Out:$4.40)" },
+        "z-ai/glm-5.1": { "name": "GLM-5.1 (In:$1.40 | Out:$4.40)" },
+        "z-ai/glm-5": { "name": "GLM-5 (In:$1.00 | Out:$3.20)" },
+        "moonshotai/kimi-k2.6": { "name": "Kimi K2.6 (In:$0.475 | Out:$2.00 - Long context coding)" },
+        "moonshotai/kimi-k2.5": { "name": "Kimi K2.5 (In:$0.285 | Out:$1.425)" },
+        "nvidia/nemotron-3-super": { "name": "Nemotron 3 Super (In:$0.08 | Out:$0.45 - 1M ctx siêu rẻ)" },
+        "nvidia/nemotron-3-ultra": { "name": "Nemotron 3 Ultra (In:$0.50 | Out:$2.20)" }
+      }
+    },
+
+    // ─── OmniRoute Free (model mạnh, miễn phí) ─────────────────────
+    //  key: OMNIROUTE_KEY
+    "omniroute-free": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "OmniRoute Free (Model mạnh nhất)",
+      "options": {
+        "baseURL": "http://127.0.0.1:20217/v1",
+        "apiKey": "{env:OMNIROUTE_KEY}"
+      },
+      "models": {
+        "cfp/zai-org/glm-5.2": { "name": "GLM-5.2 (Free - Cloudflare)" },
+        "cfp/moonshotai/kimi-k2.7-code": { "name": "Kimi K2.7 Code (Free - Cloudflare)" },
+        "cfp/nvidia/nemotron-3-120b-a12b": { "name": "Nemotron 3 120B (Free - Cloudflare)" },
+        "cfp/qwen/qwen3-30b-a3b-fp8": { "name": "Qwen3 30B A3B (Free - Cloudflare)" },
+        "cfp/openai/gpt-oss-120b": { "name": "GPT-OSS 120B (Free - Cloudflare)" },
+        "cfp/deepseek-ai/deepseek-v4-pro-0813": { "name": "DeepSeek V4 Pro (Free - Cloudflare)" },
+        "cfp/deepseek-ai/deepseek-v4-flash-0731": { "name": "DeepSeek V4 Flash (Free - Cloudflare)" },
+        "cfp/qwen/qwen2.5-coder-32b-instruct": { "name": "Qwen 2.5 Coder 32B (Free - Cloudflare)" },
+        "groq/qwen/qwen3.8-27b": { "name": "Qwen3.8 27B (Free - Groq)" },
+        "groq/openai/gpt-oss-120b": { "name": "GPT-OSS 120B (Free - Groq)" },
+        "groq/qwen/qwen3.6-27b": { "name": "Qwen3.6 27B (Free - Groq)" },
+        "gemini/gemini-3.1-flash-lite": { "name": "Gemini 3.1 Flash Lite (Free - 1M ctx)" },
+        "gemini/gemini-2.5-flash-8b-preview-05-20": { "name": "Gemini 2.5 Flash 8B (Free Daily)" }
+      }
+    },
+
+    // ─── OpenRouter Free (qua OmniRoute local) ─────────────────────
+    "openrouter-free": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "OpenRouter Free",
+      "options": {
+        "baseURL": "http://127.0.0.1:20217/v1",
+        "apiKey": "{env:OMNIROUTE_KEY}"
+      },
+      "models": {
+        "openrouter/inclusionai/ling-3.0-flash-sante:free": { "name": "Ling 3.0 Flash (Free - OpenRouter)" },
+        "openrouter/nvidia/nemotron-3-super-120b-a12b:free": { "name": "Nemotron 3 Super 120B (Free - OpenRouter)" },
+        "openrouter/cohere/north-mini-code:free": { "name": "North Mini Code (Free - OpenRouter)" },
+        "openrouter/poolside/laguna-s-2.1:free": { "name": "Laguna S 2.1 (Free - OpenRouter)" }
+      }
+    },
+
+    // ─── 9Router (router local) ────────────────────────────────────
+    //  key: NINE_ROUTER_API_KEY
+    "9router": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "9Router (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:20128/v1",
+        "apiKey": "{env:NINE_ROUTER_API_KEY}"
+      },
+      "models": {
+        "ollama/gpt-oss:120b": { "name": "GPT-OSS 120B (Free - 9Router)" },
+        "gemini/gemini-3.8-flash": { "name": "Gemini 3.8 Flash (Free - 9Router)" }
+      }
+    },
+
+    // ─── TeamoRouter (giá ưu đãi, có mô hình miễn phí) ─────────────
+    //  key: TEAMO_API_KEY
+    "teamoRouter": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "TeamoRouter (Discount & Thesis)",
+      "options": {
+        "baseURL": "https://api.teamorouter.cn/v1",
+        "apiKey": "{env:TEAMO_API_KEY}"
+      },
+      "models": {
+        "deepseek-v4-flash-free": { "name": "DeepSeek V4 Flash Free (In:$0.00 | Out:$0.00 - Miễn phí)" },
+        "glm-5.3-flash-free": { "name": "GLM-5.3 Flash Free (In:$0.00 | Out:$0.00 - Miễn phí)" },
+        "gpt-5.4-mini": { "name": "GPT-5.4-Mini (In:$0.09 | Out:$0.51 - Rẻ nhất còn mạnh)" },
+        "gpt-5.6-luna": { "name": "GPT-5.6 Luna (In:$0.11 | Out:$0.64 - Reasoning rẻ ổn định)" },
+        "deepseek-v4-flash": { "name": "DeepSeek V4 Flash (In:$0.14 | Out:$0.28 - Fast reasoning)" },
+        "gpt-5.6-terra": { "name": "GPT-5.6 Terra (In:$0.27 | Out:$1.61 - Sustained session)" },
+        "gemini-3.1-pro-preview": { "name": "Gemini 3.1 Pro (In:$0.29 | Out:$1.73 - 2M Context)" },
+        "gemini-3.5-flash-lite": { "name": "Gemini 3.5 Flash Lite (In:$0.30 | Out:$2.50 - Rẻ, nhanh)" },
+        "claude-haiku-4-5": { "name": "Claude Haiku 4.5 (In:$0.40 | Out:$2.00 - Nhanh)" },
+        "deepseek-v4-pro": { "name": "DeepSeek V4 Pro (In:$0.435 | Out:$0.87 - Reasoning chuyên)" },
+        "claude-sonnet-5": { "name": "Claude Sonnet 5 (In:$0.50 | Out:$2.52 - Coding agent đỉnh)" },
+        "glm-5.3": { "name": "GLM-5.3 (In:$1.40 | Out:$4.40 - Cao cấp)" }
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  🆕 THÊM PROVIDER MỚI TẠI ĐÂY (ví dụ):
+    //  "my-provider": {
+    //    "npm": "@ai-sdk/openai-compatible",
+    //    "name": "My Provider",
+    //    "options": {
+    //      "baseURL": "https://api.example.com/v1",
+    //      "apiKey": "{env:MY_PROVIDER_KEY}"
+    //    },
+    //    "models": {
+    //      "my-model": { "name": "My Model (Free)" }
+    //    }
+    //  }
+    //  👉 Vị trí block quyết định thứ tự hiển thị trong /model.
+    // ─────────────────────────────────────────────────────────────
+  }
+}
+// ═══════════════════════════════════════════════════════════════════
+//  LUỒNG PUBLISH (BẮT BUỘC):
+//  1) scripts/Test-ModelCompassConfig.ps1 -Path configs\development\opencode.jsonc
+//     -> Kiểm tra cú pháp + cấu trúc.
+//  2) scripts/Test-ModelConnectivity.ps1 -ConfigPath configs\development\opencode.jsonc
+//     -> Ping từng provider/model (cần dịch vụ local + API key).
+//  3) Test thực tế bằng opencode với cấu hình development tạm:
+//     $env:OPENCODE_CONFIG = "D:\...\01-ModelCompass\configs\development\opencode.jsonc"; opencode
+//  4) Mọi thứ OK -> scripts/Publish-Config.ps1 (tự validate + backup + promote).
+//  5) scripts/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
+//  6) Quit & restart opencode.
+// ═══════════════════════════════════════════════════════════════════

@@ -1,0 +1,39 @@
+# ── ModelCompass ────────────────────────────────────────────────
+#  🔐 BẢO MẬT KEY: mọi file môi trường (.env, .env.local, *.env*)
+#  đều BỊ IGNORE — KHÔNG BAO GIỜ được commit lên GitHub.
+#
+#  Quy ước:
+#    .env.local       → key thật, chỉ tồn tại trên máy (bị ignore)
+#    .env.sample      → MẪU chứa TÊN TRƯỜNG + placeholder, được commit
+#
+#  Nếu lỡ commit nhầm file secret, xoá khỏi index ngay:
+#    git rm --cached <file> && git commit -m "chore: remove leaked env file"
+
+# Cấu hình chứa secret / thông tin máy cá nhân
+.env
+.env.local
+.env.*
+*.local.json
+!*.local.json.example
+
+# Ngoại lệ: MẪU an toàn (chỉ tên trường, KHÔNG có giá trị thật)
+!.env.sample
+!.env.example
+
+# Backup cấu hình tạo bởi scripts
+configs/production/.backup/
+configs/**/*.bak*
+*.bak-*
+
+# Báo cáo test / logs
+reports/
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Node (dự phòng khi chạy test plugin)
+node_modules/

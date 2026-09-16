@@ -1,0 +1,35 @@
+{
+  // ─────────────────────────────────────────────────────────────
+  //  PRESET: FASTEST-PAID (giá rẻ nhất trong nhóm trả phí)
+  //  👉 Dùng khi cần model trả phí nhưng vẫn tiết kiệm.
+  //     Không cần "tốt nhất" — cần "đủ tốt + rẻ + nhanh".
+  //  Giá (USD / triệu token, input|output) cập nhật 08-2026:
+  //    DeepSeek V4 Flash    $0.14|$0.28
+  //    GPT-5.6 Luna         $0.20|$1.20   (giảm giá 30/07/2026)
+  //    Gemini 3.1 FlashLite $0.25|$1.50
+  //    Claude Haiku 4.5     $1.00|$5.00
+  //    DeepSeek V4 Pro      $0.435|$0.87  (reasoning chuyên sâu)
+  //  Cách dùng: copy entry provider cần vào development/opencode.jsonc.
+  // ─────────────────────────────────────────────────────────────
+  "$schema": "https://opencode.ai/config.json",
+
+  "model": "teamoRouter/deepseek-v4-flash",
+
+  "provider": {
+    "teamoRouter": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "TeamoRouter (Giá ưu đãi)",
+      "options": {
+        "baseURL": "https://api.teamorouter.cn/v1",
+        "apiKey": "{env:TEAMO_API_KEY}"
+      },
+      "models": {
+        "deepseek-v4-flash": { "name": "DeepSeek V4 Flash ($0.14|$0.28 - rẻ nhất, nhanh)" },
+        "gpt-5.6-luna": { "name": "GPT-5.6 Luna ($0.20|$1.20 - OpenAI rẻ)" },
+        "deepseek-v4-pro": { "name": "DeepSeek V4 Pro ($0.435|$0.87 - reasoning)" },
+        "gemini-3.5-flash-lite": { "name": "Gemini 3.5 Flash Lite ($0.30|$2.50)" },
+        "claude-haiku-4-5": { "name": "Claude Haiku 4.5 ($1|$5 - Claude nhanh nhất)" }
+      }
+    }
+  }
+}

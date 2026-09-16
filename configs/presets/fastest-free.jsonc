@@ -1,0 +1,47 @@
+{
+  // ─────────────────────────────────────────────────────────────
+  //  PRESET: FASTEST-FREE
+  //  👉 Model MIỄN PHÍ + tốc độ cao — dùng cho lập trình hàng ngày,
+  //     fix lỗi, script nhanh. Không tốn chi phí API.
+  //  Cách dùng: copy các entry "provider" cần thiết vào
+  //  development/opencode.jsonc rồi test.
+  //  Lưu ý: model free có rate-limit; nếu gặp tải cao hãy quay lại
+  //  "omniroute-free" thay cho 1 provider duy nhất.
+  // ─────────────────────────────────────────────────────────────
+  "$schema": "https://opencode.ai/config.json",
+
+  // Model mặc định nhanh nhất cho code miễn phí:
+  "model": "openrouter-free/openrouter/cohere/north-mini-code:free",
+
+  "provider": {
+    // Nhóm này gộp các model free tốc độ cao nhất từ OmniRoute/OpenRouter:
+    "openrouter-free": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "OpenRouter Free (Fastest)",
+      "options": {
+        "baseURL": "http://127.0.0.1:20217/v1",
+        "apiKey": "{env:OMNIROUTE_KEY}"
+      },
+      "models": {
+        "openrouter/cohere/north-mini-code:free": { "name": "North Mini Code (Free - siêu nhanh, chuyên code)" },
+        "openrouter/inclusionai/ling-3.0-flash-sante:free": { "name": "Ling 3.0 Flash (Free - nhanh, đa năng)" },
+        "openrouter/nvidia/nemotron-3-super-120b-a12b:free": { "name": "Nemotron 3 Super 120B (Free - mạnh nhất nhóm)" },
+        "openrouter/poolside/laguna-s-2.1:free": { "name": "Laguna S 2.1 (Free - coding)" }
+      }
+    },
+    "omniroute-free": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "OmniRoute Free (Cloudflare/Groq)",
+      "options": {
+        "baseURL": "http://127.0.0.1:20217/v1",
+        "apiKey": "{env:OMNIROUTE_KEY}"
+      },
+      "models": {
+        "groq/qwen/qwen3.8-27b": { "name": "Qwen3.8 27B (Free - Groq, cực nhanh)" },
+        "groq/openai/gpt-oss-120b": { "name": "GPT-OSS 120B (Free - Groq)" },
+        "cfp/deepseek-ai/deepseek-v4-flash-0731": { "name": "DeepSeek V4 Flash (Free - Cloudflare)" },
+        "cfp/zai-org/glm-5.2": { "name": "GLM-5.2 (Free - Cloudflare, mạnh)" }
+      }
+    }
+  }
+}

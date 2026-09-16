@@ -1,0 +1,75 @@
+# ─────────────────────────────────────────────────────────────
+# ModelCompass — CI validate cấu hình
+# Chạy trên mỗi push/PR đụng tới thư mục configs/.
+# Đảm bảo chỉ cấu hình hợp lệ (cú pháp + cấu trúc) mới được
+# đưa vào nhánh chính / production.
+# ─────────────────────────────────────────────────────────────
+name: validate-configs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'configs/**'
+  pull_request:
+    paths:
+      - 'configs/**'
+
+jobs:
+  validate:
+    name: Validate opencode configs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate production config
+        shell: pwsh
+        run: |
+          & ./scripts/Test-ModelCompassConfig.ps1 -Path configs/production/opencode.json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Validate development config
+        shell: pwsh
+        run: |
+          & ./scripts/Test-ModelCompassConfig.ps1 -Path configs/development/opencode.jsonc
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Validate presets (không strict — env không có trong CI)
+        shell: pwsh
+        run: |
+          Get-ChildItem configs/presets -Filter '*.jsonc' | Where-Object {
+            $_.Name -ne 'README.md'
+          } | ForEach-Object {
+            Write-Host "  → $($_.FullName)"
+            & ./scripts/Test-ModelCompassConfig.ps1 -Path $_.FullName
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+
+      - name: Check API keys không nằm trong repo
+        shell: pwsh
+        run: |
+          $leaks = Select-String -Path (Get-ChildItem configs -Recurse -File).FullName `
+                      -Pattern '(sk-[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_-]{20,}|Bearer\s+[A-Za-z0-9._-]{20,})' `
+                      -AllMatches
+          if ($leaks) {
+            Write-Error "Phát hiện chuỗi giống API key trong config:"
+            $leaks | ForEach-Object { Write-Error "  $($_.Path):$($_.LineNumber)" }
+            exit 1
+          }
+          Write-Host 'OK — không thấy API key trong configs/.'
+
+      - name: Chặn file env secret bị theo dõi trong Git
+        shell: pwsh
+        run: |
+          # Cho phép duy nhất .env.sample / .env.example (mẫu không chứa giá trị)
+          $bad = git ls-files | Where-Object {
+            $_ -match '(?:^|/)\.env(?:\.|$)' -and $_ -notmatch '\.env\.(sample|example)$'
+          }
+          if ($bad) {
+            Write-Error 'Có file env chứa secret đang được theo dõi trong Git:'
+            $bad | ForEach-Object { Write-Error "  $_" }
+            Write-Error 'Khắc phục: git rm --cached <file> rồi đổi key trên dashboard nhà cung cấp.'
+            exit 1
+          }
+          Write-Host 'OK — không có file .env/.env.local trong index (chỉ chấp nhận mẫu an toàn).'
