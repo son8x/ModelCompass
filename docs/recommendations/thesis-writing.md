@@ -11,22 +11,22 @@ tốc độ cực nhanh.
 
 | Mức | Model ID (provider/model) | Giá (~/1M) | Điểm mạnh |
 |---|---|---|---|
-| 🏆 Tổng hợp + văn phong | `teamoRouter/claude-sonnet-5` | ~$2/$10 | văn tiếng Việt tự nhiên, 1M context đọc cả chương, không phụ phí context dài |
-| 🏆 Tiết kiệm | `teamoRouter/glm-5.3` | ~$1.40/$4.40 | tóm tắt và triển khai lý thuyết tốt |
-| 🏆 Đọc cả luận văn | `teamoRouter/gemini-3.1-pro-preview` | ~$0.29/$1.73 | 2M context — nạp nguyên tài liệu + template |
-| 🏆 Rà soát/copy-edit | `teamoRouter/gemini-3.5-flash-lite` | ~$0.30/$2.50 | kiểm tra lỗi chính tả, thống nhất mục lục, rẻ |
+| 🏆 Tổng hợp + văn phong | `6-teamoRouter/claude-sonnet-5` | ~$2/$10 | văn tiếng Việt tự nhiên, 1M context đọc cả chương, không phụ phí context dài |
+| 🏆 Tiết kiệm | `6-teamoRouter/glm-5.3` | ~$1.40/$4.40 | tóm tắt và triển khai lý thuyết tốt |
+| 🏆 Đọc cả luận văn | `6-teamoRouter/gemini-3.1-pro-preview` | ~$0.29/$1.73 | 2M context — nạp nguyên tài liệu + template |
+| 🏆 Rà soát/copy-edit | `6-teamoRouter/gemini-3.5-flash-lite` | ~$0.30/$2.50 | kiểm tra lỗi chính tả, thống nhất mục lục, rẻ |
 
 ## Dự phòng
 
-- `teamoRouter/gpt-5.6-terra` — session dài (viết liên tục nhiều giờ).
-- `omniroute-free/cfp/zai-org/glm-5.2` — $0 khi tài chính eo hẹp, chất lượng khá.
+- `6-teamoRouter/gpt-5.6-terra` — session dài (viết liên tục nhiều giờ).
+- `3-omniroute-free/cfp/zai-org/glm-5.2` — $0 khi tài chính eo hẹp, chất lượng khá.
 
 ## Gợi ý thiết lập opencode (cho dự án luận văn)
 
 ```jsonc
 // dành riêng cho thư mục luận văn (project config .opencode/opencode.json)
-"model": "teamoRouter/claude-sonnet-5",
-"small_model": "teamoRouter/gemini-3.5-flash-lite"
+"model": "6-teamoRouter/claude-sonnet-5",
+"small_model": "6-teamoRouter/gemini-3.5-flash-lite"
 ```
 
 ## Quy trình viết luận văn với agent

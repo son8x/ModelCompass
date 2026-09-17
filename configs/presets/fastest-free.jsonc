@@ -6,18 +6,18 @@
   //  Cách dùng: copy các entry "provider" cần thiết vào
   //  development/opencode.jsonc rồi test.
   //  Lưu ý: model free có rate-limit; nếu gặp tải cao hãy quay lại
-  //  "omniroute-free" thay cho 1 provider duy nhất.
+  //  "3-omniroute-free" thay cho 1 provider duy nhất.
   // ─────────────────────────────────────────────────────────────
   "$schema": "https://opencode.ai/config.json",
 
   // Model mặc định nhanh nhất cho code miễn phí:
-  "model": "openrouter-free/openrouter/cohere/north-mini-code:free",
+  "model": "4-openrouter-free/openrouter/cohere/north-mini-code:free",
 
   "provider": {
     // Nhóm này gộp các model free tốc độ cao nhất từ OmniRoute/OpenRouter:
-    "openrouter-free": {
+    "4-openrouter-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "OpenRouter Free (Fastest)",
+      "name": "4. OpenRouter Free (Fastest)",
       "options": {
         "baseURL": "http://127.0.0.1:20217/v1",
         "apiKey": "{env:OMNIROUTE_KEY}"
@@ -29,9 +29,9 @@
         "openrouter/poolside/laguna-s-2.1:free": { "name": "Laguna S 2.1 (Free - coding)" }
       }
     },
-    "omniroute-free": {
+    "3-omniroute-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "OmniRoute Free (Cloudflare/Groq)",
+      "name": "3. OmniRoute Free (Cloudflare/Groq)",
       "options": {
         "baseURL": "http://127.0.0.1:20217/v1",
         "apiKey": "{env:OMNIROUTE_KEY}"

@@ -35,7 +35,7 @@
 
 .EXAMPLE
     PS scripts\Test-ModelConnectivity.ps1
-    PS scripts\Test-ModelConnectivity.ps1 -Provider 'teamoRouter' -Report
+    PS scripts\Test-ModelConnectivity.ps1 -Provider '6-teamoRouter' -Report
 #>
 [CmdletBinding()]
 param(

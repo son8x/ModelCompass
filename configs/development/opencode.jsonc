@@ -21,18 +21,23 @@
   "$schema": "https://opencode.ai/config.json",
 
   // Model mặc định khi mở opencode (provider/model-id).
-  // 👉 Giữ free (đã test OK): xkiro-free/deepseek/deepseek-v4-pro.
-  //    Muốn dùng model gói Max, đổi sang "xkiro-max/<model-id>".
+  // 👉 Giữ free (đã test OK): 1-xkiro-free/deepseek/deepseek-v4-pro.
+  //    Muốn dùng model gói Max, đổi sang "2-xkiro-max/<model-id>".
   //    Để biết model nào nhanh/ổn, chạy:
   //    PS scripts/Test-ModelConnectivity.ps1 -ConfigPath .\configs\development\opencode.jsonc
   //
-  //  🎯 THỨ TỰ HIỂN THỊ TRONG /model = THỨ TỰ KHAI BÁO block "provider" Ở ĐÂY
-  //     (opencode giữ nguyên thứ tự khai báo — KHÔNG cần số đánh trước key/name).
-  //     Muốn đổi thứ tự: chỉ cần kéo lên/xuống block, không phải sửa số.
+  //  🎯 THỨ TỰ HIỂN THỊ TRONG /model = SẮP XẾP THEO KEY (provider id)
+  //     (build opencode này xếp nhóm provider theo key/name theo bảng chữ cái,
+  //     nên PHẢI đánh số 1-, 2-, … ở đầu key VÀ name mỗi provider).
+  //     Muốn đổi thứ tự: chỉ cần sửa lại số, không cần di chuyển block.
   //     Thứ tự ưu tiên hiện tại:
-  //       1. xkiro-free → 2. xkiro-max → 3. omniroute-free
-  //       → 4. openrouter-free → 5. 9router → 6. teamoRouter
-  "model": "xkiro-free/deepseek/deepseek-v4-pro",
+  //       1-xkiro-free → 2-xkiro-max → 3-omniroute-free
+  //       → 4-openrouter-free → 5-9router → 6-teamoRouter
+  //
+  //  🎯 THỨ TỰ MODEL TRONG MỖI NHÓM = sort theo "release_date" GIẢM DẦN (rồi name A→Z),
+  //     KHÔNG theo thứ tự khai báo. Các provider xKiro gán release_date tổng hợp (2099-…)
+  //     làm khoá sắp xếp — xem ghi chú trong block "provider" bên dưới.
+  "model": "1-xkiro-free/deepseek/deepseek-v4-pro",
 
   // Plugin OmniRoute: router model nội bộ (chạy local tại cổng 20217).
   "plugin": [
@@ -51,38 +56,45 @@
     //  key: XTROUTER_API_KEY
     //  Lưu ý: các model "qwen/*:free" cũ đã bị xKiro gỡ (404) 16/09/2026
     //  — danh sách dưới là các free model đã ping thực tế OK trên gói Max.
-    "xkiro-free": {
+    "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "xKiro Free (Best‑price multi‑model)",
+      "name": "1. xKiro Free (Best‑price multi‑model)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
       },
       "models": {
-        "minimax/minimax-m2.7:free": { "name": "MiniMax M2.7 (Free)" },
-        "minimax/minimax-m2.7-highspeed:free": { "name": "MiniMax M2.7 Highspeed (Free)" },
-        "minimax/minimax-m2.5:free": { "name": "MiniMax M2.5 (Free)" },
-        "minimax/minimax-m2.5-highspeed:free": { "name": "MiniMax M2.5 Highspeed (Free)" },
-        "minimax/minimax-m3:free": { "name": "MiniMax M3 (Free)" },
-        "minimax/minimax-m2.1:free": { "name": "MiniMax M2.1 (Free)" },
-        "minimax/minimax-m2.1-highspeed:free": { "name": "MiniMax M2.1 Highspeed (Free)" },
-        "minimax/minimax-m2:free": { "name": "MiniMax M2 (Free)" },
-        "deepseek/deepseek-v4-pro": { "name": "DeepSeek V4 Pro (Free)" },
-        "deepseek/deepseek-v4-flash": { "name": "DeepSeek V4 Flash (Free)" },
-        "deepseek/deepseek-v4.1-flash:free": { "name": "DeepSeek V4.1 Flash (Free)" },
-        "deepseek/deepseek-v3.2": { "name": "DeepSeek V3.2 (Free)" },
-        "deepseek/deepseek-chat-v3.1": { "name": "DeepSeek Chat V3.1 (Free)" },
-        "mistralai/codestral-2508": { "name": "Codestral 2508 (Free - chuyên code)" },
-        "mistralai/devstral-medium": { "name": "Devstral Medium (Free - dev)" },
-        "mistralai/mistral-large-2512": { "name": "Mistral Large 2512 (Free)" },
-        "mistralai/mistral-medium-3.5": { "name": "Mistral Medium 3.5 (Free)" },
-        "mistralai/mistral-small-2603": { "name": "Mistral Small 2603 (Free)" },
-        "mistralai/ministral-14b": { "name": "Ministral 14B (Free)" },
-        "mistralai/ministral-8b": { "name": "Ministral 8B (Free)" },
-        "mistralai/ministral-3b": { "name": "Ministral 3B (Free)" },
-        "sensenova/sensenova-6.7-flash-lite": { "name": "SenseNova 6.7 Flash Lite (Free)" },
-        "sensenova/sensenova-6.8-flash-lite": { "name": "SenseNova 6.8 Flash Lite (Free - đang 503 tạm)" },
-        "openai/gpt-5.3-codex-spark": { "name": "GPT-5.3 Codex Spark (Free - code, đang 503 tạm)" }
+        // (sắp theo độ mạnh giảm dần: reasoning/code mạnh → lite/small)
+        // ⚠️ opencode KHÔNG giữ thứ tự khai báo: trong /model nó tự sort theo
+        //    release_date GIẢM DẦN rồi mới tới name (A→Z). Các release_date dưới
+        //    đây là KHOÁ SẮP XẾP TỔNG HỢP (năm 2099, không phải ngày phát hành
+        //    thật) — model có date LỚN NHẤT hiện trên cùng. Muốn chèn/đổi vị trí:
+        //    gán date nằm giữa 2 date lân cận. Chi tiết: docs/providers-and-models.md §6.
+        //  Ghi chú từng model = thế mạnh/lĩnh vực (đối chiếu capabilities xKiro 17/09).
+        "deepseek/deepseek-v4-pro": { "name": "DeepSeek V4 Pro (Reasoning + code mạnh nhất free · 1M ctx)", "release_date": "2099-12-31" },
+        "minimax/minimax-m3:free": { "name": "MiniMax M3 (Vision + reasoning · 1M ctx)", "release_date": "2099-12-30" },
+        "openai/gpt-5.3-codex-spark": { "name": "GPT-5.3 Codex Spark (Chuyên code · đang 503 tạm)", "release_date": "2099-12-29" },
+        "deepseek/deepseek-v4.1-flash:free": { "name": "DeepSeek V4.1 Flash (Nhanh + vision · 1M ctx)", "release_date": "2099-12-28" },
+        "minimax/minimax-m2.7:free": { "name": "MiniMax M2.7 (Đa dụng cân bằng)", "release_date": "2099-12-27" },
+        "minimax/minimax-m2.7-highspeed:free": { "name": "MiniMax M2.7 Highspeed (Tốc độ cao)", "release_date": "2099-12-26" },
+        "deepseek/deepseek-v4-flash": { "name": "DeepSeek V4 Flash (Nhanh, hợp tác agent · 1M ctx)", "release_date": "2099-12-25" },
+        "deepseek/deepseek-v3.2": { "name": "DeepSeek V3.2 (Đa dụng ổn định)", "release_date": "2099-12-24" },
+        "mistralai/codestral-2508": { "name": "Codestral 2508 (Chuyên code)", "release_date": "2099-12-23" },
+        "minimax/minimax-m2.5:free": { "name": "MiniMax M2.5 (Cân bằng đa dụng)", "release_date": "2099-12-22" },
+        "minimax/minimax-m2.5-highspeed:free": { "name": "MiniMax M2.5 Highspeed (Tốc độ cao)", "release_date": "2099-12-21" },
+        "mistralai/devstral-medium": { "name": "Devstral Medium (Dev/code nhanh)", "release_date": "2099-12-20" },
+        "deepseek/deepseek-chat-v3.1": { "name": "DeepSeek Chat V3.1 (Chat đa dụng)", "release_date": "2099-12-19" },
+        "mistralai/mistral-large-2512": { "name": "Mistral Large 2512 (Viết lách / paraphrase · 256K)", "release_date": "2099-12-18" },
+        "mistralai/mistral-medium-3.5": { "name": "Mistral Medium 3.5 (Cân bằng + vision)", "release_date": "2099-12-17" },
+        "minimax/minimax-m2.1:free": { "name": "MiniMax M2.1 (Nền tảng ổn định)", "release_date": "2099-12-16" },
+        "minimax/minimax-m2.1-highspeed:free": { "name": "MiniMax M2.1 Highspeed (Nhanh, tác vụ nhẹ)", "release_date": "2099-12-15" },
+        "minimax/minimax-m2:free": { "name": "MiniMax M2 (Dòng M2 cũ nhất)", "release_date": "2099-12-14" },
+        "mistralai/mistral-small-2603": { "name": "Mistral Small 2603 (Nhẹ, nhanh, vision)", "release_date": "2099-12-13" },
+        "mistralai/ministral-14b": { "name": "Ministral 14B (Nhỏ, phản hồi nhanh)", "release_date": "2099-12-12" },
+        "mistralai/ministral-8b": { "name": "Ministral 8B (Siêu nhẹ)", "release_date": "2099-12-11" },
+        "mistralai/ministral-3b": { "name": "Ministral 3B (Nhẹ nhất, việc đơn giản)", "release_date": "2099-12-10" },
+        "sensenova/sensenova-6.8-flash-lite": { "name": "SenseNova 6.8 Flash-Lite (Nhẹ + vision · đang 503 tạm)", "release_date": "2099-12-09" },
+        "sensenova/sensenova-6.7-flash-lite": { "name": "SenseNova 6.7 Flash-Lite (Nhẹ, cơ bản)", "release_date": "2099-12-08" }
       }
     },
 
@@ -91,46 +103,57 @@
     //  Gói Max phủ toàn bộ model tier "paid" + "free".
     //  ⚠️ KHÔNG nằm trong gói (cần nạp wallet / Ultra/Power):
     //     gemini-*, qwen3.x-*max/plus, minimax-m3, kimi-k3, kimi-k2.7-code,
-    //     deepseek-v4-pro-0813, deepseek-v4.1-flash, gpt-6-astra.
-    "xkiro-max": {
+    //     deepseek-v4-pro-0813, deepseek-v4.1-flash, gpt-6-astra, claude-fable-5-1.
+    //     (gpt-6-astra & claude-fable-5-1 bị 403 dù API khai tier=paid — cần gói ≥ Ultra.)
+    "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "xKiro Max (Paid - gói Max)",
+      "name": "2. xKiro Max (Paid - gói Max)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
       },
       "models": {
-        "anthropic/claude-sonnet-5": { "name": "Claude Sonnet 5 (In:$1.80 | Out:$9.00 - Agent coding đỉnh, 1M ctx)" },
-        "anthropic/claude-opus-5": { "name": "Claude Opus 5 (In:$4.50 | Out:$22.50 - Reasoning cao cấp)" },
-        "anthropic/claude-fable-5": { "name": "Claude Fable 5 (In:$9.00 | Out:$45.00 - Mạnh nhất Anthropic)" },
-        "anthropic/claude-haiku-4.5": { "name": "Claude Haiku 4.5 (In:$0.90 | Out:$4.50 - Nhanh, rẻ)" },
-        "anthropic/claude-opus-4.8": { "name": "Claude Opus 4.8 (In:$4.50 | Out:$22.50)" },
-        "anthropic/claude-sonnet-4.6": { "name": "Claude Sonnet 4.6 (In:$2.70 | Out:$13.50)" },
-        "openai/gpt-5.6-sol": { "name": "GPT-5.6 Sol (In:$4.50 | Out:$27.00 - Flagship OpenAI)" },
-        "openai/gpt-5.6-terra": { "name": "GPT-5.6 Terra (In:$1.00 | Out:$6.00 - Sustained context dài)" },
-        "openai/gpt-5.6-luna": { "name": "GPT-5.6 Luna (In:$0.10 | Out:$0.60 - Reasoning rẻ nhất paid)" },
-        "openai/gpt-5.5": { "name": "GPT-5.5 (In:$4.50 | Out:$27.00)" },
-        "openai/gpt-5.4": { "name": "GPT-5.4 (In:$2.25 | Out:$13.50)" },
-        "openai/gpt-5.4-mini": { "name": "GPT-5.4 Mini (In:$0.675 | Out:$4.05 - Rẻ còn mạnh)" },
-        "x-ai/grok-4.6": { "name": "Grok 4.6 (In:$1.00 | Out:$3.00 - Agentic fast)" },
-        "x-ai/grok-4.5": { "name": "Grok 4.5 (In:$1.00 | Out:$3.00)" },
-        "x-ai/grok-build-0.1": { "name": "Grok Build 0.1 (In:$0.50 | Out:$1.00 - Coding rẻ)" },
-        "z-ai/glm-5.3": { "name": "GLM-5.3 (In:$1.40 | Out:$4.40 - Coding / tiếng Việt tốt)" },
-        "z-ai/glm-5.2": { "name": "GLM-5.2 (In:$1.40 | Out:$4.40)" },
-        "z-ai/glm-5.1": { "name": "GLM-5.1 (In:$1.40 | Out:$4.40)" },
-        "z-ai/glm-5": { "name": "GLM-5 (In:$1.00 | Out:$3.20)" },
-        "moonshotai/kimi-k2.6": { "name": "Kimi K2.6 (In:$0.475 | Out:$2.00 - Long context coding)" },
-        "moonshotai/kimi-k2.5": { "name": "Kimi K2.5 (In:$0.285 | Out:$1.425)" },
-        "nvidia/nemotron-3-super": { "name": "Nemotron 3 Super (In:$0.08 | Out:$0.45 - 1M ctx siêu rẻ)" },
-        "nvidia/nemotron-3-ultra": { "name": "Nemotron 3 Ultra (In:$0.50 | Out:$2.20)" }
+        //  SẮP XẾP THEO NHÓM SỨC MẠNH (17/09/2026) — 3 bậc thay thế được cho nhau:
+        //    [B] Nhẹ/rẻ → [A] Mạnh đa dụng → [S] Flagship (rẻ trước, mạnh sau).
+        //  Trong mỗi nhóm: giá INPUT tăng dần (rẻ trước). Tag nhóm + giá nằm ngay
+        //  trong "name" để dễ nhận biết + chọn. Giá đối chiếu catalog xKiro 17/09.
+        //  ⚠️ release_date = KHOÁ SẮP XẾP TỔNG HỢP (xem ghi chú provider 1-xkiro-free).
+        // ── [B] Nhẹ/rẻ, tác vụ thường ──
+        "nvidia/nemotron-3-nano": { "name": "[B · Nhẹ/rẻ] Nemotron 3 Nano (In:$0.05 | Out:$0.20 · Rẻ nhất, 1M ctx)", "release_date": "2099-10-25" },
+        "nvidia/nemotron-3-super": { "name": "[B · Nhẹ/rẻ] Nemotron 3 Super (In:$0.08 | Out:$0.45 · 1M ctx siêu rẻ · khuyến nghị)", "release_date": "2099-10-24" },
+        "openai/gpt-5.6-luna": { "name": "[B · Nhẹ/rẻ] GPT-5.6 Luna (In:$0.10 | Out:$0.60 · Reasoning+vision rẻ nhất · khuyến nghị)", "release_date": "2099-10-23" },
+        "z-ai/glm-5.3-flash": { "name": "[B · Nhẹ/rẻ] GLM-5.3 Flash (In:$0.15 | Out:$0.50 · 1M ctx + vision giá rẻ · khuyến nghị)", "release_date": "2099-10-22" },
+        "moonshotai/kimi-k2.5": { "name": "[B · Nhẹ/rẻ] Kimi K2.5 (In:$0.285 | Out:$1.425 · Coding giá tốt · khuyến nghị)", "release_date": "2099-10-21" },
+        "x-ai/grok-build-0.1": { "name": "[B · Nhẹ/rẻ] Grok Build 0.1 (In:$0.50 | Out:$1.00 · Task agent nhanh)", "release_date": "2099-10-20" },
+        "nvidia/nemotron-3-ultra": { "name": "[B · Nhẹ/rẻ] Nemotron 3 Ultra (In:$0.50 | Out:$2.20 · Mạnh hơn Super)", "release_date": "2099-10-19" },
+        "openai/gpt-5.4-mini": { "name": "[B · Nhẹ/rẻ] GPT-5.4 Mini (In:$0.675 | Out:$4.05 · Nhẹ đủ dùng · khuyến nghị)", "release_date": "2099-10-18" },
+        "anthropic/claude-haiku-4.5": { "name": "[B · Nhẹ/rẻ] Claude Haiku 4.5 (In:$0.90 | Out:$4.50 · Claude rẻ nhất, nhanh)", "release_date": "2099-10-17" },
+        // ── [A] Mạnh đa dụng (thay thế chính) ──
+        "moonshotai/kimi-k2.6": { "name": "[A · Đa dụng] Kimi K2.6 (In:$0.475 | Out:$2.00 · Long context)", "release_date": "2099-10-16" },
+        "x-ai/grok-4.6": { "name": "[A · Đa dụng] Grok 4.6 (In:$1.00 | Out:$3.00 · Agentic nhanh)", "release_date": "2099-10-15" },
+        "x-ai/grok-4.5": { "name": "[A · Đa dụng] Grok 4.5 (In:$1.00 | Out:$3.00 · Đa nhiệm ổn)", "release_date": "2099-10-14" },
+        "z-ai/glm-5": { "name": "[A · Đa dụng] GLM-5 (In:$1.00 | Out:$3.20 · Không vision)", "release_date": "2099-10-13" },
+        "openai/gpt-5.6-terra": { "name": "[A · Đa dụng] GPT-5.6 Terra (In:$1.00 | Out:$6.00 · Sustained context 1M · khuyến nghị)", "release_date": "2099-10-12" },
+        "z-ai/glm-5.1": { "name": "[A · Đa dụng] GLM-5.1 (In:$1.40 | Out:$4.40)", "release_date": "2099-10-11" },
+        "z-ai/glm-5.2": { "name": "[A · Đa dụng] GLM-5.2 (In:$1.40 | Out:$4.40 · 1M ctx)", "release_date": "2099-10-10" },
+        "z-ai/glm-5.3": { "name": "[A · Đa dụng] GLM-5.3 (In:$1.40 | Out:$4.40 · Coding / tiếng Việt tốt · khuyến nghị)", "release_date": "2099-10-09" },
+        "anthropic/claude-sonnet-5": { "name": "[A · Đa dụng] Claude Sonnet 5 (In:$1.80 | Out:$9.00 · Agent + văn đỉnh, 1M ctx · khuyến nghị)", "release_date": "2099-10-08" },
+        "openai/gpt-5.4": { "name": "[A · Đa dụng] GPT-5.4 (In:$2.25 | Out:$13.50 · Đa dụng)", "release_date": "2099-10-07" },
+        "anthropic/claude-sonnet-4.6": { "name": "[A · Đa dụng] Claude Sonnet 4.6 (In:$2.70 | Out:$13.50)", "release_date": "2099-10-06" },
+        // ── [S] Flagship ──
+        "anthropic/claude-opus-4.8": { "name": "[S · Flagship] Claude Opus 4.8 (In:$4.50 | Out:$22.50 · Reasoning cao cấp)", "release_date": "2099-10-05" },
+        "anthropic/claude-opus-5": { "name": "[S · Flagship] Claude Opus 5 (In:$4.50 | Out:$22.50 · Flagship reasoning)", "release_date": "2099-10-04" },
+        "openai/gpt-5.5": { "name": "[S · Flagship] GPT-5.5 (In:$4.50 | Out:$27.00)", "release_date": "2099-10-03" },
+        "openai/gpt-5.6-sol": { "name": "[S · Flagship] GPT-5.6 Sol (In:$4.50 | Out:$27.00 · Flagship OpenAI)", "release_date": "2099-10-02" },
+        "anthropic/claude-fable-5": { "name": "[S · Flagship] Claude Fable 5 (In:$9.00 | Out:$45.00 · Mạnh nhất)", "release_date": "2099-10-01" }
       }
     },
 
     // ─── OmniRoute Free (model mạnh, miễn phí) ─────────────────────
     //  key: OMNIROUTE_KEY
-    "omniroute-free": {
+    "3-omniroute-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "OmniRoute Free (Model mạnh nhất)",
+      "name": "3. OmniRoute Free (Model mạnh nhất)",
       "options": {
         "baseURL": "http://127.0.0.1:20217/v1",
         "apiKey": "{env:OMNIROUTE_KEY}"
@@ -153,9 +176,9 @@
     },
 
     // ─── OpenRouter Free (qua OmniRoute local) ─────────────────────
-    "openrouter-free": {
+    "4-openrouter-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "OpenRouter Free",
+      "name": "4. OpenRouter Free",
       "options": {
         "baseURL": "http://127.0.0.1:20217/v1",
         "apiKey": "{env:OMNIROUTE_KEY}"
@@ -170,9 +193,9 @@
 
     // ─── 9Router (router local) ────────────────────────────────────
     //  key: NINE_ROUTER_API_KEY
-    "9router": {
+    "5-9router": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "9Router (local)",
+      "name": "5. 9Router (local)",
       "options": {
         "baseURL": "http://127.0.0.1:20128/v1",
         "apiKey": "{env:NINE_ROUTER_API_KEY}"
@@ -185,9 +208,9 @@
 
     // ─── TeamoRouter (giá ưu đãi, có mô hình miễn phí) ─────────────
     //  key: TEAMO_API_KEY
-    "teamoRouter": {
+    "6-teamoRouter": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "TeamoRouter (Discount & Thesis)",
+      "name": "6. TeamoRouter (Discount & Thesis)",
       "options": {
         "baseURL": "https://api.teamorouter.cn/v1",
         "apiKey": "{env:TEAMO_API_KEY}"
@@ -221,7 +244,10 @@
     //      "my-model": { "name": "My Model (Free)" }
     //    }
     //  }
-    //  👉 Vị trí block quyết định thứ tự hiển thị trong /model.
+    //  👉 Số đánh đầu key/name (1-, 2-, …) quyết định thứ tự NHÓM provider trong /model.
+    //  👉 Thứ tự MODEL trong mỗi nhóm do opencode tự sort theo "release_date" GIẢM DẦN
+    //     (rồi mới tới name A→Z) — KHÔNG theo thứ tự khai báo. Dùng release_date tổng
+    //     hợp (vd 2099-12-31, 2099-12-30, …) làm khoá sắp xếp. Xem docs/providers-and-models.md §6.
     // ─────────────────────────────────────────────────────────────
   }
 }

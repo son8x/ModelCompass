@@ -59,10 +59,10 @@ $repoRoot = Get-RepoRoot
 
 # Danh sách biến BẮT BUỘC (được tham chiếu thực tế trong cấu hình đang dùng)
 $knownVars = @(
-    @{ Name = 'TEAMO_API_KEY';       Desc = 'Teamorouter - api.teamorouter.cn (provider teamoRouter)';       Required = $true },
-    @{ Name = 'OMNIROUTE_KEY';       Desc = 'Gateway OmniRoute local - 127.0.0.1:20217 (provider omniroute-free, openrouter-free)'; Required = $true },
-    @{ Name = 'XTROUTER_API_KEY';    Desc = 'xKiro - api.xkiro.com (provider xkiro-free, xkiro-max)';       Required = $true },
-    @{ Name = 'NINE_ROUTER_API_KEY'; Desc = '9Router local - 127.0.0.1:20128 (provider 9router)';          Required = $true }
+    @{ Name = 'TEAMO_API_KEY';       Desc = 'Teamorouter - api.teamorouter.cn (provider 6-teamoRouter)';       Required = $true },
+    @{ Name = 'OMNIROUTE_KEY';       Desc = 'Gateway OmniRoute local - 127.0.0.1:20217 (provider 3-omniroute-free, 4-openrouter-free)'; Required = $true },
+    @{ Name = 'XTROUTER_API_KEY';    Desc = 'xKiro - api.xkiro.com (provider 1-xkiro-free, 2-xkiro-max)';       Required = $true },
+    @{ Name = 'NINE_ROUTER_API_KEY'; Desc = '9Router local - 127.0.0.1:20128 (provider 5-9router)';          Required = $true }
 )
 
 # ── Tiện ích nội bộ ───────────────────────────────────────────

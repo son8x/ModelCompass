@@ -11,12 +11,12 @@
   // ─────────────────────────────────────────────────────────────
   "$schema": "https://opencode.ai/config.json",
 
-  "model": "teamoRouter/claude-sonnet-5",
+  "model": "6-teamoRouter/claude-sonnet-5",
 
   "provider": {
-    "teamoRouter": {
+    "6-teamoRouter": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "TeamoRouter (Thesis)",
+      "name": "6. TeamoRouter (Thesis)",
       "options": {
         "baseURL": "https://api.teamorouter.cn/v1",
         "apiKey": "{env:TEAMO_API_KEY}"

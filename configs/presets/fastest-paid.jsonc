@@ -13,12 +13,12 @@
   // ─────────────────────────────────────────────────────────────
   "$schema": "https://opencode.ai/config.json",
 
-  "model": "teamoRouter/deepseek-v4-flash",
+  "model": "6-teamoRouter/deepseek-v4-flash",
 
   "provider": {
-    "teamoRouter": {
+    "6-teamoRouter": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "TeamoRouter (Giá ưu đãi)",
+      "name": "6. TeamoRouter (Giá ưu đãi)",
       "options": {
         "baseURL": "https://api.teamorouter.cn/v1",
         "apiKey": "{env:TEAMO_API_KEY}"

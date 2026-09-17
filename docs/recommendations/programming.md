@@ -7,25 +7,25 @@ Tần suất cao → ưu tiên **giá/token + tốc độ**, đánh đổi nhẹ
 
 | Mức | Model ID (provider/model) | Giá (~/1M) | Khi nào dùng |
 |---|---|---|---|
-| 🏆 Miễn phí + nhanh | `omniroute-free/groq/qwen/qwen3.8-27b` | $0 | fix lỗi, script, đọc repo vừa |
-| 🏆 Miễn phí + mạnh | `omniroute-free/cfp/zai-org/glm-5.2` | $0 | feature vừa, refactor |
-| 🏆 Trả phí rẻ | `teamoRouter/deepseek-v4-flash` | ~$0.14/$0.28 | code chất lượng, giá rẻ nhất |
-| 🏆 Trả phí mạnh | `teamoRouter/claude-sonnet-5` | ~$2/$10 | agent/refactor lớn cần chính xác |
-| ⚡ Tốc độ tối đa | `openrouter-free/openrouter/cohere/north-mini-code:free` | $0 | câu hỏi nhỏ, cần phản hồi dưới vài giây |
+| 🏆 Miễn phí + nhanh | `3-omniroute-free/groq/qwen/qwen3.8-27b` | $0 | fix lỗi, script, đọc repo vừa |
+| 🏆 Miễn phí + mạnh | `3-omniroute-free/cfp/zai-org/glm-5.2` | $0 | feature vừa, refactor |
+| 🏆 Trả phí rẻ | `6-teamoRouter/deepseek-v4-flash` | ~$0.14/$0.28 | code chất lượng, giá rẻ nhất |
+| 🏆 Trả phí mạnh | `6-teamoRouter/claude-sonnet-5` | ~$2/$10 | agent/refactor lớn cần chính xác |
+| ⚡ Tốc độ tối đa | `4-openrouter-free/openrouter/cohere/north-mini-code:free` | $0 | câu hỏi nhỏ, cần phản hồi dưới vài giây |
 
 ## Dự phòng
 
-- `omniroute-free/cfp/deepseek-ai/deepseek-v4-flash-0731` — DeepSeek free qua Cloudflare.
-- `teamoRouter/gpt-5.6-luna` — OpenAI rẻ ($0.20/$1.20) khi cần hệ GPT.
-- `omniroute-free/groq/openai/gpt-oss-120b` — open-weight 120B trên Groq.
-- `teamoRouter/deepseek-v4-pro` — khi cần suy luận sâu hơn (debug khó).
+- `3-omniroute-free/cfp/deepseek-ai/deepseek-v4-flash-0731` — DeepSeek free qua Cloudflare.
+- `6-teamoRouter/gpt-5.6-luna` — OpenAI rẻ ($0.20/$1.20) khi cần hệ GPT.
+- `3-omniroute-free/groq/openai/gpt-oss-120b` — open-weight 120B trên Groq.
+- `6-teamoRouter/deepseek-v4-pro` — khi cần suy luận sâu hơn (debug khó).
 
 ## Gợi ý thiết lập opencode
 
 ```jsonc
 // trong development/opencode.jsonc
-"model": "teamoRouter/deepseek-v4-flash",      // mặc định code chính
-"small_model": "openrouter-free/openrouter/cohere/north-mini-code:free" // việc nhỏ
+"model": "6-teamoRouter/deepseek-v4-flash",      // mặc định code chính
+"small_model": "4-openrouter-free/openrouter/cohere/north-mini-code:free" // việc nhỏ
 ```
 
 ## Chi phí thực tế (ước tính 2026)

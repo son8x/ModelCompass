@@ -28,17 +28,28 @@ development/  ──Publish-->  production/  ──Install-->  ~/.config/opencod
 
 | Biến | Dùng cho |
 |------|----------|
-| `TEAMO_API_KEY` | Provider `teamoRouter` |
-| `OMNIROUTE_KEY` | Provider `omniroute-free`, `openrouter-free` |
-| `XTROUTER_API_KEY` | Provider `xkiro-free`, `xkiro-max` |
-| `NINE_ROUTER_API_KEY` | Provider `9router` |
+| `TEAMO_API_KEY` | Provider `6-teamoRouter` |
+| `OMNIROUTE_KEY` | Provider `3-omniroute-free`, `4-openrouter-free` |
+| `XTROUTER_API_KEY` | Provider `1-xkiro-free`, `2-xkiro-max` |
+| `NINE_ROUTER_API_KEY` | Provider `5-9router` |
 
 > Cấu hình dùng cơ chế `{env:TÊN_BIEN}` của opencode — repo không chứa key.
 
-> 🎯 **Thứ tự hiển thị trong `/model` = thứ tự khai báo block `provider` trong
-> file cấu hình** (opencode giữ nguyên thứ tự, không đánh số). Muốn đổi thứ tự
-> ưu tiên chỉ cần kéo lên/xuống block — không phải sửa số như trước đây
-> (`1-teamoRouter`, `2-omniroute-free`, …).
+> 🎯 **Thứ tự hiển thị trong `/model` = sắp xếp theo key (provider id) + name
+> theo bảng chữ cái**, nên PHẢI đánh số thứ tự `1-`, `2-`, … ở đầu key VÀ name
+> mỗi provider để ép đúng thứ tự ưu tiên (xem file config hiện tại). Muốn đổi
+> thứ tự: sửa lại số, không cần di chuyển block (so sánh theo chuỗi, tránh số >9
+> nếu cần — dùng `1-`…`9-`).
+> (Thứ tự cũ 2026 dùng `1-teamoRouter`, `2-omniroute-free`, … nay đổi ưu tiên:
+> `1-xkiro-free → 2-xkiro-max → 3-omniroute-free → 4-openrouter-free →
+> 5-9router → 6-teamoRouter`.)
+>
+> 🌟 **Thứ tự MODEL trong mỗi provider**: opencode KHÔNG giữ thứ tự khai báo — nó sort theo
+> `release_date` GIẢM DẦN rồi mới tới `name` A→Z. Muốn ép thứ tự model (vd theo giá/độ mạnh),
+> gán `"release_date"` (string, chỉ dùng làm khoá sắp xếp — không hiển thị trên UI):
+> model hiện trên cùng có `release_date` LỚN nhất; đặt trùng nhau sẽ fallback về `name` A→Z.
+> 2 provider xKiro đang dùng quy ước `2099-<MM>-<DD>` giảm dần 1 ngày/lượt.
+> Chi tiết + recipe: `docs/providers-and-models.md` §6.
 
 ## Các script liên quan (xem `../scripts/`)
 

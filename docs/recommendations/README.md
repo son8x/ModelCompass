@@ -12,8 +12,8 @@ và **cách cấu hình nhanh**.
 
 ## Công thức chọn model chung
 
-1. **Ngân sách $0** → nhóm free: `omniroute-free`, `openrouter-free`, `xkiro-free`.
-2. **$0–5/tháng** → `teamoRouter` DeepSeek V4 Flash/Pro, GPT-5.6 Luna.
+1. **Ngân sách $0** → nhóm free: `3-omniroute-free`, `4-openrouter-free`, `1-xkiro-free`.
+2. **$0–5/tháng** → `6-teamoRouter` DeepSeek V4 Flash/Pro, GPT-5.6 Luna.
 3. **$10–30/tháng** → Claude Sonnet 5 / Gemini 3.1 Pro (theo tác vụ nặng/ngữ cảnh dài).
 4. **Tốc độ trên hết** → Groq (free) hoặc Gemini 3.x Flash Lite (paid rẻ).
 

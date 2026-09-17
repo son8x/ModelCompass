@@ -21,6 +21,8 @@
 //    XKIRO_USAGE_INJECT_GAP=300   khoảng tối thiểu giữa 2 lần ghi transcript (giây)
 // ═══════════════════════════════════════════════════════════════════════════
 
+import { createUsageStore } from "./xkiro-store.js"
+
 const USAGE_URL = "https://api.xkiro.com/v1/usage"
 
 const DISABLED =
@@ -54,11 +56,28 @@ function fmtUsd(v) {
   }
 }
 
+function fmtUntil(sec) {
+  const s = Number(sec ?? 0)
+  if (s <= 0) return ""
+  if (s < 60) return `${Math.max(1, Math.round(s))}s`
+  if (s < 3600) return `${Math.floor(s / 60)}m`
+  if (s < 86400) {
+    const h = Math.floor(s / 3600)
+    const m = Math.floor((s % 3600) / 60)
+    return m ? `${h}h${m}m` : `${h}h`
+  }
+  const d = Math.floor(s / 86400)
+  const h = Math.floor((s % 86400) / 3600)
+  return h ? `${d}d${h}h` : `${d}d`
+}
+
 export const xkiroUsagePlugin = async ({ client }) => {
   if (DISABLED) return {}
 
   const warned = { free: false, burst: false, budget: false }
   const firstToast = { done: false }
+
+  const store = createUsageStore()
 
   async function fetchUsage() {
     const key =
@@ -136,6 +155,7 @@ export const xkiroUsagePlugin = async ({ client }) => {
         cap: Number(w.cap_usd) || 0,
         rem: Number(w.remaining_usd) || 0,
         spent: Number(w.spent_usd) || 0,
+        reset: Number(w.resets_in_sec) || 0,
       }
     }
 
@@ -145,17 +165,17 @@ export const xkiroUsagePlugin = async ({ client }) => {
       parts.push(`free còn ${fmtCount(limits.free.rem)} (đã dùng ${usedPct(limits.free.cap, limits.free.rem).toFixed(1)}%)`)
     }
     if (limits.budget.cap) {
-      parts.push(`budget còn ${fmtUsd(limits.budget.rem)}/${fmtUsd(limits.budget.cap)} (đã dùng ${usedPct(limits.budget.cap, limits.budget.rem).toFixed(1)}%)`)
+      parts.push(`budget còn ${fmtUsd(limits.budget.rem)}/${fmtUsd(limits.budget.cap)} (đã dùng ${usedPct(limits.budget.cap, limits.budget.rem).toFixed(1)}%, reset ~${fmtUntil(limits.budget.reset)})`)
     }
     if (limits.burst.cap) {
-      parts.push(`burst còn ${fmtUsd(limits.burst.rem)}/${fmtUsd(limits.burst.cap)} (đã dùng ${usedPct(limits.burst.cap, limits.burst.rem).toFixed(1)}%)`)
+      parts.push(`burst còn ${fmtUsd(limits.burst.rem)}/${fmtUsd(limits.burst.cap)} (đã dùng ${usedPct(limits.burst.cap, limits.burst.rem).toFixed(1)}%, reset ~${fmtUntil(limits.burst.reset)})`)
     }
     parts.push(`wallet ${fmtUsd(limits.wallet ?? 0)}`)
     return { text: `xKiro | ${parts.join(" | ")}`, limits }
   }
 
   async function poll(showToast = false) {
-    const data = await fetchUsage()
+    const { data } = await store.resolve(fetchUsage)
     if (!data) {
       await logLine("xKiro | /v1/usage không đọc được (network/quota)", "warn")
       return
@@ -202,7 +222,7 @@ export const xkiroUsagePlugin = async ({ client }) => {
         if (props.info.parentID) subagentIDs.add(props.info.id)
         else subagentIDs.delete(props.info.id)
         if (!props.info.parentID && props.info.id) {
-          const data = await fetchUsage()
+          const { data } = await store.resolve(fetchUsage)
           if (data) await injectStatus(props.info.id, summarize(data).text)
         }
       }
@@ -211,7 +231,7 @@ export const xkiroUsagePlugin = async ({ client }) => {
         const sid = props.sessionID
         await poll()
         if (sid && !subagentIDs.has(sid)) {
-          const data = await fetchUsage()
+          const { data } = await store.resolve(fetchUsage)
           if (data) {
             await injectStatus(sid, summarize(data).text)
             if (TOAST_EACH && Date.now() - lastToastAt >= TOAST_GAP_MS) {
