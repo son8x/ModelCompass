@@ -60,6 +60,9 @@ development/  ──Publish-->  production/  ──Install-->  ~/.config/opencod
 - `Restore-RunningConfig.ps1` — khôi phục backup nếu có sự cố (xem state + hash).
 - `Compare-Config.ps1` — so sánh dev vs prod (chống lệch trước/sau publish).
 - `Get-ProviderCatalog.ps1` — tải catalog live của xKiro/Teamo/OpenRouter/OmniRoute/9Router → `docs/catalogs/`, so với config để liệt kê model **thiếu/đổi tên/mới** (hỗ trợ strip tiền tố id gateway, `-ShowAllNew`).
+- `Compare-Prices.ps1` — so giá nhồi trong `name` mỗi model (vd `In:$1.40 | Out:$4.40`) vs catalog live → báo model **giá đã đổi** + gợi ý tên mới để copy (chống hiển thị giá cũ trong `/model`).
+- `Add-SpendEntry.ps1` — ghi chi phí 1 phiên (provider, model, token in/out) vào `reports/spend.jsonl` — dùng bởi script/plugin giám sát **đa provider**, không chỉ xKiro.
+- `Get-SpendReport.ps1` — tổng hợp spend log theo **ngày/provider/model** (bảng console, `-Json` cho pipe, `-Report` ra Markdown); lọc theo `-Month/-Day/-Provider/-Model`.
 - `Prune-Backups.ps1` — chính sách giữ/xoá backup (repo + global).
 - `Test-Suite.ps1` — chạy toàn bộ test Pester (`tests/`).
 

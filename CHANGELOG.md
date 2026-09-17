@@ -4,6 +4,42 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.3.2] — 2026-09-17 — Phase 1.3: báo cáo chi phí tổng hợp (đa provider)
+
+### Thêm
+- `scripts/Add-SpendEntry.ps1` — ghi 1 phiên (provider, model, token in/out, $)
+  vào `reports/spend.jsonl` (append-only, 1 JSON/dòng); tính cost từ token × giá/1M.
+- `scripts/Get-SpendReport.ps1` — tổng hợp spend log theo **ngày / provider / top model**:
+  filter `-Month/-Day/-Provider/-Model`, xuất bảng console, `-Json` (pipe/script khác),
+  `-Report` (Markdown `reports/spend-report-*.md`).
+- `scripts/Common-Functions.ps1`: `ConvertTo-SpendCost`, `Get-SpendLogPath`,
+  `Add-SpendEntry`, `Get-SpendEntries` (tự chuẩn hoá `ts` thành chuỗi ISO, lướt dòng hỏng).
+- `tests/SpendReport.Tests.ps1` (18 test) — ghi/đọc round-trip trên file tạm + hàm thuần.
+
+### Changed
+- `scripts/Test-Suite.ps1` giờ chạy 68 test (34 → 50 → 68), pass toàn bộ.
+
+### Ghi chú
+- Demo live 17/09/2026: 3 phiên (xkiro gpt-5.6-sol + deepseek free, openrouter deepseek-r2)
+  → tổng `$1.36`, tách đúng theo ngày/provider/model; KPI "mỗi phiên trả phí để lại 1 dòng log"
+  của ROADMAP §6 đã đạt.
+
+## [0.3.1] — 2026-09-17 — Phase 1.2: so giá config vs catalog live
+
+### Thêm
+- `scripts/Compare-Prices.ps1` — trích giá nhồi trong `name` model (`In:$X | Out:$Y`),
+  đối chiếu với catalog live (`docs/catalogs/`): báo model giá **đã đổi** ($ + %),
+  gợi ý tên mới để copy vào config; tôn trọng strip tiền tố id gateway.
+- `tests/Compare-Prices.Tests.ps1` (16 test) — dot-source `-SkipRun`, không gọi mạng.
+
+### Changed
+- Tái dùng registry provider của Get-ProviderCatalog (dot-source `-SkipRun`).
+- `docs/workflow.md`, `configs/README.md`: thêm bước Compare-Prices trước publish.
+
+### Ghi chú
+- Chạy 17/09/2026 so với prod: `2-xkiro-max` **25/25 giá khớp** catalog live;
+  provider không nhồi giá free/model không có giá thì báo "không so được" (không phải lỗi).
+
 ## [0.3.0] — 2026-09-17 — Phase 1.1: catalog live đa provider
 
 ### Thêm

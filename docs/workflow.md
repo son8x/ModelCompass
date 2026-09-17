@@ -69,6 +69,13 @@ git push origin main          # CI validate chạy → xanh mới thôi
 ```powershell
 pwsh scripts\Get-ProviderCatalog.ps1          # tải catalog live → docs/catalogs/ + snapshot + so với config
 pwsh scripts\Get-ProviderCatalog.ps1 -ShowAllNew   # liệt kê model mới chưa khai báo (mặc định ẩn)
+pwsh scripts\Compare-Prices.ps1               # giá nhồi trong name vs catalog live (mặc định chỉ báo)
+pwsh scripts\Compare-Prices.ps1 -ShowAll -Report  # chi tiết + report markdown
+# Giám sát chi phí đa provider (mỗi phiên trả phí ghi 1 dòng log):
+pwsh scripts\Add-SpendEntry.ps1 -Provider xkiro -Model 'openai/gpt-5.6-sol' `
+    -PromptTokens 120000 -CompletionTokens 30000 -PriceIn 4.5 -PriceOut 27
+pwsh scripts\Get-SpendReport.ps1              # tổng hợp theo ngày/provider/model
+pwsh scripts\Get-SpendReport.ps1 -Month 2026-09 -Model deepseek -Report  # lọc + report md
 pwsh scripts\Prune-Backups.ps1 -DryRun        # xem sẽ xoá backup nào (repo + global)
 pwsh scripts\Prune-Backups.ps1                # giữ 10 bản mới nhất mỗi nơi
 pwsh scripts\Test-Suite.ps1                   # chạy toàn bộ test Pester
@@ -76,6 +83,7 @@ pwsh scripts\Test-Suite.ps1                   # chạy toàn bộ test Pester
 
 > 📌 Khi thêm model mới: chạy `Get-ProviderCatalog.ps1` trước để chắc model nằm
 > trong catalog live (tránh khai báo 404/đổi tên) và đối chiếu model "MISS".
+> Trước khi publish: chạy `Compare-Prices.ps1` để không đưa ra bảng giá cũ trong `name`.
 
 ### Giai đoạn D — Install (production → máy đang chạy)
 

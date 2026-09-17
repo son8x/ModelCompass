@@ -33,11 +33,11 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 | Giai đoạn | Trạng thái | Tiến độ | Ghi chú |
 |---|---|---|---|
 | **Phase 0 — Vững nền móng** | ✅ | 6/6 (7/7 nhiệm vụ) | hoàn thành 17/09/2026 |
-| **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | 🔶 | 1/5 | đang làm — 1.1 xong 17/09/2026 |
+| **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | 🔶 | 3/5 | đang làm — 1.1, 1.2, 1.3 xong 17/09/2026 |
 | **Phase 2 — Cứng hoá & mở rộng** | ⬜ | 0/6 | khi có nhu cầu |
 | **Phase 3 — Hệ sinh thái mở** | ⬜ | 0/4 | khi có nhu cầu |
 
-**Next action đang chờ**: Phase 1 hạng mục 1.2 — `Compare-Prices.ps1` (so giá config vs live catalog).
+**Next action đang chờ**: Phase 1 hạng mục 1.4 — tổng quát `xkiro-statusline.tsx` thành "quota bar" đa provider.
 
 ---
 
@@ -103,8 +103,8 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 | # | Hạng mục | Mô tả | Ưu tiên | Kích thước | Trạng thái |
 |---|---|---|---|---|---|
 | 1.1 | **`Get-ProviderCatalog.ps1`** | Gọi `GET /v1/models` của xKiro/Teamo/OpenRouter/OmniRoute/9Router (OpenRouter có sẵn pricing) → xuất `docs/catalogs/<provider>.json` + snapshot `reports/catalogs/`, so với config để liệt kê model thiếu/404/mới — có test Pester | P1 | L | ✅ |
-| 1.2 | **`Compare-Prices.ps1`** | So sánh giá (input/output) trong config vs live catalog → báo mức chênh, gợi ý cập nhật tên model (giá đang nhồi vào `name`) | P1 | M | ⬜ |
-| 1.3 | **Báo cáo chi phí tổng hợp** | Mở rộng plugin/script giám sát **đa provider** (không chỉ xKiro): log mỗi phiên (model, token in/out ước, $) vào `reports/spend-*.json`; script `Get-SpendReport.ps1` tổng hợp theo ngày/model | P1 | L | ⬜ |
+| 1.2 | **`Compare-Prices.ps1`** | So sánh giá (input/output) trong config vs live catalog → báo mức chênh, gợi ý cập nhật tên model (giá đang nhồi vào `name`) — có test Pester | P1 | M | ✅ |
+| 1.3 | **Báo cáo chi phí tổng hợp** | `Add-SpendEntry.ps1` ghi mỗi phiên (model, token in/out, $) vào `reports/spend.jsonl` (đa provider, mở rộng từ xKiro); `Get-SpendReport.ps1` tổng hợp theo ngày/provider/model, xuất bảng/`-Json`/`-Report` md — có test Pester | P1 | L | ✅ |
 | 1.4 | **Statusline đa quota** | Tổng quát `xkiro-statusline.tsx` thành "quota bar" đọc từ 1 module chung (env quyết định provider nào bật), giữ fallback khi API không có | P1 | M | ⬜ |
 | 1.5 | **Auto-update STATUS.md** | `Test-ModelConnectivity.ps1 -Report` sinh dòng "trạng thái gần nhất" → script cập nhật bảng `STATUS.md` bán tự động (flag `-UpdateStatus`) | P1 | M | ⬜ |
 
@@ -154,7 +154,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 ## 8. Gợi ý bước đi ngay (sau Phase 0)
 
-1. **Phase 1 (1.2)**: triển khai `Compare-Prices.ps1` — tận dụng catalog live đã có pricing (OpenRouter, xKiro) để báo giá config vs live lệch (P1/M).
+1. **Phase 1 (1.4)**: mở rộng statusline xKiro thành "quota bar" đa provider (P1/L đã có 1.3).
 2. **Prune-Backups**: cài vào lịch (hoặc chạy thủ công hằng tuần) để giữ repo gọn.
 3. **Thực thi workflow mới**: trước publish chạy `Compare-Config`, sau publish chạy `Compare-Config -FailOnDiff` để xác nhận đồng bộ.
 4. **Kiểm `Restore-RunningConfig.ps1 -List`** trên máy thật để xác nhận state file (sentry) hiển thị đúng.

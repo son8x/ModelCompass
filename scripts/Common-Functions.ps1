@@ -159,6 +159,92 @@ function Get-Timestamp {
     return (Get-Date -Format 'yyyyMMdd-HHmmss')
 }
 
+function ConvertTo-SpendCost {
+    <#
+    Tính chi phí USD từ token × giá (giá/1M token). Trả cost in/out làm tròn 6 chữ số.
+    -PriceIn/-PriceOut có thể bỏ (mô hình free → 0).
+    #>
+    param(
+        [long]$PromptTokens = 0,
+        [long]$CompletionTokens = 0,
+        [double]$PriceIn = 0,
+        [double]$PriceOut = 0
+    )
+    return [pscustomobject]@{
+        CostIn  = [math]::Round([double]$PromptTokens / 1e6 * $PriceIn, 6)
+        CostOut = [math]::Round([double]$CompletionTokens / 1e6 * $PriceOut, 6)
+    }
+}
+
+function Get-SpendLogPath {
+    <#
+    Đường dẫn spend log. Mặc định: reports/spend.jsonl (append-only, 1 JSON/dòng).
+    #>
+    param([string]$Path)
+    if (-not [string]::IsNullOrWhiteSpace($Path)) { return $Path }
+    return Join-Path (Get-RepoRoot) 'reports\spend.jsonl'
+}
+
+function Add-SpendEntry {
+    <#
+    Ghi 1 bản ghi chi phí (append) vào spend log JSONL. Tự tạo thư mục reports/ nếu chưa có.
+    Dữ liệu: hai stamp, provider, model, token in/out, cost in/out (USD), total.
+    Trả về đường dẫn file vừa ghi.
+    #>
+    param(
+        [Parameter(Mandatory)][string]$Provider,
+        [Parameter(Mandatory)][string]$Model,
+        [long]$PromptTokens = 0,
+        [long]$CompletionTokens = 0,
+        [double]$CostInUsd = 0,
+        [double]$CostOutUsd = 0,
+        [string]$Note = '',
+        [string]$Path
+    )
+    $file = Get-SpendLogPath $Path
+    $dir = Split-Path -Parent $file
+    if ($dir -and -not (Test-Path -LiteralPath $dir)) {
+        New-Item -ItemType Directory -Force -Path $dir | Out-Null
+    }
+    $entry = [ordered]@{
+        ts                = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ss')
+        provider          = $Provider
+        model             = $Model
+        prompt_tokens     = $PromptTokens
+        completion_tokens = $CompletionTokens
+        cost_in_usd       = [math]::Round($CostInUsd, 6)
+        cost_out_usd      = [math]::Round($CostOutUsd, 6)
+        total_usd         = [math]::Round($CostInUsd + $CostOutUsd, 6)
+        note              = $Note
+    }
+    Add-Content -LiteralPath $file -Value ($entry | ConvertTo-Json -Compress -Depth 3) -Encoding utf8
+    return $file
+}
+
+function Get-SpendEntries {
+    <#
+    Đọc toàn bộ spend log (JSONL) thành mảng object; lướt qua dòng hỏng.
+    Trả array rỗng nếu file chưa tồn tại.
+    #>
+    param([string]$Path)
+    $file = Get-SpendLogPath $Path
+    if (-not (Test-Path -LiteralPath $file -PathType Leaf)) { return @() }
+    $out = [System.Collections.Generic.List[object]]::new()
+    foreach ($line in Get-Content -LiteralPath $file) {
+        if ([string]::IsNullOrWhiteSpace($line)) { continue }
+        try {
+            $parsed = $line | ConvertFrom-Json
+            if (($parsed.PSObject.Properties.Name -contains 'ts') -and ($parsed.ts -is [datetime])) {
+                $parsed.ts = $parsed.ts.ToString('yyyy-MM-ddTHH:mm:ss')
+            }
+            $out.Add($parsed)
+        } catch {
+            continue
+        }
+    }
+    return @($out)
+}
+
 function Write-Step {
     param([string]$Msg)
     Write-Host ''
