@@ -23,6 +23,8 @@ opencode đang chạy**.
    PR/push vào `configs/`, block API key lọt vào repo.
 5. **Quy trình 2 giai đoạn an toàn** — `development/` (soạn thử) → `production/`
    (đã test) → `~/.config/opencode/` (đang chạy), kèm backup/rollback.
+6. **Plugin theo dõi hạn mức xKiro** — poll `GET /v1/usage` ngay trong opencode:
+   log + toast cảnh báo + status bar (`xkiro-usage.js`, `xkiro-statusline.tsx`).
 
 ---
 
@@ -40,6 +42,10 @@ opencode đang chạy**.
 │   ├── production/opencode.json    ← ✅ đã test, dùng để cài đặt
 │   └── presets/*.jsonc             ← model pick theo use case
 ├── scripts/                    ← PowerShell 7: validate / test / publish / install / restore
+├── .opencode/plugins-xkiro/    ← plugin theo dõi hạn mức xKiro (source)
+│   ├── xkiro-usage.js              ← server plugin: poll /v1/usage + log/toast (mặc định bật)
+│   ├── xkiro-statusline.tsx        ← TUI status bar (slot app_bottom)
+│   └── xkiro-store.js              ← shared cache + file lock giữa các cửa sổ
 ├── reports/                    ← kết quả test (gitignored)
 └── .github/workflows/validate.yml ← CI
 ```
@@ -96,6 +102,44 @@ pwsh scripts\Restore-RunningConfig.ps1 -Backup opencode.json.bak-20260916-100000
   ```
 - CI tự quét chuỗi giống API key trong `configs/` + chặn mọi file `.env*`
   (trừ mẫu an toàn) bị theo dõi trong Git → fail nếu lộ bất cứ thứ gì.
+
+## 🧩 Plugin: theo dõi hạn mức xKiro
+
+Theo dõi hạn mức tài khoản xKiro ngay trong opencode — **chỉ đọc**, không tốn
+token, gọi `GET https://api.xkiro.com/v1/usage` (endpoint miễn phí). Bộ nguồn
+nằm trong `.opencode/plugins-xkiro/`:
+
+| File | Loại | Vai trò |
+|---|---|---|
+| `xkiro-usage.js` | Server plugin | Poll hạn mức định kỳ, ghi chuỗi `xKiro · free … · burst … · budget …` vào `opencode.log`, toast cảnh báo khi vượt ngưỡng |
+| `xkiro-statusline.tsx` | TUI plugin (slot `app_bottom`) | Status bar cuối màn hình hiển thị hạn mức; vàng ≥90%, đỏ khi hết |
+| `xkiro-store.js` | Module dùng chung | Cache + file lock để **mọi cửa sổ opencode** dùng chung 1 số liệu, chỉ 1 tiến trình gọi mạng |
+
+**Cài đặt** (script `Install-Config.ps1` đã sao 3 file vào `~/.config/opencode/lib/`):
+đăng ký trong mảng `plugin` của `opencode.json` global:
+
+```json
+"plugin": [
+  "./lib/xkiro-usage.js",
+  "./lib/xkiro-statusline.tsx"
+]
+```
+
+**Cấu hình** qua biến môi trường:
+
+| Biến | Mặc định | Ý nghĩa |
+|---|---|---|
+| `XKIRO_USAGE_INTERVAL` | 300 | chu kỳ poll (giây) |
+| `XKIRO_USAGE_WARN_PCT` | 90 | % hạn mức dùng để cảnh báo (statusline & toast) |
+| `XKIRO_USAGE_TOAST_EACH` / `XKIRO_USAGE_TOAST_GAP` | 1 / 60 | toast lặp lại mỗi N lần / cách N giây |
+| `XKIRO_USAGE_INJECT` / `XKIRO_USAGE_INJECT_GAP` | 0 / 300 | ghi thêm hạn mức vào transcript chat |
+| `XKIRO_STATUSBAR_RENDER_MS` | 5000 | tần suất render status bar |
+| `XKIRO_USAGE_TTL` | 60 | TTL cache dùng chung (giây) |
+| `XKIRO_USAGE_CACHE_DIR` | `~/.cache/xkiro` | nơi lưu `usage.json` |
+| `XKIRO_USAGE_DISABLE` / `XKIRO_STATUSBAR_DISABLE` | — | tắt server plugin / status bar |
+
+**Bảo mật:** plugin chỉ đọc endpoint `/v1/usage` (miễn phí) — **không** in hay lưu
+`XTROUTER_API_KEY`; key chỉ được đọc từ biến môi trường khi gọi model.
 
 ## 📊 Nguồn dữ liệu giá
 

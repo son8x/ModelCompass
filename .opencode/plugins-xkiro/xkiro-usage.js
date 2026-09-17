@@ -5,7 +5,7 @@
 //  - Gọi GET /v1/usage của xKiro (miễn phí, không tốn token) định kỳ.
 //  - Ghi 1 dòng tóm tắt vào opencode.log (mở bằng `:open-logs`).
 //  - HIỂN THỊ: status bar cuối màn hình do xkiro-statusline.tsx đảm nhiệm
-//    (xem .opencode/plugins/xkiro-statusline.tsx). Tùy chọn ghi thêm dòng
+//    (xem .opencode/plugins-xkiro/xkiro-statusline.tsx). Tùy chọn ghi thêm dòng
 //    vào transcript chat qua XKIRO_USAGE_INJECT=1 (phương pháp opencode-quota).
 //  - Bắn toast cảnh báo khi free-token / budget paid / burst chạm ngưỡng
 //    (kèm toast trạng thái theo chu kỳ nếu bật).
