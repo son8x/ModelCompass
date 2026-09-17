@@ -1,0 +1,7236 @@
+{
+  "fetched_at": "2026-09-17 11:25:50",
+  "provider": "omniroute",
+  "source": "http://127.0.0.1:20217/v1/models",
+  "count": 556,
+  "models": [
+    {
+      "id": "aihorde/2DN",
+      "name": "2DN",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/526Mix-Animated",
+      "name": "526Mix-Animated",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/A-Zovya RPG Inpainting",
+      "name": "A-Zovya RPG Inpainting",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/AAM XL",
+      "name": "AAM XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/AbsoluteReality",
+      "name": "AbsoluteReality",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Abyss OrangeMix",
+      "name": "Abyss OrangeMix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/AbyssOrangeMix-AfterDark",
+      "name": "AbyssOrangeMix-AfterDark",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/ACertainThing",
+      "name": "ACertainThing",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/AIO Pixel Art",
+      "name": "AIO Pixel Art",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/AlbedoBase XL (SDXL)",
+      "name": "AlbedoBase XL (SDXL)",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/AlbedoBase XL 3.1",
+      "name": "AlbedoBase XL 3.1",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/AMPonyXL",
+      "name": "AMPonyXL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Analog Diffusion",
+      "name": "Analog Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Analog Madness",
+      "name": "Analog Madness",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Anima-Turbo-v1.1",
+      "name": "Anima-Turbo-v1.1",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Animagine XL",
+      "name": "Animagine XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Anime Pencil Diffusion",
+      "name": "Anime Pencil Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Anygen",
+      "name": "Anygen",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/AnyLoRA",
+      "name": "AnyLoRA",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Anything Diffusion",
+      "name": "Anything Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Anything Diffusion Inpainting",
+      "name": "Anything Diffusion Inpainting",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Anything v3",
+      "name": "Anything v3",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Anything v5",
+      "name": "Anything v5",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/aphrodite/SicariusSicariiStuff/Impish_Bloodmoon_12B",
+      "name": "aihorde/aphrodite/SicariusSicariiStuff/Impish_Bloodmoon_12B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/aphrodite/SicariusSicariiStuff/Impish_LLAMA_4B",
+      "name": "aihorde/aphrodite/SicariusSicariiStuff/Impish_LLAMA_4B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/aphrodite/TheDrummer/Behemoth-X-123B-v2.1",
+      "name": "aihorde/aphrodite/TheDrummer/Behemoth-X-123B-v2.1",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/aphrodite/TheDrummer/Cydonia-24B-v4.3",
+      "name": "aihorde/Cydonia 24B (AI Horde)",
+      "access_tier": null,
+      "context": 32768,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/aphrodite/TheDrummer/Skyfall-31B-v4.2",
+      "name": "aihorde/Skyfall 31B (AI Horde)",
+      "access_tier": null,
+      "context": 32768,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/App Icon Diffusion",
+      "name": "App Icon Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Art Of Mtg",
+      "name": "Art Of Mtg",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Aurora",
+      "name": "Aurora",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Babes",
+      "name": "Babes",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/BB95 Furry Mix",
+      "name": "BB95 Furry Mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/BB95 Furry Mix v14",
+      "name": "BB95 Furry Mix v14",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/BigASP",
+      "name": "BigASP",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Blank Canvas XL",
+      "name": "Blank Canvas XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/BlenderMix Pony",
+      "name": "BlenderMix Pony",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/BweshMix",
+      "name": "BweshMix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/CamelliaMix 2.5D",
+      "name": "CamelliaMix 2.5D",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Cetus-Mix",
+      "name": "Cetus-Mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Cheese Daddys Landscape Mix",
+      "name": "Cheese Daddys Landscape Mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Cheyenne",
+      "name": "Cheyenne",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Comic-Diffusion",
+      "name": "Comic-Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Counterfeit",
+      "name": "Counterfeit",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/CyberRealistic Pony",
+      "name": "CyberRealistic Pony",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/CyriousMix",
+      "name": "CyriousMix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Dan Mumford Style",
+      "name": "Dan Mumford Style",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Deliberate",
+      "name": "Deliberate",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Deliberate 3.0",
+      "name": "Deliberate 3.0",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Deliberate Inpainting",
+      "name": "Deliberate Inpainting",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Double Exposure Diffusion",
+      "name": "Double Exposure Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Dreamlike Diffusion",
+      "name": "Dreamlike Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/DreamLikeSamKuvshinov",
+      "name": "DreamLikeSamKuvshinov",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Dreamshaper",
+      "name": "Dreamshaper",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/DreamShaper Inpainting",
+      "name": "DreamShaper Inpainting",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/DreamShaper XL",
+      "name": "DreamShaper XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/DucHaiten",
+      "name": "DucHaiten",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/DucHaiten Classic Anime",
+      "name": "DucHaiten Classic Anime",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Dungeons and Diffusion",
+      "name": "Dungeons and Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Dungeons n Waifus",
+      "name": "Dungeons n Waifus",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Edge Of Realism",
+      "name": "Edge Of Realism",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Eimis Anime Diffusion",
+      "name": "Eimis Anime Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Elysium Anime",
+      "name": "Elysium Anime",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Epic Diffusion",
+      "name": "Epic Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Epic Diffusion Inpainting",
+      "name": "Epic Diffusion Inpainting",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Ether Real Mix",
+      "name": "Ether Real Mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Experience",
+      "name": "Experience",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/ExpMix Line",
+      "name": "ExpMix Line",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/FaeTastic",
+      "name": "FaeTastic",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Fantasy Card Diffusion",
+      "name": "Fantasy Card Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Felladrin/LittleLamb-293M-RP",
+      "name": "aihorde/Felladrin/LittleLamb-293M-RP",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Flat-2D Animerge",
+      "name": "Flat-2D Animerge",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Flux.1-Schnell fp8 (Compact)",
+      "name": "Flux.1-Schnell fp8 (Compact)",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Fustercluck",
+      "name": "Fustercluck",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Galena Redux",
+      "name": "Galena Redux",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Ghibli Diffusion",
+      "name": "Ghibli Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/GhostMix",
+      "name": "GhostMix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Grapefruit Hentai",
+      "name": "Grapefruit Hentai",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/GTA5 Artwork Diffusion",
+      "name": "GTA5 Artwork Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/HASDX",
+      "name": "HASDX",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Hassaku XL",
+      "name": "Hassaku XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Healy's Anime Blend",
+      "name": "Healy's Anime Blend",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Hentai Diffusion",
+      "name": "Hentai Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Hidden Canvas",
+      "name": "Hidden Canvas",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/HolyMix ILXL",
+      "name": "HolyMix ILXL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/HRL",
+      "name": "HRL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/ICBINP - I Can't Believe It's Not Photography",
+      "name": "ICBINP - I Can't Believe It's Not Photography",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/ICBINP XL",
+      "name": "ICBINP XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/iCoMix",
+      "name": "iCoMix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/iCoMix Inpainting",
+      "name": "iCoMix Inpainting",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Illuminati Diffusion",
+      "name": "Illuminati Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Inkpunk Diffusion",
+      "name": "Inkpunk Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Jim Eidomode",
+      "name": "Jim Eidomode",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Juggernaut XL",
+      "name": "Juggernaut XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/KaynegIllustriousXL",
+      "name": "KaynegIllustriousXL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Angelic_Eclipse-12B",
+      "name": "aihorde/koboldcpp/Angelic_Eclipse-12B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/debug-Froopert-31B-v1.1-Q4_K_M",
+      "name": "aihorde/koboldcpp/debug-Froopert-31B-v1.1-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/digo-prayudha/unsloth-llama-3.2-1b-gguf",
+      "name": "aihorde/koboldcpp/digo-prayudha/unsloth-llama-3.2-1b-gguf",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/gemma-4-31B-it-heretic",
+      "name": "aihorde/koboldcpp/gemma-4-31B-it-heretic",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Gemma-4-E4B-it-Ultra-Uncensored-Heretic",
+      "name": "aihorde/koboldcpp/Gemma-4-E4B-it-Ultra-Uncensored-Heretic",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M",
+      "name": "aihorde/koboldcpp/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/L3-8B-Stheno-v3.2",
+      "name": "aihorde/koboldcpp/L3-8B-Stheno-v3.2",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/L3-8B-Stheno-v3.2-Q5_K_M",
+      "name": "aihorde/koboldcpp/L3-8B-Stheno-v3.2-Q5_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/L3-8B-Stheno-v3.2-Q8_0",
+      "name": "aihorde/koboldcpp/L3-8B-Stheno-v3.2-Q8_0",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/L3-Super-Nova-RP-8B",
+      "name": "aihorde/koboldcpp/L3-Super-Nova-RP-8B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Llama-3.1-8B-Stheno-v3.4-Q4_K_M-imat",
+      "name": "aihorde/koboldcpp/Llama-3.1-8B-Stheno-v3.4-Q4_K_M-imat",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Llama-3.2-3B",
+      "name": "aihorde/koboldcpp/Llama-3.2-3B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Llama-3.2-3B-Instruct-Q4_K_M",
+      "name": "aihorde/koboldcpp/Llama-3.2-3B-Instruct-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/llama-3.2-3b-instruct-q4_k_m",
+      "name": "aihorde/koboldcpp/llama-3.2-3b-instruct-q4_k_m",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/mini-magnum-12b-v1.1",
+      "name": "aihorde/koboldcpp/mini-magnum-12b-v1.1",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/MN-Violet-Lotus-12B.Q8_0",
+      "name": "aihorde/koboldcpp/MN-Violet-Lotus-12B.Q8_0",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/mradermacher/Cerebras-GPT-111M-instruction-GGUF",
+      "name": "aihorde/koboldcpp/mradermacher/Cerebras-GPT-111M-instruction-GGUF",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/mradermacher/pythia-70m-deduped.f16.gguf",
+      "name": "aihorde/koboldcpp/mradermacher/pythia-70m-deduped.f16.gguf",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Qwen_Qwen3-0.6B-IQ4_XS",
+      "name": "aihorde/koboldcpp/Qwen_Qwen3-0.6B-IQ4_XS",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Qwen/Qwen3.5-0.8B",
+      "name": "aihorde/koboldcpp/Qwen/Qwen3.5-0.8B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Qwen2.5-7B-Q4_K_M",
+      "name": "aihorde/koboldcpp/Qwen2.5-7B-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Qwen3.8-27B-Uncensored",
+      "name": "aihorde/koboldcpp/Qwen3.8-27B-Uncensored",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/ReadyArt/Forgotten-Safeword-22B",
+      "name": "aihorde/koboldcpp/ReadyArt/Forgotten-Safeword-22B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/Rocinante-X-12B",
+      "name": "aihorde/koboldcpp/Rocinante-X-12B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/koboldcpp/TheDrummer_Behemoth-128B-v3-Q4_K_M",
+      "name": "aihorde/koboldcpp/TheDrummer_Behemoth-128B-v3-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Krea2-Turbo_fp8",
+      "name": "Krea2-Turbo_fp8",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Lawlas's yiff mix",
+      "name": "Lawlas's yiff mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Liberty",
+      "name": "Liberty",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Lyriel",
+      "name": "Lyriel",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/majicMIX realistic",
+      "name": "majicMIX realistic",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/MeinaMix",
+      "name": "MeinaMix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/MHXL - Aventis Horizon",
+      "name": "MHXL - Aventis Horizon",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Midjourney PaintArt",
+      "name": "Midjourney PaintArt",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Mistoon Anime",
+      "name": "Mistoon Anime",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/ModernArt Diffusion",
+      "name": "ModernArt Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/MoonMix Fantasy",
+      "name": "MoonMix Fantasy",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Movie Diffusion",
+      "name": "Movie Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/NatViS",
+      "name": "NatViS",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Neurogen",
+      "name": "Neurogen",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/NeverEnding Dream",
+      "name": "NeverEnding Dream",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/NEW ERA",
+      "name": "NEW ERA",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/noob_v_pencil XL",
+      "name": "noob_v_pencil XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/noobEvo",
+      "name": "noobEvo",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Nova Anime XL",
+      "name": "Nova Anime XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Nova Flat XL",
+      "name": "Nova Flat XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Nova Furry Pony",
+      "name": "Nova Furry Pony",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Nova Furry XL",
+      "name": "Nova Furry XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/NTR MIX IL-Noob XL",
+      "name": "NTR MIX IL-Noob XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Pastel Mix",
+      "name": "Pastel Mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Perfect World",
+      "name": "Perfect World",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/PerfectDeliberate",
+      "name": "PerfectDeliberate",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Photon",
+      "name": "Photon",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Pixel Illustrious",
+      "name": "Pixel Illustrious",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Poison",
+      "name": "Poison",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Pony Diffusion XL",
+      "name": "Pony Diffusion XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Pony Realism",
+      "name": "Pony Realism",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/PPP",
+      "name": "PPP",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Prefect Pony",
+      "name": "Prefect Pony",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Pretty 2.5D",
+      "name": "Pretty 2.5D",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Project Unreal Engine 5",
+      "name": "Project Unreal Engine 5",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Quiet Goodnight XL",
+      "name": "Quiet Goodnight XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Qwen/Qwen3.5-35B-A3B",
+      "name": "aihorde/Qwen/Qwen3.5-35B-A3B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Rag Illustrious Mix",
+      "name": "Rag Illustrious Mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Real Dos Mix",
+      "name": "Real Dos Mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/RealBiter",
+      "name": "RealBiter",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Realism Engine",
+      "name": "Realism Engine",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Realistic Vision",
+      "name": "Realistic Vision",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Realistic Vision Inpainting",
+      "name": "Realistic Vision Inpainting",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Reliberate",
+      "name": "Reliberate",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Rev Animated",
+      "name": "Rev Animated",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Ri-Mix",
+      "name": "Ri-Mix",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/RPG",
+      "name": "RPG",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Sci-Fi Diffusion",
+      "name": "Sci-Fi Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/SD-Silicon",
+      "name": "SD-Silicon",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/SDXL 1.0",
+      "name": "SDXL 1.0",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Something",
+      "name": "Something",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Stable Cascade 1.0",
+      "name": "Stable Cascade 1.0",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/stable_diffusion",
+      "name": "stable_diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/stable_diffusion_2.1",
+      "name": "stable_diffusion_2.1",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/stable_diffusion_inpainting",
+      "name": "stable_diffusion_inpainting",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/SwamPonyXL",
+      "name": "SwamPonyXL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/ToonYou",
+      "name": "ToonYou",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/TUNIX Pony",
+      "name": "TUNIX Pony",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Uhmami",
+      "name": "Uhmami",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Unstable Diffusers XL",
+      "name": "Unstable Diffusers XL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Unstable Ink Dream",
+      "name": "Unstable Ink Dream",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/URPM",
+      "name": "URPM",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Vector Art",
+      "name": "Vector Art",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/WAI-ANI-NSFW-PONYXL",
+      "name": "WAI-ANI-NSFW-PONYXL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/WAI-CUTE Pony",
+      "name": "WAI-CUTE Pony",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/WAI-NSFW-illustrious-SDXL",
+      "name": "WAI-NSFW-illustrious-SDXL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/waifu_diffusion",
+      "name": "waifu_diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Western Animation Diffusion",
+      "name": "Western Animation Diffusion",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/White Pony Diffusion 4",
+      "name": "White Pony Diffusion 4",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Woop-Woop Photo",
+      "name": "Woop-Woop Photo",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Yiffy",
+      "name": "Yiffy",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Z-Image-Turbo",
+      "name": "Z-Image-Turbo",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/ZavyChromaXL",
+      "name": "ZavyChromaXL",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "aihorde/Zeipher Female Model",
+      "name": "Zeipher Female Model",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/best-chaos",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/best-chat",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/best-coding",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/best-coding-fast",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/best-fast",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/best-free",
+      "name": "",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/best-reasoning",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/best-vision",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/chaos",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/chat",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/cheap",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/claude-opus",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/claude-sonnet",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/coding",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/coding:cheap",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/coding:fast",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/coding:free",
+      "name": "",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/coding:pro",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/coding:reliable",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/fast",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/gemini",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/gemma",
+      "name": "",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/glm",
+      "name": "",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/llama",
+      "name": "",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/mimo",
+      "name": "",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/minimax",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/multimodal",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/offline",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/pro-chat",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/pro-coding",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/pro-fast",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/pro-reasoning",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/pro-vision",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/reasoning",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/reasoning:pro",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/smart",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/vision",
+      "name": "",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "auto/zai",
+      "name": "",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+      "name": "cf/DeepSeek R1 Distill 32B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/google/gemma-4-26b-a4b-it",
+      "name": "cf/Gemma 4 26B (🆓)",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/meta/llama-3.2-3b-instruct",
+      "name": "cf/Llama 3.2 3B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "name": "cf/Llama 3.3 70B (FP8 Fast 🆓 ~150 resp/day)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/mistral/mistral-7b-instruct-v0.2-lora",
+      "name": "cf/Mistral 7B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/moonshotai/kimi-k2.6",
+      "name": "cf/Kimi K2.6 (🆓)",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/qwen/qwen2.5-coder-32b-instruct",
+      "name": "cf/Qwen 2.5 Coder 32B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/qwen/qwq-32b",
+      "name": "cf/QwQ 32B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cf/@cf/zai-org/glm-4.7-flash",
+      "name": "cf/GLM 4.7 Flash (🆓)",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/aisingapore/gemma-sea-lion-v4-27b-it",
+      "name": "Gemma SEA-LION V4 27B (AI Singapore)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/deepseek-ai/deepseek-r1-distill-qwen-32b",
+      "name": "DeepSeek R1 Distill Qwen 32B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/deepseek-ai/deepseek-v4-flash-0731",
+      "name": "DeepSeek V4 Flash (DeepSeek)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/deepseek-ai/deepseek-v4-pro-0813",
+      "name": "DeepSeek V4 Pro (DeepSeek)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/google/gemma-4-26b-a4b-it",
+      "name": "Gemma 4 26B A4B (Google)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/ibm-granite/granite-4.0-h-micro",
+      "name": "Granite 4.0 H Micro (IBM)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/meta-llama/llama-3.3-70b-instruct-fp8-fast",
+      "name": "Llama 3.3 70B Instruct (Meta)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/meta/llama-3.1-8b-instruct-fp8",
+      "name": "Llama 3.1 8B Instruct (Meta)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/meta/llama-4-scout-17b-16e-instruct",
+      "name": "Llama 4 Scout 17B (Meta)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/mistralai/mistral-small-3.1-24b-instruct",
+      "name": "Mistral Small 3.1 24B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/moonshotai/kimi-k2.6",
+      "name": "Kimi K2.6 (Moonshot)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/moonshotai/kimi-k2.7-code",
+      "name": "Kimi K2.7 Code (Moonshot)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/nvidia/nemotron-3-120b-a12b",
+      "name": "Nemotron 3 120B (NVIDIA)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/openai/gpt-oss-120b",
+      "name": "GPT-OSS 120B (OpenAI)",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/openai/gpt-oss-20b",
+      "name": "GPT-OSS 20B (OpenAI)",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/qwen/qwen2.5-coder-32b-instruct",
+      "name": "Qwen2.5 Coder 32B (Qwen)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/qwen/qwen3-30b-a3b-fp8",
+      "name": "Qwen3 30B A3B (Qwen)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/qwen/qwq-32b",
+      "name": "QwQ 32B (Qwen)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/zai-org/glm-4.7-flash",
+      "name": "GLM 4.7 Flash (Z.ai)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cfp/zai-org/glm-5.2",
+      "name": "GLM 5.2 (Z.ai)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+      "name": "cloudflare-ai/DeepSeek R1 Distill 32B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/google/gemma-4-26b-a4b-it",
+      "name": "cloudflare-ai/Gemma 4 26B (🆓)",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/meta/llama-3.2-3b-instruct",
+      "name": "cloudflare-ai/Llama 3.2 3B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "name": "cloudflare-ai/Llama 3.3 70B (FP8 Fast 🆓 ~150 resp/day)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/mistral/mistral-7b-instruct-v0.2-lora",
+      "name": "cloudflare-ai/Mistral 7B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/moonshotai/kimi-k2.6",
+      "name": "cloudflare-ai/Kimi K2.6 (🆓)",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/qwen/qwen2.5-coder-32b-instruct",
+      "name": "cloudflare-ai/Qwen 2.5 Coder 32B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/qwen/qwq-32b",
+      "name": "cloudflare-ai/QwQ 32B (🆓)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "cloudflare-ai/@cf/zai-org/glm-4.7-flash",
+      "name": "cloudflare-ai/GLM 4.7 Flash (🆓)",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/antigravity-preview-05-2026",
+      "name": "antigravity-preview-05-2026",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/aqa",
+      "name": "aqa",
+      "access_tier": null,
+      "context": 7168,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/deep-research-max-preview-04-2026",
+      "name": "deep-research-max-preview-04-2026",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/deep-research-preview-04-2026",
+      "name": "deep-research-preview-04-2026",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/deep-research-pro-preview-12-2025",
+      "name": "deep-research-pro-preview-12-2025",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-2.5-computer-use-preview-10-2025",
+      "name": "gemini-2.5-computer-use-preview-10-2025",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": 0.3,
+        "output": 2.5,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-2.5-flash-image",
+      "name": "gemini-2.5-flash-image",
+      "access_tier": null,
+      "context": 32768,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-2.5-flash-lite",
+      "name": "Gemini 2.5 Flash Lite",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": 0.1,
+        "output": 0.4,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-2.5-flash-preview-tts",
+      "name": "gemini-2.5-flash-preview-tts",
+      "access_tier": null,
+      "context": 8192,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-2.5-pro",
+      "name": "Gemini 2.5 Pro",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": 2.0,
+        "output": 12.0,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-2.5-pro-preview-tts",
+      "name": "gemini-2.5-pro-preview-tts",
+      "access_tier": null,
+      "context": 8192,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3-flash-preview",
+      "name": "Gemini 3 Flash Preview",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3-pro-image",
+      "name": "gemini-3-pro-image",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3-pro-image-preview",
+      "name": "gemini-3-pro-image-preview",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.1-flash-image",
+      "name": "gemini-3.1-flash-image",
+      "access_tier": null,
+      "context": 65536,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.1-flash-image-preview",
+      "name": "gemini-3.1-flash-image-preview",
+      "access_tier": null,
+      "context": 65536,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.1-flash-lite",
+      "name": "Gemini 3.1 Flash Lite",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.1-flash-lite-image",
+      "name": "gemini-3.1-flash-lite-image",
+      "access_tier": null,
+      "context": 65536,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.1-flash-lite-preview",
+      "name": "gemini-3.1-flash-lite-preview",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.1-flash-tts-preview",
+      "name": "Gemini 3.1 Flash TTS",
+      "access_tier": null,
+      "context": 8192,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.1-pro-preview",
+      "name": "Gemini 3.1 Pro Preview",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": 2.0,
+        "output": 12.0,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.1-pro-preview-customtools",
+      "name": "gemini-3.1-pro-preview-customtools",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.5-flash-lite",
+      "name": "gemini-3.5-flash-lite",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.5-transcribe",
+      "name": "gemini-3.5-transcribe",
+      "access_tier": null,
+      "context": 98304,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.6-flash",
+      "name": "gemini-3.6-flash",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.7-flash",
+      "name": "Gemini 3.7 Flash",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": 0.75,
+        "output": 3.75,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-3.8-flash",
+      "name": "gemini-3.8-flash",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-embedding-001",
+      "name": "gemini-embedding-001",
+      "access_tier": null,
+      "context": 2048,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-embedding-2",
+      "name": "gemini-embedding-2",
+      "access_tier": null,
+      "context": 8192,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-embedding-2-preview",
+      "name": "gemini-embedding-2-preview",
+      "access_tier": null,
+      "context": 8192,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-flash-latest",
+      "name": "gemini-flash-latest",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-flash-lite-latest",
+      "name": "gemini-flash-lite-latest",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-omni-1.1-flash",
+      "name": "gemini-omni-1.1-flash",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-omni-flash-preview",
+      "name": "gemini-omni-flash-preview",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-pro-latest",
+      "name": "gemini-pro-latest",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemini-robotics-er-2-preview",
+      "name": "gemini-robotics-er-2-preview",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemma-4-26b-a4b-it",
+      "name": "gemma-4-26b-a4b-it",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/gemma-4-31b-it",
+      "name": "gemma-4-31b-it",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/lyria-3-clip-preview",
+      "name": "lyria-3-clip-preview",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/lyria-3-pro-preview",
+      "name": "lyria-3-pro-preview",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/lyria-3.5",
+      "name": "lyria-3.5",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "gemini/nano-banana-pro-preview",
+      "name": "nano-banana-pro-preview",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/allam-2-7b",
+      "name": "allam-2-7b",
+      "access_tier": null,
+      "context": 4096,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/canopylabs/orpheus-arabic-saudi",
+      "name": "canopylabs/orpheus-arabic-saudi",
+      "access_tier": null,
+      "context": 4000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/canopylabs/orpheus-v1-english",
+      "name": "canopylabs/orpheus-v1-english",
+      "access_tier": null,
+      "context": 4000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/distil-whisper-large-v3-en",
+      "name": "distil-whisper-large-v3-en",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/groq/compound",
+      "name": "groq/compound",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/groq/compound-mini",
+      "name": "groq/compound-mini",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/llama-3.3-70b-versatile",
+      "name": "Llama 3.3 70B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "name": "Llama 4 Scout",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/meta-llama/llama-prompt-guard-2-22m",
+      "name": "meta-llama/llama-prompt-guard-2-22m",
+      "access_tier": null,
+      "context": 512,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/meta-llama/llama-prompt-guard-2-86m",
+      "name": "meta-llama/llama-prompt-guard-2-86m",
+      "access_tier": null,
+      "context": 512,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/openai/gpt-oss-120b",
+      "name": "groq/GPT-OSS 120B",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/openai/gpt-oss-20b",
+      "name": "groq/GPT-OSS 20B",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/openai/gpt-oss-safeguard-20b",
+      "name": "GPT-OSS Safeguard 20B",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/qwen/qwen3-32b",
+      "name": "Qwen3 32B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/qwen/qwen3.6-27b",
+      "name": "Qwen3.6 27B",
+      "access_tier": null,
+      "context": 131072,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/qwen/qwen3.8-27b",
+      "name": "qwen/qwen3.8-27b",
+      "access_tier": null,
+      "context": 131042,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/whisper-large-v3",
+      "name": "whisper-large-v3",
+      "access_tier": null,
+      "context": 448,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "groq/whisper-large-v3-turbo",
+      "name": "whisper-large-v3-turbo",
+      "access_tier": null,
+      "context": 448,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/aphrodite/SicariusSicariiStuff/Impish_Bloodmoon_12B",
+      "name": "horde/aphrodite/SicariusSicariiStuff/Impish_Bloodmoon_12B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/aphrodite/SicariusSicariiStuff/Impish_LLAMA_4B",
+      "name": "horde/aphrodite/SicariusSicariiStuff/Impish_LLAMA_4B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/aphrodite/TheDrummer/Behemoth-X-123B-v2.1",
+      "name": "horde/aphrodite/TheDrummer/Behemoth-X-123B-v2.1",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/aphrodite/TheDrummer/Cydonia-24B-v4.3",
+      "name": "horde/Cydonia 24B (AI Horde)",
+      "access_tier": null,
+      "context": 32768,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/aphrodite/TheDrummer/Skyfall-31B-v4.2",
+      "name": "horde/Skyfall 31B (AI Horde)",
+      "access_tier": null,
+      "context": 32768,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/Felladrin/LittleLamb-293M-RP",
+      "name": "horde/Felladrin/LittleLamb-293M-RP",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Angelic_Eclipse-12B",
+      "name": "horde/koboldcpp/Angelic_Eclipse-12B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/debug-Froopert-31B-v1.1-Q4_K_M",
+      "name": "horde/koboldcpp/debug-Froopert-31B-v1.1-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/digo-prayudha/unsloth-llama-3.2-1b-gguf",
+      "name": "horde/koboldcpp/digo-prayudha/unsloth-llama-3.2-1b-gguf",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/gemma-4-31B-it-heretic",
+      "name": "horde/koboldcpp/gemma-4-31B-it-heretic",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Gemma-4-E4B-it-Ultra-Uncensored-Heretic",
+      "name": "horde/koboldcpp/Gemma-4-E4B-it-Ultra-Uncensored-Heretic",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M",
+      "name": "horde/koboldcpp/Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/L3-8B-Stheno-v3.2",
+      "name": "horde/koboldcpp/L3-8B-Stheno-v3.2",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/L3-8B-Stheno-v3.2-Q5_K_M",
+      "name": "horde/koboldcpp/L3-8B-Stheno-v3.2-Q5_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/L3-8B-Stheno-v3.2-Q8_0",
+      "name": "horde/koboldcpp/L3-8B-Stheno-v3.2-Q8_0",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/L3-Super-Nova-RP-8B",
+      "name": "horde/koboldcpp/L3-Super-Nova-RP-8B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Llama-3.1-8B-Stheno-v3.4-Q4_K_M-imat",
+      "name": "horde/koboldcpp/Llama-3.1-8B-Stheno-v3.4-Q4_K_M-imat",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Llama-3.2-3B",
+      "name": "horde/koboldcpp/Llama-3.2-3B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/llama-3.2-3b-instruct-q4_k_m",
+      "name": "horde/koboldcpp/llama-3.2-3b-instruct-q4_k_m",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Llama-3.2-3B-Instruct-Q4_K_M",
+      "name": "horde/koboldcpp/Llama-3.2-3B-Instruct-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/mini-magnum-12b-v1.1",
+      "name": "horde/koboldcpp/mini-magnum-12b-v1.1",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/MN-Violet-Lotus-12B.Q8_0",
+      "name": "horde/koboldcpp/MN-Violet-Lotus-12B.Q8_0",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/mradermacher/Cerebras-GPT-111M-instruction-GGUF",
+      "name": "horde/koboldcpp/mradermacher/Cerebras-GPT-111M-instruction-GGUF",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/mradermacher/pythia-70m-deduped.f16.gguf",
+      "name": "horde/koboldcpp/mradermacher/pythia-70m-deduped.f16.gguf",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Qwen_Qwen3-0.6B-IQ4_XS",
+      "name": "horde/koboldcpp/Qwen_Qwen3-0.6B-IQ4_XS",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Qwen/Qwen3.5-0.8B",
+      "name": "horde/koboldcpp/Qwen/Qwen3.5-0.8B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Qwen2.5-7B-Q4_K_M",
+      "name": "horde/koboldcpp/Qwen2.5-7B-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Qwen3.8-27B-Uncensored",
+      "name": "horde/koboldcpp/Qwen3.8-27B-Uncensored",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/ReadyArt/Forgotten-Safeword-22B",
+      "name": "horde/koboldcpp/ReadyArt/Forgotten-Safeword-22B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/Rocinante-X-12B",
+      "name": "horde/koboldcpp/Rocinante-X-12B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/koboldcpp/TheDrummer_Behemoth-128B-v3-Q4_K_M",
+      "name": "horde/koboldcpp/TheDrummer_Behemoth-128B-v3-Q4_K_M",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "horde/Qwen/Qwen3.5-35B-A3B",
+      "name": "horde/Qwen/Qwen3.5-35B-A3B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-flash",
+      "name": "ollama-cloud/DeepSeek V4 Flash",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-flash-high",
+      "name": "ollama-cloud/deepseek-v4-flash-high",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-flash-low",
+      "name": "ollama-cloud/deepseek-v4-flash-low",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-flash-max",
+      "name": "ollama-cloud/deepseek-v4-flash-max",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-flash-medium",
+      "name": "ollama-cloud/deepseek-v4-flash-medium",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-flash-none",
+      "name": "ollama-cloud/deepseek-v4-flash-none",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-flash:0731",
+      "name": "ollama-cloud/deepseek-v4-flash:0731",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-pro",
+      "name": "ollama-cloud/DeepSeek V4 Pro",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-pro-high",
+      "name": "ollama-cloud/deepseek-v4-pro-high",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-pro-low",
+      "name": "ollama-cloud/deepseek-v4-pro-low",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-pro-max",
+      "name": "ollama-cloud/deepseek-v4-pro-max",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-pro-medium",
+      "name": "ollama-cloud/deepseek-v4-pro-medium",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-pro-none",
+      "name": "ollama-cloud/deepseek-v4-pro-none",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/deepseek-v4-pro:0813",
+      "name": "ollama-cloud/deepseek-v4-pro:0813",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gemma4:31b",
+      "name": "ollama-cloud/Gemma 4 31B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.1",
+      "name": "ollama-cloud/GLM 5.1",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.1-high",
+      "name": "ollama-cloud/glm-5.1-high",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.1-low",
+      "name": "ollama-cloud/glm-5.1-low",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.1-max",
+      "name": "ollama-cloud/glm-5.1-max",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.1-medium",
+      "name": "ollama-cloud/glm-5.1-medium",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.1-none",
+      "name": "ollama-cloud/glm-5.1-none",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.2",
+      "name": "ollama-cloud/GLM 5.2",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.2-high",
+      "name": "ollama-cloud/glm-5.2-high",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.2-low",
+      "name": "ollama-cloud/glm-5.2-low",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.2-max",
+      "name": "ollama-cloud/glm-5.2-max",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.2-medium",
+      "name": "ollama-cloud/glm-5.2-medium",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.2-none",
+      "name": "ollama-cloud/glm-5.2-none",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.3",
+      "name": "ollama-cloud/glm-5.3",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/glm-5.3-flash",
+      "name": "ollama-cloud/glm-5.3-flash",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gpt-oss:120b",
+      "name": "ollama-cloud/GPT-OSS 120B",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gpt-oss:120b-high",
+      "name": "ollama-cloud/gpt-oss:120b-high",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gpt-oss:120b-low",
+      "name": "ollama-cloud/gpt-oss:120b-low",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gpt-oss:120b-medium",
+      "name": "ollama-cloud/gpt-oss:120b-medium",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gpt-oss:20b",
+      "name": "ollama-cloud/GPT-OSS 20B",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gpt-oss:20b-high",
+      "name": "ollama-cloud/gpt-oss:20b-high",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gpt-oss:20b-low",
+      "name": "ollama-cloud/gpt-oss:20b-low",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/gpt-oss:20b-medium",
+      "name": "ollama-cloud/gpt-oss:20b-medium",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/kimi-k2.6",
+      "name": "ollama-cloud/Kimi K2.6",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/kimi-k2.7-code",
+      "name": "ollama-cloud/kimi-k2.7-code",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/kimi-k3",
+      "name": "ollama-cloud/kimi-k3",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/minimax-m2.7",
+      "name": "ollama-cloud/MiniMax M2.7",
+      "access_tier": null,
+      "context": 204800,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/minimax-m3",
+      "name": "ollama-cloud/MiniMax M3",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/mistral-large-3:675b",
+      "name": "ollama-cloud/mistral-large-3:675b",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/nemotron-3-nano:30b",
+      "name": "ollama-cloud/nemotron-3-nano:30b",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/nemotron-3-super",
+      "name": "ollama-cloud/NVIDIA Nemotron 3 Super",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/nemotron-3-ultra",
+      "name": "ollama-cloud/nemotron-3-ultra",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-cloud/qwen3.5:397b",
+      "name": "ollama-cloud/Qwen 3.5 397B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollama-search/web_search",
+      "name": "web_search",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-flash",
+      "name": "ollamacloud/DeepSeek V4 Flash",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-flash-high",
+      "name": "ollamacloud/deepseek-v4-flash-high",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-flash-low",
+      "name": "ollamacloud/deepseek-v4-flash-low",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-flash-max",
+      "name": "ollamacloud/deepseek-v4-flash-max",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-flash-medium",
+      "name": "ollamacloud/deepseek-v4-flash-medium",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-flash-none",
+      "name": "ollamacloud/deepseek-v4-flash-none",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-flash:0731",
+      "name": "ollamacloud/deepseek-v4-flash:0731",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-pro",
+      "name": "ollamacloud/DeepSeek V4 Pro",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-pro-high",
+      "name": "ollamacloud/deepseek-v4-pro-high",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-pro-low",
+      "name": "ollamacloud/deepseek-v4-pro-low",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-pro-max",
+      "name": "ollamacloud/deepseek-v4-pro-max",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-pro-medium",
+      "name": "ollamacloud/deepseek-v4-pro-medium",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-pro-none",
+      "name": "ollamacloud/deepseek-v4-pro-none",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/deepseek-v4-pro:0813",
+      "name": "ollamacloud/deepseek-v4-pro:0813",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gemma4:31b",
+      "name": "ollamacloud/Gemma 4 31B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.1",
+      "name": "ollamacloud/GLM 5.1",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.1-high",
+      "name": "ollamacloud/glm-5.1-high",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.1-low",
+      "name": "ollamacloud/glm-5.1-low",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.1-max",
+      "name": "ollamacloud/glm-5.1-max",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.1-medium",
+      "name": "ollamacloud/glm-5.1-medium",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.1-none",
+      "name": "ollamacloud/glm-5.1-none",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.2",
+      "name": "ollamacloud/GLM 5.2",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.2-high",
+      "name": "ollamacloud/glm-5.2-high",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.2-low",
+      "name": "ollamacloud/glm-5.2-low",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.2-max",
+      "name": "ollamacloud/glm-5.2-max",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.2-medium",
+      "name": "ollamacloud/glm-5.2-medium",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.2-none",
+      "name": "ollamacloud/glm-5.2-none",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.3",
+      "name": "ollamacloud/glm-5.3",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/glm-5.3-flash",
+      "name": "ollamacloud/glm-5.3-flash",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gpt-oss:120b",
+      "name": "ollamacloud/GPT-OSS 120B",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gpt-oss:120b-high",
+      "name": "ollamacloud/gpt-oss:120b-high",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gpt-oss:120b-low",
+      "name": "ollamacloud/gpt-oss:120b-low",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gpt-oss:120b-medium",
+      "name": "ollamacloud/gpt-oss:120b-medium",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gpt-oss:20b",
+      "name": "ollamacloud/GPT-OSS 20B",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gpt-oss:20b-high",
+      "name": "ollamacloud/gpt-oss:20b-high",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gpt-oss:20b-low",
+      "name": "ollamacloud/gpt-oss:20b-low",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/gpt-oss:20b-medium",
+      "name": "ollamacloud/gpt-oss:20b-medium",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/kimi-k2.6",
+      "name": "ollamacloud/Kimi K2.6",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/kimi-k2.7-code",
+      "name": "ollamacloud/kimi-k2.7-code",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/kimi-k3",
+      "name": "ollamacloud/kimi-k3",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/minimax-m2.7",
+      "name": "ollamacloud/MiniMax M2.7",
+      "access_tier": null,
+      "context": 204800,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/minimax-m3",
+      "name": "ollamacloud/MiniMax M3",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/mistral-large-3:675b",
+      "name": "ollamacloud/mistral-large-3:675b",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/nemotron-3-nano:30b",
+      "name": "ollamacloud/nemotron-3-nano:30b",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/nemotron-3-super",
+      "name": "ollamacloud/NVIDIA Nemotron 3 Super",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/nemotron-3-ultra",
+      "name": "ollamacloud/nemotron-3-ultra",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "ollamacloud/qwen3.5:397b",
+      "name": "ollamacloud/Qwen 3.5 397B",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/auto",
+      "name": "Auto (Best Available)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": 2.0,
+        "output": 8.0,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/baai/bge-m3",
+      "name": "baai/bge-m3",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/black-forest-labs/flux.2-flex",
+      "name": "black-forest-labs/flux.2-flex",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/black-forest-labs/flux.2-max",
+      "name": "black-forest-labs/flux.2-max",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/black-forest-labs/flux.2-pro",
+      "name": "black-forest-labs/flux.2-pro",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/cohere/north-mini-code:free",
+      "name": "cohere/north-mini-code:free",
+      "access_tier": null,
+      "context": 256000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/cohere/rerank-4-fast",
+      "name": "cohere/rerank-4-fast",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/cohere/rerank-4-pro",
+      "name": "cohere/rerank-4-pro",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/cohere/rerank-v3.5",
+      "name": "cohere/rerank-v3.5",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/deepgram/nova-3",
+      "name": "deepgram/nova-3",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/dots-studio/dots-3-note-preview:free",
+      "name": "dots-studio/dots-3-note-preview:free",
+      "access_tier": null,
+      "context": 512000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/chirp-3",
+      "name": "google/chirp-3",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/gemini-3-pro-image-preview",
+      "name": "google/gemini-3-pro-image-preview",
+      "access_tier": null,
+      "context": 65536,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/gemini-3.1-flash-image-preview",
+      "name": "google/gemini-3.1-flash-image-preview",
+      "access_tier": null,
+      "context": 65536,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/gemini-embedding-001",
+      "name": "google/gemini-embedding-001",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/gemini-embedding-2",
+      "name": "google/gemini-embedding-2",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/gemini-embedding-2-preview",
+      "name": "google/gemini-embedding-2-preview",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/gemma-4-26b-a4b-it:free",
+      "name": "google/gemma-4-26b-a4b-it:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/gemma-4-31b-it:free",
+      "name": "google/gemma-4-31b-it:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/lyria-3-clip-preview",
+      "name": "google/lyria-3-clip-preview",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/google/lyria-3-pro-preview",
+      "name": "google/lyria-3-pro-preview",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/inclusionai/ling-3.0-flash-fin:free",
+      "name": "inclusionai/ling-3.0-flash-fin:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/inclusionai/ling-3.0-flash-sante:free",
+      "name": "inclusionai/ling-3.0-flash-sante:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/liquid/lfm-2.5-2.6b:free",
+      "name": "liquid/lfm-2.5-2.6b:free",
+      "access_tier": null,
+      "context": 65536,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/microsoft/mai-transcribe-1.5",
+      "name": "microsoft/mai-transcribe-1.5",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/mistralai/mistral-embed-2312",
+      "name": "mistralai/mistral-embed-2312",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/mistralai/voxtral-mini-transcribe",
+      "name": "mistralai/voxtral-mini-transcribe",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nex-agi/nex-n2.5-mini:free",
+      "name": "nex-agi/nex-n2.5-mini:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nex-agi/nex-n2.5-mini:free-high",
+      "name": "nex-agi/nex-n2.5-mini:free-high",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nex-agi/nex-n2.5-mini:free-medium",
+      "name": "nex-agi/nex-n2.5-mini:free-medium",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nex-agi/nex-n2.5-mini:free-none",
+      "name": "nex-agi/nex-n2.5-mini:free-none",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nex-agi/nex-n2.5-pro:free",
+      "name": "nex-agi/nex-n2.5-pro:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nex-agi/nex-n2.5-pro:free-high",
+      "name": "nex-agi/nex-n2.5-pro:free-high",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nex-agi/nex-n2.5-pro:free-medium",
+      "name": "nex-agi/nex-n2.5-pro:free-medium",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nex-agi/nex-n2.5-pro:free-none",
+      "name": "nex-agi/nex-n2.5-pro:free-none",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "name": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "access_tier": null,
+      "context": 256000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "name": "nvidia/nemotron-3-super-120b-a12b:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free-low",
+      "name": "nvidia/nemotron-3-super-120b-a12b:free-low",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free-medium",
+      "name": "nvidia/nemotron-3-super-120b-a12b:free-medium",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "name": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free-high",
+      "name": "nvidia/nemotron-3-ultra-550b-a55b:free-high",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free-medium",
+      "name": "nvidia/nemotron-3-ultra-550b-a55b:free-medium",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3.5-content-safety:free",
+      "name": "nvidia/nemotron-3.5-content-safety:free",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "name": "nvidia/nemotron-3.5-lightning:free",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/nvidia/parakeet-tdt-0.6b-v3",
+      "name": "nvidia/parakeet-tdt-0.6b-v3",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/gpt-4o-mini-transcribe",
+      "name": "openai/gpt-4o-mini-transcribe",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/gpt-4o-transcribe",
+      "name": "openai/gpt-4o-transcribe",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/gpt-5-image-mini",
+      "name": "openai/gpt-5-image-mini",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/gpt-5.4-image-2",
+      "name": "openai/gpt-5.4-image-2",
+      "access_tier": null,
+      "context": 272000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/text-embedding-3-large",
+      "name": "openai/text-embedding-3-large",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/text-embedding-3-small",
+      "name": "openai/text-embedding-3-small",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/whisper-1",
+      "name": "openai/whisper-1",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/whisper-large-v3",
+      "name": "openai/whisper-large-v3",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openai/whisper-large-v3-turbo",
+      "name": "openai/whisper-large-v3-turbo",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/openrouter/free",
+      "name": "openrouter/free",
+      "access_tier": null,
+      "context": 200000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/poolside/laguna-s-2.1:free",
+      "name": "poolside/laguna-s-2.1:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/poolside/laguna-xs-2.1:free",
+      "name": "poolside/laguna-xs-2.1:free",
+      "access_tier": null,
+      "context": 262144,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/qwen/qwen3-asr-flash-2026-02-10",
+      "name": "qwen/qwen3-asr-flash-2026-02-10",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/qwen/qwen3-embedding-4b",
+      "name": "qwen/qwen3-embedding-4b",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/qwen/qwen3-embedding-8b",
+      "name": "qwen/qwen3-embedding-8b",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling-small:free",
+      "name": "thinkingmachines/inkling-small:free",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling-small:free-high",
+      "name": "thinkingmachines/inkling-small:free-high",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling-small:free-low",
+      "name": "thinkingmachines/inkling-small:free-low",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling-small:free-medium",
+      "name": "thinkingmachines/inkling-small:free-medium",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling-small:free-minimal",
+      "name": "thinkingmachines/inkling-small:free-minimal",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling-small:free-none",
+      "name": "thinkingmachines/inkling-small:free-none",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling-small:free-xhigh",
+      "name": "thinkingmachines/inkling-small:free-xhigh",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling:free",
+      "name": "thinkingmachines/inkling:free",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling:free-high",
+      "name": "thinkingmachines/inkling:free-high",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling:free-low",
+      "name": "thinkingmachines/inkling:free-low",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling:free-medium",
+      "name": "thinkingmachines/inkling:free-medium",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling:free-minimal",
+      "name": "thinkingmachines/inkling:free-minimal",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling:free-none",
+      "name": "thinkingmachines/inkling:free-none",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling:free-xhigh",
+      "name": "thinkingmachines/inkling:free-xhigh",
+      "access_tier": null,
+      "context": 1048576,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-auto",
+      "name": "perplexity-web/Perplexity Best",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-gemini",
+      "name": "perplexity-web/Gemini 3.7 Flash (via Perplexity)",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-glm",
+      "name": "perplexity-web/GLM-5.2 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-gpt-5.6-sol",
+      "name": "perplexity-web/GPT-5.6 Sol (via Perplexity)",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-gpt-5.6-terra",
+      "name": "perplexity-web/GPT-5.6 Terra (via Perplexity)",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-grok-4.6",
+      "name": "perplexity-web/Grok 4.6 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-kimi",
+      "name": "perplexity-web/Kimi K3 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-nemotron",
+      "name": "perplexity-web/Nemotron 3 Ultra (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-opus",
+      "name": "perplexity-web/Claude Opus 5.0 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-sonar",
+      "name": "perplexity-web/Sonar 2 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "perplexity-web/pplx-sonnet",
+      "name": "perplexity-web/Claude Sonnet 5.0 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-auto",
+      "name": "pplx-web/Perplexity Best",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-gemini",
+      "name": "pplx-web/Gemini 3.7 Flash (via Perplexity)",
+      "access_tier": null,
+      "context": 1000000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-glm",
+      "name": "pplx-web/GLM-5.2 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-gpt-5.6-sol",
+      "name": "pplx-web/GPT-5.6 Sol (via Perplexity)",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-gpt-5.6-terra",
+      "name": "pplx-web/GPT-5.6 Terra (via Perplexity)",
+      "access_tier": null,
+      "context": 400000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-grok-4.6",
+      "name": "pplx-web/Grok 4.6 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-kimi",
+      "name": "pplx-web/Kimi K3 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-nemotron",
+      "name": "pplx-web/Nemotron 3 Ultra (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-opus",
+      "name": "pplx-web/Claude Opus 5.0 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-sonar",
+      "name": "pplx-web/Sonar 2 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "pplx-web/pplx-sonnet",
+      "name": "pplx-web/Claude Sonnet 5.0 (via Perplexity)",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "youcom-search/news",
+      "name": "news",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    },
+    {
+      "id": "youcom-search/web",
+      "name": "web",
+      "access_tier": null,
+      "context": 128000,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": 1789619149
+    }
+  ]
+}

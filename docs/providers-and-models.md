@@ -174,6 +174,26 @@ ta dùng nó làm "khoá sắp xếp tổng hợp" — 2 provider xKiro hiện t
 - Kiểm tra: `pwsh scripts\Get-XKiroUsage.ps1`
 - Theo dõi trong opencode: **status bar cuối màn hình** (TUI plugin `.opencode/plugins-xkiro/xkiro-statusline.tsx`, slot `app_bottom`) — 1 dòng ngắn gọn: `xKiro · free 25.92M (19%) · burst $19.96 (0%) · budget $140.00 (0%) · wallet $0.00`, tự làm mới mỗi 60s và sau mỗi lượt trả lời, chuyển màu vàng khi dùng ≥90%, đỏ khi hết. Đi kèm plugin `.opencode/plugins-xkiro/xkiro-usage.js` ghi chi tiết vào `opencode.log` + toast cảnh báo ngưỡng (90%). Biến: `XKIRO_STATUSBAR_DISABLE`, `XKIRO_STATUSBAR_REFRESH` (s, mặc định 60), `XKIRO_STATUSBAR_WARN_PCT`; `XKIRO_USAGE_DISABLE`, `XKIRO_USAGE_INTERVAL` (s, mặc định 300), `XKIRO_USAGE_WARN_PCT`, `XKIRO_USAGE_TOAST_EACH` (mặc định 1), `XKIRO_USAGE_TOAST_GAP` (s, mặc định 60), `XKIRO_USAGE_INJECT` (=1 mới ghi thêm vào transcript chat), `XKIRO_USAGE_INJECT_GAP` (s, mặc định 300).<br>**Lưu ý:** `ctrl+l` (`app_console`) là console debug của renderer, KHÔNG hiển thị log plugin — log chỉ ở file `opencode.log`.
 
+### xKiro Max — Ứng cứu khi model bị overload (fallback theo tầng)
+
+> **Bản chất**: xKiro là proxy bán lại — upstream có giới hạn concurrent; model nào **"đáng tiền" nhất trong tầm giá** (giá/hiệu năng ngon) thì đông người dùng nhất → hay bị chạm hạn mức và trả `429 "temporarily at capacity"` / `500`. Không riêng nhóm A: B (giá rẻ) cũng bị ép.
+> **Lưu ý**: catalog `GET /v1/models` **không có field availability** → không thể lọc trước khi chọn, phải dựa retry + fallback. Lỗi là **thoáng qua** (1 mình dùng thử lại sau vài giây thường OK). Probe snapshot 17/09/2026: `gpt-5.6-terra`/`gpt-5.6-luna` `500`, `kimi-k2.5` `429`; `glm-5.3`, `sonnet-5`, `gpt-5.5`, `opus-5`, `haiku-4.5` OK.
+> **Quy tắc chọn**: ưu tiên (1) retry lại trong ~5–10s, (2) chuyển **Fallback cùng tầng** (giữ nguyên mức chất lượng, giá tương đương), (3) giảm chi phí → **Backup rẻ (B)**, (4) cần sức mạnh thật và chấp nhận giá → **Nâng cấp (S)**.
+
+| Model A (chính) | Fallback cùng tầng (A) | Backup rẻ (B) | Nâng cấp (S) |
+|---|---|---|---|
+| `kimi-k2.6` | `grok-4.6` | `glm-5.3-flash` / `kimi-k2.5` | `gpt-5.5` |
+| `grok-4.6` | `grok-4.5` | `gpt-5.6-luna` | `gpt-5.6-sol` |
+| `grok-4.5` | `grok-4.6` | `glm-5.3-flash` | `gpt-5.6-sol` |
+| `glm-5` | `glm-5.1` / `glm-5.2` | `glm-5.3-flash` | `gpt-5.5` |
+| `gpt-5.6-terra` | `grok-4.6` / `glm-5.3` | `gpt-5.6-luna` | `gpt-5.6-sol` |
+| `glm-5.1` | `glm-5.2` / `glm-5.3` | `glm-5.3-flash` | `gpt-5.5` |
+| `glm-5.2` | `glm-5.3` | `glm-5.3-flash` | `gpt-5.5` |
+| `glm-5.3` | `claude-sonnet-5` / `grok-4.6` | `gpt-5.6-luna` / `glm-5.3-flash` | `claude-opus-5` |
+| `claude-sonnet-5` | `gpt-5.4` / `gpt-5.6-terra` | `claude-haiku-4.5` / `gpt-5.6-luna` | `claude-opus-5` |
+| `gpt-5.4` | `claude-sonnet-5` | `gpt-5.6-luna` | `claude-opus-5` |
+| `claude-sonnet-4.6` | `claude-sonnet-5` | `gpt-5.6-luna` / `claude-haiku-4.5` | `claude-opus-5` |
+
 ### Free model tốt nhất từ xKiro cho review luận văn
 
 | # | Model | Context | Vai trò |

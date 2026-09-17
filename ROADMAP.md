@@ -25,6 +25,22 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 ---
 
+## 1b. Tiến độ triển khai (giám sát)
+
+> **Ký hiệu**: ✅ hoàn thành · 🔶 đang làm · ⬜ chưa bắt đầu · ⚪ hoãn/loại bỏ.
+> Cập nhật bảng này mỗi khi hoàn tất một hạng mục.
+
+| Giai đoạn | Trạng thái | Tiến độ | Ghi chú |
+|---|---|---|---|
+| **Phase 0 — Vững nền móng** | ✅ | 6/6 (7/7 nhiệm vụ) | hoàn thành 17/09/2026 |
+| **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | 🔶 | 1/5 | đang làm — 1.1 xong 17/09/2026 |
+| **Phase 2 — Cứng hoá & mở rộng** | ⬜ | 0/6 | khi có nhu cầu |
+| **Phase 3 — Hệ sinh thái mở** | ⬜ | 0/4 | khi có nhu cầu |
+
+**Next action đang chờ**: Phase 1 hạng mục 1.2 — `Compare-Prices.ps1` (so giá config vs live catalog).
+
+---
+
 ## 2. Điểm mạnh cần giữ
 
 1. **Quy trình 2 giai đoạn + backup**: không bao giờ chạm config đang chạy ngoài
@@ -71,26 +87,26 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 > Ước lượng khối lượng theo nỗ lực người dùng cá nhân (S/M/L). **P0 = làm ngay**,
 > **P1 = tiếp theo**, **P2 = khi có nhu cầu thật**.
 
-### Phase 0 — Vững nền móng (tuần 1)
+### Phase 0 — Vững nền móng (tuần 1) — ✅ hoàn thành 17/09/2026
 
-| # | Hạng mục | Mô tả | Ưu tiên | Kích thước | File liên quan |
-|---|---|---|---|---|---|
-| 0.1 | **Chốt đồng bộ dev ↔ prod** | Thêm script `Compare-Config.ps1 -Dev -Prod` (so model set, options, default model) + chạy trong CI như **warning** (không fail vì 2 file có thể lệch chủ đích) | P0 | S | `scripts/`, `.github/workflows/validate.yml` |
-| 0.2 | **Sentry cho rollback** | `Restore-RunningConfig.ps1` thêm chế độ `-StateFile` ghi metadata (ngày, ghi chú, hash) để biết "bản nào đang được install" | P0 | S | `scripts/Restore-RunningConfig.ps1`, `Install-Config.ps1` |
-| 0.3 | **Policy backup** | Script `Prune-Backups.ps1` (giữ N bản mới nhất mỗi loại, mặc định 10), cài vào workflow của repo | P0 | S | `scripts/`, README |
-| 0.4 | **Test Pester cho `Common-Functions` + validate** | `tests/ModelCompass.Tests.ps1` (parse JSONC, resolve env, detect key) — chạy được local lẫn CI | P0 | M | `tests/`, `scripts/Common-Functions.ps1` |
-| 0.5 | **Kiểm build plugin TUI trong CI** | `bun tsc --noEmit` (hoặc `tsx --check`) cho `plugins/xkiro-statusline.tsx` + `node --check` cho `xkiro-usage.js` | P0 | S | `.github/workflows/validate.yml` |
-| 0.6 | **Bump version + CHANGELOG chuẩn semver** | Version hoá theo release production (vd 0.2.0 cho bộ thay đổi 16–17/09 đã có) | P1 | S | `CHANGELOG.md` |
+| # | Hạng mục | Mô tả | Ưu tiên | Kích thước | File liên quan | Trạng thái |
+|---|---|---|---|---|---|---|
+| 0.1 | **Chốt đồng bộ dev ↔ prod** | Thêm script `Compare-Config.ps1 -Dev -Prod` (so model set, options, default model) + chạy trong CI như **warning** (không fail vì 2 file có thể lệch chủ đích) | P0 | S | `scripts/`, `.github/workflows/validate.yml` | ✅ |
+| 0.2 | **Sentry cho rollback** | `Restore-RunningConfig.ps1` thêm chế độ `-StateFile` ghi metadata (ngày, ghi chú, hash) để biết "bản nào đang được install" | P0 | S | `scripts/Restore-RunningConfig.ps1`, `Install-Config.ps1` | ✅ |
+| 0.3 | **Policy backup** | Script `Prune-Backups.ps1` (giữ N bản mới nhất mỗi loại, mặc định 10), cài vào workflow của repo | P0 | S | `scripts/`, README | ✅ |
+| 0.4 | **Test Pester cho `Common-Functions` + validate** | `tests/ModelCompass.Tests.ps1` (parse JSONC, resolve env, detect key) — chạy được local lẫn CI | P0 | M | `tests/`, `scripts/Common-Functions.ps1` | ✅ |
+| 0.5 | **Kiểm build plugin TUI trong CI** | `node --check` cho server plugin `.js` + esbuild syntax-check (JSX) cho `xkiro-statusline.tsx` | P0 | S | `.github/workflows/validate.yml` | ✅ |
+| 0.6 | **Bump version + CHANGELOG chuẩn semver** | Version hoá theo release production (vd 0.2.0 cho bộ thay đổi 16–17/09 đã có) | P1 | S | `CHANGELOG.md` | ✅ |
 
 ### Phase 1 — Sống hoá dữ liệu & giám sát chi phí (tuần 2–3)
 
-| # | Hạng mục | Mô tả | Ưu tiên | Kích thước |
-|---|---|---|---|---|
-| 1.1 | **`Get-ProviderCatalog.ps1`** | Gọi `GET /v1/models` của xKiro/Teamo/OpenRouter (OpenRouter có sẵn pricing) → xuất `docs/catalogs/<provider>-<date>.json`, so với config để liệt kê model thiếu/404/giá đổi | P1 | L |
-| 1.2 | **`Compare-Prices.ps1`** | So sánh giá (input/output) trong config vs live catalog → báo mức chênh, gợi ý cập nhật tên model (giá đang nhồi vào `name`) | P1 | M |
-| 1.3 | **Báo cáo chi phí tổng hợp** | Mở rộng plugin/script giám sát **đa provider** (không chỉ xKiro): log mỗi phiên (model, token in/out ước, $) vào `reports/spend-*.json`; script `Get-SpendReport.ps1` tổng hợp theo ngày/model | P1 | L |
-| 1.4 | **Statusline đa quota** | Tổng quát `xkiro-statusline.tsx` thành "quota bar" đọc từ 1 module chung (env quyết định provider nào bật), giữ fallback khi API không có | P1 | M |
-| 1.5 | **Auto-update STATUS.md** | `Test-ModelConnectivity.ps1 -Report` sinh dòng "trạng thái gần nhất" → script cập nhật bảng `STATUS.md` bán tự động (flag `-UpdateStatus`) | P1 | M |
+| # | Hạng mục | Mô tả | Ưu tiên | Kích thước | Trạng thái |
+|---|---|---|---|---|---|
+| 1.1 | **`Get-ProviderCatalog.ps1`** | Gọi `GET /v1/models` của xKiro/Teamo/OpenRouter/OmniRoute/9Router (OpenRouter có sẵn pricing) → xuất `docs/catalogs/<provider>.json` + snapshot `reports/catalogs/`, so với config để liệt kê model thiếu/404/mới — có test Pester | P1 | L | ✅ |
+| 1.2 | **`Compare-Prices.ps1`** | So sánh giá (input/output) trong config vs live catalog → báo mức chênh, gợi ý cập nhật tên model (giá đang nhồi vào `name`) | P1 | M | ⬜ |
+| 1.3 | **Báo cáo chi phí tổng hợp** | Mở rộng plugin/script giám sát **đa provider** (không chỉ xKiro): log mỗi phiên (model, token in/out ước, $) vào `reports/spend-*.json`; script `Get-SpendReport.ps1` tổng hợp theo ngày/model | P1 | L | ⬜ |
+| 1.4 | **Statusline đa quota** | Tổng quát `xkiro-statusline.tsx` thành "quota bar" đọc từ 1 module chung (env quyết định provider nào bật), giữ fallback khi API không có | P1 | M | ⬜ |
+| 1.5 | **Auto-update STATUS.md** | `Test-ModelConnectivity.ps1 -Report` sinh dòng "trạng thái gần nhất" → script cập nhật bảng `STATUS.md` bán tự động (flag `-UpdateStatus`) | P1 | M | ⬜ |
 
 ### Phase 2 — Cứng hoá & mở rộng (tháng 1)
 
@@ -136,12 +152,12 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 ---
 
-## 8. Gợi ý bước đi ngay (next actions — 72 giờ)
+## 8. Gợi ý bước đi ngay (sau Phase 0)
 
-1. Làm **0.1 + 0.4 + 0.5** (so sánh dev↔prod, Pester, plugin check) — là nền cho mọi thứ sau.
-2. Cài **Prune-Backups** (0.3) ngay trong tuần để dọn `.backup/`.
-3. Bump **0.2.0** + CHANGELOG cho bộ thay đổi '09/2026 đã có sẵn trong working tree.
-4. Triển khai **Get-ProviderCatalog** cho xKiro trước (đã có recipe + key), sau mở rộng Teamo/OpenRouter.
+1. **Phase 1 (1.2)**: triển khai `Compare-Prices.ps1` — tận dụng catalog live đã có pricing (OpenRouter, xKiro) để báo giá config vs live lệch (P1/M).
+2. **Prune-Backups**: cài vào lịch (hoặc chạy thủ công hằng tuần) để giữ repo gọn.
+3. **Thực thi workflow mới**: trước publish chạy `Compare-Config`, sau publish chạy `Compare-Config -FailOnDiff` để xác nhận đồng bộ.
+4. **Kiểm `Restore-RunningConfig.ps1 -List`** trên máy thật để xác nhận state file (sentry) hiển thị đúng.
 
 ---
 

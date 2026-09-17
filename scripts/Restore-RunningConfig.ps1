@@ -45,6 +45,24 @@ if (Test-Path -LiteralPath $dir -PathType Container) {
 
 if ($List -or ([string]::IsNullOrWhiteSpace($Backup))) {
     Write-Step "Backup hiện có trong $dir"
+
+    $state = Read-ConfigState -Target $Target
+    if ($null -ne $state) {
+        Write-Host "  ── Trạng thái hiện tại ──" -ForegroundColor DarkCyan
+        Write-Host ("    cài lúc   : {0}" -f $state.installedAt) -ForegroundColor Cyan
+        Write-Host ("    nguồn     : {0}" -f $state.source) -ForegroundColor Cyan
+        Write-Host ("    backup    : {0}" -f $state.backup) -ForegroundColor Cyan
+        Write-Host ("    ghi chú   : {0}" -f $state.note) -ForegroundColor Cyan
+        if ($state.targetHash) {
+            $nowHash = Get-FileHashSha256 $Target
+            $match = ($nowHash -eq $state.targetHash)
+            Write-Host ("    hash      : {0}{1}" -f $state.targetHash, $(if ($match) { '  ✓ khớp với file đang chạy' } else { '  ⚠️ file đang chạy ĐÃ ĐỔI (bị sửa ngoài scripts)' })) -ForegroundColor $(if ($match) { 'Green' } else { 'DarkYellow' })
+        }
+        Write-Host ''
+    } else {
+        Write-Warn 'Chưa có file trạng thái cài đặt (.state.json) — chưa dùng Install-Config.ps1 trên target này?'
+    }
+
     if ($null -eq $backs -or $backs.Count -eq 0) {
         Write-Warn 'Không tìm thấy backup nào.'
         exit 0
@@ -67,11 +85,15 @@ if (-not (Test-Path -LiteralPath $src -PathType Leaf)) {
 }
 
 Write-Step "Restore: $src -> $Target"
+$backupNow = ''
 if (Test-Path -LiteralPath $Target -PathType Leaf) {
     $bakNow = "${Target}.bak-" + (Get-Timestamp)
     Copy-Item -LiteralPath $Target -Destination $bakNow
+    $backupNow = $bakNow
     Write-Info "Backup hiện trạng: $bakNow"
 }
 Copy-Item -LiteralPath $src -Destination $Target
+$statePath = Save-ConfigState -Target $Target -Source $src -SourceHash (Get-FileHashSha256 $src) -Backup $backupNow -Note 'restore (rollback từ backup)'
 Write-Ok 'Đã khôi phục. Quit & restart opencode để áp dụng.'
+Write-Info "Trạng thái cài đặt: $statePath"
 exit 0

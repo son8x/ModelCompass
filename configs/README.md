@@ -56,8 +56,12 @@ development/  ──Publish-->  production/  ──Install-->  ~/.config/opencod
 - `Test-ModelCompassConfig.ps1` — validate cú pháp/cấu trúc JSON(C).
 - `Test-ModelConnectivity.ps1` — ping thực tế từng provider/model.
 - `Publish-Config.ps1` — promote `development` → `production` (sau validate).
-- `Install-Config.ps1` — cài `production` vào thư mục global opencode.
-- `Restore-RunningConfig.ps1` — khôi phục backup nếu có sự cố.
+- `Install-Config.ps1` — cài `production` vào thư mục global opencode (ghi state file).
+- `Restore-RunningConfig.ps1` — khôi phục backup nếu có sự cố (xem state + hash).
+- `Compare-Config.ps1` — so sánh dev vs prod (chống lệch trước/sau publish).
+- `Get-ProviderCatalog.ps1` — tải catalog live của xKiro/Teamo/OpenRouter/OmniRoute/9Router → `docs/catalogs/`, so với config để liệt kê model **thiếu/đổi tên/mới** (hỗ trợ strip tiền tố id gateway, `-ShowAllNew`).
+- `Prune-Backups.ps1` — chính sách giữ/xoá backup (repo + global).
+- `Test-Suite.ps1` — chạy toàn bộ test Pester (`tests/`).
 
 ## Presets hiện có
 

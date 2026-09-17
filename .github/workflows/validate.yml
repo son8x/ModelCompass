@@ -11,9 +11,15 @@ on:
     branches: [main]
     paths:
       - 'configs/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '.opencode/**'
   pull_request:
     paths:
       - 'configs/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '.opencode/**'
 
 jobs:
   validate:
@@ -22,6 +28,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Validate production config
         shell: pwsh
@@ -45,6 +56,40 @@ jobs:
             & ./scripts/Test-ModelCompassConfig.ps1 -Path $_.FullName
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
+
+      - name: Test Suite (Pester) — scripts + validate configs
+        shell: pwsh
+        run: |
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+          if (-not (Get-Module -ListAvailable Pester)) {
+            Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser -MinimumVersion 5.0
+          }
+          & ./scripts/Test-Suite.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: So sánh development vs production (cảnh báo lệch)
+        shell: pwsh
+        run: |
+          & ./scripts/Compare-Config.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Kiểm tra cú pháp plugin TUI (esbuild) + server plugin (node --check)
+        shell: bash
+        run: |
+          set -e
+          PLUGINS=".opencode/plugins-xkiro"
+          for f in "$PLUGINS"/*.js; do
+            echo "  → node --check $f"
+            node --check "$f"
+          done
+          for f in "$PLUGINS"/*.tsx; do
+            echo "  → esbuild check $f"
+            npx --yes esbuild@0.24.2 "$f" \
+              --bundle --external:* --format=esm \
+              --jsx=automatic --jsx-import-source=@opentui/solid \
+              --outfile="$RUNNER_TEMP/plugin-check.js" >/dev/null
+          done
+          echo 'OK — plugin syntax/JSX hợp lệ.'
 
       - name: Check API keys không nằm trong repo
         shell: pwsh

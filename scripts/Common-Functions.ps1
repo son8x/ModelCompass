@@ -95,6 +95,66 @@ function Get-RepoRoot {
     return (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 }
 
+function Get-InstallStatePath {
+    <#
+    Đường dẫn file trạng thái cài đặt (sentry) của target config global.
+    Vị trí: <target>.state.json — đặt cạnh config đang dùng, không commit.
+    #>
+    param([Parameter(Mandatory)][string]$Target)
+    return "$Target.state.json"
+}
+
+function Get-FileHashSha256 {
+    <#
+    Hash SHA256 của file; trả $null nếu file không tồn tại.
+    #>
+    param([string]$Path)
+    if ([string]::IsNullOrWhiteSpace($Path) -or -not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        return $null
+    }
+    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash
+}
+
+function Save-ConfigState {
+    <#
+    Ghi file trạng thái cài đặt (được gọi bởi Install-Config.ps1 / Restore-RunningConfig.ps1).
+    Dữ liệu lưu: thời điểm, nguồn, đích, hash nguồn/đích, backup, ghi chú.
+    #>
+    param(
+        [Parameter(Mandatory)][string]$Target,
+        [string]$Source,
+        [string]$SourceHash,
+        [string]$Backup,
+        [string]$Note = ''
+    )
+    $statePath = Get-InstallStatePath $Target
+    $obj = [ordered]@{
+        installedAt = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
+        source      = if ($Source) { $Source } else { '' }
+        sourceHash  = if ($SourceHash) { $SourceHash } else { '' }
+        target      = $Target
+        targetHash  = (Get-FileHashSha256 $Target)
+        backup      = if ($Backup) { $Backup } else { '' }
+        note        = $Note
+    }
+    $obj | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $statePath -Encoding utf8
+    return $statePath
+}
+
+function Read-ConfigState {
+    <#
+    Đọc file trạng thái cài đặt; trả $null nếu chưa từng install hoặc hỏng cú pháp.
+    #>
+    param([string]$Target)
+    $statePath = Get-InstallStatePath $Target
+    if (-not (Test-Path -LiteralPath $statePath -PathType Leaf)) { return $null }
+    try {
+        return (Get-Content -LiteralPath $statePath -Raw -Encoding utf8 | ConvertFrom-Json)
+    } catch {
+        return $null
+    }
+}
+
 function Get-Timestamp {
     return (Get-Date -Format 'yyyyMMdd-HHmmss')
 }

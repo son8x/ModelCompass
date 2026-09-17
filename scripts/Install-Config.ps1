@@ -61,6 +61,8 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
+$sourceHash = Get-FileHashSha256 $source
+$backup = ''
 $hadTarget = Test-Path -LiteralPath $Target -PathType Leaf
 if ($hadTarget) {
     $stamp = Get-Timestamp
@@ -70,7 +72,9 @@ if ($hadTarget) {
 }
 
 Copy-Item -LiteralPath $source -Destination $Target
+$statePath = Save-ConfigState -Target $Target -Source $source -SourceHash $sourceHash -Backup $backup -Note 'install (production -> global)'
 Write-Ok "Đã cài: $Target"
+Write-Info "Trạng thái cài đặt: $statePath"
 
 # cảnh báo nếu tồn tại cả .json và .jsonc (tránh mơ hồ khi opencode load)
 $alt = $Target -replace '\.json$', '.jsonc'

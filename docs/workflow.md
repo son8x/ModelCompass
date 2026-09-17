@@ -48,16 +48,34 @@ dùng thử ổn (không lỗi phiên, tốc độ chấp nhận, không tiêu t
 
 ### Giai đoạn C — Publish (development → production)
 
+> 💡 Sửa `docs/workflow.md`. Chạy `Compare-Config` **trước publish** để biết những gì
+> sẽ đưa lên prod chuẩn xác, và **-FailOnDiff sau publish** để xác nhận đồng bộ.
+
 ```powershell
+pwsh scripts\Compare-Config.ps1            # xem lệch dev vs prod (cảnh báo)
 pwsh scripts\Publish-Config.ps1 -ConnectivityTest
 # Tự động:
 #   1) validate lại        2) [tuỳ chọn] test kết nối
 #   3) backup production cũ vào configs\production\.backup\
 #   4) chuẩn hoá JSON thuần (bỏ comment) rồi ghi production
+pwsh scripts\Compare-Config.ps1 -FailOnDiff  # sau publish: expected khớp (trừ model mặc định)
 git add configs/production/opencode.json
 git commit -m "chore(configs): mô tả model/provider thay đổi"
 git push origin main          # CI validate chạy → xanh mới thôi
 ```
+
+## Bảo trì (khi có nhiều backup)
+
+```powershell
+pwsh scripts\Get-ProviderCatalog.ps1          # tải catalog live → docs/catalogs/ + snapshot + so với config
+pwsh scripts\Get-ProviderCatalog.ps1 -ShowAllNew   # liệt kê model mới chưa khai báo (mặc định ẩn)
+pwsh scripts\Prune-Backups.ps1 -DryRun        # xem sẽ xoá backup nào (repo + global)
+pwsh scripts\Prune-Backups.ps1                # giữ 10 bản mới nhất mỗi nơi
+pwsh scripts\Test-Suite.ps1                   # chạy toàn bộ test Pester
+```
+
+> 📌 Khi thêm model mới: chạy `Get-ProviderCatalog.ps1` trước để chắc model nằm
+> trong catalog live (tránh khai báo 404/đổi tên) và đối chiếu model "MISS".
 
 ### Giai đoạn D — Install (production → máy đang chạy)
 

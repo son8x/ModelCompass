@@ -1,0 +1,1768 @@
+{
+  "fetched_at": "2026-09-17 11:25:37",
+  "provider": "xkiro",
+  "source": "https://api.xkiro.com/v1/models",
+  "count": 110,
+  "models": [
+    {
+      "id": "anthropic/claude-fable-5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 9.0,
+        "output": 45.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-fable-5-1",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 10.0,
+        "output": 50.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-haiku-4.5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 0.9,
+        "output": 4.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-opus-4.6",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 4.5,
+        "output": 22.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 4.5,
+        "output": 22.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-opus-4.8",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 4.5,
+        "output": 22.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-opus-5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 4.5,
+        "output": 22.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.6",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 2.7,
+        "output": 13.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-sonnet-5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 1.8,
+        "output": 9.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-0731",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1048576,
+      "pricing": {
+        "input": 0.091,
+        "output": 0.182,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-vision-exp",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1048576,
+      "pricing": {
+        "input": 0.143,
+        "output": 0.429,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro-0813",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1048576,
+      "pricing": {
+        "input": 0.28275,
+        "output": 0.5655,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1048576,
+      "pricing": {
+        "input": 0.075,
+        "output": 0.3,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "google/gemini-2.5-flash",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.195,
+        "output": 1.625,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "google/gemini-2.5-pro",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.8125,
+        "output": 6.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "google/gemini-3-flash",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.325,
+        "output": 1.95,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "google/gemini-3.1-pro",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 1.3,
+        "output": 7.8,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "google/gemini-3.5-flash",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.975,
+        "output": 5.85,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "google/gemini-3.6-flash",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.975,
+        "output": 4.875,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "google/gemini-3.7-flash",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.24375,
+        "output": 1.21875,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "google/gemini-3.8-flash",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.4875,
+        "output": 2.4375,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "meta/muse-spark-1.2-contributor",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1048576,
+      "pricing": {
+        "input": 0.065,
+        "output": 0.13,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 204800,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2.1-highspeed:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 204800,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2.1:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 204800,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2.5",
+      "name": "",
+      "access_tier": "premium",
+      "context": 204800,
+      "pricing": {
+        "input": 0.27,
+        "output": 1.08,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2.5-highspeed:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 204800,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2.5:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 204800,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "name": "",
+      "access_tier": "premium",
+      "context": 204800,
+      "pricing": {
+        "input": 0.3,
+        "output": 1.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2.7-highspeed:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 204800,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m2.7:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 204800,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.3,
+        "output": 1.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m3:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "mistralai/codestral-2508",
+      "name": "",
+      "access_tier": "free",
+      "context": 256000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "mistralai/devstral-medium",
+      "name": "",
+      "access_tier": "free",
+      "context": 256000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "mistralai/ministral-14b",
+      "name": "",
+      "access_tier": "free",
+      "context": 256000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "mistralai/ministral-3b",
+      "name": "",
+      "access_tier": "free",
+      "context": 128000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "mistralai/ministral-8b",
+      "name": "",
+      "access_tier": "free",
+      "context": 256000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "mistralai/mistral-large-2512",
+      "name": "",
+      "access_tier": "free",
+      "context": 256000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "mistralai/mistral-medium-3.5",
+      "name": "",
+      "access_tier": "free",
+      "context": 256000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "mistralai/mistral-small-2603",
+      "name": "",
+      "access_tier": "free",
+      "context": 256000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "moonshotai/kimi-k2.5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 262144,
+      "pricing": {
+        "input": 0.285,
+        "output": 1.425,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "name": "",
+      "access_tier": "paid",
+      "context": 262144,
+      "pricing": {
+        "input": 0.475,
+        "output": 2.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "moonshotai/kimi-k2.7-code",
+      "name": "",
+      "access_tier": "premium",
+      "context": 262144,
+      "pricing": {
+        "input": 0.455,
+        "output": 2.275,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "moonshotai/kimi-k3",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 1.95,
+        "output": 9.75,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "nvidia/llama-3.3-nemotron-super-49b",
+      "name": "",
+      "access_tier": "paid",
+      "context": 131072,
+      "pricing": {
+        "input": 0.1,
+        "output": 0.32,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "nvidia/nemotron-3-nano",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.05,
+        "output": 0.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-omni",
+      "name": "",
+      "access_tier": "paid",
+      "context": 256000,
+      "pricing": {
+        "input": 0.05,
+        "output": 0.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "nvidia/nemotron-3-super",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.08,
+        "output": 0.45,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "nvidia/nemotron-3-ultra",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.5,
+        "output": 2.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "openai/gpt-5.3-codex-spark",
+      "name": "",
+      "access_tier": "free",
+      "context": 128000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "openai/gpt-5.4",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 2.25,
+        "output": 13.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "openai/gpt-5.4-mini",
+      "name": "",
+      "access_tier": "paid",
+      "context": 400000,
+      "pricing": {
+        "input": 0.675,
+        "output": 4.05,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "openai/gpt-5.5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 4.5,
+        "output": 27.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "openai/gpt-5.6-luna",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.1,
+        "output": 0.6,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "openai/gpt-5.6-sol",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 4.5,
+        "output": 27.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "openai/gpt-5.6-terra",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 1.0,
+        "output": 6.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "openai/gpt-6-astra",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1050000,
+      "pricing": {
+        "input": 10.0,
+        "output": 50.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen-plus-2025-07-28:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 131072,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3-coder-plus:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1048576,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3-max:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3-omni-flash:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3-vl-plus:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.5-397b-a17b:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.5-flash:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.5-omni-flash:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.5-omni-plus:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.5-plus",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.3,
+        "output": 1.8,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.5-plus:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.6-27b:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.6-35b-a3b:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.6-max-preview:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.6-plus",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.325,
+        "output": 1.95,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.6-plus:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.7-flash:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.7-max",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 1.475,
+        "output": 4.425,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.7-max:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.7-plus",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.32,
+        "output": 1.28,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.7-plus:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.8-max",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1000000,
+      "pricing": {
+        "input": 2.0,
+        "output": 6.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "qwen/qwen3.8-max:free",
+      "name": "",
+      "access_tier": "free",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "sensenova/sensenova-6.7-flash-lite",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "sensenova/sensenova-6.8-flash-lite",
+      "name": "",
+      "access_tier": "free",
+      "context": 262144,
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "tencent/hy3",
+      "name": "",
+      "access_tier": "premium",
+      "context": 262144,
+      "pricing": {
+        "input": 0.08151,
+        "output": 0.32604,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "tencent/hy4-preview",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1048576,
+      "pricing": {
+        "input": 0.5421,
+        "output": 1.62565,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "x-ai/grok-4.5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 500000,
+      "pricing": {
+        "input": 1.0,
+        "output": 3.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "x-ai/grok-4.6",
+      "name": "",
+      "access_tier": "paid",
+      "context": 500000,
+      "pricing": {
+        "input": 1.0,
+        "output": 3.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "x-ai/grok-build-0.1",
+      "name": "",
+      "access_tier": "paid",
+      "context": 256000,
+      "pricing": {
+        "input": 0.5,
+        "output": 1.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "xiaomi/mimo-v2.5",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1050000,
+      "pricing": {
+        "input": 0.091,
+        "output": 0.182,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "xiaomi/mimo-v2.5-pro",
+      "name": "",
+      "access_tier": "premium",
+      "context": 1050000,
+      "pricing": {
+        "input": 0.28275,
+        "output": 0.5655,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 131072,
+      "pricing": {
+        "input": 0.6,
+        "output": 2.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.5-air",
+      "name": "",
+      "access_tier": "paid",
+      "context": 131072,
+      "pricing": {
+        "input": 0.2,
+        "output": 1.1,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.5-airx",
+      "name": "",
+      "access_tier": "paid",
+      "context": 131072,
+      "pricing": {
+        "input": 1.1,
+        "output": 4.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.5-flash",
+      "name": "",
+      "access_tier": "paid",
+      "context": 131072,
+      "pricing": {
+        "input": 0.2,
+        "output": 1.1,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.5-x",
+      "name": "",
+      "access_tier": "paid",
+      "context": 131072,
+      "pricing": {
+        "input": 2.2,
+        "output": 8.9,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.5v",
+      "name": "",
+      "access_tier": "paid",
+      "context": 65536,
+      "pricing": {
+        "input": 0.6,
+        "output": 1.8,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.6",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 0.6,
+        "output": 2.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.6v",
+      "name": "",
+      "access_tier": "paid",
+      "context": 128000,
+      "pricing": {
+        "input": 0.3,
+        "output": 0.9,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.6v-flash",
+      "name": "",
+      "access_tier": "paid",
+      "context": 128000,
+      "pricing": {
+        "input": 0.04,
+        "output": 0.4,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.6v-flashx",
+      "name": "",
+      "access_tier": "paid",
+      "context": 128000,
+      "pricing": {
+        "input": 0.04,
+        "output": 0.4,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.7",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 0.6,
+        "output": 2.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.7-flash",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 0.07,
+        "output": 0.4,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-4.7-flashx",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 0.07,
+        "output": 0.4,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 1.0,
+        "output": 3.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-5-turbo",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 1.2,
+        "output": 4.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-5.1",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-5.2",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-5.3",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.15,
+        "output": 0.5,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "z-ai/glm-5v-turbo",
+      "name": "",
+      "access_tier": "paid",
+      "context": 200000,
+      "pricing": {
+        "input": 1.2,
+        "output": 4.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    }
+  ]
+}

@@ -1,0 +1,541 @@
+{
+  "fetched_at": "2026-09-17 11:25:38",
+  "provider": "teamo",
+  "source": "https://api.teamorouter.cn/v1/models",
+  "count": 41,
+  "models": [
+    {
+      "id": "claude-fable-5",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-fable-5-1",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-haiku-4-5-20251001",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-opus-4-6",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-opus-4-7",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-opus-4-8",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-opus-5",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "claude-sonnet-5",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "deepseek-flash",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "deepseek-flash-free",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "deepseek-v4-flash-free",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "deepseek-v4-flash-vision-exp",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "deepseek-v4-pro-260425",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gemini-3.1-flash-image",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gemini-3.1-pro-preview",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gemini-3.5-flash",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gemini-3.5-flash-lite",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gemini-3.6-flash",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gemini-3.7-flash",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "glm-5.2",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "glm-5.3",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "glm-5.3-flash",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "glm-5.3-flash-free",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-5.4",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-5.4-mini",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-5.5",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-6-astra",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-image-2",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-image-2.5-flare",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "gpt-image-2.5-sunburst",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "grok-4.6",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "kimi-k3",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    },
+    {
+      "id": "kimi-k3[1M]",
+      "name": "",
+      "access_tier": null,
+      "context": null,
+      "pricing": {
+        "input": null,
+        "output": null,
+        "request": null
+      },
+      "modality": null,
+      "created": null
+    }
+  ]
+}
