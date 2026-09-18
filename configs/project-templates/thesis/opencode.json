@@ -1,0 +1,5 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "6-teamoRouter/claude-sonnet-5",
+  "instructions": ["../ModelCompass/docs/thesis-review-plan.md"]
+}

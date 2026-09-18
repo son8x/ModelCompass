@@ -245,6 +245,206 @@ function Get-SpendEntries {
     return @($out)
 }
 
+function New-SortOrderKey {
+    <#
+    Sinh chuỗi khoá sắp xếp dạng yyyy-MM-dd (vùng năm 2099 — xem docs/§6).
+    Mặc định: giảm 1 ngày/lượt từ 2099-12-31 (model trên cùng có key LỚN nhất).
+    -Exclude: bỏ qua các key đã tồn tại (tránh trùng rơi xuống sort theo name).
+    An toàn khi chạy lại (àp dụng cho cluster khác, tham số khác).
+    #>
+    param(
+        [string]$From = '2099-12-31',
+        [int]$StepDays = -1,
+        [int]$Count = 1,
+        [string[]]$Exclude = @()
+    )
+    if ($Count -le 0) { return @() }
+    if ($StepDays -eq 0) { throw 'StepDays phải khác 0' }
+
+    $cur = [datetime]::ParseExact($From, 'yyyy-MM-dd', [cultureinfo]'en-US')
+    $taken = [System.Collections.Generic.HashSet[string]]::new()
+    foreach ($e in $Exclude) {
+        if (-not [string]::IsNullOrWhiteSpace($e)) { [void]$taken.Add($e) }
+    }
+    $out = [System.Collections.Generic.List[string]]::new()
+    $guard = 0
+    while ($out.Count -lt $Count -and $guard -lt 100000) {
+        $key = $cur.ToString('yyyy-MM-dd')
+        if (-not $taken.Contains($key)) {
+            $out.Add($key)
+            [void]$taken.Add($key)
+        }
+        $cur = $cur.AddDays($StepDays)
+        $guard++
+    }
+    if ($out.Count -lt $Count) { throw "Không đủ key tránh Exclude sau $guard bước." }
+    return @($out)
+}
+
+function Get-SortOrderKeyBetween {
+    <#
+    Khoá sắp xếp nằm giữa 2 model kề sẵn có (Upper > Lower), dùng khi CHÈN model mới
+    vào giữa danh sách đã có mà không muốn đổi date các model khác.
+    Trả key GẦN NHẤT với Upper (giữ nguyên ngưỡng khoảng cách hiện có).
+    Throw nếu 2 key kề sát nhau (không còn ngày trống giữa chúng).
+    #>
+    param(
+        [Parameter(Mandatory)][string]$Upper,
+        [Parameter(Mandatory)][string]$Lower
+    )
+    $a = [datetime]::ParseExact($Upper, 'yyyy-MM-dd', [cultureinfo]'en-US')
+    $b = [datetime]::ParseExact($Lower, 'yyyy-MM-dd', [cultureinfo]'en-US')
+    if ($a -lt $b) { $tmp = $a; $a = $b; $b = $tmp }
+    if ($a -eq $b) { throw 'Không thể chèn: 2 key trùng nhau' }
+    $days = ($a - $b).Days
+    if ($days -le 1) {
+        throw 'Không còn ngày trống giữa 2 key kề sát nhau'
+    }
+    return $b.AddDays([int][math]::Floor($days / 2)).ToString('yyyy-MM-dd')
+}
+
+function Test-ConfigFile {
+    <#
+    Validate 1 file config theo chuẩn ModelCompass → { Path, Config, Errors[], Warnings[] }.
+    Đọc được JSON/JSONC (bỏ comment); ném exception khi parse lỗi (giữ hành vi script cũ).
+    Không exit — dùng chung cho Test-ModelCompassConfig.ps1 (CLI) và báo cáo CI (bản refactor 2.4).
+    -Strict: biến env thiếu coi là LỖI (thay vì cảnh báo).
+    #>
+    param(
+        [Parameter(Mandatory)][string]$Path,
+        [switch]$Strict
+    )
+    $Path = (Get-Item -LiteralPath $Path).FullName
+    $config   = Get-ConfigContent $Path
+    $errors   = [System.Collections.Generic.List[string]]::new()
+    $warnings = [System.Collections.Generic.List[string]]::new()
+
+    $schemaProp = $config.PSObject.Properties['$schema']
+    $modelProp  = $config.PSObject.Properties['model']
+    $provProp   = $config.PSObject.Properties['provider']
+
+    if ($null -eq $schemaProp -or [string]::IsNullOrWhiteSpace([string]$schemaProp.Value)) {
+        $errors.Add('Thiếu "$schema". Nên khai báo "https://opencode.ai/config.json".')
+    }
+
+    if ($null -eq $modelProp -or [string]::IsNullOrWhiteSpace([string]$modelProp.Value)) {
+        $errors.Add('Thiếu "model". Yêu cầu dạng provider/model-id.')
+    } elseif ($modelProp.Value -notmatch '/') {
+        $errors.Add("Model thiếu tiền tố provider: '$($modelProp.Value)' (phải là provider/model-id).")
+    }
+
+    if ($null -ne $provProp) {
+        $props = [System.Collections.Generic.List[object]]::new()
+        foreach ($pp in $config.provider.PSObject.Properties) { $props.Add($pp) }
+        if ($props.Count -eq 0) {
+            $warnings.Add('Provider rỗng — sẽ không có model có thể chọn.')
+        }
+        foreach ($p in $props) {
+            $name = $p.Name
+            $def  = $p.Value
+            $modelsProp = $def.PSObject.Properties['models']
+            $modelList = [System.Collections.Generic.List[object]]::new()
+            if ($null -ne $modelsProp) {
+                foreach ($mm in $modelsProp.Value.PSObject.Properties) { $modelList.Add($mm) }
+            }
+            $nModels = $modelList.Count
+            if ($nModels -eq 0) {
+                $errors.Add("Provider '$name': không có model nào (mục 'models' trống).")
+            }
+            $npmProp = $def.PSObject.Properties['npm']
+            if ($null -eq $npmProp -or [string]::IsNullOrWhiteSpace([string]$npmProp.Value)) {
+                $warnings.Add("Provider '$name': thiếu 'npm' (vd: '@ai-sdk/openai-compatible').")
+            }
+            $optionsProp = $def.PSObject.Properties['options']
+            $burl = ''
+            if ($null -ne $optionsProp) {
+                $burlProp = $optionsProp.Value.PSObject.Properties['baseURL']
+                if ($null -ne $burlProp) { $burl = [string]$burlProp.Value }
+            }
+            if ([string]::IsNullOrWhiteSpace($burl)) {
+                $warnings.Add("Provider '$name': thiếu options.baseURL.")
+            }
+        }
+    } else {
+        $warnings.Add('Không có mục "provider" trong cấu hình.')
+    }
+
+    $clean = Remove-CommentsAndTrailingCommas (Get-Content -LiteralPath $Path -Raw -Encoding utf8)
+    foreach ($m in [regex]::Matches($clean, '\{env:([^}]+)\}')) {
+        $name = $m.Groups[1].Value
+        $val  = [Environment]::GetEnvironmentVariable($name)
+        if ($null -eq $val -or '' -eq $val) {
+            $msg = "Biến môi trường '$name' chưa được đặt — provider/model này sẽ không có API key."
+            if ($Strict) { $errors.Add($msg) } else { $warnings.Add($msg) }
+        }
+    }
+
+    return [pscustomobject]@{
+        Path     = $Path
+        Config   = $config
+        Errors   = @($errors)
+        Warnings = @($warnings)
+    }
+}
+
+function Get-ConfigDiff {
+    <#
+    So sánh 2 config đã parse (dev WIP vs prod đã test) → danh sách chênh lệch [string].
+    Không đọc file — dùng cùng logic Compare-Config.ps1 (refactor Phase 2.3/2.4) để tái dùng
+    trong báo cáo định kỳ CI. Khác biệt: model mặc định, bộ provider, options (npm/baseURL),
+    bộ model mỗi provider.
+    #>
+    param(
+        [Parameter(Mandatory)]$DevObj,
+        [Parameter(Mandatory)]$ProdObj,
+        [switch]$SkipModelSet
+    )
+    $diffs = [System.Collections.Generic.List[string]]::new()
+
+    if ($DevObj.model -ne $ProdObj.model) {
+        $diffs.Add("Model mặc định khác nhau: dev='$($DevObj.model)'  prod='$($ProdObj.model)'")
+    }
+
+    $devP  = @($DevObj.provider.PSObject.Properties | ForEach-Object Name)
+    $prodP = @($ProdObj.provider.PSObject.Properties | ForEach-Object Name)
+    foreach ($name in ($prodP | Where-Object { $devP -notcontains $_ })) {
+        $diffs.Add("Provider chỉ có ở prod: '$name'")
+    }
+    foreach ($name in ($devP | Where-Object { $prodP -notcontains $_ })) {
+        $diffs.Add("Provider chỉ có ở dev (chưa publish): '$name'")
+    }
+
+    foreach ($name in ($devP | Where-Object { $prodP -contains $_ })) {
+        $d = $DevObj.provider.$name
+        $p = $ProdObj.provider.$name
+
+        $dOpt = if ($null -eq $d.options) { @{} } else { $d.options }
+        $pOpt = if ($null -eq $p.options) { @{} } else { $p.options }
+        $dUri = [string]$dOpt.baseURL
+        $pUri = [string]$pOpt.baseURL
+        if ($dUri -ne $pUri) {
+            $diffs.Add("[$name] baseURL: dev='$dUri'  prod='$pUri'")
+        }
+        $dNpm = [string]$d.npm
+        $pNpm = [string]$p.npm
+        if ($dNpm -ne $pNpm) {
+            $diffs.Add("[$name] npm: dev='$dNpm'  prod='$pNpm'")
+        }
+
+        if (-not $SkipModelSet) {
+            $dMods = @($d.models.PSObject.Properties | ForEach-Object Name)
+            $pMods = @($p.models.PSObject.Properties | ForEach-Object Name)
+            foreach ($m in ($pMods | Where-Object { $dMods -notcontains $_ })) {
+                $diffs.Add("[$name] model chỉ có ở prod: '$m'")
+            }
+            foreach ($m in ($dMods | Where-Object { $pMods -notcontains $_ })) {
+                $diffs.Add("[$name] model chỉ có ở dev (chưa publish): '$m'")
+            }
+        }
+    }
+    return [string[]]$diffs
+}
+
 function Write-Step {
     param([string]$Msg)
     Write-Host ''

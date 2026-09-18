@@ -4,6 +4,39 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.5.0] — 2026-09-18 — Phase 2 hoàn tất (2.2–2.6)
+
+### Thêm
+- **2.2 Per-project config**: `configs/project-templates/{code,thesis,pentest}/opencode.json`
+  (JSON thuần, chỉ `$schema`+`model`+`instructions`) + `docs/per-project-config.md`
+  (tầng config, `OPENCODE_CONFIG` / `OPENCODE_CONFIG_CONTENT`, restart, cứu hộ).
+- **2.3 Helper sort-order**: `New-SortOrderKey.ps1` (default generate, `-Between/-Append/-Rebuild`,
+  chỉ in key không sửa file) + hàm `New-SortOrderKey`/`Get-SortOrderKeyBetween` (tránh trùng key);
+  `tests/SortOrder.Tests.ps1` (14 test). Docs `providers-and-models.md §6b` + `configs/README.md`.
+- **2.4 Báo cáo drift định kỳ**: `New-ConfigDriftReport.ps1` (validate dev/prod/presets +
+  `Get-ConfigDiff` + thống kê model/backup, report offline, `-FailOnInvalid/-FailOnDrift`);
+  refactor `Get-ConfigDiff` + `Test-ConfigFile` thành hàm thuần trong `Common-Functions.ps1`
+  (`Compare-Config.ps1`, `Test-ModelCompassConfig.ps1` giờ là CLI mỏng);
+  `tests/ConfigDiff.Tests.ps1` (11 test); workflow `.github/workflows/report-drift.yml`
+  (cron thứ 3 03:00 UTC + `workflow_dispatch`, tự mở/đóng issue label `ci:config-drift`).
+- **2.5 Benchmark latency/token**: `Test-ModelConnectivity.ps1 -Benchmark`
+  (`-BenchmarkRuns` mặc định 6, `-BenchmarkPrompt/-BenchmarkMaxTokens`) — bắt buộc thu hẹp
+  `-Provider/-Model`; hàm `Invoke-Benchmark` (ms + usage token) + `Get-BenchmarkSummary`
+  (median/min/max ms, token in/out, tokens/s); report md thêm bảng benchmark;
+  `tests/Benchmark.Tests.ps1` (5 test).
+- **2.6 Public hoá**: `LICENSE` (MIT), README mở rộng cho người dùng ngoài
+  (badge CI + license, cài từ GitHub, tính năng 7–11, cấu trúc mới, đo benchmark).
+
+### Changed
+- `scripts/Common-Functions.ps1`: `Test-ConfigFile` truy cập property an toàn StrictMode
+  (bỏ `@(...)` với 1 phần tử → dùng `List` accumulation), hết `PropertyNotFoundException`.
+- `scripts/Test-Suite.ps1` giờ chạy **103 test** (73 → 103), pass toàn bộ.
+- `ROADMAP.md`: Phase 2 ✅ 6/6 hoàn thành 18/09/2026; next = Phase 3.
+
+### Ghi chú
+- Kết thúc **Phase 2**. Bắt đầu **Phase 3** (CLI `mc`, provider plugin, model bank, Pages docs)
+  khi có nhu cầu thật.
+
 ## [0.4.0] — 2026-09-17 — Phase 2.1: preset "safe-mode"
 
 ### Thêm

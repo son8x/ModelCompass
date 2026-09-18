@@ -62,53 +62,7 @@ Write-Info "  prod = $Prod"
 $devObj  = Get-ConfigContent $Dev
 $prodObj = Get-ConfigContent $Prod
 
-$diffs = [System.Collections.Generic.List[string]]::new()
-
-# ── model mặc định ────────────────────────────────────────────
-if ($devObj.model -ne $prodObj.model) {
-    $diffs.Add("Model mặc định khác nhau: dev='$($devObj.model)'  prod='$($prodObj.model)'")
-}
-
-# ── bộ provider ───────────────────────────────────────────────
-$devP  = @($devObj.provider.PSObject.Properties | ForEach-Object Name)
-$prodP = @($prodObj.provider.PSObject.Properties | ForEach-Object Name)
-foreach ($name in ($prodP | Where-Object { $devP -notcontains $_ })) {
-    $diffs.Add("Provider chỉ có ở prod: '$name'")
-}
-foreach ($name in ($devP | Where-Object { $prodP -notcontains $_ })) {
-    $diffs.Add("Provider chỉ có ở dev (chưa publish): '$name'")
-}
-
-# ── options provider + bộ model ───────────────────────────────
-foreach ($name in ($devP | Where-Object { $prodP -contains $_ })) {
-    $d = $devObj.provider.$name
-    $p = $prodObj.provider.$name
-
-    $dOpt = if ($null -eq $d.options) { @{} } else { $d.options }
-    $pOpt = if ($null -eq $p.options) { @{} } else { $p.options }
-    $dUri = [string]$dOpt.baseURL
-    $pUri = [string]$pOpt.baseURL
-    if ($dUri -ne $pUri) {
-        $diffs.Add("[$name] baseURL: dev='$dUri'  prod='$pUri'")
-    }
-    $dNpm = [string]$d.npm
-    $pNpm = [string]$p.npm
-    if ($dNpm -ne $pNpm) {
-        $diffs.Add("[$name] npm: dev='$dNpm'  prod='$pNpm'")
-    }
-
-    if (-not $SkipModelSet) {
-        $dMods = @($d.models.PSObject.Properties | ForEach-Object Name)
-        $pMods = @($p.models.PSObject.Properties | ForEach-Object Name)
-        foreach ($m in ($pMods | Where-Object { $dMods -notcontains $_ })) {
-            $diffs.Add("[$name] model chỉ có ở prod: '$m'")
-        }
-        foreach ($m in ($dMods | Where-Object { $pMods -notcontains $_ })) {
-            $diffs.Add("[$name] model chỉ có ở dev (chưa publish): '$m'")
-        }
-    }
-    $null = $d, $p
-}
+$diffs = @(Get-ConfigDiff -DevObj $devObj -ProdObj $prodObj -SkipModelSet:$SkipModelSet)
 
 # ── báo cáo ───────────────────────────────────────────────────
 Write-Step "Chênh lệch ($($diffs.Count))"

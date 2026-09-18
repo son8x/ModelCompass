@@ -1,0 +1,5 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "1-xkiro-free/mistralai/codestral-2508",
+  "instructions": ["../ModelCompass/docs/providers-and-models.md"]
+}

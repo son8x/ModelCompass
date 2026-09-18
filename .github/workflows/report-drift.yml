@@ -1,0 +1,77 @@
+# ─────────────────────────────────────────────────────────────
+# ModelCompass — Báo cáo định kỳ sức khoẻ cấu hình (Phase 2.4)
+# Chạy schedule (03:00 UTC thứ 3 hàng tuần) + công tay khi cần.
+# KHÔNG cần mạng local (không gọi provider/router) — chỉ đọc file
+# trong repo + thư mục backup cục bộ (CI sẽ ghi "không có").
+# Tự tạo/cập nhật issue khi có VẤN ĐỀ; tự đóng issue cũ khi hết lệch.
+# ─────────────────────────────────────────────────────────────
+name: config-drift-report
+
+on:
+  schedule:
+    - cron: '0 3 * * 2'   # 03:00 UTC ~ 10:00 ICT, thứ 3.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  drift:
+    name: Generate config drift report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sinh báo cáo drift (validate + dev/prod + thống kê)
+        shell: pwsh
+        run: |
+          & ./scripts/New-ConfigDriftReport.ps1 -OutFile "$RUNNER_TEMP/config-drift.md"
+          Write-Host "exit=$LASTEXITCODE"
+
+      - name: Kèm report vào artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: config-drift-report
+          path: ${{ runner.temp }}/config-drift.md
+          if-no-files-found: error
+
+      - name: Tạo / cập nhật / đóng issue theo kết quả
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync(process.env.RUNNER_TEMP + '/config-drift.md', 'utf8');
+            const { owner, repo } = context.repo;
+            const label = 'ci:config-drift';
+
+            let existing = null;
+            try {
+              const resp = await github.rest.issues.listForRepo({
+                owner, repo, state: 'open', labels: label, per_page: 100
+              });
+              existing = resp.data[0] || null;
+            } catch (e) { console.log('list issues failed:', e.message); }
+
+            const okClean = /## Kết luận: \*\*OK/.test(report);
+            const title = `[Config drift] ${new Date().toISOString().slice(0, 10)}`;
+
+            if (!okClean) {
+              if (existing) {
+                await github.rest.issues.update({ owner, repo, issue_number: existing.number, title, body: report });
+                console.log(`Cập nhật issue #${existing.number} (có vấn đề).`);
+              } else {
+                const created = await github.rest.issues.create({ owner, repo, title, body: report, labels: [label] });
+                console.log(`Tạo issue #${created.data.number}.`);
+              }
+            } else if (existing) {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: existing.number,
+                body: '✅ Báo cáo mới: hết lệch — tự đóng issue này.'
+              });
+              await github.rest.issues.update({ owner, repo, issue_number: existing.number, state: 'closed' });
+              console.log(`Đóng issue #${existing.number} (đã sạch).`);
+            } else {
+              console.log('Mọi thứ OK — không cần issue.');
+            }

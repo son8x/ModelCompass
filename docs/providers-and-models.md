@@ -156,11 +156,27 @@ ta dùng nó làm "khoá sắp xếp tổng hợp" — 2 provider xKiro hiện t
 
 1. Model muốn hiện **trên** → gán `release_date` **lớn hơn** (vì opencode sort GIẢM DẦN).
 2. Dùng vùng năm **`2099`** để phân biệt với ngày phát hành thật (không lẫn khi catalog ra model mới).
-3. Danh sách N liên tiếp: gán `2099-<MM>-<DD>` giảm dần 1 ngày/lượt; khi **chèn mới vào giữa**, chọn ngày nằm giữa 2 model lân cận.
+3. Danh sách N liên tiếp: sinh bằng helper (mục §6b) — `scripts\New-SortOrderKey.ps1 -Count N` (giảm dần từ `2099-12-31`, cách 1 ngày; `-From` để đổi điểm bắt đầu cluster). Khi **chèn mới vào giữa**: `-Between <key-trên> -BetweenLower <key-dưới>` — helper chọn ngày nằm giữa, không phải đụng date các model khác.
 4. **Không trùng `release_date`** giữa 2 model — trùng sẽ rơi xuống sort theo `name` A→Z làm mất thứ tự.
 5. Chỉ áp dụng cho provider muốn ép thứ tự model; provider không đặt `release_date` sẽ hiển thị theo `name` A→Z.
 6. Schema hỗ trợ `release_date` ở mỗi model (`provider.<id>.models.<id>.release_date`, string) — xác nhận tại `https://opencode.ai/config.json`.
 7. Sau khi sửa: validate → `Publish-Config.ps1` → `Install-Config.ps1` → **quit & restart opencode** (config chỉ nạp 1 lần lúc khởi động).
+
+### 6b. Helper "khoá sắp xếp" (`scripts\New-SortOrderKey.ps1`)
+
+Mọi việc bấm số `2099-…` giờ hội tụ về 1 helper (Phase 2.3) — **script chỉ IN key, không sửa file** (config chứa nhiều comment, tránh hỏng):
+
+| Thao tác | Lệnh |
+|----------|------|
+| Sinh N key giảm dần (mặc định từ `2099-12-31`) | `pwsh scripts\New-SortOrderKey.ps1 -Count 24` |
+| Sinh key cho cluster khác (vd cụm B trả phí, bắt đầu `2099-10-25`) | `pwsh scripts\New-SortOrderKey.ps1 -From 2099-10-25 -Count 9` |
+| Chèn model giữa 2 model đã có (không đụng date khác) | `pwsh scripts\New-SortOrderKey.ps1 -Between <key-trên> -BetweenLower <key-dưới>` |
+| Thêm N model vào cuối provider (tự đọc key nhỏ nhất, nối tiếp) | `pwsh scripts\New-SortOrderKey.ps1 -Append -Config <config> -Provider <id> -Count N` |
+| Dựng lại toàn bộ key của provider | `pwsh scripts\New-SortOrderKey.ps1 -Rebuild -Config <config> -Provider <id> -From 2099-12-31` |
+
+Helper tránh trùng key bằng `-Exclude` (tự động nạp key sẵn có trong `-Append`). Hàm thuần dùng chung:
+`New-SortOrderKey` / `Get-SortOrderKeyBetween` trong `scripts\Common-Functions.ps1` (phủ test tại
+`tests\SortOrder.Tests.ps1`).
 
 > Cách thay thế (không khuyến khích): đánh số vào `name` ("01 · DeepSeek V4 Pro"…) cũng ép được thứ tự
 > khi không có `release_date`, nhưng làm **nhiễu fuzzy search** (`fuzzysort` gõ chữ số) và hiển thị số xấu

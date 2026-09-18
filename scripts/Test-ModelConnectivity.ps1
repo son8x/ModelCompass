@@ -44,10 +44,24 @@
 .PARAMETER SkipRun
     Chỉ nạp định nghĩa function (dùng cho test dot-source), không chạy probe.
 
+.PARAMETER Benchmark
+    Đo latency + token thực: gọi -BenchmarkRuns lần mỗi model, tổng hợp median/min/max
+    (ms) + tokens/giây. BẮT BUỘC thu hẹp bằng -Provider hoặc -Model (tránh đốt quota).
+
+.PARAMETER BenchmarkRuns
+    Số request benchmark mỗi model. Mặc định: 6.
+
+.PARAMETER BenchmarkPrompt
+    Prompt dùng trong benchmark. Mặc định: yêu cầu trả lời ngắn.
+
+.PARAMETER BenchmarkMaxTokens
+    max_tokens trong benchmark. Mặc định: 32.
+
 .EXAMPLE
     PS scripts\Test-ModelConnectivity.ps1
     PS scripts\Test-ModelConnectivity.ps1 -Provider '6-teamoRouter' -Report
     PS scripts\Test-ModelConnectivity.ps1 -UpdateStatus   # cập nhật STATUS.md
+    PS scripts\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Model 'minimax/minimax-m3:free'
 #>
 [CmdletBinding()]
 param(
@@ -58,7 +72,11 @@ param(
     [switch]$Report,
     [switch]$UpdateStatus,
     [string]$StatusPath,
-    [switch]$SkipRun
+    [switch]$SkipRun,
+    [switch]$Benchmark,
+    [int]$BenchmarkRuns = 6,
+    [string]$BenchmarkPrompt = 'Trả lời một câu ngắn bằng tiếng Việt: 2+2 bằng mấy?',
+    [int]$BenchmarkMaxTokens = 32
 )
 
 . (Join-Path $PSScriptRoot 'Common-Functions.ps1')
@@ -101,6 +119,110 @@ function Invoke-Probe {
             return [pscustomobject]@{ status = 'DOWN'; msg = 'không kết nối được (host refused / down)'; code = 0 }
         }
         return [pscustomobject]@{ status = 'ERROR'; msg = $msg; code = 0 }
+    }
+}
+
+function Invoke-Benchmark {
+    <#
+    Gọi -Runs request chat/completions giống Invoke-Probe nhưng ghi lại ms + usage token.
+    Trả mảng run: { ms, ok, prompt_tokens, completion_tokens, code, error }.
+    #>
+    param(
+        [string]$Url,
+        [string]$ModelId,
+        [string]$ApiKey,
+        [string]$Prompt,
+        [int]$MaxTokens,
+        [int]$Runs,
+        [int]$TimeoutSeconds
+    )
+    $runs = [System.Collections.Generic.List[object]]::new()
+    $headers = @{ Authorization = "Bearer $ApiKey" }
+    for ($i = 1; $i -le $Runs; $i++) {
+        $body = @{
+            model      = $ModelId
+            messages   = @(@{ role = 'user'; content = $Prompt })
+            max_tokens = $MaxTokens
+        } | ConvertTo-Json -Depth 5
+        $sw = [System.Diagnostics.Stopwatch]::StartNew()
+        try {
+            $resp = Invoke-WebRequest -Uri $Url -Method Post -Headers $headers `
+                -ContentType 'application/json' -Body $body `
+                -TimeoutSec $TimeoutSeconds -SkipHttpErrorCheck
+            $sw.Stop()
+            $code = [int]$resp.StatusCode
+            $tokIn = 0; $tokOut = 0
+            if ($resp.Content) {
+                try {
+                    $parsed = $null
+                    $parsed = $resp.Content | ConvertFrom-Json
+                    if ($null -ne $parsed.usage) {
+                        $tokIn = [int]$parsed.usage.prompt_tokens
+                        $tokOut = [int]$parsed.usage.completion_tokens
+                    }
+                } catch { }
+            }
+            $runs.Add([pscustomobject]@{
+                ms = $sw.ElapsedMilliseconds; ok = ($code -eq 200 -or $code -eq 201)
+                prompt_tokens = $tokIn; completion_tokens = $tokOut; code = $code; error = ''
+            })
+        } catch {
+            $sw.Stop()
+            $msg = $_.Exception.Message
+            $runs.Add([pscustomobject]@{
+                ms = $sw.ElapsedMilliseconds; ok = $false
+                prompt_tokens = 0; completion_tokens = 0; code = 0; error = $msg
+            })
+        }
+    }
+    return ,$runs
+}
+
+function Get-BenchmarkSummary {
+    <#
+    Tổng hợp mảng runs (từ Invoke-Benchmark) → summary latency/token.
+    Hàm THUẦN (không gọi mạng) — phủ test:
+      - MedianMs: trung vị các run OK (bền với outlier), MinMs/MaxMs/AvgMs.
+      - AvgTokenIn/AvgTokenOut: trung bình token mỗi run OK.
+      - TokensPerSec: tổng token / tổng thời gian các run OK (giây), làm tròn 1 chữ số.
+      - FailCount + FirstError để phát hiện lỗi lẫn trong benchmark.
+    #>
+    param([Parameter(Mandatory)]$Runs)
+    $okRuns = @($Runs | Where-Object { $_.ok })
+    $failRuns = @($Runs | Where-Object { -not $_.ok })
+
+    $msOk = @($okRuns | ForEach-Object { [long]$_.ms })
+    $median = 0.0
+    $minMs = 0.0; $maxMs = 0.0; $avgMs = 0.0
+    $avgIn = 0.0; $avgOut = 0.0; $tps = 0.0
+    if ($msOk.Count -gt 0) {
+        $sorted = @($msOk | Sort-Object)
+        $n = $sorted.Count
+        $median = if ($n % 2 -eq 1) { [double]$sorted[[int](($n - 1) / 2)] }
+                else { ([double]$sorted[$n / 2 - 1] + [double]$sorted[$n / 2]) / 2 }
+        $minMs = [double]($sorted | Select-Object -First 1)
+        $maxMs = [double]($sorted | Select-Object -Last 1)
+        $avgMs = [math]::Round((($msOk | Measure-Object -Sum -Average).Average), 1)
+        $inSum  = ($okRuns | Measure-Object -Property prompt_tokens -Sum).Sum
+        $outSum = ($okRuns | Measure-Object -Property completion_tokens -Sum).Sum
+        $totMs  = (($msOk | Measure-Object -Sum).Sum)
+        $avgIn  = [math]::Round($inSum / $msOk.Count, 1)
+        $avgOut = [math]::Round($outSum / $msOk.Count, 1)
+        if ($totMs -gt 0) {
+            $tps = [math]::Round(($inSum + $outSum) / ($totMs / 1000.0), 1)
+        }
+    }
+    return [pscustomobject]@{
+        Ok          = $okRuns.Count
+        Fail        = $failRuns.Count
+        MedianMs    = [math]::Round($median, 1)
+        MinMs       = $minMs
+        MaxMs       = $maxMs
+        AvgMs       = $avgMs
+        AvgTokenIn  = $avgIn
+        AvgTokenOut = $avgOut
+        TokensPerSec = $tps
+        FirstError  = if ($failRuns.Count -gt 0) { [string]$failRuns[0].error } else { '' }
     }
 }
 
@@ -194,7 +316,19 @@ if (-not (Test-Path -LiteralPath $ConfigPath -PathType Leaf)) {
     exit 1
 }
 
+if ($Benchmark -and -not $Provider -and -not $Model) {
+    Write-Fail 'Benchmark bắn nhiều request/model — hãy thu hẹp bằng -Provider và/hoặc -Model.'
+    exit 2
+}
+if ($Benchmark -and $BenchmarkRuns -lt 1) {
+    Write-Fail 'BenchmarkRuns phải >= 1.'
+    exit 2
+}
+
 Write-Step "Test kết nối: $ConfigPath (timeout ${TimeoutSeconds}s)"
+if ($Benchmark) {
+    Write-Info "Benchmark: $BenchmarkRuns runs/model, prompt='$BenchmarkPrompt' max_tokens=$BenchmarkMaxTokens"
+}
 $config = Get-ConfigContent $ConfigPath
 
 $results = [System.Collections.Generic.List[object]]::new()
@@ -204,6 +338,7 @@ if ($null -eq $config.provider) {
     exit 1
 }
 
+if (-not $Benchmark) {
 foreach ($p in @($config.provider.PSObject.Properties)) {
     if ($Provider -and $Provider -notcontains $p.Name) { continue }
 
@@ -231,6 +366,49 @@ foreach ($p in @($config.provider.PSObject.Properties)) {
         $results.Add([pscustomobject]@{
             Provider = $p.Name; Model = $modelId; Status = $r.status; Message = $r.msg; ms = $null
         })
+    }
+}
+}
+
+if ($Benchmark) {
+    foreach ($p in @($config.provider.PSObject.Properties)) {
+        if ($Provider -and $Provider -notcontains $p.Name) { continue }
+        $def = $p.Value
+        $baseUrl = $null
+        if ($null -ne $def.options) { $baseUrl = $def.options.baseURL }
+        if ([string]::IsNullOrWhiteSpace($baseUrl)) { continue }
+        $key = Resolve-EnvValue ([string]$def.options.apiKey)
+        $url = $baseUrl.TrimEnd('/') + '/chat/completions'
+        if ([string]::IsNullOrWhiteSpace($key)) {
+            foreach ($m in @($def.models.PSObject.Properties)) {
+                if ($Model -and $Model -ne $m.Name) { continue }
+                $results.Add([pscustomobject]@{
+                    Provider = $p.Name; Model = $m.Name; Status = 'SKIP'; Message = 'thiếu API key ({env:...})'; ms = 0
+                })
+            }
+            continue
+        }
+        foreach ($m in @($def.models.PSObject.Properties)) {
+            $modelId = $m.Name
+            if ($Model -and $Model -ne $modelId) { continue }
+            $runs = Invoke-Benchmark -Url $url -ModelId $modelId -ApiKey $key `
+                -Prompt $BenchmarkPrompt -MaxTokens $BenchmarkMaxTokens `
+                -Runs $BenchmarkRuns -TimeoutSeconds $TimeoutSeconds
+            $s = Get-BenchmarkSummary -Runs $runs
+            if ($s.Fail -gt 0) {
+                $results.Add([pscustomobject]@{
+                    Provider = $p.Name; Model = $modelId; Status = 'ERROR'
+                    Message = "benchmark fail $($s.Fail)/$($s.Ok + $s.Fail): $($s.FirstError)"
+                    ms = $null
+                })
+            } else {
+                $results.Add([pscustomobject]@{
+                    Provider = $p.Name; Model = $modelId; Status = 'OK'
+                    Message = "med=${($s.MedianMs)}ms ${($s.TokensPerSec)}tok/s (in ${($s.AvgTokenIn)}/out ${($s.AvgTokenOut)})"
+                    ms = $s.MedianMs
+                })
+            }
+        }
     }
 }
 
@@ -262,9 +440,24 @@ if ($Report) {
     $reportDir = Join-Path (Get-RepoRoot) 'reports'
     New-Item -ItemType Directory -Force -Path $reportDir | Out-Null
     $file = Join-Path $reportDir ("connectivity-" + (Get-Timestamp) + ".md")
-    $lines = @("# ModelCompass — Kết quả test kết nối", '', "Ngày: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')", '', '| Provider | Model | Status | Message |', '|---|---|---|---|')
-    foreach ($r in $results) {
-        $lines += "| $($r.Provider) | $($r.Model) | $($r.Status) | $($r.Message) |"
+    $lines = @("# ModelCompass — Kết quả test kết nối", '', "Ngày: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')", '')
+    if ($Benchmark) {
+        $lines += '| Provider | Model | Status | Median ms | Tokens/s | Token in | Token out |', '|---|---|---|---|---|---|---|'
+        foreach ($r in $results) {
+            $med = [string]$r.ms
+            if ($r.Message -match 'med=([0-9.]+)ms ([0-9.]+)tok/s \(in ([0-9.]+)/out ([0-9.]+)\)') {
+                $med = $Matches[1]
+                $tps = $Matches[2]; $tin = $Matches[3]; $tout = $Matches[4]
+            } else {
+                $tps = '—'; $tin = '—'; $tout = '—'
+            }
+            $lines += "| $($r.Provider) | $($r.Model) | $($r.Status) | $med | $tps | $tin | $tout |"
+        }
+    } else {
+        $lines += '| Provider | Model | Status | Message |', '|---|---|---|---|'
+        foreach ($r in $results) {
+            $lines += "| $($r.Provider) | $($r.Model) | $($r.Status) | $($r.Message) |"
+        }
     }
     $lines | Set-Content -LiteralPath $file -Encoding utf8
     Write-Info "Report: $file"

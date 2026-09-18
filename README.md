@@ -5,6 +5,9 @@ Dự án **phân tích, đánh giá và quản lý cấu hình AI provider/model
 kèm theo quy trình **an toàn** để đưa model mới vào sử dụng mà **không làm hỏng
 opencode đang chạy**.
 
+[![CI — validate config](https://github.com/son8x/ModelCompass/actions/workflows/validate.yml/badge.svg)](https://github.com/son8x/ModelCompass/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 > 🎯 Mục tiêu: biết **dùng provider/model nào** cho từng nhu cầu (lập trình,
 > viết luận văn, pentest, …), và **cấu hình opencode nhanh nhất** với cấu hình
 > được **quản lý phiên bản trong Git/GitHub**.
@@ -25,6 +28,18 @@ opencode đang chạy**.
    (đã test) → `~/.config/opencode/` (đang chạy), kèm backup/rollback.
 6. **Plugin theo dõi hạn mức xKiro** — poll `GET /v1/usage` ngay trong opencode:
    log + toast cảnh báo + status bar (`xkiro-usage.js`, `xkiro-statusline.tsx`).
+7. **Chế độ an toàn (safe-mode)** — preset chỉ dùng provider/model có trong
+   catalog live + cần đúng 1 API key, để dev khởi động nhanh mà không tìm hiểu
+   trước (`configs/presets/safe-minimal.jsonc`).
+8. **Cấu hình theo từng dự án** — template per-project + cách dùng
+   `OPENCODE_CONFIG`/`OPENCODE_CONFIG_CONTENT` (`configs/project-templates/`,
+   `docs/per-project-config.md`).
+9. **Helper sort-order** — `New-SortOrderKey.ps1` sinh/tìm key `yyyy-MM-dd` cho
+   mục `sortOrder` của provider/model (không đụng file), tránh trùng key.
+10. **Báo cáo drift định kỳ** — CI tự validate dev/prod/presets, ghi report, mở
+    issue khi có vấn đề (`report-drift.yml`).
+11. **Benchmark latency/token** — `Test-ModelConnectivity.ps1 -Benchmark` gọi
+    N lần mỗi model, tổng hợp median ms + tokens/giây.
 
 ---
 
@@ -33,24 +48,30 @@ opencode đang chạy**.
 ```
 01-ModelCompass/
 ├── README.md                  ← bạn đang ở đây
+├── LICENSE                    ← MIT
 ├── docs/
 │   ├── providers-and-models.md   ← phân tích chi tiết provider/model
 │   ├── workflow.md               ← quy trình development → production → release
+│   ├── per-project-config.md     ← cấu hình theo từng dự án (OPENCODE_CONFIG)
 │   └── recommendations/          ← đề xuất theo nhu cầu (lập trình / luận văn / pentest)
 ├── configs/
 │   ├── development/opencode.jsonc  ← 🚧 soạn thử (sửa thoải mái)
 │   ├── production/opencode.json    ← ✅ đã test, dùng để cài đặt
-│   └── presets/*.jsonc             ← model pick theo use case
-├── scripts/                    ← PowerShell 7: validate / test / publish / install / restore
+│   ├── presets/*.jsonc             ← model pick theo use case (kèm safe-minimal)
+│   └── project-templates/          ← template per-project (code / thesis / pentest)
+├── scripts/                    ← PowerShell 7: validate / test / publish / install / restore / report* / New-SortOrderKey
+├── tests/                      ← Pester: Config, SortOrder, ConfigDiff, Benchmark, StatusUpdate, SpendReport
 ├── .opencode/plugins-xkiro/    ← plugin theo dõi hạn mức xKiro (source)
 │   ├── xkiro-usage.js              ← server plugin: poll /v1/usage + log/toast (mặc định bật)
 │   ├── xkiro-statusline.tsx        ← TUI status bar (slot app_bottom)
 │   └── xkiro-store.js              ← shared cache + file lock giữa các cửa sổ
 ├── reports/                    ← kết quả test (gitignored)
-└── .github/workflows/validate.yml ← CI
+└── .github/workflows/          ← CI
+    ├── validate.yml                ← validate config + chặn API key (mỗi push/PR)
+    └── report-drift.yml            ← báo cáo drift định kỳ (cron + workflow_dispatch)
 ```
 
-## 🚀 Quickstart (lần đầu)
+## 🚀 Quickstart (lần đầu — Windows, PowerShell 7)
 
 ```powershell
 # 1) Kiểm tra cấu hình production hợp lệ
@@ -63,6 +84,10 @@ pwsh scripts\Test-ModelConnectivity.ps1 -ConfigPath configs\development\opencode
 pwsh scripts\Install-Config.ps1
 #    → Quit & restart opencode
 ```
+
+**Cài từ GitHub:** `git clone https://github.com/son8x/ModelCompass.git`
+rồi chạy các lệnh trên (yêu cầu **Windows + PowerShell 7**, opencode cài sẵn).
+Key API **không nằm trong repo** — đọc mục **[🔐 Bảo mật](#-bảo-mật)**.
 
 ## 🔄 Vòng đời cấu hình mới (khuyến nghị)
 
@@ -150,6 +175,24 @@ nằm trong `.opencode/plugins-xkiro/`:
 Bảng giá token là **ảnh chụp tại thời điểm viết** (Q4/2026), có ghi nguồn trong
 `docs/providers-and-models.md`. Giá nhà cung cấp thay đổi thường xuyên — trước
 khi quyết định trả phí, hãy xác nhận lại trên trang chính thức của provider.
+
+## 📏 Đo tốc độ model (benchmark)
+
+```powershell
+# Benchmark 1 model (mặc định 6 lượt gọi, tổng hợp median ms + tokens/giây)
+pwsh scripts\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Model 'minimax/minimax-m3:free'
+
+# Kèm report Markdown vào reports\
+pwsh scripts\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Report
+```
+
+`-Benchmark` **bắt buộc** thu hẹp bằng `-Provider` hoặc `-Model` để không đốt
+quota khi chạy cả catalog.
+
+## 📄 Giấy phép
+
+[MIT](LICENSE) — tự do dùng, sửa, chia sẻ với điều kiện giữ phần thông báo
+bản quyền.
 
 ---
 

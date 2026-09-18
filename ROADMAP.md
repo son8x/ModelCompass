@@ -34,10 +34,10 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 |---|---|---|---|
 | **Phase 0 — Vững nền móng** | ✅ | 6/6 (7/7 nhiệm vụ) | hoàn thành 17/09/2026 |
 | **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | ✅ | 5/5 | hoàn thành 17/09/2026 |
-| **Phase 2 — Cứng hoá & mở rộng** | 🔶 | 1/6 | đang làm — 2.1 xong 17/09/2026 |
+| **Phase 2 — Cứng hoá & mở rộng** | ✅ | 6/6 | hoàn thành 18/09/2026 |
 | **Phase 3 — Hệ sinh thái mở** | ⬜ | 0/4 | khi có nhu cầu |
 
-**Next action đang chờ**: Phase 2 hạng mục 2.2 — per-project config (template + OPENCODE_CONFIG hook tầng).
+**Next action đang chờ**: Phase 3 — bắt đầu khi có nhu cầu thật (CLI gói gọn `mc`, provider plugin, "model bank", GitHub Pages docs).
 
 ---
 
@@ -113,11 +113,11 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 | # | Hạng mục | Mô tả | Ưu tiên | Kích thước |
 |---|---|---|---|---|
 | 2.1 | **Preset "safe-mode"** | `configs/presets/safe-minimal.jsonc`: 3 provider free đã test lâu (8 model toàn nằm trong catalog live), chỉ dùng khi nghi ngờ config mới gây lỗi + hướng dẫn rollback nhanh | P1 | S | ✅ |
-| 2.2 | **Per-project config** | Tài liệu + template `opencode.json` cho từng project (thesis/pentest/code) dùng `OPENCODE_CONFIG` hook tầng, không đụng global | P2 | M |
-| 2.3 | **Phân cụm sort-order** | Tách "khoá sắp xếp" ra 1 quy ước dùng chung (helper tạo key 2099 từ nhóm/giá) để thêm model không phải chỉnh tay date rải rác | P2 | M |
-| 2.4 | **Scheduled -report trên CI** | Cron GitHub Actions chạy `Test-ModelCompassConfig` + (không cần mạng local) báo cáo lệch dev/prod + size backup — issue tự động | P2 | S |
-| 2.5 | **Đo latency/token thực** | `Test-ModelConnectivity.ps1` thêm tham số `-Benchmark` (N lần, ghi ms + tokens) → dữ liệu tốc độ thực tế cho `docs/providers-and-models.md` | P2 | M |
-| 2.6 | **License & chuẩn hoá public** | Thêm LICENSE (MIT), mở rộng README cho người dùng ngoài (env vars, cách fork, disclaimer giá) | P2 | S |
+| 2.2 | **Per-project config** | Tài liệu + template `opencode.json` cho từng project (thesis/pentest/code) dùng `OPENCODE_CONFIG` hook tầng, không đụng global | P2 | M | ✅ |
+| 2.3 | **Phân cụm sort-order** | Tách "khoá sắp xếp" ra 1 quy ước dùng chung (helper tạo key 2099 từ nhóm/giá) để thêm model không phải chỉnh tay date rải rác | P2 | M | ✅ |
+| 2.4 | **Scheduled -report trên CI** | Cron GitHub Actions chạy `Test-ModelCompassConfig` + (không cần mạng local) báo cáo lệch dev/prod + size backup — issue tự động | P2 | S | ✅ |
+| 2.5 | **Đo latency/token thực** | `Test-ModelConnectivity.ps1` thêm tham số `-Benchmark` (N lần, ghi ms + tokens) → dữ liệu tốc độ thực tế cho `docs/providers-and-models.md` | P2 | M | ✅ |
+| 2.6 | **License & chuẩn hoá public** | Thêm LICENSE (MIT), mở rộng README cho người dùng ngoài (env vars, cách fork, disclaimer giá) | P2 | S | ✅ |
 
 ### Phase 3 — Hệ sinh thái mở (tháng 2+, khi cần)
 
