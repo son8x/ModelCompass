@@ -29,15 +29,20 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 > **Ký hiệu**: ✅ hoàn thành · 🔶 đang làm · ⬜ chưa bắt đầu · ⚪ hoãn/loại bỏ.
 > Cập nhật bảng này mỗi khi hoàn tất một hạng mục.
+>
+> **Trạng thái 18/09/2026**: Phase 0–3 đều hoàn thành; bản xem lại chi tiết
+> bên dưới giữ nguyên đánh giá tại thời điểm 17/09/2026.
 
 | Giai đoạn | Trạng thái | Tiến độ | Ghi chú |
 |---|---|---|---|
 | **Phase 0 — Vững nền móng** | ✅ | 6/6 (7/7 nhiệm vụ) | hoàn thành 17/09/2026 |
 | **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | ✅ | 5/5 | hoàn thành 17/09/2026 |
 | **Phase 2 — Cứng hoá & mở rộng** | ✅ | 6/6 | hoàn thành 18/09/2026 |
-| **Phase 3 — Hệ sinh thái mở** | ⬜ | 0/4 | khi có nhu cầu |
+| **Phase 3 — Hệ sinh thái mở** | ✅ | 4/4 | hoàn thành 18/09/2026 |
 
-**Next action đang chờ**: Phase 3 — bắt đầu khi có nhu cầu thật (CLI gói gọn `mc`, provider plugin, "model bank", GitHub Pages docs).
+**Next action đang chờ**: sau Phase 3, các trục mở rộng theo định hướng §4
+(dữ liệu sống hơn: scan giá tự động trên CI, plugin dùng chung rộng hơn) —
+mỗi hạng mục chỉ bắt đầu khi có nhu cầu thật.
 
 ---
 
@@ -110,8 +115,8 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 ### Phase 2 — Cứng hoá & mở rộng (tháng 1)
 
-| # | Hạng mục | Mô tả | Ưu tiên | Kích thước |
-|---|---|---|---|---|
+| # | Hạng mục | Mô tả | Ưu tiên | Kích thước | Trạng thái |
+|---|---|---|---|---|---|
 | 2.1 | **Preset "safe-mode"** | `configs/presets/safe-minimal.jsonc`: 3 provider free đã test lâu (8 model toàn nằm trong catalog live), chỉ dùng khi nghi ngờ config mới gây lỗi + hướng dẫn rollback nhanh | P1 | S | ✅ |
 | 2.2 | **Per-project config** | Tài liệu + template `opencode.json` cho từng project (thesis/pentest/code) dùng `OPENCODE_CONFIG` hook tầng, không đụng global | P2 | M | ✅ |
 | 2.3 | **Phân cụm sort-order** | Tách "khoá sắp xếp" ra 1 quy ước dùng chung (helper tạo key 2099 từ nhóm/giá) để thêm model không phải chỉnh tay date rải rác | P2 | M | ✅ |
@@ -121,12 +126,12 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 ### Phase 3 — Hệ sinh thái mở (tháng 2+, khi cần)
 
-| # | Hạng mục | Mô tả | Ưu tiên | Kích thước |
-|---|---|---|---|---|
-| 3.1 | **"ModelCompass CLI"** | Gói gọn các script thành `mc` (PowerShell module) với command: `mc sync`, `mc publish`, `mc status`, `mc report`, `mc doctor` (kiểm local services OmniRoute/9Router) | P2 | L |
-| 3.2 | **Provider plugin để người dùng tự đóng góp** | Chuẩn hoá cách khai báo provider mới (template + recipe), CI chấp nhận preset mới | P2 | M |
-| 3.3 | **Export sang dạng dùng chung** | Sinh `configs/production/opencode.json` + `presets` thành "model bank" JSON có schema, để các công cụ khác (đồng bộ nhiều máy) tiêu thụ | P2 | L |
-| 3.4 | **GitHub Pages docs** | Dựng trang kubey đọc `docs/` làm "nơi tra cứu model theo giá/tác vụ" | P2 | M |
+| # | Hạng mục | Mô tả | Ưu tiên | Kích thước | Trạng thái |
+|---|---|---|---|---|---|
+| 3.1 | **"ModelCompass CLI"** | Gói gọn các script thành `mc` (PowerShell module) với command: `mc sync`, `mc publish`, `mc status`, `mc report`, `mc doctor` (kiểm local services OmniRoute/9Router) | P2 | L | ✅ `modules/ModelCompass/` + `scripts/mc.ps1`; 17 lệnh, test McCli 11 |
+| 3.2 | **Provider plugin để người dùng tự đóng góp** | Chuẩn hoá cách khai báo provider mới (template + recipe), CI chấp nhận preset mới | P2 | M | ✅ `configs/provider-template/` + `docs/contributing-provider.md`; validate.yml thêm step; test Templates 6 |
+| 3.3 | **Export sang dạng dùng chung** | Sinh `configs/production/opencode.json` + `presets` thành "model bank" JSON có schema, để các công cụ khác (đồng bộ nhiều máy) tiêu thụ | P2 | L | ✅ `scripts/Export-ModelBank.ps1` + `model-bank/schema.json`; test ModelBank 12 |
+| 3.4 | **GitHub Pages docs** | Dựng trang kubey đọc `docs/` làm "nơi tra cứu model theo giá/tác vụ" | P2 | M | ✅ `docs/site/` Jekyll + `.github/workflows/pages.yml`; test DocsSite 4 |
 
 ---
 

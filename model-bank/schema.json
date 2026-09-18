@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/son8x/ModelCompass/main/model-bank/schema.json",
+  "title": "ModelCompass Model Bank",
+  "description": "Cấu trúc 'model bank' — config + presets + catalog pricing xuất dạng dùng chung (đồng bộ nhiều máy / công cụ khác tiêu thụ).",
+  "type": "object",
+  "required": ["version", "exportedAt", "generatedBy", "providers", "models", "presets", "stats"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string", "enum": ["1.0.0"] },
+    "exportedAt": { "type": "string", "format": "date-time" },
+    "generatedBy": { "type": "string" },
+    "sourceConfig": { "type": "string" },
+    "providers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "npm", "baseURL", "apiKeyEnv", "local"],
+        "properties": {
+          "id": { "type": "string" },
+          "catalogId": { "type": ["string", "null"] },
+          "name": { "type": "string" },
+          "npm": { "type": "string" },
+          "baseURL": { "type": ["string", "null"] },
+          "apiKeyEnv": { "type": ["string", "null"] },
+          "local": { "type": "boolean" }
+        }
+      }
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["provider", "id", "releaseDate", "name", "tags"],
+        "properties": {
+          "provider": { "type": "string" },
+          "id": { "type": "string" },
+          "releaseDate": { "type": "string" },
+          "name": { "type": "string" },
+          "pricing": {
+            "type": ["object", "null"],
+            "properties": {
+              "input": { "type": "number" },
+              "output": { "type": "number" }
+            }
+          },
+          "catalogPricing": {
+            "type": ["object", "null"],
+            "properties": {
+              "input": { "type": "number" },
+              "output": { "type": "number" }
+            }
+          },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "presets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "path", "modelCount"],
+        "properties": {
+          "name": { "type": "string" },
+          "path": { "type": "string" },
+          "modelCount": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "required": ["providers", "models", "presets"],
+      "properties": {
+        "providers": { "type": "integer" },
+        "models": { "type": "integer" },
+        "presets": { "type": "integer" }
+      }
+    }
+  }
+}

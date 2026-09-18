@@ -57,6 +57,18 @@ jobs:
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
 
+      - name: Validate templates (per-project + provider template)
+        shell: pwsh
+        run: |
+          $files = @()
+          $files += Get-ChildItem configs/project-templates -Recurse -Filter '*.json' -File
+          $files += Get-ChildItem configs/provider-template -Recurse -Filter '*.json' -File
+          foreach ($f in $files) {
+            Write-Host "  → $($f.FullName)"
+            & ./scripts/Test-ModelCompassConfig.ps1 -Path $f.FullName
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+
       - name: Test Suite (Pester) — scripts + validate configs
         shell: pwsh
         run: |

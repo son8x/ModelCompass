@@ -40,6 +40,16 @@ opencode đang chạy**.
     issue khi có vấn đề (`report-drift.yml`).
 11. **Benchmark latency/token** — `Test-ModelConnectivity.ps1 -Benchmark` gọi
     N lần mỗi model, tổng hợp median ms + tokens/giây.
+12. **CLI `mc`** — gói gọn mọi script thành 1 lệnh: `mc sync`, `mc publish`,
+    `mc status`, `mc report`, `mc doctor` (check services local + config),
+    `mc benchmark`, `mc export`, `mc help` (`modules/ModelCompass/`).
+13. **Model Bank (dạng dùng chung)** — `scripts/Export-ModelBank.ps1` sinh JSON
+    có schema (`model-bank/schema.json`) từ production config + presets để đồng
+    bộ nhiều máy / công cụ khác tiêu thụ.
+14. **Provider plugin tự đóng góp** — template + recipe để thêm provider mới,
+    CI validate mọi template (`configs/provider-template/`, `docs/contributing-provider.md`).
+15. **GitHub Pages docs** — trang tra cứu model theo giá/tác vụ tự sinh bởi CI
+    (`docs/site/`, `.github/workflows/pages.yml`).
 
 ---
 
@@ -53,22 +63,28 @@ opencode đang chạy**.
 │   ├── providers-and-models.md   ← phân tích chi tiết provider/model
 │   ├── workflow.md               ← quy trình development → production → release
 │   ├── per-project-config.md     ← cấu hình theo từng dự án (OPENCODE_CONFIG)
-│   └── recommendations/          ← đề xuất theo nhu cầu (lập trình / luận văn / pentest)
+│   ├── contributing-provider.md  ← recipe thêm provider mới (Phase 3.2)
+│   ├── recommendations/          ← đề xuất theo nhu cầu (lập trình / luận văn / pentest)
+│   └── site/                     ← GitHub Pages (Jekyll) tra cứu model theo giá/tác vụ
 ├── configs/
 │   ├── development/opencode.jsonc  ← 🚧 soạn thử (sửa thoải mái)
 │   ├── production/opencode.json    ← ✅ đã test, dùng để cài đặt
 │   ├── presets/*.jsonc             ← model pick theo use case (kèm safe-minimal)
+│   ├── provider-template/          ← template provider mới để đóng góp (3.2)
 │   └── project-templates/          ← template per-project (code / thesis / pentest)
-├── scripts/                    ← PowerShell 7: validate / test / publish / install / restore / report* / New-SortOrderKey
-├── tests/                      ← Pester: Config, SortOrder, ConfigDiff, Benchmark, StatusUpdate, SpendReport
+├── modules/ModelCompass/       ← 🧭 CLI `mc` (PowerShell module, Phase 3.1)
+├── model-bank/                 ← model bank JSON + schema (dạng dùng chung, 3.3)
+├── scripts/                    ← PowerShell 7: validate / test / publish / install / restore / report* / mc / New-SortOrderKey / Export-ModelBank
+├── tests/                      ← Pester: Config, SortOrder, ConfigDiff, Benchmark, StatusUpdate, SpendReport, McCli, Templates, ModelBank, DocsSite
 ├── .opencode/plugins-xkiro/    ← plugin theo dõi hạn mức xKiro (source)
 │   ├── xkiro-usage.js              ← server plugin: poll /v1/usage + log/toast (mặc định bật)
 │   ├── xkiro-statusline.tsx        ← TUI status bar (slot app_bottom)
 │   └── xkiro-store.js              ← shared cache + file lock giữa các cửa sổ
 ├── reports/                    ← kết quả test (gitignored)
 └── .github/workflows/          ← CI
-    ├── validate.yml                ← validate config + chặn API key (mỗi push/PR)
-    └── report-drift.yml            ← báo cáo drift định kỳ (cron + workflow_dispatch)
+    ├── validate.yml                ← validate config + templates + chặn API key (mỗi push/PR)
+    ├── report-drift.yml            ← báo cáo drift định kỳ (cron + workflow_dispatch)
+    └── pages.yml                   ← build + deploy GitHub Pages docs (3.4)
 ```
 
 ## 🚀 Quickstart (lần đầu — Windows, PowerShell 7)
@@ -188,6 +204,35 @@ pwsh scripts\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Rep
 
 `-Benchmark` **bắt buộc** thu hẹp bằng `-Provider` hoặc `-Model` để không đốt
 quota khi chạy cả catalog.
+
+## 🧭 ModelCompass CLI (`mc`)
+
+Gói gọn mọi script thành 1 lệnh — module PowerShell tại `modules/ModelCompass/`,
+gọi script qua tiến trình pwsh con (an toàn khi script có `exit`):
+
+```powershell
+& scripts\mc.ps1 help                       # liệt kê lệnh
+& scripts\mc.ps1 status                     # validate production + so dev/prod
+& scripts\mc.ps1 doctor                     # check env + services local + config
+& scripts\mc.ps1 publish                    # dev → prod (kèm backup)
+& scripts\mc.ps1 report -Month 2026-09      # spend report
+& scripts\mc.ps1 export                     # sinh model-bank/modelbank.json
+& scripts\mc.ps1 sync                       # kéo catalog provider (mạng)
+```
+
+Import trực tiếp trong PowerShell: `Import-Module modules\ModelCompass\ModelCompass.psd1`,
+rồi dùng `mc <lệnh>`. `mc doctor` cần các env `XTROUTER_API_KEY`, `OMNIROUTE_KEY`,
+`TEAMO_API_KEY`, `NINE_ROUTER_API_KEY` và 2 service local OmniRoute/9Router nếu muốn để ý.
+
+## 🗂 Model bank & GitHub Pages docs
+
+- **Model bank**: `scripts/Export-ModelBank.ps1` đọc `configs/production/opencode.json`
+  + `configs/presets/*` + catalog live → `model-bank/modelbank.json` (schema
+  `model-bank/schema.json`). Chứa providers, models (giá từ `name` + catalog, tag
+  `preset:<tên>`), presets, stats — để công cụ khác/dâ chuyển đồng bộ dùng.
+- **Docs site (GitHub Pages)**: `docs/site/` build tự động bởi `.github/workflows/pages.yml`
+  — sinh model bank vào `_data/`, Jekyll render bảng tra cứu model theo giá/tác vụ.
+  Bật `Settings → Pages → Source = GitHub Actions` là trang chạy.
 
 ## 📄 Giấy phép
 

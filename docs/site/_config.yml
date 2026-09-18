@@ -1,0 +1,9 @@
+title: ModelCompass
+description: >-
+  Tra cứu model AI theo giá/tác vụ, plus quản lý cấu hình opencode
+  (docs nguồn: son8x/ModelCompass).
+theme: minima
+markdown: kramdown
+exclude:
+  - README.md
+  - .gitkeep

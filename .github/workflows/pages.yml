@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────
+# ModelCompass — GitHub Pages docs (Phase 3.4)
+# Build: Export-ModelBank.ps1 sinh docs/site/_data/modelbank.json
+#        (Jekyll đọc qua site.data.modelbank), rồi Jekyll build + deploy.
+# Cần bật: Settings → Pages → Source = GitHub Actions.
+# ─────────────────────────────────────────────────────────────
+name: github-pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'configs/**'
+      - 'docs/catalogs/**'
+      - 'model-bank/**'
+      - 'docs/site/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  pages:
+    name: Build & deploy docs site
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sinh Model Bank data cho Jekyll (_data/modelbank.json)
+        shell: pwsh
+        run: |
+          & ./scripts/Export-ModelBank.ps1 -OutDir ./docs/site/_data
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Jekyll build
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: docs/site
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

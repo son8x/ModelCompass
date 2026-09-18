@@ -1,0 +1,1128 @@
+{
+  "$schema": "https://raw.githubusercontent.com/son8x/ModelCompass/main/model-bank/schema.json",
+  "version": "1.0.0",
+  "exportedAt": "2026-09-18T11:46:23.7486836+07:00",
+  "generatedBy": "Export-ModelBank.ps1",
+  "sourceConfig": "configs/production/opencode.json",
+  "providers": [
+    {
+      "id": "1-xkiro-free",
+      "catalogId": "xkiro",
+      "name": "1. xKiro Free (Best‑price multi‑model)",
+      "npm": "@ai-sdk/openai-compatible",
+      "baseURL": "https://api.xkiro.com/v1",
+      "apiKeyEnv": "XTROUTER_API_KEY",
+      "local": false
+    },
+    {
+      "id": "2-xkiro-max",
+      "catalogId": "xkiro",
+      "name": "2. xKiro Max (Paid - gói Max)",
+      "npm": "@ai-sdk/openai-compatible",
+      "baseURL": "https://api.xkiro.com/v1",
+      "apiKeyEnv": "XTROUTER_API_KEY",
+      "local": false
+    },
+    {
+      "id": "3-omniroute-free",
+      "catalogId": "omniroute",
+      "name": "3. OmniRoute Free (Model mạnh nhất)",
+      "npm": "@ai-sdk/openai-compatible",
+      "baseURL": "http://127.0.0.1:20217/v1",
+      "apiKeyEnv": "OMNIROUTE_KEY",
+      "local": true
+    },
+    {
+      "id": "4-openrouter-free",
+      "catalogId": "openrouter",
+      "name": "4. OpenRouter Free",
+      "npm": "@ai-sdk/openai-compatible",
+      "baseURL": "http://127.0.0.1:20217/v1",
+      "apiKeyEnv": "OMNIROUTE_KEY",
+      "local": true
+    },
+    {
+      "id": "5-9router",
+      "catalogId": null,
+      "name": "5. 9Router (local)",
+      "npm": "@ai-sdk/openai-compatible",
+      "baseURL": "http://127.0.0.1:20128/v1",
+      "apiKeyEnv": "NINE_ROUTER_API_KEY",
+      "local": true
+    },
+    {
+      "id": "6-teamoRouter",
+      "catalogId": "teamo",
+      "name": "6. TeamoRouter (Discount & Thesis)",
+      "npm": "@ai-sdk/openai-compatible",
+      "baseURL": "https://api.teamorouter.cn/v1",
+      "apiKeyEnv": "TEAMO_API_KEY",
+      "local": false
+    }
+  ],
+  "models": [
+    {
+      "provider": "1-xkiro-free",
+      "id": "deepseek/deepseek-v4-pro",
+      "releaseDate": "2099-12-31",
+      "name": "DeepSeek V4 Pro (Reasoning + code mạnh nhất free · 1M ctx)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "minimax/minimax-m3:free",
+      "releaseDate": "2099-12-30",
+      "name": "MiniMax M3 (Vision + reasoning · 1M ctx)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": [
+        "preset:safe-minimal"
+      ]
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "openai/gpt-5.3-codex-spark",
+      "releaseDate": "2099-12-29",
+      "name": "GPT-5.3 Codex Spark (Chuyên code · đang 503 tạm)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "deepseek/deepseek-v4.1-flash:free",
+      "releaseDate": "2099-12-28",
+      "name": "DeepSeek V4.1 Flash (Nhanh + vision · 1M ctx)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "minimax/minimax-m2.7:free",
+      "releaseDate": "2099-12-27",
+      "name": "MiniMax M2.7 (Đa dụng cân bằng)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": [
+        "preset:safe-minimal"
+      ]
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "minimax/minimax-m2.7-highspeed:free",
+      "releaseDate": "2099-12-26",
+      "name": "MiniMax M2.7 Highspeed (Tốc độ cao)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "deepseek/deepseek-v4-flash",
+      "releaseDate": "2099-12-25",
+      "name": "DeepSeek V4 Flash (Nhanh, hợp tác agent · 1M ctx)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "deepseek/deepseek-v3.2",
+      "releaseDate": "2099-12-24",
+      "name": "DeepSeek V3.2 (Đa dụng ổn định)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "mistralai/codestral-2508",
+      "releaseDate": "2099-12-23",
+      "name": "Codestral 2508 (Chuyên code)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "minimax/minimax-m2.5:free",
+      "releaseDate": "2099-12-22",
+      "name": "MiniMax M2.5 (Cân bằng đa dụng)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "minimax/minimax-m2.5-highspeed:free",
+      "releaseDate": "2099-12-21",
+      "name": "MiniMax M2.5 Highspeed (Tốc độ cao)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "mistralai/devstral-medium",
+      "releaseDate": "2099-12-20",
+      "name": "Devstral Medium (Dev/code nhanh)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "deepseek/deepseek-chat-v3.1",
+      "releaseDate": "2099-12-19",
+      "name": "DeepSeek Chat V3.1 (Chat đa dụng)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "mistralai/mistral-large-2512",
+      "releaseDate": "2099-12-18",
+      "name": "Mistral Large 2512 (Viết lách / paraphrase · 256K)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": [
+        "preset:safe-minimal"
+      ]
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "mistralai/mistral-medium-3.5",
+      "releaseDate": "2099-12-17",
+      "name": "Mistral Medium 3.5 (Cân bằng + vision)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "minimax/minimax-m2.1:free",
+      "releaseDate": "2099-12-16",
+      "name": "MiniMax M2.1 (Nền tảng ổn định)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "minimax/minimax-m2.1-highspeed:free",
+      "releaseDate": "2099-12-15",
+      "name": "MiniMax M2.1 Highspeed (Nhanh, tác vụ nhẹ)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "minimax/minimax-m2:free",
+      "releaseDate": "2099-12-14",
+      "name": "MiniMax M2 (Dòng M2 cũ nhất)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "mistralai/mistral-small-2603",
+      "releaseDate": "2099-12-13",
+      "name": "Mistral Small 2603 (Nhẹ, nhanh, vision)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "mistralai/ministral-14b",
+      "releaseDate": "2099-12-12",
+      "name": "Ministral 14B (Nhỏ, phản hồi nhanh)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "mistralai/ministral-8b",
+      "releaseDate": "2099-12-11",
+      "name": "Ministral 8B (Siêu nhẹ)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "mistralai/ministral-3b",
+      "releaseDate": "2099-12-10",
+      "name": "Ministral 3B (Nhẹ nhất, việc đơn giản)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "sensenova/sensenova-6.8-flash-lite",
+      "releaseDate": "2099-12-09",
+      "name": "SenseNova 6.8 Flash-Lite (Nhẹ + vision · đang 503 tạm)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "1-xkiro-free",
+      "id": "sensenova/sensenova-6.7-flash-lite",
+      "releaseDate": "2099-12-08",
+      "name": "SenseNova 6.7 Flash-Lite (Nhẹ, cơ bản)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "nvidia/nemotron-3-nano",
+      "releaseDate": "2099-10-25",
+      "name": "[B · Nhẹ/rẻ] Nemotron 3 Nano (In:$0.05 | Out:$0.20 · Rẻ nhất, 1M ctx)",
+      "pricing": {
+        "input": 0.05,
+        "output": 0.2
+      },
+      "catalogPricing": {
+        "input": 0.05,
+        "output": 0.2
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "nvidia/nemotron-3-super",
+      "releaseDate": "2099-10-24",
+      "name": "[B · Nhẹ/rẻ] Nemotron 3 Super (In:$0.08 | Out:$0.45 · 1M ctx siêu rẻ · khuyến nghị)",
+      "pricing": {
+        "input": 0.08,
+        "output": 0.45
+      },
+      "catalogPricing": {
+        "input": 0.08,
+        "output": 0.45
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "openai/gpt-5.6-luna",
+      "releaseDate": "2099-10-23",
+      "name": "[B · Nhẹ/rẻ] GPT-5.6 Luna (In:$0.10 | Out:$0.60 · Reasoning+vision rẻ nhất · khuyến nghị)",
+      "pricing": {
+        "input": 0.1,
+        "output": 0.6
+      },
+      "catalogPricing": {
+        "input": 0.1,
+        "output": 0.6
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "z-ai/glm-5.3-flash",
+      "releaseDate": "2099-10-22",
+      "name": "[B · Nhẹ/rẻ] GLM-5.3 Flash (In:$0.15 | Out:$0.50 · 1M ctx + vision giá rẻ · khuyến nghị)",
+      "pricing": {
+        "input": 0.15,
+        "output": 0.5
+      },
+      "catalogPricing": {
+        "input": 0.15,
+        "output": 0.5
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "moonshotai/kimi-k2.5",
+      "releaseDate": "2099-10-21",
+      "name": "[B · Nhẹ/rẻ] Kimi K2.5 (In:$0.285 | Out:$1.425 · Coding giá tốt · khuyến nghị)",
+      "pricing": {
+        "input": 0.285,
+        "output": 1.425
+      },
+      "catalogPricing": {
+        "input": 0.285,
+        "output": 1.425
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "x-ai/grok-build-0.1",
+      "releaseDate": "2099-10-20",
+      "name": "[B · Nhẹ/rẻ] Grok Build 0.1 (In:$0.50 | Out:$1.00 · Task agent nhanh)",
+      "pricing": {
+        "input": 0.5,
+        "output": 1.0
+      },
+      "catalogPricing": {
+        "input": 0.5,
+        "output": 1.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "nvidia/nemotron-3-ultra",
+      "releaseDate": "2099-10-19",
+      "name": "[B · Nhẹ/rẻ] Nemotron 3 Ultra (In:$0.50 | Out:$2.20 · Mạnh hơn Super)",
+      "pricing": {
+        "input": 0.5,
+        "output": 2.2
+      },
+      "catalogPricing": {
+        "input": 0.5,
+        "output": 2.2
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "openai/gpt-5.4-mini",
+      "releaseDate": "2099-10-18",
+      "name": "[B · Nhẹ/rẻ] GPT-5.4 Mini (In:$0.675 | Out:$4.05 · Nhẹ đủ dùng · khuyến nghị)",
+      "pricing": {
+        "input": 0.675,
+        "output": 4.05
+      },
+      "catalogPricing": {
+        "input": 0.675,
+        "output": 4.05
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "anthropic/claude-haiku-4.5",
+      "releaseDate": "2099-10-17",
+      "name": "[B · Nhẹ/rẻ] Claude Haiku 4.5 (In:$0.90 | Out:$4.50 · Claude rẻ nhất, nhanh)",
+      "pricing": {
+        "input": 0.9,
+        "output": 4.5
+      },
+      "catalogPricing": {
+        "input": 0.9,
+        "output": 4.5
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "moonshotai/kimi-k2.6",
+      "releaseDate": "2099-10-16",
+      "name": "[A · Đa dụng] Kimi K2.6 (In:$0.475 | Out:$2.00 · Long context)",
+      "pricing": {
+        "input": 0.475,
+        "output": 2.0
+      },
+      "catalogPricing": {
+        "input": 0.475,
+        "output": 2.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "x-ai/grok-4.6",
+      "releaseDate": "2099-10-15",
+      "name": "[A · Đa dụng] Grok 4.6 (In:$1.00 | Out:$3.00 · Agentic nhanh)",
+      "pricing": {
+        "input": 1.0,
+        "output": 3.0
+      },
+      "catalogPricing": {
+        "input": 1.0,
+        "output": 3.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "x-ai/grok-4.5",
+      "releaseDate": "2099-10-14",
+      "name": "[A · Đa dụng] Grok 4.5 (In:$1.00 | Out:$3.00 · Đa nhiệm ổn)",
+      "pricing": {
+        "input": 1.0,
+        "output": 3.0
+      },
+      "catalogPricing": {
+        "input": 1.0,
+        "output": 3.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "z-ai/glm-5",
+      "releaseDate": "2099-10-13",
+      "name": "[A · Đa dụng] GLM-5 (In:$1.00 | Out:$3.20 · Không vision)",
+      "pricing": {
+        "input": 1.0,
+        "output": 3.2
+      },
+      "catalogPricing": {
+        "input": 1.0,
+        "output": 3.2
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "openai/gpt-5.6-terra",
+      "releaseDate": "2099-10-12",
+      "name": "[A · Đa dụng] GPT-5.6 Terra (In:$1.00 | Out:$6.00 · Sustained context 1M · khuyến nghị)",
+      "pricing": {
+        "input": 1.0,
+        "output": 6.0
+      },
+      "catalogPricing": {
+        "input": 1.0,
+        "output": 6.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "z-ai/glm-5.1",
+      "releaseDate": "2099-10-11",
+      "name": "[A · Đa dụng] GLM-5.1 (In:$1.40 | Out:$4.40)",
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4
+      },
+      "catalogPricing": {
+        "input": 1.4,
+        "output": 4.4
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "z-ai/glm-5.2",
+      "releaseDate": "2099-10-10",
+      "name": "[A · Đa dụng] GLM-5.2 (In:$1.40 | Out:$4.40 · 1M ctx)",
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4
+      },
+      "catalogPricing": {
+        "input": 1.4,
+        "output": 4.4
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "z-ai/glm-5.3",
+      "releaseDate": "2099-10-09",
+      "name": "[A · Đa dụng] GLM-5.3 (In:$1.40 | Out:$4.40 · Coding / tiếng Việt tốt · khuyến nghị)",
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4
+      },
+      "catalogPricing": {
+        "input": 1.4,
+        "output": 4.4
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "anthropic/claude-sonnet-5",
+      "releaseDate": "2099-10-08",
+      "name": "[A · Đa dụng] Claude Sonnet 5 (In:$1.80 | Out:$9.00 · Agent + văn đỉnh, 1M ctx · khuyến nghị)",
+      "pricing": {
+        "input": 1.8,
+        "output": 9.0
+      },
+      "catalogPricing": {
+        "input": 1.8,
+        "output": 9.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "openai/gpt-5.4",
+      "releaseDate": "2099-10-07",
+      "name": "[A · Đa dụng] GPT-5.4 (In:$2.25 | Out:$13.50 · Đa dụng)",
+      "pricing": {
+        "input": 2.25,
+        "output": 13.5
+      },
+      "catalogPricing": {
+        "input": 2.25,
+        "output": 13.5
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "anthropic/claude-sonnet-4.6",
+      "releaseDate": "2099-10-06",
+      "name": "[A · Đa dụng] Claude Sonnet 4.6 (In:$2.70 | Out:$13.50)",
+      "pricing": {
+        "input": 2.7,
+        "output": 13.5
+      },
+      "catalogPricing": {
+        "input": 2.7,
+        "output": 13.5
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "anthropic/claude-opus-4.8",
+      "releaseDate": "2099-10-05",
+      "name": "[S · Flagship] Claude Opus 4.8 (In:$4.50 | Out:$22.50 · Reasoning cao cấp)",
+      "pricing": {
+        "input": 4.5,
+        "output": 22.5
+      },
+      "catalogPricing": {
+        "input": 4.5,
+        "output": 22.5
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "anthropic/claude-opus-5",
+      "releaseDate": "2099-10-04",
+      "name": "[S · Flagship] Claude Opus 5 (In:$4.50 | Out:$22.50 · Flagship reasoning)",
+      "pricing": {
+        "input": 4.5,
+        "output": 22.5
+      },
+      "catalogPricing": {
+        "input": 4.5,
+        "output": 22.5
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "openai/gpt-5.5",
+      "releaseDate": "2099-10-03",
+      "name": "[S · Flagship] GPT-5.5 (In:$4.50 | Out:$27.00)",
+      "pricing": {
+        "input": 4.5,
+        "output": 27.0
+      },
+      "catalogPricing": {
+        "input": 4.5,
+        "output": 27.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "openai/gpt-5.6-sol",
+      "releaseDate": "2099-10-02",
+      "name": "[S · Flagship] GPT-5.6 Sol (In:$4.50 | Out:$27.00 · Flagship OpenAI)",
+      "pricing": {
+        "input": 4.5,
+        "output": 27.0
+      },
+      "catalogPricing": {
+        "input": 4.5,
+        "output": 27.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "2-xkiro-max",
+      "id": "anthropic/claude-fable-5",
+      "releaseDate": "2099-10-01",
+      "name": "[S · Flagship] Claude Fable 5 (In:$9.00 | Out:$45.00 · Mạnh nhất)",
+      "pricing": {
+        "input": 9.0,
+        "output": 45.0
+      },
+      "catalogPricing": {
+        "input": 9.0,
+        "output": 45.0
+      },
+      "tags": []
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "cfp/zai-org/glm-5.2",
+      "releaseDate": "",
+      "name": "GLM-5.2 (Free - Cloudflare)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": [
+        "preset:fastest-free",
+        "preset:safe-minimal"
+      ]
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "cfp/moonshotai/kimi-k2.7-code",
+      "releaseDate": "",
+      "name": "Kimi K2.7 Code (Free - Cloudflare)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": [
+        "preset:pentest"
+      ]
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "cfp/nvidia/nemotron-3-120b-a12b",
+      "releaseDate": "",
+      "name": "Nemotron 3 120B (Free - Cloudflare)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "cfp/qwen/qwen3-30b-a3b-fp8",
+      "releaseDate": "",
+      "name": "Qwen3 30B A3B (Free - Cloudflare)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "cfp/openai/gpt-oss-120b",
+      "releaseDate": "",
+      "name": "GPT-OSS 120B (Free - Cloudflare)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "cfp/deepseek-ai/deepseek-v4-pro-0813",
+      "releaseDate": "",
+      "name": "DeepSeek V4 Pro (Free - Cloudflare)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": [
+        "preset:pentest"
+      ]
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "cfp/deepseek-ai/deepseek-v4-flash-0731",
+      "releaseDate": "",
+      "name": "DeepSeek V4 Flash (Free - Cloudflare)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": [
+        "preset:fastest-free"
+      ]
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "cfp/qwen/qwen2.5-coder-32b-instruct",
+      "releaseDate": "",
+      "name": "Qwen 2.5 Coder 32B (Free - Cloudflare)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "groq/qwen/qwen3.8-27b",
+      "releaseDate": "",
+      "name": "Qwen3.8 27B (Free - Groq)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": [
+        "preset:fastest-free",
+        "preset:safe-minimal"
+      ]
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "groq/openai/gpt-oss-120b",
+      "releaseDate": "",
+      "name": "GPT-OSS 120B (Free - Groq)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": [
+        "preset:fastest-free",
+        "preset:safe-minimal"
+      ]
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "groq/qwen/qwen3.6-27b",
+      "releaseDate": "",
+      "name": "Qwen3.6 27B (Free - Groq)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "gemini/gemini-3.1-flash-lite",
+      "releaseDate": "",
+      "name": "Gemini 3.1 Flash Lite (Free - 1M ctx)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "3-omniroute-free",
+      "id": "gemini/gemini-2.5-flash-8b-preview-05-20",
+      "releaseDate": "",
+      "name": "Gemini 2.5 Flash 8B (Free Daily)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "4-openrouter-free",
+      "id": "openrouter/inclusionai/ling-3.0-flash-sante:free",
+      "releaseDate": "",
+      "name": "Ling 3.0 Flash (Free - OpenRouter)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": [
+        "preset:fastest-free",
+        "preset:safe-minimal"
+      ]
+    },
+    {
+      "provider": "4-openrouter-free",
+      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "releaseDate": "",
+      "name": "Nemotron 3 Super 120B (Free - OpenRouter)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": [
+        "preset:fastest-free",
+        "preset:safe-minimal"
+      ]
+    },
+    {
+      "provider": "4-openrouter-free",
+      "id": "openrouter/cohere/north-mini-code:free",
+      "releaseDate": "",
+      "name": "North Mini Code (Free - OpenRouter)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": [
+        "preset:fastest-free"
+      ]
+    },
+    {
+      "provider": "4-openrouter-free",
+      "id": "openrouter/poolside/laguna-s-2.1:free",
+      "releaseDate": "",
+      "name": "Laguna S 2.1 (Free - OpenRouter)",
+      "pricing": null,
+      "catalogPricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "tags": [
+        "preset:fastest-free"
+      ]
+    },
+    {
+      "provider": "5-9router",
+      "id": "ollama/gpt-oss:120b",
+      "releaseDate": "",
+      "name": "GPT-OSS 120B (Free - 9Router)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "5-9router",
+      "id": "gemini/gemini-3.8-flash",
+      "releaseDate": "",
+      "name": "Gemini 3.8 Flash (Free - 9Router)",
+      "pricing": null,
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "deepseek-v4-flash-free",
+      "releaseDate": "",
+      "name": "DeepSeek V4 Flash Free (In:$0.00 | Out:$0.00 - Miễn phí)",
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "glm-5.3-flash-free",
+      "releaseDate": "",
+      "name": "GLM-5.3 Flash Free (In:$0.00 | Out:$0.00 - Miễn phí)",
+      "pricing": {
+        "input": 0.0,
+        "output": 0.0
+      },
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "gpt-5.4-mini",
+      "releaseDate": "",
+      "name": "GPT-5.4-Mini (In:$0.09 | Out:$0.51 - Rẻ nhất còn mạnh)",
+      "pricing": {
+        "input": 0.09,
+        "output": 0.51
+      },
+      "catalogPricing": null,
+      "tags": []
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "gpt-5.6-luna",
+      "releaseDate": "",
+      "name": "GPT-5.6 Luna (In:$0.11 | Out:$0.64 - Reasoning rẻ ổn định)",
+      "pricing": {
+        "input": 0.11,
+        "output": 0.64
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:fastest-paid",
+        "preset:pentest"
+      ]
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "deepseek-v4-flash",
+      "releaseDate": "",
+      "name": "DeepSeek V4 Flash (In:$0.14 | Out:$0.28 - Fast reasoning)",
+      "pricing": {
+        "input": 0.14,
+        "output": 0.28
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:fastest-paid"
+      ]
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "gpt-5.6-terra",
+      "releaseDate": "",
+      "name": "GPT-5.6 Terra (In:$0.27 | Out:$1.61 - Sustained session)",
+      "pricing": {
+        "input": 0.27,
+        "output": 1.61
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:thesis-writing"
+      ]
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "gemini-3.1-pro-preview",
+      "releaseDate": "",
+      "name": "Gemini 3.1 Pro (In:$0.29 | Out:$1.73 - 2M Context)",
+      "pricing": {
+        "input": 0.29,
+        "output": 1.73
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:thesis-writing"
+      ]
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "gemini-3.5-flash-lite",
+      "releaseDate": "",
+      "name": "Gemini 3.5 Flash Lite (In:$0.30 | Out:$2.50 - Rẻ, nhanh)",
+      "pricing": {
+        "input": 0.3,
+        "output": 2.5
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:fastest-paid",
+        "preset:thesis-writing"
+      ]
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "claude-haiku-4-5",
+      "releaseDate": "",
+      "name": "Claude Haiku 4.5 (In:$0.40 | Out:$2.00 - Nhanh)",
+      "pricing": {
+        "input": 0.4,
+        "output": 2.0
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:fastest-paid"
+      ]
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "deepseek-v4-pro",
+      "releaseDate": "",
+      "name": "DeepSeek V4 Pro (In:$0.435 | Out:$0.87 - Reasoning chuyên)",
+      "pricing": {
+        "input": 0.435,
+        "output": 0.87
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:fastest-paid",
+        "preset:pentest"
+      ]
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "claude-sonnet-5",
+      "releaseDate": "",
+      "name": "Claude Sonnet 5 (In:$0.50 | Out:$2.52 - Coding agent đỉnh)",
+      "pricing": {
+        "input": 0.5,
+        "output": 2.52
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:pentest",
+        "preset:thesis-writing"
+      ]
+    },
+    {
+      "provider": "6-teamoRouter",
+      "id": "glm-5.3",
+      "releaseDate": "",
+      "name": "GLM-5.3 (In:$1.40 | Out:$4.40 - Cao cấp)",
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4
+      },
+      "catalogPricing": null,
+      "tags": [
+        "preset:thesis-writing"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "fastest-free",
+      "path": "configs/presets/fastest-free.jsonc",
+      "modelCount": 8
+    },
+    {
+      "name": "fastest-paid",
+      "path": "configs/presets/fastest-paid.jsonc",
+      "modelCount": 5
+    },
+    {
+      "name": "pentest",
+      "path": "configs/presets/pentest.jsonc",
+      "modelCount": 5
+    },
+    {
+      "name": "safe-minimal",
+      "path": "configs/presets/safe-minimal.jsonc",
+      "modelCount": 8
+    },
+    {
+      "name": "thesis-writing",
+      "path": "configs/presets/thesis-writing.jsonc",
+      "modelCount": 5
+    }
+  ],
+  "stats": {
+    "providers": 6,
+    "models": 80,
+    "presets": 5
+  }
+}

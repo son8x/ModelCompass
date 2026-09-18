@@ -4,6 +4,47 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.6.0] — 2026-09-18 — Phase 3 hoàn tất (3.1–3.4)
+
+### Thêm
+- **3.1 ModelCompass CLI (`mc`)**: module PowerShell `modules/ModelCompass/`
+  (`ModelCompass.psd1` + `.psm1`, chỉ export `mc`) — map 17 lệnh (`sync`, `publish`,
+  `status`, `report`, `doctor`, `benchmark`, `export`, `help`, …), gọi script qua tiến
+  trình pwsh con (script `exit` không giết phiên opencode), `doctor` = check env bắt
+  buộc + TCP local services OmniRoute/9Router + validate production, `status` = validate
+  + so dev/prod, `benchmark` tự thêm `-Benchmark`; `ConvertTo-McCommandLine` giữ cờ,
+  bọc/escape giá trị an toàn. Shim `scripts/mc.ps1`. `tests/McCli.Tests.ps1` (11 test).
+- **3.2 Provider recipe cho người tự đóng góp**: `configs/provider-template/opencode.json`
+  (provider mẫu khai báo `provider.<id>`, `options.apiKey` = `{env:VAR}`, `models` có
+  `sortOrder`/`release_date`, ghi chú tiếng Việt trong `readme` model) + `docs/contributing-provider.md`
+  (quy ước tên id, ánh xạ catalog, recipe 7 bước, checklist CI). CI `validate.yml` thêm
+  step validate **mọi template** (project-templates + provider-template). `tests/Templates.Tests.ps1` (6 test).
+- **3.3 Model Bank**: `scripts/Export-ModelBank.ps1` (`Get-PricesFromName`, `Get-ModelBankPricing`
+  — giá ưu tiên catalog live, fallback giá trong `name`, tôn trọng strip tiền tố id gateway;
+  `New-ModelBank` — providers, models kèm pricing/catalogPricing/tags `preset:<tên>`, presets,
+  stats: modelCount/free/paid/tagSet, version 1.0.0) + `model-bank/schema.json` (JSON Schema
+  2020-12) + **artifact `model-bank/modelbank.json`** (6 provider · 80 model · 5 preset — hàm
+  xKiro 0 giá nhồi nhưng có catalog). `tests/ModelBank.Tests.ps1` (12 test).
+- **3.4 GitHub Pages docs**: `docs/site/` (Jekyll theme minima: `index.md` tra cứu
+  provider + presets, `models.md` bảng model giá/tác vụ — đọc `_data/modelbank.json` qua
+  `site.data.modelbank`) + `.github/workflows/pages.yml` (sinh model bank → `jekyll-build-pages`
+  → upload → deploy; bật Pages source = GitHub Actions). `tests/DocsSite.Tests.ps1` (4 test).
+
+### Changed
+- `scripts/Export-ModelBank.ps1`: đường dẫn preset/source config xuất ra là **tương đối**
+  repo (đồng bộ nhiều máy); truy cập property an toàn StrictMode (`PSObject.Properties['...']`)
+  — không còn `PropertyNotFoundException` khi model thiếu `release_date`/`name`.
+- `modules/ModelCompass/ModelCompass.psm1`: `ConvertTo-McCommandLine` nhận `$Args` rỗng
+  (không còn lỗi bind khi gọi lệnh không tham số).
+- `scripts/Test-Suite.ps1` giờ chạy **136 test** (103 → 136), pass toàn bộ.
+- `README.md`, `ROADMAP.md`: Phase 3 ✅ 4/4 hoàn thành 18/09/2026.
+
+### Ghi chú
+- Kết thúc **Phase 3** — toàn bộ ROADMAP Phase 0–3 đã hoàn thành. Docs site deploy sẵn
+  trên GitHub Pages sau khi bật `Settings → Pages → Source = GitHub Actions`.
+- `mc doctor` cần đúng key: `XTROUTER_API_KEY`, `OMNIROUTE_KEY`, `TEAMO_API_KEY`,
+  `NINE_ROUTER_API_KEY` và 2 dịch vụ local OmniRoute (20217) / 9Router (20128).
+
 ## [0.5.0] — 2026-09-18 — Phase 2 hoàn tất (2.2–2.6)
 
 ### Thêm
