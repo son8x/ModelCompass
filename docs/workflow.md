@@ -76,6 +76,7 @@ pwsh scripts\Add-SpendEntry.ps1 -Provider xkiro -Model 'openai/gpt-5.6-sol' `
     -PromptTokens 120000 -CompletionTokens 30000 -PriceIn 4.5 -PriceOut 27
 pwsh scripts\Get-SpendReport.ps1              # tổng hợp theo ngày/provider/model
 pwsh scripts\Get-SpendReport.ps1 -Month 2026-09 -Model deepseek -Report  # lọc + report md
+pwsh scripts\Test-ModelConnectivity.ps1 -UpdateStatus  # cập nhật STATUS.md "Trạng thái gần nhất"
 pwsh scripts\Prune-Backups.ps1 -DryRun        # xem sẽ xoá backup nào (repo + global)
 pwsh scripts\Prune-Backups.ps1                # giữ 10 bản mới nhất mỗi nơi
 pwsh scripts\Test-Suite.ps1                   # chạy toàn bộ test Pester

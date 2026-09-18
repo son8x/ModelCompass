@@ -33,9 +33,21 @@
 .PARAMETER Report
     Xuất report dạng Markdown vào reports\.
 
+.PARAMETER UpdateStatus
+    Cập nhật STATUS.md (repo root) với khối "Trạng thái gần nhất" sinh từ kết quả
+    probe — chèn/ghi đè giữa marker `<!-- START auto-status -->` / `<!-- END auto-status -->`.
+    Bán tự động: chỉ chạy khi có flag này.
+
+.PARAMETER StatusPath
+    Thay đổi đường dẫn STATUS.md (mặc định: repo root). Dùng cho test/demo.
+
+.PARAMETER SkipRun
+    Chỉ nạp định nghĩa function (dùng cho test dot-source), không chạy probe.
+
 .EXAMPLE
     PS scripts\Test-ModelConnectivity.ps1
     PS scripts\Test-ModelConnectivity.ps1 -Provider '6-teamoRouter' -Report
+    PS scripts\Test-ModelConnectivity.ps1 -UpdateStatus   # cập nhật STATUS.md
 #>
 [CmdletBinding()]
 param(
@@ -43,24 +55,14 @@ param(
     [string[]]$Provider,
     [string]$Model,
     [int]$TimeoutSeconds = 20,
-    [switch]$Report
+    [switch]$Report,
+    [switch]$UpdateStatus,
+    [string]$StatusPath,
+    [switch]$SkipRun
 )
 
 . (Join-Path $PSScriptRoot 'Common-Functions.ps1')
 $ProgressPreference = 'SilentlyContinue'
-
-if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
-    $ConfigPath = Join-Path (Get-RepoRoot) 'configs\development\opencode.jsonc'
-}
-if (-not (Test-Path -LiteralPath $ConfigPath -PathType Leaf)) {
-    Write-Fail "Không tìm thấy file: $ConfigPath"
-    exit 1
-}
-
-Write-Step "Test kết nối: $ConfigPath (timeout ${TimeoutSeconds}s)"
-$config = Get-ConfigContent $ConfigPath
-
-$results = [System.Collections.Generic.List[object]]::new()
 
 function Invoke-Probe {
     param([string]$Url, [string]$ModelId, [string]$ApiKey, [int]$TimeoutSeconds)
@@ -101,6 +103,101 @@ function Invoke-Probe {
         return [pscustomobject]@{ status = 'ERROR'; msg = $msg; code = 0 }
     }
 }
+
+function ConvertTo-StatusBlock {
+    <#
+    Sinh khối markdown "Trạng thái gần nhất" (giữa marker auto-status) từ kết quả probe.
+    Chạy được độc lập (hàm thuần) để test.
+    #>
+    param(
+        [Parameter(Mandatory)]$Results,
+        [datetime]$TestedAt = (Get-Date)
+    )
+    $lines = [System.Collections.Generic.List[string]]::new()
+    $lines.Add('<!-- START auto-status (Test-ModelConnectivity.ps1 -UpdateStatus) — KHÔNG sửa tay, script sẽ ghi đè -->')
+    $lines.Add("### Trạng thái gần nhất — $(Get-Date $TestedAt -Format 'yyyy-MM-dd HH:mm:ss')")
+    $lines.Add('')
+    $countParts = @()
+    foreach ($g in @($Results | Group-Object Status | Sort-Object Count -Descending)) {
+        $countParts += ("{0} {1}" -f $g.Name, $g.Count)
+    }
+    $lines.Add(('> {0}' -f ($countParts -join '  ·  ')))
+    $lines.Add('')
+    $lines.Add('| Provider | Model | Status | Phản hồi |')
+    $lines.Add('|---|---|---|---|')
+    foreach ($r in @($Results)) {
+        $lines.Add("| $($r.Provider) | $($r.Model) | **$($r.Status)** | $($r.Message) |")
+    }
+    $lines.Add('')
+    $lines.Add('<!-- END auto-status -->')
+    return @($lines)
+}
+
+function Update-StatusFile {
+    <#
+    Ghi/đè khối auto-status vào STATUS.md dựa trên marker.
+    Chưa có marker → chèn ngay sau dòng tiêu đề đầu tiên (dòng bắt đầu bằng '#'),
+    nếu không còn dòng nào thì chèn cuối file. Trả { Path, Action = insert|replace }.
+    #>
+    param(
+        [Parameter(Mandatory)][string]$StatusPath,
+        [Parameter(Mandatory)]$BlockLines
+    )
+    if (-not (Test-Path -LiteralPath $StatusPath -PathType Leaf)) {
+        throw "Không tìm thấy STATUS.md: $StatusPath"
+    }
+    $start = '<!-- START auto-status'
+    $end = '<!-- END auto-status -->'
+    $existing = Get-Content -LiteralPath $StatusPath -Encoding utf8
+    $fileLines = [System.Collections.Generic.List[string]]::new([string[]]$existing)
+
+    $iStart = -1; $iEnd = -1
+    for ($i = 0; $i -lt $fileLines.Count; $i++) {
+        if ($iStart -lt 0 -and $fileLines[$i].StartsWith($start, [System.StringComparison]::Ordinal)) { $iStart = $i }
+        if ($fileLines[$i].StartsWith($end, [System.StringComparison]::Ordinal)) { $iEnd = $i }
+    }
+
+    $out = [System.Collections.Generic.List[string]]::new()
+    if ($iStart -ge 0 -and $iEnd -ge $iStart) {
+        for ($i = 0; $i -lt $fileLines.Count; $i++) {
+            if ($i -eq $iStart) {
+                foreach ($b in $BlockLines) { $out.Add($b) }
+            }
+            if ($i -lt $iStart -or $i -gt $iEnd) { $out.Add($fileLines[$i]) }
+        }
+        $action = 'replace'
+    } else {
+        $insertAt = -1
+        for ($i = 0; $i -lt $fileLines.Count; $i++) {
+            if ($fileLines[$i] -match '^#') { $insertAt = $i + 1; break }
+        }
+        if ($insertAt -lt 0) { $insertAt = $fileLines.Count }
+        for ($i = 0; $i -le $fileLines.Count; $i++) {
+            if ($i -eq $insertAt) {
+                foreach ($b in $BlockLines) { $out.Add($b) }
+            }
+            if ($i -lt $fileLines.Count) { $out.Add($fileLines[$i]) }
+        }
+        $action = 'insert'
+    }
+    $out | Set-Content -LiteralPath $StatusPath -Encoding utf8
+    return [pscustomobject]@{ Path = $StatusPath; Action = $action }
+}
+
+if ($SkipRun) { return }
+
+if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
+    $ConfigPath = Join-Path (Get-RepoRoot) 'configs\development\opencode.jsonc'
+}
+if (-not (Test-Path -LiteralPath $ConfigPath -PathType Leaf)) {
+    Write-Fail "Không tìm thấy file: $ConfigPath"
+    exit 1
+}
+
+Write-Step "Test kết nối: $ConfigPath (timeout ${TimeoutSeconds}s)"
+$config = Get-ConfigContent $ConfigPath
+
+$results = [System.Collections.Generic.List[object]]::new()
 
 if ($null -eq $config.provider) {
     Write-Fail 'Cấu hình không có mục "provider".'
@@ -171,6 +268,21 @@ if ($Report) {
     }
     $lines | Set-Content -LiteralPath $file -Encoding utf8
     Write-Info "Report: $file"
+}
+
+if ($UpdateStatus) {
+    $statusFile = $StatusPath
+    if ([string]::IsNullOrWhiteSpace($statusFile)) {
+        $statusFile = Join-Path (Get-RepoRoot) 'STATUS.md'
+    }
+    try {
+        $block = ConvertTo-StatusBlock -Results $results -TestedAt (Get-Date)
+        $upd = Update-StatusFile -StatusPath $statusFile -BlockLines $block
+        Write-Info "STATUS.md — khối 'Trạng thái gần nhất' $($upd.Action) xong: $($upd.Path)"
+    } catch {
+        Write-Fail "Không cập nhật được STATUS.md: $($_.Exception.Message)"
+        exit 1
+    }
 }
 
 $bad = @('ERROR', 'DOWN', 'NOTFOUND', 'TIMEOUT')

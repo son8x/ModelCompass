@@ -33,11 +33,11 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 | Giai đoạn | Trạng thái | Tiến độ | Ghi chú |
 |---|---|---|---|
 | **Phase 0 — Vững nền móng** | ✅ | 6/6 (7/7 nhiệm vụ) | hoàn thành 17/09/2026 |
-| **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | 🔶 | 4/5 | đang làm — 1.1–1.3, 1.4 xong 17/09/2026 |
+| **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | ✅ | 5/5 | hoàn thành 17/09/2026 |
 | **Phase 2 — Cứng hoá & mở rộng** | ⬜ | 0/6 | khi có nhu cầu |
 | **Phase 3 — Hệ sinh thái mở** | ⬜ | 0/4 | khi có nhu cầu |
 
-**Next action đang chờ**: Phase 1 hạng mục 1.5 — `Test-ModelConnectivity.ps1 -Report` + cập nhật `STATUS.md` bán tự động.
+**Next action đang chờ**: Phase 2 hạng mục 2.1 — preset "safe-mode" (`configs/presets/safe-minimal.jsonc`).
 
 ---
 
@@ -106,7 +106,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 | 1.2 | **`Compare-Prices.ps1`** | So sánh giá (input/output) trong config vs live catalog → báo mức chênh, gợi ý cập nhật tên model (giá đang nhồi vào `name`) — có test Pester | P1 | M | ✅ |
 | 1.3 | **Báo cáo chi phí tổng hợp** | `Add-SpendEntry.ps1` ghi mỗi phiên (model, token in/out, $) vào `reports/spend.jsonl` (đa provider, mở rộng từ xKiro); `Get-SpendReport.ps1` tổng hợp theo ngày/provider/model, xuất bảng/`-Json`/`-Report` md — có test Pester | P1 | L | ✅ |
 | 1.4 | **Statusline đa quota** | `quota-common.js` tách logic chung; `xkiro-statusline.tsx` đọc `QUOTA_PROVIDERS` env (mặc định xkiro), render multi-segment "quota · xKiro free … · teamo chưa có …"; giữ env tương thích `XKIRO_STATUSBAR_*`; CI esbuild syntax-check pass | P1 | M | ✅ |
-| 1.5 | **Auto-update STATUS.md** | `Test-ModelConnectivity.ps1 -Report` sinh dòng "trạng thái gần nhất" → script cập nhật bảng `STATUS.md` bán tự động (flag `-UpdateStatus`) | P1 | M | ⬜ |
+| 1.5 | **Auto-update STATUS.md** | `Test-ModelConnectivity.ps1 -UpdateStatus` sinh khối "Trạng thái gần nhất" (marker auto-status) rồi chèn/ghi đè vào `STATUS.md` bán tự động; `-StatusPath` cho test/demo — có test Pester | P1 | M | ✅ |
 
 ### Phase 2 — Cứng hoá & mở rộng (tháng 1)
 
@@ -154,7 +154,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 ## 8. Gợi ý bước đi ngay (sau Phase 0)
 
-1. **Phase 1 (1.5)**: `Test-ModelConnectivity.ps1 -Report` + cập nhật `STATUS.md` bán tự động (P1/M — đã có 1.1–1.4).
+1. **Phase 2 (2.1)**: tạo preset `configs/presets/safe-minimal.jsonc` (P2 — đã xong 1.1–1.5).
 2. **Prune-Backups**: cài vào lịch (hoặc chạy thủ công hằng tuần) để giữ repo gọn.
 3. **Thực thi workflow mới**: trước publish chạy `Compare-Config`, sau publish chạy `Compare-Config -FailOnDiff` để xác nhận đồng bộ.
 4. **Kiểm `Restore-RunningConfig.ps1 -List`** trên máy thật để xác nhận state file (sentry) hiển thị đúng.

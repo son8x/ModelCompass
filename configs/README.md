@@ -54,7 +54,7 @@ development/  ──Publish-->  production/  ──Install-->  ~/.config/opencod
 ## Các script liên quan (xem `../scripts/`)
 
 - `Test-ModelCompassConfig.ps1` — validate cú pháp/cấu trúc JSON(C).
-- `Test-ModelConnectivity.ps1` — ping thực tế từng provider/model.
+- `Test-ModelConnectivity.ps1` — ping thực tế từng provider/model (`-UpdateStatus` tự ghi khối "Trạng thái gần nhất" vào `STATUS.md`).
 - `Publish-Config.ps1` — promote `development` → `production` (sau validate).
 - `Install-Config.ps1` — cài `production` vào thư mục global opencode (ghi state file).
 - `Restore-RunningConfig.ps1` — khôi phục backup nếu có sự cố (xem state + hash).

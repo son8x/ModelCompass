@@ -4,6 +4,24 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.3.4] — 2026-09-17 — Phase 1.5: auto-update STATUS.md (bán tự động)
+
+### Thêm
+- `scripts/Test-ModelConnectivity.ps1`: cờ `-UpdateStatus` sinh khối **"Trạng thái gần nhất"**
+  từ kết quả probe (marker `<!-- START/END auto-status -->`) rồi chèn/ghi đè vào `STATUS.md`;
+  `-StatusPath` cho test/demo; `-SkipRun` để dot-source test.
+- `tests/StatusUpdate.Tests.ps1` (5 test) — `ConvertTo-StatusBlock` + `Update-StatusFile`
+  (insert khi chưa có marker, replace đúng 1 khối, file thiếu → throw).
+
+### Changed
+- `Test-ModelConnectivity.ps1` cấu trúc lại: các hàm thuần đặt phía trên điểm chạy chính.
+- `scripts/Test-Suite.ps1` giờ chạy 73 test (68 → 73), pass toàn bộ.
+
+### Ghi chú
+- Demo 17/09/2026 trên config tạm: 3 dòng SKIP (thiếu key) → STATUS.md insert đúng 1 khối
+  sau tiêu đề, giữ nguyên nội dung gốc; chạy lần 2 → replace (không nhân đôi khối).
+- Kết thúc **Phase 1** — Phase 2 tiếp theo là preset "safe-mode".
+
 ## [0.3.3] — 2026-09-17 — Phase 1.4: statusline đa provider (quota bar)
 
 ### Thêm
