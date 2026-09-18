@@ -4,6 +4,20 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.4.0] — 2026-09-17 — Phase 2.1: preset "safe-mode"
+
+### Thêm
+- `configs/presets/safe-minimal.jsonc` — preset cứu hộ: 3 provider free đã test lâu
+  (xKiro free remote + OmniRoute/OpenRouter qua local router), **8 model toàn bộ nằm
+  trong catalog live 17/09/2026** (cố tình né 5 model `deepseek*` đang vắng trong
+  `GET /v1/models`) — 0 chi phí, kèm hướng dẫn rollback nhanh trong comment.
+
+### Changed
+- `configs/README.md`: bảng presets + mục "Cứu hộ nhanh".
+
+### Ghi chú
+- Bắt đầu **Phase 2** (cứng hoá & mở rộng) — Phase 1 đã hoàn tất 5/5 ở 0.3.x.
+
 ## [0.3.4] — 2026-09-17 — Phase 1.5: auto-update STATUS.md (bán tự động)
 
 ### Thêm

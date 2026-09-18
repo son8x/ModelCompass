@@ -34,10 +34,10 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 |---|---|---|---|
 | **Phase 0 — Vững nền móng** | ✅ | 6/6 (7/7 nhiệm vụ) | hoàn thành 17/09/2026 |
 | **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | ✅ | 5/5 | hoàn thành 17/09/2026 |
-| **Phase 2 — Cứng hoá & mở rộng** | ⬜ | 0/6 | khi có nhu cầu |
+| **Phase 2 — Cứng hoá & mở rộng** | 🔶 | 1/6 | đang làm — 2.1 xong 17/09/2026 |
 | **Phase 3 — Hệ sinh thái mở** | ⬜ | 0/4 | khi có nhu cầu |
 
-**Next action đang chờ**: Phase 2 hạng mục 2.1 — preset "safe-mode" (`configs/presets/safe-minimal.jsonc`).
+**Next action đang chờ**: Phase 2 hạng mục 2.2 — per-project config (template + OPENCODE_CONFIG hook tầng).
 
 ---
 
@@ -112,7 +112,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 | # | Hạng mục | Mô tả | Ưu tiên | Kích thước |
 |---|---|---|---|---|
-| 2.1 | **Preset "safe-mode"** | `configs/presets/safe-minimal.jsonc`: 2–3 provider free đã test lâu + rollback nhanh — dùng khi nghi ngờ config mới gây lỗi | P1 | S |
+| 2.1 | **Preset "safe-mode"** | `configs/presets/safe-minimal.jsonc`: 3 provider free đã test lâu (8 model toàn nằm trong catalog live), chỉ dùng khi nghi ngờ config mới gây lỗi + hướng dẫn rollback nhanh | P1 | S | ✅ |
 | 2.2 | **Per-project config** | Tài liệu + template `opencode.json` cho từng project (thesis/pentest/code) dùng `OPENCODE_CONFIG` hook tầng, không đụng global | P2 | M |
 | 2.3 | **Phân cụm sort-order** | Tách "khoá sắp xếp" ra 1 quy ước dùng chung (helper tạo key 2099 từ nhóm/giá) để thêm model không phải chỉnh tay date rải rác | P2 | M |
 | 2.4 | **Scheduled -report trên CI** | Cron GitHub Actions chạy `Test-ModelCompassConfig` + (không cần mạng local) báo cáo lệch dev/prod + size backup — issue tự động | P2 | S |
@@ -154,7 +154,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 
 ## 8. Gợi ý bước đi ngay (sau Phase 0)
 
-1. **Phase 2 (2.1)**: tạo preset `configs/presets/safe-minimal.jsonc` (P2 — đã xong 1.1–1.5).
+1. **Phase 2 (2.2)**: tạo template + docs per-project config (P2 — đã xong 2.1).
 2. **Prune-Backups**: cài vào lịch (hoặc chạy thủ công hằng tuần) để giữ repo gọn.
 3. **Thực thi workflow mới**: trước publish chạy `Compare-Config`, sau publish chạy `Compare-Config -FailOnDiff` để xác nhận đồng bộ.
 4. **Kiểm `Restore-RunningConfig.ps1 -List`** trên máy thật để xác nhận state file (sentry) hiển thị đúng.

@@ -70,10 +70,15 @@ development/  ──Publish-->  production/  ──Install-->  ~/.config/opencod
 
 | Preset | Dùng cho |
 |--------|----------|
+| `presets/safe-minimal.jsonc` | Chế độ **cứu hộ** khi nghi ngờ config mới gây lỗi: 3 provider free tối thiểu, toàn model đã xác minh trong catalog (0 chi phí) |
 | `presets/fastest-free.jsonc` | Model miễn phí, tốc độ cao (code/sửa lỗi hằng ngày) |
 | `presets/fastest-paid.jsonc` | Model trả phí giá rẻ, hiệu năng cao |
 | `presets/thesis-writing.jsonc` | Viết luận văn (văn phong hàn lâm, tiếng Việt) |
 | `presets/pentest.jsonc` | Pentest / bảo mật (reasoning, phân tích mã) |
+
+Cứu hộ nhanh (`safe-minimal`): copy preset vào `development/opencode.jsonc` → `Publish-Config.ps1`
+→ `Install-Config.ps1` (tự backup bản đang chạy) → restart opencode. Nhanh hơn:
+`Restore-RunningConfig.ps1 -List` về backup gần nhất.
 
 Cách dùng preset: copy block `"provider"` (hoặc từng entry) mong muốn vào
 `development/opencode.jsonc` → validate → test → publish.

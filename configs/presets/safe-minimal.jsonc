@@ -1,0 +1,67 @@
+{
+  // ─────────────────────────────────────────────────────────────
+  //  PRESET: SAFE-MINIMAL  (chế độ "safe-mode" / cứu hộ)
+  //  👉 Dùng khi NGHI NGỜ config mới gây lỗi (lỗi cú pháp mới,
+  //     model vừa bị đổi/404, provider local chết…): đưa về bộ
+  //     FREE tối thiểu đã chạy ổn định lâu ngày, KHÔNG có model
+  //     trả phí (0 rủi ro chi phí).
+  //  Cách dùng (rollback nhanh):
+  //    1) backup sẽ tự tạo khi Install — chỉ cần:
+  //         pwsh scripts\Install-Config.ps1   (sau khi copy preset
+  //         vào development\opencode.jsonc + publish)
+  //       HOẶC nhanh hơn: dùng Restore-RunningConfig.ps1 -List để
+  //       về bản backup gần nhất.
+  //    2) Restart opencode → nếu /model bình thường là config mới
+  //       có vấn đề, quay lại điều tra model/options mới.
+  //  Lưu ý:
+  //    - Chỉ dùng model có trong catalog live 17/09/2026 (né 5 model
+  //      deepseek* đang vắng trong GET /v1/models — xem Get-ProviderCatalog).
+  //    - 1-xkiro-free chạy remote (chỉ cần XTROUTER_API_KEY); nhánh
+  //      OmniRoute/OpenRouter cần local service cổng 20217 đang bật.
+  // ─────────────────────────────────────────────────────────────
+  "$schema": "https://opencode.ai/config.json",
+
+  // Model mặc định: miniMax M3 free (mạnh + vision, catalog OK).
+  "model": "1-xkiro-free/minimax/minimax-m3:free",
+
+  "provider": {
+    "1-xkiro-free": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "1. xKiro Free (Safe)",
+      "options": {
+        "baseURL": "https://api.xkiro.com/v1",
+        "apiKey": "{env:XTROUTER_API_KEY}"
+      },
+      "models": {
+        "minimax/minimax-m3:free": { "name": "MiniMax M3 (Safe - vision + reasoning, catalog OK)" },
+        "minimax/minimax-m2.7:free": { "name": "MiniMax M2.7 (Safe - đa dụng cân bằng)" },
+        "mistralai/mistral-large-2512": { "name": "Mistral Large 2512 (Safe - viết/paraphrase · 256K)" }
+      }
+    },
+    "3-omniroute-free": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "3. OmniRoute Free (Safe)",
+      "options": {
+        "baseURL": "http://127.0.0.1:20217/v1",
+        "apiKey": "{env:OMNIROUTE_KEY}"
+      },
+      "models": {
+        "cfp/zai-org/glm-5.2": { "name": "GLM-5.2 (Safe - Cloudflare, mạnh)" },
+        "groq/qwen/qwen3.8-27b": { "name": "Qwen3.8 27B (Safe - Groq cực nhanh)" },
+        "groq/openai/gpt-oss-120b": { "name": "GPT-OSS 120B (Safe - Groq)" }
+      }
+    },
+    "4-openrouter-free": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "4. OpenRouter Free (Safe)",
+      "options": {
+        "baseURL": "http://127.0.0.1:20217/v1",
+        "apiKey": "{env:OMNIROUTE_KEY}"
+      },
+      "models": {
+        "openrouter/inclusionai/ling-3.0-flash-sante:free": { "name": "Ling 3.0 Flash (Safe - nhanh, đa năng)" },
+        "openrouter/nvidia/nemotron-3-super-120b-a12b:free": { "name": "Nemotron 3 Super 120B (Safe - mạnh nhất nhóm)" }
+      }
+    }
+  }
+}
