@@ -39,10 +39,24 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 | **Phase 1 — Sống hoá dữ liệu & giám sát chi phí** | ✅ | 5/5 | hoàn thành 17/09/2026 |
 | **Phase 2 — Cứng hoá & mở rộng** | ✅ | 6/6 | hoàn thành 18/09/2026 |
 | **Phase 3 — Hệ sinh thái mở** | ✅ | 4/4 | hoàn thành 18/09/2026 |
+| **Phase 4 — Vòng kín tự động hoá** | ⬜ | 0/5 | khi có nhu cầu |
 
-**Next action đang chờ**: sau Phase 3, các trục mở rộng theo định hướng §4
-(dữ liệu sống hơn: scan giá tự động trên CI, plugin dùng chung rộng hơn) —
-mỗi hạng mục chỉ bắt đầu khi có nhu cầu thật.
+**Next action đang chờ**: Phase 4 — auto price sync + spend log hook + CI backup prune.
+
+---
+
+## 2b. Đánh giá tổng thể Phase 3 (18/09/2026)
+
+| Khía cạnh | Đánh giá | Ghi chú |
+|---|---|
+| Kiến trúc quy trình | ⭐ Rất tốt | 2 giai đoạn dev → prod + backup/rollback, nguyên tắc bất biến rõ ràng |
+| Bảo mật key | ⭐ Rất tốt | `{env:...}` chuẩn duy nhất, `.env.local` bị ignore, CI quét rò rỉ |
+| Chất lượng tooling | 👍 Tốt | 19 script PowerShell rõ ràng, `mc` CLI 17 lệnh, có mã thoát, hỗ trợ non-interactive |
+| Tài liệu | 👍 Tốt | pricing, recommendations, workflow, STATUS, contributing-provider, per-project, GitHub Pages |
+| Kiểm thử tự động | 🚧 Đạt 136 test | CI chạy Pester đủ; vẫn còn gap (price auto-sync, spend hook, coverage tool) |
+| Phiên bản hoá | ✅ Đã cải thiện | CHANGELOG 0.6.0 đúng semver sau Phase 3 |
+
+**Kết luận**: Phase 3 hoàn thành tốt. Ưu tiên tiếp theo: **tự động hoá price sync** (catalog ≤48h) và **hook spend log** (mỗi phiên để lại dòng log tự động, không thủ công).
 
 ---
 
@@ -133,6 +147,16 @@ mỗi hạng mục chỉ bắt đầu khi có nhu cầu thật.
 | 3.3 | **Export sang dạng dùng chung** | Sinh `configs/production/opencode.json` + `presets` thành "model bank" JSON có schema, để các công cụ khác (đồng bộ nhiều máy) tiêu thụ | P2 | L | ✅ `scripts/Export-ModelBank.ps1` + `model-bank/schema.json`; test ModelBank 12 |
 | 3.4 | **GitHub Pages docs** | Dựng trang kubey đọc `docs/` làm "nơi tra cứu model theo giá/tác vụ" | P2 | M | ✅ `docs/site/` Jekyll + `.github/workflows/pages.yml`; test DocsSite 4 |
 
+### Phase 4 — Vòng kín tự động hoá (khi cần)
+
+| # | Hạng mục | Mô tả | Ưu tiên | Kích thước | Trạng thái |
+|---|---|---|---|---|---|
+| 4.1 | **Auto price-sync CI** | `compare-prices.yml` (hoặc step trong `validate.yml`): chạy `Compare-Prices.ps1 -FailOnDiff` mỗi push `configs/`, `docs/catalogs/` — exit 1 nếu giá lệch ≥1% → báo trong CI log. Catalog ≤48h trước mỗi publish (CI tự kéo catalog mới nếu cũ >48h). | P1 | M | ⬜ chưa bắt đầu |
+| 4.2 | **Spend log hook tự động** | Wrapper `mc run <model> <prompt>` — gọi provider thật, tự động ghi `Add-SpendEntry` sau mỗi phiên (token đếm từ response `usage`). HOẶC: plugin middleware hook vào opencode transcript để trigger. Kết quả: mỗi phiên trả phí để lại 1 dòng trong `reports/spend.jsonl` mà không cần chạy tay. | P1 | L | ⬜ chưa bắt đầu |
+| 4.3 | **CI Prune-Backups schedule** | Thêm step trong `report-drift.yml` (hoặc workflow riêng `prune-backups.yml`) chạy định kỳ (2 tuần/lần) — gọi `Prune-Backups.ps1 -WhatIf:$false` để xoá backup cũ (giữ 10 bản gần nhất mỗi loại). | P2 | S | ⬜ chưa bắt đầu |
+| 4.4 | **Coverage tool + threshold gate** | Tích hợp `Invoke-Pester -Coverage` trong `Test-Suite.ps1` để đo % dòng lệnh được phủ; ghi ra `reports/coverage.json`. CI `validate.yml` chặn nếu coverage < 60% (P0: `Common-Functions.ps1`, `Test-ConfigFile`, `Get-ConfigDiff` ≥80%; P1: toàn bộ scripts ≥60%). | P2 | M | ⬜ chưa bắt đầu |
+| 4.5 | **`mc export` trigger CI on catalog push** | Khi `docs/catalogs/*.json` thay đổi (sau `mc sync`), tự động kích hoạt `pages.yml` để rebuild + deploy docs site (GitHub Actions tự động detect dependency graph; HOẶC thêm `workflow_run` trigger). Kết quả: docs site luôn có dữ liệu catalog mới nhất mà không cần push giả. | P2 | M | ⬜ chưa bắt đầu |
+
 ---
 
 ## 6. KPI đề xuất (đo mức độ hoàn thiện)
@@ -157,13 +181,16 @@ mỗi hạng mục chỉ bắt đầu khi có nhu cầu thật.
 
 ---
 
-## 8. Gợi ý bước đi ngay (sau Phase 0)
+## 8. Gợi ý bước đi ngay (sau Phase 3)
 
-1. **Phase 2 (2.2)**: tạo template + docs per-project config (P2 — đã xong 2.1).
-2. **Prune-Backups**: cài vào lịch (hoặc chạy thủ công hằng tuần) để giữ repo gọn.
-3. **Thực thi workflow mới**: trước publish chạy `Compare-Config`, sau publish chạy `Compare-Config -FailOnDiff` để xác nhận đồng bộ.
-4. **Kiểm `Restore-RunningConfig.ps1 -List`** trên máy thật để xác nhận state file (sentry) hiển thị đúng.
+Sau khi Phase 3 hoàn thành, thứ tự ưu tiên:
+
+1. **Phase 4.1 (P1)**: bật auto price-sync CI — mỗi push `configs/` → `Compare-Prices -FailOnDiff` → tránh giá cũ trong `name` gây hiểu lầm.
+2. **Phase 4.2 (P1)**: triển khai spend log hook tự động — mỗi phiên trả phí để lại dòng log mà không cần chạy tay `Add-SpendEntry`.
+3. **`Restore-RunningConfig.ps1 -List`**: chạy thử trên máy thật để xác nhận state file + hash tracking hoạt động đúng.
+4. **Bật GitHub Pages** (`Settings → Pages → Source = GitHub Actions`) rồi trigger `pages.yml` lần đầu để docs site lên live.
+5. **Phase 4.3 + 4.4 + 4.5**: khi nào repo phình backup hoặc cần coverage gate hoặc docs tự update.
 
 ---
 
-*Sinh bởi review tổng thể ModelCompass — ngày 17/09/2026. Cập nhật file này mỗi khi đánh giá lại định hướng.*
+*Sinh bởi review tổng thể ModelCompass — ngày 17/09/2026. Cập nhật Phase 4 ngày 18/09/2026.*
