@@ -4,6 +4,24 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.3.3] — 2026-09-17 — Phase 1.4: statusline đa provider (quota bar)
+
+### Thêm
+- `.opencode/plugins-xkiro/quota-common.js` — module chung: `activeProviders()`
+  (đọc `QUOTA_PROVIDERS`, mặc định `xkiro`), `providerDir(name)`,
+  `createQuotaStore(name)`, `xkiroKey()`, `summarizeXKiro(data)`.
+- `.opencode/plugins-xkiro/xkiro-statusline.tsx` — refactor thành **multi-provider quota bar**:
+  render "quota · xKiro free … · provider chưa có …"; tổng tone worst-case;
+  env compat `XKIRO_STATUSBAR_*` giữ nguyên.
+
+### Changed
+- CI (`validate.yml`) tự động kiểm `quota-common.js` khi loop `node --check`.
+
+### Ghi chú
+- `xkiro-usage.js` (server plugin) giữ nguyên — mới chỉ xKiro có endpoint quota thật;
+  provider khác fallback "chưa có quota API" (màu trắng, không phải lỗi).
+- Không thay đổi bản đồ cache cũ của xKiro (`~/.cache/xkiro`) nên không cần migrate.
+
 ## [0.3.2] — 2026-09-17 — Phase 1.3: báo cáo chi phí tổng hợp (đa provider)
 
 ### Thêm

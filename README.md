@@ -111,9 +111,10 @@ nằm trong `.opencode/plugins-xkiro/`:
 
 | File | Loại | Vai trò |
 |---|---|---|
-| `xkiro-usage.js` | Server plugin | Poll hạn mức định kỳ, ghi chuỗi `xKiro · free … · burst … · budget …` vào `opencode.log`, toast cảnh báo khi vượt ngưỡng |
-| `xkiro-statusline.tsx` | TUI plugin (slot `app_bottom`) | Status bar cuối màn hình hiển thị hạn mức; vàng ≥90%, đỏ khi hết |
+| `xkiro-usage.js` | Server plugin | Poll hạn mức định kỳ (riêng xKiro), ghi chuỗi `xKiro · free … · burst … · budget …` vào `opencode.log`, toast cảnh báo khi vượt ngưỡng |
+| `xkiro-statusline.tsx` | TUI plugin (slot `app_bottom`) | Status bar **multi-provider quota** (đọc `QUOTA_PROVIDERS`); xKiro hiển thị free/burst/budget/wallet; provider khác hiện "chưa có quota API" nếu endpoint chưa hỗ trợ; vàng ≥90%, đỏ khi hết |
 | `xkiro-store.js` | Module dùng chung | Cache + file lock để **mọi cửa sổ opencode** dùng chung 1 số liệu, chỉ 1 tiến trình gọi mạng |
+| `quota-common.js` | Module dùng chung (Phase 1.4) | Tách logic: danh sách provider (`QUOTA_PROVIDERS`), cache dir, tạo store per-provider, format hiển thị xKiro — dùng bởi statusline, có thể mở rộng cho usage plugin sau này |
 
 **Cài đặt** (script `Install-Config.ps1` đã sao 3 file vào `~/.config/opencode/lib/`):
 đăng ký trong mảng `plugin` của `opencode.json` global:
@@ -137,6 +138,9 @@ nằm trong `.opencode/plugins-xkiro/`:
 | `XKIRO_USAGE_TTL` | 60 | TTL cache dùng chung (giây) |
 | `XKIRO_USAGE_CACHE_DIR` | `~/.cache/xkiro` | nơi lưu `usage.json` |
 | `XKIRO_USAGE_DISABLE` / `XKIRO_STATUSBAR_DISABLE` | — | tắt server plugin / status bar |
+| `QUOTA_PROVIDERS` | `xkiro` | danh sách provider hiển thị trên status bar (cách nhau dấu phẩy, vd `xkiro,teamo`) |
+| `QUOTA_STATUSBAR_DISABLE` / `QUOTA_STATUSBAR_RENDER_MS` / `QUOTA_STATUSBAR_WARN_PCT` | — / 5000 / 90 | tương đương `XKIRO_STATUSBAR_*`, ưu tiên đọc trước (status bar) |
+| `QUOTA_CACHE_DIR` | `~/.cache/quota` | cache dir cho provider ngoài xKiro (xKiro vẫn dùng `XKIRO_USAGE_CACHE_DIR` / `~/.cache/xkiro`) |
 
 **Bảo mật:** plugin chỉ đọc endpoint `/v1/usage` (miễn phí) — **không** in hay lưu
 `XTROUTER_API_KEY`; key chỉ được đọc từ biến môi trường khi gọi model.
