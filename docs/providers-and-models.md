@@ -149,8 +149,8 @@ opencode dùng `release_date` của model làm **khoá sắp xếp chính** tron
 (model có `release_date` LỚN hơn hiện TRƯỚC). Vì field này **không hiển thị ở bất kỳ đâu trên UI**,
 ta dùng nó làm "khoá sắp xếp tổng hợp" — 2 provider xKiro hiện tại đã áp dụng:
 
-- `1-xkiro-free` — 24 model, thứ tự **theo độ mạnh giảm dần** (DeepSeek V4 Pro trên cùng), `release_date` từ `2099-12-31` giảm dần → `2099-12-08`. Tên model ghi chú **thế mạnh/lĩnh vực** (thay cho chữ "Free" cũ), đối chiếu capabilities xKiro 17/09/2026. Model "đang 503 tạm": `gpt-5.3-codex-spark`, `sensenova-6.8-flash-lite`.
-- `2-xkiro-max` — 25 model, hiển thị **theo nhóm sức mạnh** (rẻ → mạnh: `[B] Nhẹ/rẻ` → `[A] Mạnh đa dụng` → `[S] Flagship`), trong mỗi nhóm **giá input tăng dần** (rẻ trước). `release_date` từ `2099-10-25` giảm dần → `2099-10-01`. Tag nhóm + giá nằm ngay trong `name` để nhận biết model **thay thế được cho nhau** và giá khi chọn. Thành phần nhóm: `[B]` = Nemotron Nano/Super/Ultra, Luna, GLM-5.3 Flash, Kimi K2.5, Grok Build, GPT-5.4 Mini, Haiku 4.5; `[A]` = Kimi K2.6, Grok 4.6/4.5, GLM-5/5.1/5.2/5.3, GPT-5.6 Terra, GPT-5.4, Claude Sonnet 5/4.6; `[S]` = Opus 4.8/5, GPT-5.5/Sol, Fable 5. Giá `In/Out` đối chiếu `GET /v1/models` xKiro 17/09/2026. Loại khỏi danh sách: `gpt-6-astra`, `claude-fable-5-1` (API khai tier=paid nhưng thực tế cần gói ≥ Ultra, bị 403 trên gói Max).
+- `1-xkiro-free` — **42 model free** (catalog `GET /v1/models` xKiro 25/09), thứ tự **theo độ mạnh giảm dần** (Qwen3.8 Max trên cùng), `release_date` từ `2099-12-31` giảm dần → `2099-11-20`. Thành phần: Qwen (19: 3.x/3.5/3.6/3.7/3.8, coder/vl/omni), DeepSeek (5, xKiro đưa lại 25/09: `v4-pro`, `v4-flash`, `v4.1-flash:free`, `v3.2`, `chat-v3.1`), MiniMax (8: M2→M3), Mistral (8: Mistral Large 3, Medium 3.5, Small 4, Codestral, Devstral, Ministral 14B/8B/3B), SenseNova (2: 6.8/6.7). Đã gỡ `gpt-5.3-codex-spark` (xKiro gỡ khỏi tier free — HTTP 404). Đang lỗi phía xKiro (HTTP 500, 21/09): `minimax-m3:free`, `minimax-m2.7:free`, `minimax-m2.5-highspeed:free`.
+- `2-xkiro-max` — **46 model dùng được trên gói Max** (probe thực tế 21/09), hiển thị **theo 4 nhóm sức mạnh** đi từ rẻ-nhanh → mạnh nhất: `[L] Nhẹ·Nhanh·Rẻ` → `[B] Đa dụng giá tốt` → `[A] Mạnh đa dụng` → `[S] Flagship`. `release_date` từ `2099-10-25` giảm dần → `2099-09-10`. Tag nhóm ngay trong `name` để nhận biết model **cùng tầng / thay thế được cho nhau**. Thành phần nhóm: `[L]` = Nemotron 3 Super/Nano/Nano-Omni, GPT-5.4 Mini, GPT-5.6 Luna, Haiku 4.5, GLM-5.3 Flash/5-Turbo/4.5-Air/AirX/4.5V/4.6V-Flash/4.6V-FlashX/5V-Turbo, Gemini 2.5 Flash/3 Flash; `[B]` = Nemotron 3 Ultra, Llama-3.3-Nemotron-49B, Gemini 2.5 Pro, GLM-4.5/4.5-X/4.6/4.6V/4.7/4.7-Flash/4.7-FlashX/5/5.1/5.2; `[A]` = Gemini 3.1 Pro/3.5-Flash/3.6-Flash/3.7-Flash/3.8-Flash, GPT-5.6 Terra, GPT-5.4, Claude Sonnet 4.6/5, GLM-5.3; `[S]` = Claude Opus 4.6/4.7/4.8/5, Claude Fable 5, GPT-5.5, GPT-5.6 Sol. **Tên hiển thị ghi giá đầy đủ `In/Out` (USD/1M token) lấy từ catalog live 21/09** — trên gói Max các model này tính theo allowance $264/tuần (không trừ per-token) nên giá dùng để ước lượng khi nạp thêm wallet. **Đã loại 27 model 403** (Kimi/Grok/DeepSeek/Qwen-premium/MiniMax-premium/Tencent/Xiaomi/`gpt-6-astra`/`claude-fable-5-1` — tính wallet hoặc cần gói ≥ Ultra) + 4 model đang lỗi tạm (ghi tag ⚠️): `gpt-5.5` (ERR), `gpt-5.6-sol` (500), `nemotron-3-nano`, `llama-3.3-nemotron-super-49b` (410).
 
 **Quy ước đặt `release_date` tổng hợp khi cần kiểm soát thứ tự model:**
 
@@ -196,27 +196,26 @@ Helper tránh trùng key bằng `-Exclude` (tự động nạp key sẵn có tro
 > **Lưu ý**: catalog `GET /v1/models` **không có field availability** → không thể lọc trước khi chọn, phải dựa retry + fallback. Lỗi là **thoáng qua** (1 mình dùng thử lại sau vài giây thường OK). Probe snapshot 17/09/2026: `gpt-5.6-terra`/`gpt-5.6-luna` `500`, `kimi-k2.5` `429`; `glm-5.3`, `sonnet-5`, `gpt-5.5`, `opus-5`, `haiku-4.5` OK.
 > **Quy tắc chọn**: ưu tiên (1) retry lại trong ~5–10s, (2) chuyển **Fallback cùng tầng** (giữ nguyên mức chất lượng, giá tương đương), (3) giảm chi phí → **Backup rẻ (B)**, (4) cần sức mạnh thật và chấp nhận giá → **Nâng cấp (S)**.
 
-| Model A (chính) | Fallback cùng tầng (A) | Backup rẻ (B) | Nâng cấp (S) |
+| Model chính (tầng chọn) | Fallback cùng tầng | Backup rẻ hơn | Nâng cấp mạnh hơn |
 |---|---|---|---|
-| `kimi-k2.6` | `grok-4.6` | `glm-5.3-flash` / `kimi-k2.5` | `gpt-5.5` |
-| `grok-4.6` | `grok-4.5` | `gpt-5.6-luna` | `gpt-5.6-sol` |
-| `grok-4.5` | `grok-4.6` | `glm-5.3-flash` | `gpt-5.6-sol` |
-| `glm-5` | `glm-5.1` / `glm-5.2` | `glm-5.3-flash` | `gpt-5.5` |
-| `gpt-5.6-terra` | `grok-4.6` / `glm-5.3` | `gpt-5.6-luna` | `gpt-5.6-sol` |
-| `glm-5.1` | `glm-5.2` / `glm-5.3` | `glm-5.3-flash` | `gpt-5.5` |
-| `glm-5.2` | `glm-5.3` | `glm-5.3-flash` | `gpt-5.5` |
-| `glm-5.3` | `claude-sonnet-5` / `grok-4.6` | `gpt-5.6-luna` / `glm-5.3-flash` | `claude-opus-5` |
-| `claude-sonnet-5` | `gpt-5.4` / `gpt-5.6-terra` | `claude-haiku-4.5` / `gpt-5.6-luna` | `claude-opus-5` |
-| `gpt-5.4` | `claude-sonnet-5` | `gpt-5.6-luna` | `claude-opus-5` |
-| `claude-sonnet-4.6` | `claude-sonnet-5` | `gpt-5.6-luna` / `claude-haiku-4.5` | `claude-opus-5` |
+| `z-ai/glm-5.3` (A) | `claude-sonnet-5` / `gpt-5.6-terra` | `glm-5.3-flash` / `gpt-5.6-luna` (L) | `claude-opus-5` / `claude-fable-5` (S) |
+| `claude-sonnet-5` (A) | `gpt-5.6-terra` / `glm-5.3` | `claude-haiku-4.5` / `gpt-5.6-luna` (L) | `claude-opus-5` (S) |
+| `google/gemini-3.8-flash` (A) | `gemini-3.7-flash` / `gemini-3.1-pro` | `glm-5.3-flash` / `gemini-3-flash` (L) | `claude-opus-5` (S) |
+| `gpt-5.6-terra` (A) | `gemini-3.1-pro` / `glm-5.3` | `glm-5.3-flash` (L) | `claude-opus-5` / `gpt-5.5` (S) |
+| `openai/gpt-5.4` (A) | `claude-sonnet-5` / `gpt-5.6-terra` | `gpt-5.4-mini` (L) | `claude-opus-5` / `claude-fable-5` (S) |
+| `z-ai/glm-5.2` (B) | `glm-5.3` (A) | `glm-5.3-flash` (L) | `claude-opus-4.8` / `claude-opus-5` (S) |
+| `google/gemini-2.5-pro` (B) | `gemini-3-flash` (B) | `gemini-2.5-flash` (L) | `claude-opus-5` / `gpt-5.6-sol` (S) |
+| `openai/gpt-5.6-luna` (L) | `glm-5.3-flash` (L) | `glm-4.6v-flash` / `claude-haiku-4.5` (L) | `glm-5.3` / `gpt-5.6-terra` (A) |
+
+> **Đã gỡ khỏi danh sách (403 — không dùng được trên gói Max):** `kimi-k2.5/k2.6/k2.7-code/k3`, `grok-4.5/4.6/build-0.1`, `deepseek-v4-*`, `qwen3.5+/3.6+/3.7±/3.8-max`, `minimax-m2.5/m2.7/m3`, `tencent-hy3/hy4`, `xiaomi-mimo*`, `gpt-6-astra`, `claude-fable-5-1` — các model này nay tính phí theo **wallet (pay-as-you-go)** hoặc yêu cầu gói ≥ Ultra/Power, gói Max ($20/tháng) không phủ.
 
 ### Free model tốt nhất từ xKiro cho review luận văn
 
 | # | Model | Context | Vai trò |
 |---|---|---|---|
-| 1 | `deepseek/deepseek-v4-pro` | 1M | Pass tổng thể — reasoning mạnh nhất free |
-| 2 | `deepseek/deepseek-v4-flash` | 1M | Pass nhanh, chấm câu, lỗi lặp |
-| 3 | `minimax/minimax-m3:free` | 1M | Kiểm tra bảng/biểu (vision) |
+| 1 | `qwen/qwen3.8-max:free` | 1M | Pass tổng thể — reasoning + vision mạnh nhất free (đã test OK 21/09) |
+| 2 | `qwen/qwen3.7-plus:free` | 1M | Pass nhanh, chấm câu, lỗi lặp |
+| 3 | `qwen/qwen3-vl-plus:free` | 1M | Kiểm tra bảng/biểu (vision) |
 | 4 | `mistralai/mistral-large-2512` | 256K | Viết lại đoạn / paraphrase |
 
 ---

@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "1-xkiro-free/deepseek/deepseek-v4-pro",
+  "model": "1-xkiro-free/qwen/qwen3.8-max:free",
   "plugin": [
     [
       "./plugins/omniroute/dist/index.js",
@@ -16,217 +16,373 @@
   "provider": {
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free (Best‑price multi‑model)",
+      "name": "1. xKiro Free",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
       },
       "models": {
-        "deepseek/deepseek-v4-pro": {
-          "name": "DeepSeek V4 Pro (Reasoning + code mạnh nhất free · 1M ctx)",
+        "qwen/qwen3.8-max:free": {
+          "name": "Qwen3.8 Max · 1M · vision/reasoning",
           "release_date": "2099-12-31"
         },
-        "minimax/minimax-m3:free": {
-          "name": "MiniMax M3 (Vision + reasoning · 1M ctx)",
+        "deepseek/deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro · 1M · code agent",
           "release_date": "2099-12-30"
         },
-        "openai/gpt-5.3-codex-spark": {
-          "name": "GPT-5.3 Codex Spark (Chuyên code · đang 503 tạm)",
+        "qwen/qwen3.7-plus:free": {
+          "name": "Qwen3.7 Plus · 1M · vision",
           "release_date": "2099-12-29"
         },
-        "deepseek/deepseek-v4.1-flash:free": {
-          "name": "DeepSeek V4.1 Flash (Nhanh + vision · 1M ctx)",
+        "qwen/qwen3.5-plus:free": {
+          "name": "Qwen3.5 Plus · 1M · vision",
           "release_date": "2099-12-28"
         },
-        "minimax/minimax-m2.7:free": {
-          "name": "MiniMax M2.7 (Đa dụng cân bằng)",
+        "minimax/minimax-m3:free": {
+          "name": "MiniMax M3 · 1M · vision/reasoning ⚠️đang 500",
           "release_date": "2099-12-27"
         },
-        "minimax/minimax-m2.7-highspeed:free": {
-          "name": "MiniMax M2.7 Highspeed (Tốc độ cao)",
+        "qwen/qwen3-coder-plus:free": {
+          "name": "Qwen3 Coder Plus · 1M · code",
           "release_date": "2099-12-26"
         },
-        "deepseek/deepseek-v4-flash": {
-          "name": "DeepSeek V4 Flash (Nhanh, hợp tác agent · 1M ctx)",
+        "deepseek/deepseek-v4.1-flash:free": {
+          "name": "DeepSeek V4.1 Flash · 1M",
           "release_date": "2099-12-25"
         },
-        "deepseek/deepseek-v3.2": {
-          "name": "DeepSeek V3.2 (Đa dụng ổn định)",
+        "deepseek/deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash · 1M",
           "release_date": "2099-12-24"
         },
-        "mistralai/codestral-2508": {
-          "name": "Codestral 2508 (Chuyên code)",
+        "deepseek/deepseek-v3.2": {
+          "name": "DeepSeek V3.2 · 131K",
           "release_date": "2099-12-23"
         },
-        "minimax/minimax-m2.5:free": {
-          "name": "MiniMax M2.5 (Cân bằng đa dụng)",
+        "deepseek/deepseek-chat-v3.1": {
+          "name": "DeepSeek Chat V3.1 · 164K",
           "release_date": "2099-12-22"
         },
-        "minimax/minimax-m2.5-highspeed:free": {
-          "name": "MiniMax M2.5 Highspeed (Tốc độ cao)",
+        "qwen/qwen3.5-397b-a17b:free": {
+          "name": "Qwen3.5 397B-A17B · vision",
           "release_date": "2099-12-21"
         },
-        "mistralai/devstral-medium": {
-          "name": "Devstral Medium (Dev/code nhanh)",
+        "qwen/qwen3.6-35b-a3b:free": {
+          "name": "Qwen3.6 35B-A3B · vision",
           "release_date": "2099-12-20"
         },
-        "deepseek/deepseek-chat-v3.1": {
-          "name": "DeepSeek Chat V3.1 (Chat đa dụng)",
+        "qwen/qwen3.6-max-preview:free": {
+          "name": "Qwen3.6 Max Preview · reasoning",
           "release_date": "2099-12-19"
         },
-        "mistralai/mistral-large-2512": {
-          "name": "Mistral Large 2512 (Viết lách / paraphrase · 256K)",
+        "qwen/qwen3.6-plus:free": {
+          "name": "Qwen3.6 Plus · 1M · vision",
           "release_date": "2099-12-18"
         },
-        "mistralai/mistral-medium-3.5": {
-          "name": "Mistral Medium 3.5 (Cân bằng + vision)",
+        "qwen/qwen3.6-27b:free": {
+          "name": "Qwen3.6 27B · vision",
           "release_date": "2099-12-17"
         },
-        "minimax/minimax-m2.1:free": {
-          "name": "MiniMax M2.1 (Nền tảng ổn định)",
+        "qwen/qwen3.5-flash:free": {
+          "name": "Qwen3.5 Flash · 1M · fast/vision",
           "release_date": "2099-12-16"
         },
-        "minimax/minimax-m2.1-highspeed:free": {
-          "name": "MiniMax M2.1 Highspeed (Nhanh, tác vụ nhẹ)",
+        "qwen/qwen3.7-flash:free": {
+          "name": "Qwen3.7 Flash · 1M · vision",
           "release_date": "2099-12-15"
         },
-        "minimax/minimax-m2:free": {
-          "name": "MiniMax M2 (Dòng M2 cũ nhất)",
+        "qwen/qwen3.7-max:free": {
+          "name": "Qwen3.7 Max · 1M · reasoning",
           "release_date": "2099-12-14"
         },
-        "mistralai/mistral-small-2603": {
-          "name": "Mistral Small 2603 (Nhẹ, nhanh, vision)",
+        "qwen/qwen3-max:free": {
+          "name": "Qwen3 Max · vision",
           "release_date": "2099-12-13"
         },
-        "mistralai/ministral-14b": {
-          "name": "Ministral 14B (Nhỏ, phản hồi nhanh)",
+        "qwen/qwen3.8-omni-flash:free": {
+          "name": "Qwen3.8 Omni · 1M · omni",
           "release_date": "2099-12-12"
         },
-        "mistralai/ministral-8b": {
-          "name": "Ministral 8B (Siêu nhẹ)",
+        "qwen/qwen3.5-omni-plus:free": {
+          "name": "Qwen3.5 Omni Plus · omni",
           "release_date": "2099-12-11"
         },
-        "mistralai/ministral-3b": {
-          "name": "Ministral 3B (Nhẹ nhất, việc đơn giản)",
+        "qwen/qwen3.5-omni-flash:free": {
+          "name": "Qwen3.5 Omni Flash · omni",
           "release_date": "2099-12-10"
         },
-        "sensenova/sensenova-6.8-flash-lite": {
-          "name": "SenseNova 6.8 Flash-Lite (Nhẹ + vision · đang 503 tạm)",
+        "qwen/qwen3-omni-flash:free": {
+          "name": "Qwen3 Omni Flash · omni",
           "release_date": "2099-12-09"
         },
-        "sensenova/sensenova-6.7-flash-lite": {
-          "name": "SenseNova 6.7 Flash-Lite (Nhẹ, cơ bản)",
+        "qwen/qwen3-vl-plus:free": {
+          "name": "Qwen3 VL Plus · vision",
           "release_date": "2099-12-08"
+        },
+        "qwen/qwen-plus-2025-07-28:free": {
+          "name": "Qwen Plus 0728 · vision",
+          "release_date": "2099-12-07"
+        },
+        "mistralai/mistral-medium-3.5": {
+          "name": "Mistral Medium 3.5 · 256K · reasoning",
+          "release_date": "2099-12-06"
+        },
+        "mistralai/mistral-large-2512": {
+          "name": "Mistral Large 3 · 256K · vision",
+          "release_date": "2099-12-05"
+        },
+        "mistralai/mistral-small-2603": {
+          "name": "Mistral Small 4 · vision",
+          "release_date": "2099-12-04"
+        },
+        "mistralai/codestral-2508": {
+          "name": "Codestral · code",
+          "release_date": "2099-12-03"
+        },
+        "mistralai/devstral-medium": {
+          "name": "Devstral 2 · dev/code",
+          "release_date": "2099-12-02"
+        },
+        "mistralai/ministral-14b": {
+          "name": "Ministral 14B · vision",
+          "release_date": "2099-12-01"
+        },
+        "mistralai/ministral-8b": {
+          "name": "Ministral 8B · vision",
+          "release_date": "2099-11-30"
+        },
+        "mistralai/ministral-3b": {
+          "name": "Ministral 3B · vision",
+          "release_date": "2099-11-29"
+        },
+        "minimax/minimax-m2.7-highspeed:free": {
+          "name": "MiniMax M2.7 HS · fast",
+          "release_date": "2099-11-28"
+        },
+        "minimax/minimax-m2.7:free": {
+          "name": "MiniMax M2.7 · balanced ⚠️đang 500",
+          "release_date": "2099-11-27"
+        },
+        "minimax/minimax-m2.5-highspeed:free": {
+          "name": "MiniMax M2.5 HS · fast ⚠️đang 500",
+          "release_date": "2099-11-26"
+        },
+        "minimax/minimax-m2.5:free": {
+          "name": "MiniMax M2.5 · balanced",
+          "release_date": "2099-11-25"
+        },
+        "minimax/minimax-m2.1-highspeed:free": {
+          "name": "MiniMax M2.1 HS · fast",
+          "release_date": "2099-11-24"
+        },
+        "minimax/minimax-m2.1:free": {
+          "name": "MiniMax M2.1 · stable",
+          "release_date": "2099-11-23"
+        },
+        "minimax/minimax-m2:free": {
+          "name": "MiniMax M2 · basic",
+          "release_date": "2099-11-22"
+        },
+        "sensenova/sensenova-6.8-flash-lite": {
+          "name": "SenseNova 6.8 · vision",
+          "release_date": "2099-11-21"
+        },
+        "sensenova/sensenova-6.7-flash-lite": {
+          "name": "SenseNova 6.7 · vision",
+          "release_date": "2099-11-20"
         }
       }
     },
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max (Paid - gói Max)",
+      "name": "2. xKiro Max",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
       },
       "models": {
-        "nvidia/nemotron-3-nano": {
-          "name": "[B · Nhẹ/rẻ] Nemotron 3 Nano (In:$0.05 | Out:$0.20 · Rẻ nhất, 1M ctx)",
+        "nvidia/nemotron-3-super": {
+          "name": "[L] Nemotron 3 Super · $0.08/$0.45 · 1M · code",
           "release_date": "2099-10-25"
         },
-        "nvidia/nemotron-3-super": {
-          "name": "[B · Nhẹ/rẻ] Nemotron 3 Super (In:$0.08 | Out:$0.45 · 1M ctx siêu rẻ · khuyến nghị)",
+        "nvidia/nemotron-3-nano": {
+          "name": "[L] Nemotron 3 Nano · $0.05/$0.20 · 1M ⚠️410 tạm",
           "release_date": "2099-10-24"
         },
-        "openai/gpt-5.6-luna": {
-          "name": "[B · Nhẹ/rẻ] GPT-5.6 Luna (In:$0.10 | Out:$0.60 · Reasoning+vision rẻ nhất · khuyến nghị)",
+        "nvidia/nemotron-3-nano-omni": {
+          "name": "[L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision",
           "release_date": "2099-10-23"
         },
-        "z-ai/glm-5.3-flash": {
-          "name": "[B · Nhẹ/rẻ] GLM-5.3 Flash (In:$0.15 | Out:$0.50 · 1M ctx + vision giá rẻ · khuyến nghị)",
+        "openai/gpt-5.4-mini": {
+          "name": "[L] GPT-5.4 Mini · $0.75/$4.50 · 400K · nhẹ",
           "release_date": "2099-10-22"
         },
-        "moonshotai/kimi-k2.5": {
-          "name": "[B · Nhẹ/rẻ] Kimi K2.5 (In:$0.285 | Out:$1.425 · Coding giá tốt · khuyến nghị)",
+        "openai/gpt-5.6-luna": {
+          "name": "[L] GPT-5.6 Luna · $0.10/$0.60 · reasoning/vision",
           "release_date": "2099-10-21"
         },
-        "x-ai/grok-build-0.1": {
-          "name": "[B · Nhẹ/rẻ] Grok Build 0.1 (In:$0.50 | Out:$1.00 · Task agent nhanh)",
+        "anthropic/claude-haiku-4.5": {
+          "name": "[L] Claude Haiku 4.5 · $1.00/$5.00 · nhanh",
           "release_date": "2099-10-20"
         },
-        "nvidia/nemotron-3-ultra": {
-          "name": "[B · Nhẹ/rẻ] Nemotron 3 Ultra (In:$0.50 | Out:$2.20 · Mạnh hơn Super)",
+        "z-ai/glm-5.3-flash": {
+          "name": "[L] GLM-5.3 Flash · $0.15/$0.50 · vision",
           "release_date": "2099-10-19"
         },
-        "openai/gpt-5.4-mini": {
-          "name": "[B · Nhẹ/rẻ] GPT-5.4 Mini (In:$0.675 | Out:$4.05 · Nhẹ đủ dùng · khuyến nghị)",
+        "z-ai/glm-5-turbo": {
+          "name": "[L] GLM-5 Turbo · $1.20/$4.00 · nhanh",
           "release_date": "2099-10-18"
         },
-        "anthropic/claude-haiku-4.5": {
-          "name": "[B · Nhẹ/rẻ] Claude Haiku 4.5 (In:$0.90 | Out:$4.50 · Claude rẻ nhất, nhanh)",
+        "google/gemini-2.5-flash": {
+          "name": "[L] Gemini 2.5 Flash · $0.30/$2.50 · 1M · nhanh",
           "release_date": "2099-10-17"
         },
-        "moonshotai/kimi-k2.6": {
-          "name": "[A · Đa dụng] Kimi K2.6 (In:$0.475 | Out:$2.00 · Long context)",
+        "google/gemini-3-flash": {
+          "name": "[L] Gemini 3 Flash · $0.50/$3.00 · 1M · nhanh",
           "release_date": "2099-10-16"
         },
-        "x-ai/grok-4.6": {
-          "name": "[A · Đa dụng] Grok 4.6 (In:$1.00 | Out:$3.00 · Agentic nhanh)",
+        "z-ai/glm-4.5-air": {
+          "name": "[L] GLM-4.5 Air · $0.20/$1.10 · nhẹ",
           "release_date": "2099-10-15"
         },
-        "x-ai/grok-4.5": {
-          "name": "[A · Đa dụng] Grok 4.5 (In:$1.00 | Out:$3.00 · Đa nhiệm ổn)",
+        "z-ai/glm-4.5-airx": {
+          "name": "[L] GLM-4.5 AirX · $1.10/$4.50 · nhẹ",
           "release_date": "2099-10-14"
         },
-        "z-ai/glm-5": {
-          "name": "[A · Đa dụng] GLM-5 (In:$1.00 | Out:$3.20 · Không vision)",
+        "z-ai/glm-4.5v": {
+          "name": "[L] GLM-4.5V · $0.60/$1.80 · vision",
           "release_date": "2099-10-13"
         },
-        "openai/gpt-5.6-terra": {
-          "name": "[A · Đa dụng] GPT-5.6 Terra (In:$1.00 | Out:$6.00 · Sustained context 1M · khuyến nghị)",
+        "z-ai/glm-4.6v-flash": {
+          "name": "[L] GLM-4.6V Flash · $0.04/$0.40 · vision/nhanh",
           "release_date": "2099-10-12"
         },
-        "z-ai/glm-5.1": {
-          "name": "[A · Đa dụng] GLM-5.1 (In:$1.40 | Out:$4.40)",
+        "z-ai/glm-4.6v-flashx": {
+          "name": "[L] GLM-4.6V FlashX · $0.04/$0.40 · vision/nhanh",
           "release_date": "2099-10-11"
         },
-        "z-ai/glm-5.2": {
-          "name": "[A · Đa dụng] GLM-5.2 (In:$1.40 | Out:$4.40 · 1M ctx)",
+        "z-ai/glm-5v-turbo": {
+          "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh",
           "release_date": "2099-10-10"
         },
-        "z-ai/glm-5.3": {
-          "name": "[A · Đa dụng] GLM-5.3 (In:$1.40 | Out:$4.40 · Coding / tiếng Việt tốt · khuyến nghị)",
+        "nvidia/nemotron-3-ultra": {
+          "name": "[B] Nemotron 3 Ultra · $0.50/$2.20 · 1M · mạnh",
           "release_date": "2099-10-09"
         },
-        "anthropic/claude-sonnet-5": {
-          "name": "[A · Đa dụng] Claude Sonnet 5 (In:$1.80 | Out:$9.00 · Agent + văn đỉnh, 1M ctx · khuyến nghị)",
+        "nvidia/llama-3.3-nemotron-super-49b": {
+          "name": "[B] Llama 3.3 Nemotron 49B · $0.10/$0.32 ⚠️410 tạm",
           "release_date": "2099-10-08"
         },
-        "openai/gpt-5.4": {
-          "name": "[A · Đa dụng] GPT-5.4 (In:$2.25 | Out:$13.50 · Đa dụng)",
+        "google/gemini-2.5-pro": {
+          "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M",
           "release_date": "2099-10-07"
         },
-        "anthropic/claude-sonnet-4.6": {
-          "name": "[A · Đa dụng] Claude Sonnet 4.6 (In:$2.70 | Out:$13.50)",
+        "z-ai/glm-4.5": {
+          "name": "[B] GLM-4.5 · $0.60/$2.20",
           "release_date": "2099-10-06"
         },
-        "anthropic/claude-opus-4.8": {
-          "name": "[S · Flagship] Claude Opus 4.8 (In:$4.50 | Out:$22.50 · Reasoning cao cấp)",
+        "z-ai/glm-4.5-x": {
+          "name": "[B] GLM-4.5 X · $2.20/$8.90",
           "release_date": "2099-10-05"
         },
-        "anthropic/claude-opus-5": {
-          "name": "[S · Flagship] Claude Opus 5 (In:$4.50 | Out:$22.50 · Flagship reasoning)",
+        "z-ai/glm-4.6": {
+          "name": "[B] GLM-4.6 · $0.60/$2.20",
           "release_date": "2099-10-04"
         },
-        "openai/gpt-5.5": {
-          "name": "[S · Flagship] GPT-5.5 (In:$4.50 | Out:$27.00)",
+        "z-ai/glm-4.6v": {
+          "name": "[B] GLM-4.6V · $0.30/$0.90 · vision",
           "release_date": "2099-10-03"
         },
-        "openai/gpt-5.6-sol": {
-          "name": "[S · Flagship] GPT-5.6 Sol (In:$4.50 | Out:$27.00 · Flagship OpenAI)",
+        "z-ai/glm-4.7": {
+          "name": "[B] GLM-4.7 · $0.60/$2.20",
           "release_date": "2099-10-02"
         },
-        "anthropic/claude-fable-5": {
-          "name": "[S · Flagship] Claude Fable 5 (In:$9.00 | Out:$45.00 · Mạnh nhất)",
+        "z-ai/glm-4.7-flash": {
+          "name": "[B] GLM-4.7 Flash · $0.07/$0.40 · nhanh",
           "release_date": "2099-10-01"
+        },
+        "z-ai/glm-4.7-flashx": {
+          "name": "[B] GLM-4.7 FlashX · $0.07/$0.40 · nhanh",
+          "release_date": "2099-09-30"
+        },
+        "z-ai/glm-5": {
+          "name": "[B] GLM-5 · $1.00/$3.20",
+          "release_date": "2099-09-29"
+        },
+        "z-ai/glm-5.1": {
+          "name": "[B] GLM-5.1 · $1.40/$4.40",
+          "release_date": "2099-09-28"
+        },
+        "z-ai/glm-5.2": {
+          "name": "[B] GLM-5.2 · $1.40/$4.40 · 1M",
+          "release_date": "2099-09-27"
+        },
+        "google/gemini-3.1-pro": {
+          "name": "[A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · mạnh",
+          "release_date": "2099-09-26"
+        },
+        "google/gemini-3.5-flash": {
+          "name": "[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M",
+          "release_date": "2099-09-25"
+        },
+        "google/gemini-3.6-flash": {
+          "name": "[A] Gemini 3.6 Flash · $1.50/$7.50 · 1M",
+          "release_date": "2099-09-24"
+        },
+        "google/gemini-3.7-flash": {
+          "name": "[A] Gemini 3.7 Flash · $0.375/$1.875 · 1M",
+          "release_date": "2099-09-23"
+        },
+        "google/gemini-3.8-flash": {
+          "name": "[A] Gemini 3.8 Flash · $0.75/$3.75 · 1M",
+          "release_date": "2099-09-22"
+        },
+        "openai/gpt-5.6-terra": {
+          "name": "[A] GPT-5.6 Terra · $1.00/$6.00 · 1M",
+          "release_date": "2099-09-21"
+        },
+        "openai/gpt-5.4": {
+          "name": "[A] GPT-5.4 · $2.50/$15.00 · đa dụng",
+          "release_date": "2099-09-20"
+        },
+        "anthropic/claude-sonnet-4.6": {
+          "name": "[A] Claude Sonnet 4.6 · $3.00/$15.00",
+          "release_date": "2099-09-19"
+        },
+        "anthropic/claude-sonnet-5": {
+          "name": "[A] Claude Sonnet 5 · $2.00/$10.00 · viết lách/agent",
+          "release_date": "2099-09-18"
+        },
+        "z-ai/glm-5.3": {
+          "name": "[A] GLM-5.3 · $1.40/$4.40 · VN/code",
+          "release_date": "2099-09-17"
+        },
+        "anthropic/claude-opus-4.6": {
+          "name": "[S] Claude Opus 4.6 · $5.00/$25.00 · 1M",
+          "release_date": "2099-09-16"
+        },
+        "anthropic/claude-opus-4.7": {
+          "name": "[S] Claude Opus 4.7 · $5.00/$25.00 · 1M",
+          "release_date": "2099-09-15"
+        },
+        "anthropic/claude-opus-4.8": {
+          "name": "[S] Claude Opus 4.8 · $5.00/$25.00 · reasoning",
+          "release_date": "2099-09-14"
+        },
+        "anthropic/claude-opus-5": {
+          "name": "[S] Claude Opus 5 · $5.00/$25.00 · flagship",
+          "release_date": "2099-09-13"
+        },
+        "anthropic/claude-fable-5": {
+          "name": "[S] Claude Fable 5 · $10.00/$50.00 · mạnh nhất",
+          "release_date": "2099-09-12"
+        },
+        "openai/gpt-5.5": {
+          "name": "[S] GPT-5.5 · $5.00/$30.00 ⚠️ERR tạm",
+          "release_date": "2099-09-11"
+        },
+        "openai/gpt-5.6-sol": {
+          "name": "[S] GPT-5.6 Sol · $5.00/$30.00 ⚠️500 tạm",
+          "release_date": "2099-09-10"
         }
       }
     },

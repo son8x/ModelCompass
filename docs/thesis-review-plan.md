@@ -18,7 +18,7 @@
 | 6 | **Rà số liệu, bảng biểu, kiểm tra tính nhất quán số** | `moonshotai/kimi-k2.6` | 262K ctx, vision, bám theo chuỗi số liệu dài; rẻ hơn Claude cùng trọng số |
 | 7 | **Biện luận sâu chương trọng tâm (phần đóng góp mới)** | `anthropic/claude-opus-5` | Reasoning flagship Anthropic, chất lượng phân biện tốt nhất |
 | 8 | **Giả lập hội đồng đánh giá / chống-feedback** | `openai/gpt-5.6-sol` hoặc `anthropic/claude-opus-5` | Dùng luân phiên 2 flagship để có 2 góc nhìn khác nhau |
-| 9 | **Background đọc hiểu tài liệu giá≈0 (không chi tiền)** | `deepseek/deepseek-v4-pro` (nhóm `1-xkiro-free`) | Miễn phí, 1M ctx — đọc nhanh để hiểu ngữ cảnh trước khi sửa |
+| 9 | **Background đọc hiểu tài liệu giá≈0 (không chi tiền)** | `qwen/qwen3.5-plus:free` (nhóm `1-xkiro-free`) | Miễn phí, 1M ctx — đọc nhanh để hiểu ngữ cảnh trước khi sửa |
 
 ## 2. Tác vụ NHỮNG model KHÔNG nên dùng
 
@@ -65,5 +65,5 @@ Toàn bộ kịch bản mỗi vòng review ≈ **$4–6**, dư sức trong $140/
 
 - Viết tiếng Việt → GLM-5.3; viết tiếng Anh → Sonnet 5.
 - Cần đọc bảng biểu → chọn model có vision (mọi model trong bảng trên trừ GLM-5.x đều có vision).
-- Đọc hiểu không mất tiền → `deepseek/deepseek-v4-pro` (free, 1M ctx).
+- Đọc hiểu không mất tiền → `qwen/qwen3.5-plus:free` (free, 1M ctx).
 - Nếu sau này nâng gói **Ultra/Power ($100+)**: thêm `openai/gpt-6-astra` ($10/$50, 1.05M ctx) và `anthropic/claude-fable-5-1` ($10/$50) — là 2 flagship mạnh hơn cả Opus 5/Sol, chỉ dành cho chương quan trọng nhất.

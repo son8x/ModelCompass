@@ -66,9 +66,15 @@ param(
 # Chụp cờ SkipRun TRƯỚC khi dot-source Get-ProviderCatalog: dot-source script có param
 # cùng tên sẽ GHI ĐÈ variable vào scope hiện tại (quirk PowerShell) — làm mất cờ gốc.
 $skipRunFlag = [bool]$SkipRun
+$configModeFlag = $ConfigMode
+$configPathFlag = $ConfigPath
 
 # Tái dùng registry provider (Id, Display, ConfigProviders, IdStripPrefix) — không gọi mạng.
 . (Join-Path $PSScriptRoot 'Get-ProviderCatalog.ps1') -SkipRun
+# Dot-source trên GHI ĐÈ $ConfigMode/$ConfigPath/$SkipRun sang mặc định của script con → khôi phục.
+$ConfigMode   = $configModeFlag
+$ConfigPath   = $configPathFlag
+$skipRunFlag  = $skipRunFlag
 
 # ═══════════════════════════════════════════════════════════════
 # Các hàm thuần (test bằng dot-source -SkipRun)
@@ -76,13 +82,19 @@ $skipRunFlag = [bool]$SkipRun
 
 function Get-PricesFromName {
     <#
-    Trích giá `In:$X | Out:$Y` từ name model config. Trả Has=$false nếu không có.
+    Trích giá từ name model config. Hỗ trợ 2 format:
+      - Đầy đủ:   In:$X | Out:$Y
+      - Compact:  $X/$Y   (vd "$0.08/$0.45 · code")
+    Trả Has=$false nếu không có.
     #>
     param([string]$Name)
     if ([string]::IsNullOrWhiteSpace($Name)) {
         return [pscustomobject]@{ Has = $false; In = $null; Out = $null }
     }
     $m = [regex]::Match($Name, 'In:\s*\$([0-9]+(?:\.[0-9]+)?)\s*\|\s*Out:\s*\$([0-9]+(?:\.[0-9]+)?)')
+    if (-not $m.Success) {
+        $m = [regex]::Match($Name, '\$([0-9]+(?:\.[0-9]+)?)\s*/\s*\$([0-9]+(?:\.[0-9]+)?)')
+    }
     if (-not $m.Success) {
         return [pscustomobject]@{ Has = $false; In = $null; Out = $null }
     }
@@ -109,17 +121,27 @@ function Format-Price {
 function Update-PricesInName {
     <#
     Thay giá cũ trong `name` bằng giá mới, giữ nguyên phần còn lại của mô tả.
-    Không tìm thấy chuỗi `In:$.. | Out:$..` -> trả về nguyên bản.
+    Hỗ trợ format compact `$X/$Y` và đầy đủ `In:$X | Out:$Y`.
+    Không tìm thấy chuỗi giá -> trả về nguyên bản.
     #>
     param(
         [Parameter(Mandatory)][string]$Name,
         [Parameter(Mandatory)][double]$In,
         [Parameter(Mandatory)][double]$Out
     )
-    $pat = 'In:\s*\$[0-9]+(?:\.[0-9]+)?\s*\|\s*Out:\s*\$[0-9]+(?:\.[0-9]+)?'
-    if (-not [regex]::IsMatch($Name, $pat)) { return $Name }
-    $new = 'In:${0} | Out:${1}' -f (Format-Price $In), (Format-Price $Out)
-    return [regex]::Replace($Name, $pat, $new)
+    $newIn = Format-Price $In
+    $newOut = Format-Price $Out
+    $patFull = 'In:\s*\$[0-9]+(?:\.[0-9]+)?\s*\|\s*Out:\s*\$[0-9]+(?:\.[0-9]+)?'
+    if ([regex]::IsMatch($Name, $patFull)) {
+        $new = 'In:${0} | Out:${1}' -f $newIn, $newOut
+        return [regex]::Replace($Name, $patFull, $new)
+    }
+    $patCompact = '\$[0-9]+(?:\.[0-9]+)?\s*/\s*\$[0-9]+(?:\.[0-9]+)?'
+    if ([regex]::IsMatch($Name, $patCompact)) {
+        $new = '${0}/${1}' -f $newIn, $newOut
+        return [regex]::Replace($Name, $patCompact, $new)
+    }
+    return $Name
 }
 
 function Compare-ConfigModelsToCatalogPrices {
