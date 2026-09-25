@@ -74,7 +74,7 @@ $configPathFlag = $ConfigPath
 # Dot-source trên GHI ĐÈ $ConfigMode/$ConfigPath/$SkipRun sang mặc định của script con → khôi phục.
 $ConfigMode   = $configModeFlag
 $ConfigPath   = $configPathFlag
-$skipRunFlag  = $skipRunFlag
+$SkipRun      = $skipRunFlag
 
 # ═══════════════════════════════════════════════════════════════
 # Các hàm thuần (test bằng dot-source -SkipRun)
@@ -133,12 +133,12 @@ function Update-PricesInName {
     $newOut = Format-Price $Out
     $patFull = 'In:\s*\$[0-9]+(?:\.[0-9]+)?\s*\|\s*Out:\s*\$[0-9]+(?:\.[0-9]+)?'
     if ([regex]::IsMatch($Name, $patFull)) {
-        $new = 'In:${0} | Out:${1}' -f $newIn, $newOut
+        $new = 'In:$${0} | Out:$${1}' -f $newIn, $newOut
         return [regex]::Replace($Name, $patFull, $new)
     }
     $patCompact = '\$[0-9]+(?:\.[0-9]+)?\s*/\s*\$[0-9]+(?:\.[0-9]+)?'
     if ([regex]::IsMatch($Name, $patCompact)) {
-        $new = '${0}/${1}' -f $newIn, $newOut
+        $new = '$${0}/$${1}' -f $newIn, $newOut
         return [regex]::Replace($Name, $patCompact, $new)
     }
     return $Name

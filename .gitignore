@@ -22,6 +22,7 @@
 
 # Backup cấu hình tạo bởi scripts
 configs/production/.backup/
+configs/development/.backup/
 configs/**/*.bak*
 *.bak-*
 
