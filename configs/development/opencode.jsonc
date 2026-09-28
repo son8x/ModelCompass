@@ -59,7 +59,7 @@
     //  minimax-m2.7:free, minimax-m2.5-highspeed:free → HTTP 500.
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free",
+      "name": "1. xKiro Free — 58 model (+16)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -79,7 +79,7 @@
         "deepseek/deepseek-v4-pro": { "name": "DeepSeek V4 Pro · 1M · code agent", "release_date": "2099-12-30" },
         "qwen/qwen3.7-plus:free": { "name": "Qwen3.7 Plus · 1M · vision", "release_date": "2099-12-29" },
         "qwen/qwen3.5-plus:free": { "name": "Qwen3.5 Plus · 1M · vision", "release_date": "2099-12-28" },
-        "minimax/minimax-m3:free": { "name": "MiniMax M3 · 1M · vision/reasoning ⚠️đang 500", "release_date": "2099-12-27" },
+        "minimax/minimax-m3:free": { "name": "MiniMax M3 · 1M · vision/reasoning", "release_date": "2099-12-27" },
         "qwen/qwen3-coder-plus:free": { "name": "Qwen3 Coder Plus · 1M · code", "release_date": "2099-12-26" },
         "deepseek/deepseek-v4.1-flash:free": { "name": "DeepSeek V4.1 Flash · 1M", "release_date": "2099-12-25" },
         "deepseek/deepseek-v4-flash": { "name": "DeepSeek V4 Flash · 1M", "release_date": "2099-12-24" },
@@ -109,14 +109,30 @@
         "mistralai/ministral-8b": { "name": "Ministral 8B · vision", "release_date": "2099-11-30" },
         "mistralai/ministral-3b": { "name": "Ministral 3B · vision", "release_date": "2099-11-29" },
         "minimax/minimax-m2.7-highspeed:free": { "name": "MiniMax M2.7 HS · fast", "release_date": "2099-11-28" },
-        "minimax/minimax-m2.7:free": { "name": "MiniMax M2.7 · balanced ⚠️đang 500", "release_date": "2099-11-27" },
-        "minimax/minimax-m2.5-highspeed:free": { "name": "MiniMax M2.5 HS · fast ⚠️đang 500", "release_date": "2099-11-26" },
+        "minimax/minimax-m2.7:free": { "name": "MiniMax M2.7 · balanced", "release_date": "2099-11-27" },
+        "minimax/minimax-m2.5-highspeed:free": { "name": "MiniMax M2.5 HS · fast", "release_date": "2099-11-26" },
         "minimax/minimax-m2.5:free": { "name": "MiniMax M2.5 · balanced", "release_date": "2099-11-25" },
         "minimax/minimax-m2.1-highspeed:free": { "name": "MiniMax M2.1 HS · fast", "release_date": "2099-11-24" },
         "minimax/minimax-m2.1:free": { "name": "MiniMax M2.1 · stable", "release_date": "2099-11-23" },
         "minimax/minimax-m2:free": { "name": "MiniMax M2 · basic", "release_date": "2099-11-22" },
         "sensenova/sensenova-6.8-flash-lite": { "name": "SenseNova 6.8 · vision", "release_date": "2099-11-21" },
-        "sensenova/sensenova-6.7-flash-lite": { "name": "SenseNova 6.7 · vision", "release_date": "2099-11-20" }
+        "sensenova/sensenova-6.7-flash-lite": { "name": "SenseNova 6.7 · vision", "release_date": "2099-11-20" },
+        "cohere/aya-expanse-32b": { "name": "🆕 Aya Expanse 32b · 128K", "release_date": "2099-11-19" },
+        "cohere/aya-vision-32b": { "name": "🆕 Aya Vision 32b · 16.4K", "release_date": "2099-11-18" },
+        "cohere/command-a": { "name": "🆕 Command A · 288K", "release_date": "2099-11-17" },
+        "cohere/command-a-plus": { "name": "🆕 Command A Plus · 436K", "release_date": "2099-11-16" },
+        "cohere/command-a-reasoning": { "name": "🆕 Command A Reasoning · 288.8K", "release_date": "2099-11-15" },
+        "cohere/command-a-translate": { "name": "🆕 Command A Translate · 9K", "release_date": "2099-11-14" },
+        "cohere/command-a-vision": { "name": "🆕 Command A Vision · 128K", "release_date": "2099-11-13" },
+        "cohere/command-r-08-2024": { "name": "🆕 Command R 08 2024 · 128K", "release_date": "2099-11-12" },
+        "cohere/command-r-plus-08-2024": { "name": "🆕 Command R Plus 08 2024 · 128K", "release_date": "2099-11-11" },
+        "cohere/command-r7b-12-2024": { "name": "🆕 Command R7b 12 2024 · 132K", "release_date": "2099-11-10" },
+        "cohere/north-mini-code": { "name": "🆕 North Mini Code · 256K", "release_date": "2099-11-09" },
+        "cohere/north-small-translate": { "name": "🆕 North Small Translate · 32.8K", "release_date": "2099-11-08" },
+        "cohere/tiny-aya-earth": { "name": "🆕 Tiny Aya Earth · 8.2K", "release_date": "2099-11-07" },
+        "cohere/tiny-aya-fire": { "name": "🆕 Tiny Aya Fire · 8.2K", "release_date": "2099-11-06" },
+        "cohere/tiny-aya-global": { "name": "🆕 Tiny Aya Global · 8.2K", "release_date": "2099-11-05" },
+        "cohere/tiny-aya-water": { "name": "🆕 Tiny Aya Water · 8.2K", "release_date": "2099-11-04" }
       }
     },
 
@@ -132,11 +148,11 @@
     //     v4-flash-0731, v4-flash-vision-exp, v4.1-flash), Qwen3.5+/3.6+/3.7±/3.8-max,
     //     MiniMax (m2.5/m2.7/m3), Tencent hy3/hy4, Longcat, Muse-Spark,
     //     gpt-6-astra, claude-fable-5-1 — đã gỡ khỏi danh sách.
-    //  Đang lỗi tạm phía xKiro (vẫn trong danh sách, tag ⚠️): gpt-5.5 (ERR),
+    //  Đang lỗi tạm phía xKiro (vẫn trong danh sách): gpt-5.5 (ERR),
     //     gpt-5.6-sol (500), nemotron-3-nano + llama-49b (410 routing).
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max",
+      "name": "2. xKiro Max — 56 model (gỡ: nemotron-3-nano, llama-3.3-nemotron-super-49b)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -148,7 +164,6 @@
         //  [tier] Model · ghi chú ngắn. ⚠️ release_date = KHOÁ SẮP XẾP TỔNG HỢP.
         // ── [L] Nhẹ·Nhanh·Rẻ — tác vụ đơn giản, chạy nhiều ──
         "nvidia/nemotron-3-super": { "name": "[L] Nemotron 3 Super · $0.08/$0.45 · 1M · code", "release_date": "2099-10-31" },
-        "nvidia/nemotron-3-nano": { "name": "[L] Nemotron 3 Nano · $0.05/$0.20 · 1M ⚠️410 tạm", "release_date": "2099-10-30" },
         "nvidia/nemotron-3-nano-omni": { "name": "[L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision", "release_date": "2099-10-29" },
         "openai/gpt-5.4-mini": { "name": "[L] GPT-5.4 Mini · $0.75/$4.50 · 400K · nhẹ", "release_date": "2099-10-28" },
         "openai/gpt-6-luna": { "name": "[L] GPT-6 Luna · $0.10/$0.50 · reasoning/vision", "release_date": "2099-10-27" },
@@ -169,7 +184,6 @@
         "z-ai/glm-5v-turbo": { "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh", "release_date": "2099-10-12" },
         // ── [B] Đa dụng giá tốt — chat hàng ngày, việc chung ──
         "nvidia/nemotron-3-ultra": { "name": "[B] Nemotron 3 Ultra · $0.50/$2.20 · 1M · mạnh", "release_date": "2099-10-11" },
-        "nvidia/llama-3.3-nemotron-super-49b": { "name": "[B] Llama 3.3 Nemotron 49B · $0.10/$0.32 ⚠️410 tạm", "release_date": "2099-10-10" },
         "google/gemini-2.5-pro": { "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M", "release_date": "2099-10-09" },
         "z-ai/glm-4.5": { "name": "[B] GLM-4.5 · $0.60/$2.20", "release_date": "2099-10-08" },
         "z-ai/glm-4.5-x": { "name": "[B] GLM-4.5 X · $2.20/$8.90", "release_date": "2099-10-07" },
@@ -206,8 +220,8 @@
         "anthropic/claude-opus-4.5": { "name": "[S] Claude Opus 4.5 · $5.00/$25.00", "release_date": "2099-09-08" },
         "openai/gpt-6-sol": { "name": "[S] GPT-6 Sol · $2.00/$10.00 · flagship", "release_date": "2099-09-07" },
         "anthropic/claude-fable-5": { "name": "[S] Claude Fable 5 · $10.00/$50.00 · mạnh nhất", "release_date": "2099-09-06" },
-        "openai/gpt-5.5": { "name": "[S] GPT-5.5 · $5.00/$30.00 ⚠️ERR tạm", "release_date": "2099-09-05" },
-        "openai/gpt-5.6-sol": { "name": "[S] GPT-5.6 Sol · $5.00/$30.00 ⚠️500 tạm", "release_date": "2099-09-04" }
+        "openai/gpt-5.5": { "name": "[S] GPT-5.5 · $5.00/$30.00", "release_date": "2099-09-05" },
+        "openai/gpt-5.6-sol": { "name": "[S] GPT-5.6 Sol · $5.00/$30.00", "release_date": "2099-09-04" }
       }
     },
 
@@ -325,3 +339,6 @@
 //  5) scripts/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
 //  6) Quit & restart opencode.
 // ═══════════════════════════════════════════════════════════════════
+
+
+

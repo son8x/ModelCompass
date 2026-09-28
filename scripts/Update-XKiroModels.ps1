@@ -58,6 +58,12 @@
 .PARAMETER SkipValidation
     Bỏ qua bước validate (không khuyến khích).
 
+.PARAMETER BaselineConfig
+    File config làm MỐC để đánh dấu model "mới" (badge 🆕): mọi model đang có
+    trong config nhưng KHÔNG có trong baseline sẽ được gắn badge. Dùng để
+    hồi tố đánh dấu các model đã thêm từ sync trước (khi badge chưa ra đời).
+    Mặc định: trống = chỉ badge model thêm trong chính lần chạy này.
+
 .PARAMETER SkipRun
     Chỉ nạp định nghĩa function cho test (dot-source -SkipRun), không chạy chính.
 
@@ -80,17 +86,19 @@ param(
     [switch]$Publish,
     [switch]$Install,
     [switch]$SkipValidation,
+    [string]$BaselineConfig,
     [switch]$SkipRun
 )
 Set-StrictMode -Version Latest
 
 # Chụp cờ TRƯỚC khi dot-source (quirk PowerShell: dot-source script cùng param sẽ ghi đè).
 # Dùng prefix riêng để không trùng biến cờ của các script con (Common-Functions/Get-ProviderCatalog/Compare-Prices).
-$uxkSkipRun    = [bool]$SkipRun
-$uxkNoWrite    = [bool]$NoWrite
-$uxkNoProbe    = [bool]$NoProbe
-$uxkConfigPath = $ConfigPath
-$uxkProvider   = @($Provider)
+$uxkSkipRun       = [bool]$SkipRun
+$uxkNoWrite       = [bool]$NoWrite
+$uxkNoProbe       = [bool]$NoProbe
+$uxkConfigPath    = $ConfigPath
+$uxkProvider      = @($Provider)
+$uxkBaseline      = $BaselineConfig
 
 . (Join-Path $PSScriptRoot 'Common-Functions.ps1')
 # Registry provider + fetch catalog (không gọi mạng khi -SkipRun).
@@ -99,11 +107,12 @@ $uxkProvider   = @($Provider)
 . (Join-Path $PSScriptRoot 'Compare-Prices.ps1') -SkipRun
 
 # Khôi phục cờ sau khi dot-source.
-$SkipRun    = $uxkSkipRun
-$NoWrite    = $uxkNoWrite
-$NoProbe    = $uxkNoProbe
-$ConfigPath = $uxkConfigPath
-$Provider   = $uxkProvider
+$SkipRun          = $uxkSkipRun
+$NoWrite          = $uxkNoWrite
+$NoProbe          = $uxkNoProbe
+$ConfigPath       = $uxkConfigPath
+$Provider         = $uxkProvider
+$BaselineConfig   = $uxkBaseline
 
 # ═══════════════════════════════════════════════════════════════
 # Các hàm thuần (test bằng dot-source -SkipRun) — không gọi mạng
@@ -346,8 +355,12 @@ function Compute-OrderedModels {
         [switch]$IsFree,
         [double]$LThreshold = 0.50,
         [double]$BThreshold = 1.50,
-        [double]$AThreshold = 4.00
+        [double]$AThreshold = 4.00,
+        [string]$NewBadge = '',
+        [switch]$RefreshBadges
     )
+    $badge = ''
+    if ($NewBadge) { $badge = [regex]::Escape($NewBadge) }
     $keepById = @{}
     foreach ($k in @($Compare.Keep)) { $keepById[$k.id] = $k }
 
@@ -359,6 +372,13 @@ function Compute-OrderedModels {
         if (-not $keepById.ContainsKey($old.id)) { continue }
         $k = $keepById[$old.id]
         $name = $old.name
+
+        # Gỡ badge "mới" cũ (nếu có) — chỉ khi sync NÀY thực sự đổi danh sách
+        # (thêm/gỡ). Nếu danh sách không đổi thì giữ badge để nhìn picker còn biết.
+        if ($badge -and $RefreshBadges) { $name = $name -replace "^$badge", '' }
+
+        # Gỡ annotation ghi tay (vd " ⚠️đang 500") — không được probe kiểm tra.
+        $name = Remove-HandAnnotation $name
 
         if (-not $IsFree) {
             $cur = Get-PricesFromName $name
@@ -387,6 +407,7 @@ function Compute-OrderedModels {
     if ($IsFree) {
         foreach ($a in $newList) {
             $nm = New-ModelDisplayName -FriendlyName $a.friendly -Context $a.context
+            if ($NewBadge) { $nm = "$NewBadge$nm" }
             $ordered.Add([pscustomobject]@{ id = $a.id; name = $nm; tier = '' })
         }
     } else {
@@ -417,6 +438,7 @@ function Compute-OrderedModels {
             }
 
             $nm = New-ModelDisplayName -FriendlyName $a.friendly -Tier $tier -In $a.in -Out $a.out -Context $a.context
+            if ($NewBadge) { $nm = "$NewBadge$nm" }
             $ordered.Insert($insertIdx, [pscustomobject]@{ id = $a.id; name = $nm; tier = $tier })
         }
     }
@@ -635,6 +657,79 @@ function Set-ProviderModelsBlock {
     return $out -join $newline
 }
 
+<#
+.SYNOPSIS
+    Gỡ annotation GHI TAY khỏi name model (vd " ⚠️đang 500", " ⚠️ERR tạm").
+    Annotation không được probe kiểm tra nên dễ lỗi thời/gây rối — sync sẽ tự strip
+    mọi thứ từ dấu ⚠️ đến cuối name. THUẦN.
+#>
+function Remove-HandAnnotation {
+    param([Parameter(Mandatory)][string]$Name)
+    $clean = $Name -replace '\s*⚠️.*$', ''
+    return $clean.TrimEnd()
+}
+
+<#
+.SYNOPSIS
+    Sinh tiêu đề provider hiển thị trong opencode picker: "<name> — <count> model".
+    Nếu có thêm/gỡ, phụ chú "(+N · gỡ: a, b)" để nhìn list biết ngay.
+    THUẦN. Nếu name đã mang hậu tố "— N model" thì strip trước khi tái tạo.
+#>
+function Format-ProviderHeader {
+    param(
+        [Parameter(Mandatory)][string]$Name,
+        [Parameter(Mandatory)][int]$Count,
+        [string[]]$Added = @(),
+        [string[]]$Removed = @()
+    )
+    $base = $Name -replace '\s*—\s*\d+ model.*$', ''
+    if ([string]::IsNullOrWhiteSpace($base)) { $base = $Name }
+    $h = "{0} — {1} model" -f $base, $Count
+
+    $notes = [System.Collections.Generic.List[string]]::new()
+    $added = @($Added); $removed = @($Removed)
+    if ($added.Count -gt 0) { $notes.Add("+$($added.Count)") }
+    if ($removed.Count -gt 0) {
+        # Tên ngắn: bỏ tiền tố provider ("anthropic/claude-opus-5.5" -> "claude-opus-5.5").
+        $short = @($removed | ForEach-Object { if ($_ -match '^[^/]+/') { $_.Substring($_.IndexOf('/') + 1) } else { $_ } })
+        $notes.Add("gỡ: " + ($short -join ', '))
+    }
+    if ($notes.Count -gt 0) { $h += " (" + ($notes -join ' · ') + ")" }
+    return $h
+}
+
+<#
+.SYNOPSIS
+    Thay dòng '"name": "..."' của 1 provider (KHÔNG phải model) trong TEXT JSONC.
+    Dòng name của provider là dòng bắt đầu bằng khoảng trắng + '"name":' trong block provider
+    (name model nằm giữa dòng '"id": { "name": ...' nên không khớp). Giữ nguyên indent.
+#>
+function Set-ProviderNameLine {
+    param(
+        [Parameter(Mandatory)][string]$Raw,
+        [Parameter(Mandatory)][string]$ProviderKey,
+        [Parameter(Mandatory)][string]$NewName
+    )
+    $newline = if ($Raw -match "`r`n") { "`r`n" } else { "`n" }
+    $lines = @($Raw -split "`r?`n")
+
+    $pIdx = -1
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+        if ($lines[$i] -match ('^\s*"' + [regex]::Escape($ProviderKey) + '"\s*:\s*\{')) { $pIdx = $i; break }
+    }
+    if ($pIdx -lt 0) { throw "Không tìm thấy provider '$ProviderKey' trong config." }
+
+    for ($i = $pIdx + 1; $i -lt $lines.Count; $i++) {
+        if ($lines[$i] -match '^\s*"models"\s*:\s*\{') { break }
+        if ($lines[$i] -match '^\s*"name"\s*:\s*') {
+            $indent = [regex]::Match($lines[$i], '^\s*').Value
+            $lines[$i] = '{0}"name": "{1}",' -f $indent, ($NewName -replace '"', '\"')
+            return $lines -join $newline
+        }
+    }
+    return $Raw
+}
+
 if ($SkipRun) { return }
 
 # ───────────────────────────────────────────────
@@ -722,8 +817,41 @@ if ($NoProbe) {
 $config = Get-ConfigContent $ConfigPath
 $totalAdd = 0; $totalRemove = 0
 $allChanges = [System.Collections.Generic.List[string]]::new()
+$summary = [System.Collections.Generic.List[pscustomobject]]::new()
 
-$newRaw = Get-Content -LiteralPath $ConfigPath -Raw -Encoding utf8
+$originalRaw = Get-Content -LiteralPath $ConfigPath -Raw -Encoding utf8
+$newRaw = $originalRaw
+
+# Badge cho model MỚI trong picker opencode (tự gỡ ở lần sync sau khi model đã cũ).
+$NewBadge = '🆕 '
+
+# Mốc để hồi tố đánh dấu model mới/gỡ: model có trong config nhưng không có trong
+# baseline -> badge 🆕 + phụ chú thêm; model có trong baseline nhưng không còn
+# trong config -> phụ chú gỡ. Mặc định TỰ TÌM backup mới nhất trong configs/development/.backup
+# (không cần truyền -BaselineConfig; config mới ghi chính là baseline cho lần sau).
+$baselineCfg = $null
+if ($BaselineConfig) {
+    if (-not (Test-Path -LiteralPath $BaselineConfig -PathType Leaf)) {
+        Write-Fail "Baseline không tồn tại: $BaselineConfig"
+        exit 2
+    }
+    $baselineCfg = Get-ConfigContent $BaselineConfig
+    Write-Info "Baseline: $BaselineConfig (chỉ định tay)."
+} else {
+    $backupDir = Join-Path $repo 'configs\development\.backup'
+    $latestBackup = @(Get-ChildItem -LiteralPath $backupDir -Filter 'opencode.*.jsonc' -File -ErrorAction SilentlyContinue |
+        Sort-Object LastWriteTime -Descending | Select-Object -First 1)
+    if ($latestBackup.Count -gt 0) {
+        try {
+            $baselineCfg = Get-ConfigContent $latestBackup[0].FullName
+            Write-Info "Baseline tự động: $($latestBackup[0].FullName)"
+        } catch {
+            Write-Warn "Không đọc được baseline backup — bỏ qua hồi tố."
+        }
+    } else {
+        Write-Info 'Chưa có backup — không hồi tố badge/gỡ (lần chạy đầu).'
+    }
+}
 
 foreach ($cpKey in $selected) {
     $cp = $config.provider.PSObject.Properties[$cpKey]
@@ -745,34 +873,108 @@ foreach ($cpKey in $selected) {
     foreach ($rId in @($cmp.RemoveReason.Keys)) { Write-Warn "  GỠ  $rId — $($cmp.RemoveReason[$rId])" }
     foreach ($a in @($cmp.Add)) {
         $nm = New-ModelDisplayName -FriendlyName $a.friendly -Tier $a.tier -In $a.in -Out $a.out -Context $a.context
-        Write-Ok "  THÊM $($a.id) -> $nm"
+        Write-Ok "  THÊM $($a.id) -> $NewBadge$nm"
     }
 
+    $listChanged = ($cmp.Add.Count -gt 0 -or $cmp.RemoveReason.Count -gt 0)
     $computed = Compute-OrderedModels -ConfigModels $cur -Compare $cmp `
-        -IsFree:$isFree -LThreshold $LThreshold -BThreshold $BThreshold -AThreshold $AThreshold
+        -IsFree:$isFree -LThreshold $LThreshold -BThreshold $BThreshold -AThreshold $AThreshold `
+        -NewBadge $NewBadge -RefreshBadges:$listChanged
 
     foreach ($c in $computed.ChangedPrice) { $allChanges.Add("[$cpKey] CẬP NHẬT GIÁ $c") }
     foreach ($rId in @($cmp.RemoveReason.Keys)) { $allChanges.Add("[$cpKey] GỠ $rId — $($cmp.RemoveReason[$rId])") }
     foreach ($a in @($cmp.Add)) { $allChanges.Add("[$cpKey] THÊM $($a.id)") }
+    $provChange = $computed.ChangedPrice.Count + $cmp.RemoveReason.Count + $cmp.Add.Count
 
     $final = Assign-ReleaseDates -Ordered $computed.Ordered -ConfigModels $cur `
         -BaseDate $(if ($isFree) { '2099-12-31' } else { '2099-11-30' })
 
+    # ── Hồi tố badge + liệt kê model bị gỡ so với baseline ──
+    # (chỉ khi truyền -BaselineConfig). Model có trong config nhưng không có trong
+    # baseline -> gắn badge 🆕 và gộp vào "thêm"; model có trong baseline nhưng
+    # không còn trong config -> gộp vào "gỡ" để header/summary hiển thị.
+    $backfillAdded = @(); $backfillRemoved = @()
+    if ($null -ne $baselineCfg) {
+        $blProv = $baselineCfg.provider.PSObject.Properties[$cpKey]
+        if ($null -ne $blProv -and $null -ne $blProv.Value) {
+            $blIds = @(Get-ConfigModels $blProv.Value | ForEach-Object { $_.id })
+            $finalIds = @($final | ForEach-Object { $_.id })
+            $backfillRemoved = @($blIds | Where-Object { $_ -notin $finalIds })
+            foreach ($m in @($final)) {
+                if ($m.id -notin $blIds) {
+                    if ($m.name -notlike "$NewBadge*") { $m.name = "$NewBadge$($m.name)" }
+                    $backfillAdded += $m.id
+                }
+            }
+        }
+        if ($backfillAdded.Count -gt 0) {
+            Write-Info "[$cpKey] hồi tố đánh dấu MỚI: $($backfillAdded.Count) model"
+        }
+        if ($backfillRemoved.Count -gt 0) {
+            Write-Info "[$cpKey] hồi tố GỠ: $($backfillRemoved.Count) model ($($backfillRemoved -join ', '))"
+        }
+    }
+
     $totalAdd += $cmp.Add.Count
     $totalRemove += $cmp.RemoveReason.Count
 
+    $summary.Add([pscustomobject]@{
+        Key      = $cpKey
+        Label    = if ($isFree) { 'xKiro FREE' } else { 'xKiro MAX' }
+        OldCount = @($cur).Count
+        NewCount = @($final).Count
+        Added    = @(@(@($cmp.Add) | ForEach-Object { $_.id }) + $backfillAdded | Select-Object -Unique)
+        Removed  = @(@($cmp.RemoveReason.Keys) + $backfillRemoved | Select-Object -Unique)
+        Changes  = $provChange
+    })
+
     if ($final.Count -gt 0) {
         $newRaw = Set-ProviderModelsBlock -Raw $newRaw -ProviderKey $cpKey -Models $final
+    }
+
+    # Cập nhật tiêu đề provider (nhìn picker opencode là biết tổng số + mới/gỡ).
+    # Chỉ tái tạo KHI có thêm/gỡ (live hoặc hồi tố) — nếu không, giữ nguyên note cũ
+    # (vd "(+16)", "gỡ: ...") để thông tin không biến mất giữa các lần chạy.
+    $provName = [string]$cp.Value.name
+    $hdrAdded = @(@(@($cmp.Add) | ForEach-Object { $_.id }) + $backfillAdded | Select-Object -Unique)
+    $hdrRemoved = @(@($cmp.RemoveReason.Keys) + $backfillRemoved | Select-Object -Unique)
+    if ($provName -and ($hdrAdded.Count -gt 0 -or $hdrRemoved.Count -gt 0)) {
+        $hdr = Format-ProviderHeader -Name $provName -Count @($final).Count `
+            -Added $hdrAdded `
+            -Removed $hdrRemoved
+        if ($hdr -ne $provName) {
+            $newRaw = Set-ProviderNameLine -Raw $newRaw -ProviderKey $cpKey -NewName $hdr
+        }
     }
 }
 
 # ── 4. Báo cáo + ghi ──────────────────────────
 Write-Step 'KẾT QUẢ'
-if ($totalAdd -eq 0 -and $totalRemove -eq 0 -and $allChanges.Count -eq 0) {
+$rawChanged = ($newRaw -cne $originalRaw)
+if (-not $rawChanged) {
     Write-Ok 'Không có thay đổi so với catalog live — config đã đồng bộ.'
     Write-Info 'Bỏ qua bước ghi/validate.'
     exit 0
 }
+
+# ── TỔNG KẾT delta theo provider ──────────────
+foreach ($s in $summary) {
+    Write-Host ''
+    Write-Step ("{0}  {1} → {2}" -f $s.Label, $s.OldCount, $s.NewCount)
+    Write-Host ("    Thêm {0} · Gỡ {1} · cập nhật giá {2}" -f `
+        $s.Added.Count, $s.Removed.Count, $s.Changes)
+
+    if ($s.Added.Count -gt 0) {
+        Write-Ok ("    MỚI ({0}): {1}" -f $s.Added.Count, ($s.Added -join ', '))
+    }
+    if ($s.Removed.Count -gt 0) {
+        Write-Warn ("    MẤT ({0}): {1}" -f $s.Removed.Count, ($s.Removed -join ', '))
+    }
+    if ($s.Added.Count -eq 0 -and $s.Removed.Count -eq 0) {
+        Write-Info '    Không thêm/gỡ model — chỉ có thể đổi thứ tự/giá.'
+    }
+}
+Write-Host ''
 
 Write-Info "Tóm tắt: thêm $totalAdd · gỡ $totalRemove · $($allChanges.Count) thay đổi name/giá."
 foreach ($c in $allChanges) { Write-Host "  · $c" -ForegroundColor DarkGray }

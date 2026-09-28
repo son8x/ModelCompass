@@ -16,7 +16,7 @@
   "provider": {
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free",
+      "name": "1. xKiro Free — 58 model (+16)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -39,7 +39,7 @@
           "release_date": "2099-12-28"
         },
         "minimax/minimax-m3:free": {
-          "name": "MiniMax M3 · 1M · vision/reasoning ⚠️đang 500",
+          "name": "MiniMax M3 · 1M · vision/reasoning",
           "release_date": "2099-12-27"
         },
         "qwen/qwen3-coder-plus:free": {
@@ -159,11 +159,11 @@
           "release_date": "2099-11-28"
         },
         "minimax/minimax-m2.7:free": {
-          "name": "MiniMax M2.7 · balanced ⚠️đang 500",
+          "name": "MiniMax M2.7 · balanced",
           "release_date": "2099-11-27"
         },
         "minimax/minimax-m2.5-highspeed:free": {
-          "name": "MiniMax M2.5 HS · fast ⚠️đang 500",
+          "name": "MiniMax M2.5 HS · fast",
           "release_date": "2099-11-26"
         },
         "minimax/minimax-m2.5:free": {
@@ -189,12 +189,76 @@
         "sensenova/sensenova-6.7-flash-lite": {
           "name": "SenseNova 6.7 · vision",
           "release_date": "2099-11-20"
+        },
+        "cohere/aya-expanse-32b": {
+          "name": "🆕 Aya Expanse 32b · 128K",
+          "release_date": "2099-11-19"
+        },
+        "cohere/aya-vision-32b": {
+          "name": "🆕 Aya Vision 32b · 16.4K",
+          "release_date": "2099-11-18"
+        },
+        "cohere/command-a": {
+          "name": "🆕 Command A · 288K",
+          "release_date": "2099-11-17"
+        },
+        "cohere/command-a-plus": {
+          "name": "🆕 Command A Plus · 436K",
+          "release_date": "2099-11-16"
+        },
+        "cohere/command-a-reasoning": {
+          "name": "🆕 Command A Reasoning · 288.8K",
+          "release_date": "2099-11-15"
+        },
+        "cohere/command-a-translate": {
+          "name": "🆕 Command A Translate · 9K",
+          "release_date": "2099-11-14"
+        },
+        "cohere/command-a-vision": {
+          "name": "🆕 Command A Vision · 128K",
+          "release_date": "2099-11-13"
+        },
+        "cohere/command-r-08-2024": {
+          "name": "🆕 Command R 08 2024 · 128K",
+          "release_date": "2099-11-12"
+        },
+        "cohere/command-r-plus-08-2024": {
+          "name": "🆕 Command R Plus 08 2024 · 128K",
+          "release_date": "2099-11-11"
+        },
+        "cohere/command-r7b-12-2024": {
+          "name": "🆕 Command R7b 12 2024 · 132K",
+          "release_date": "2099-11-10"
+        },
+        "cohere/north-mini-code": {
+          "name": "🆕 North Mini Code · 256K",
+          "release_date": "2099-11-09"
+        },
+        "cohere/north-small-translate": {
+          "name": "🆕 North Small Translate · 32.8K",
+          "release_date": "2099-11-08"
+        },
+        "cohere/tiny-aya-earth": {
+          "name": "🆕 Tiny Aya Earth · 8.2K",
+          "release_date": "2099-11-07"
+        },
+        "cohere/tiny-aya-fire": {
+          "name": "🆕 Tiny Aya Fire · 8.2K",
+          "release_date": "2099-11-06"
+        },
+        "cohere/tiny-aya-global": {
+          "name": "🆕 Tiny Aya Global · 8.2K",
+          "release_date": "2099-11-05"
+        },
+        "cohere/tiny-aya-water": {
+          "name": "🆕 Tiny Aya Water · 8.2K",
+          "release_date": "2099-11-04"
         }
       }
     },
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max",
+      "name": "2. xKiro Max — 56 model (gỡ: nemotron-3-nano, llama-3.3-nemotron-super-49b)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -203,10 +267,6 @@
         "nvidia/nemotron-3-super": {
           "name": "[L] Nemotron 3 Super · $0.08/$0.45 · 1M · code",
           "release_date": "2099-10-31"
-        },
-        "nvidia/nemotron-3-nano": {
-          "name": "[L] Nemotron 3 Nano · $0.05/$0.20 · 1M ⚠️410 tạm",
-          "release_date": "2099-10-30"
         },
         "nvidia/nemotron-3-nano-omni": {
           "name": "[L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision",
@@ -283,10 +343,6 @@
         "nvidia/nemotron-3-ultra": {
           "name": "[B] Nemotron 3 Ultra · $0.50/$2.20 · 1M · mạnh",
           "release_date": "2099-10-11"
-        },
-        "nvidia/llama-3.3-nemotron-super-49b": {
-          "name": "[B] Llama 3.3 Nemotron 49B · $0.10/$0.32 ⚠️410 tạm",
-          "release_date": "2099-10-10"
         },
         "google/gemini-2.5-pro": {
           "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M",
@@ -425,11 +481,11 @@
           "release_date": "2099-09-06"
         },
         "openai/gpt-5.5": {
-          "name": "[S] GPT-5.5 · $5.00/$30.00 ⚠️ERR tạm",
+          "name": "[S] GPT-5.5 · $5.00/$30.00",
           "release_date": "2099-09-05"
         },
         "openai/gpt-5.6-sol": {
-          "name": "[S] GPT-5.6 Sol · $5.00/$30.00 ⚠️500 tạm",
+          "name": "[S] GPT-5.6 Sol · $5.00/$30.00",
           "release_date": "2099-09-04"
         }
       }

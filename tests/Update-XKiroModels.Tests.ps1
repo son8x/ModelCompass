@@ -335,3 +335,103 @@ Describe 'Set-ProviderModelsBlock' {
             Should -Throw -ErrorId "Không tìm thấy provider '2-xkiro-max' trong config."
     }
 }
+
+Describe 'Compute-OrderedModels - NewBadge' {
+    It 'gắn badge cho model mới; khi list đổi (RefreshBadges) thì gỡ badge cũ' {
+        $cfg = @(
+            [pscustomobject]@{ id = 'c/S1'; name = '🆕 [S] C1'; release_date = '2099-09-01' },
+            [pscustomobject]@{ id = 'a/L1'; name = '[L] A1'; release_date = '2099-10-31' }
+        )
+        $cmp = [pscustomobject]@{
+            Keep = @(
+                [pscustomobject]@{ id = 'c/S1'; name = '🆕 [S] C1'; release_date = '2099-09-01'; CatIn = 5; CatOut = 25; Context = 0 },
+                [pscustomobject]@{ id = 'a/L1'; name = '[L] A1'; release_date = '2099-10-31'; CatIn = 0.1; CatOut = 0.5; Context = 0 }
+            )
+            Add = @([pscustomobject]@{ id = 'd/S2'; friendly = 'D2'; tier = 'S'; in = 6; out = 30; context = 0 })
+            RemoveReason = @{}
+        }
+        $o = Compute-OrderedModels -ConfigModels $cfg -Compare $cmp -NewBadge '🆕 ' -RefreshBadges
+        $o.Ordered.Count | Should -Be 3
+        $o.Ordered[0].name | Should -Be '[S] C1'
+        $o.Ordered[1].name | Should -Be '🆕 [S] D2 · $6.00/$30.00'
+        $o.Ordered[2].name | Should -Be '[L] A1'
+    }
+
+    It 'list không đổi (không -RefreshBadges): giữ badge cũ nguyên vẹn' {
+        $cfg = @(
+            [pscustomobject]@{ id = 'c/S1'; name = '🆕 [S] C1'; release_date = '2099-09-01' }
+        )
+        $cmp = [pscustomobject]@{
+            Keep = @(
+                [pscustomobject]@{ id = 'c/S1'; name = '🆕 [S] C1'; release_date = '2099-09-01'; CatIn = 5; CatOut = 25; Context = 0 }
+            )
+            Add = @()
+            RemoveReason = @{}
+        }
+        $o = Compute-OrderedModels -ConfigModels $cfg -Compare $cmp -NewBadge '🆕 '
+        $o.Ordered[0].name | Should -Be '🆕 [S] C1'
+    }
+}
+
+Describe 'Format-ProviderHeader' {
+    It 'thêm số model và note +N' {
+        $h = Format-ProviderHeader -Name '1. xKiro Free' -Count 58 -Added @('a/x', 'b/y') -Removed @()
+        $h | Should -Be '1. xKiro Free — 58 model (+2)'
+    }
+    It 'note gỡ liệt kê tên ngắn (bỏ tiền tố provider), không giới hạn 3' {
+        $h = Format-ProviderHeader -Name '2. xKiro Max' -Count 56 -Added @() `
+            -Removed @('anthropic/a', 'openai/b', 'google/c', 'x-ai/d')
+        $h | Should -Be '2. xKiro Max — 56 model (gỡ: a, b, c, d)'
+    }
+    It 'strip hậu tố cũ trước khi tái tạo (không cộng dồn)' {
+        $h = Format-ProviderHeader -Name '1. xKiro Free — 58 model (+2)' -Count 58 -Added @() -Removed @()
+        $h | Should -Be '1. xKiro Free — 58 model'
+    }
+}
+
+Describe 'Remove-HandAnnotation' {
+    It 'xóa annotation ⚠️ ghi tay cuối name' {
+        Remove-HandAnnotation 'MiniMax M3 · 1M · vision/reasoning ⚠️đang 500' |
+            Should -Be 'MiniMax M3 · 1M · vision/reasoning'
+        Remove-HandAnnotation '[S] GPT-5.5 · $5.00/$30.00 ⚠️ERR tạm' |
+            Should -Be '[S] GPT-5.5 · $5.00/$30.00'
+        Remove-HandAnnotation '[S] GPT-5.6 Sol · $5.00/$30.00 ⚠️500 tạm' |
+            Should -Be '[S] GPT-5.6 Sol · $5.00/$30.00'
+    }
+    It 'giữ nguyên name sạch (không ⚠️)' {
+        Remove-HandAnnotation 'Qwen3 Coder Plus · 1M · code' |
+            Should -Be 'Qwen3 Coder Plus · 1M · code'
+    }
+    It 'vẫn giữ badge 🆕 (không nhầm với annotation)' {
+        Remove-HandAnnotation '🆕 Command A · 288K' | Should -Be '🆕 Command A · 288K'
+    }
+}
+
+Describe 'Set-ProviderNameLine' {
+    It 'thay name provider, giữ nội dung còn lại' {
+        $raw = @'
+{
+  "provider": {
+    "2-xkiro-max": {
+      "name": "2. xKiro Max",
+      "options": { "baseURL": "https://x" },
+      "models": {
+        "a/x": { "name": "A X", "release_date": "2099-12-31" }
+      }
+    }
+  }
+}
+'@
+        $out = Set-ProviderNameLine -Raw $raw -ProviderKey '2-xkiro-max' -NewName '2. xKiro Max — 56 model'
+        $out | Should -Match '"name": "2\. xKiro Max — 56 model"'
+        $out | Should -Match '"a/x":'
+        $clean = Remove-CommentsAndTrailingCommas $out
+        $parsed = $clean | ConvertFrom-Json
+        $parsed.provider.'2-xkiro-max'.name | Should -Be '2. xKiro Max — 56 model'
+        $parsed.provider.'2-xkiro-max'.models.'a/x'.name | Should -Be 'A X'
+    }
+    It 'throw khi không tìm thấy provider' {
+        { Set-ProviderNameLine -Raw '{}' -ProviderKey '2-xkiro-max' -NewName 'X' } |
+            Should -Throw -ErrorId "Không tìm thấy provider '2-xkiro-max' trong config."
+    }
+}
