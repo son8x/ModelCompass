@@ -58,10 +58,10 @@
     max_tokens trong benchmark. Mặc định: 32.
 
 .EXAMPLE
-    PS scripts\Test-ModelConnectivity.ps1
-    PS scripts\Test-ModelConnectivity.ps1 -Provider '6-teamoRouter' -Report
-    PS scripts\Test-ModelConnectivity.ps1 -UpdateStatus   # cập nhật STATUS.md
-    PS scripts\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Model 'minimax/minimax-m3:free'
+    PS scripts\test\Test-ModelConnectivity.ps1
+    PS scripts\test\Test-ModelConnectivity.ps1 -Provider '6-teamoRouter' -Report
+    PS scripts\test\Test-ModelConnectivity.ps1 -UpdateStatus   # cập nhật STATUS.md
+    PS scripts\test\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Model 'minimax/minimax-m3:free'
 #>
 [CmdletBinding()]
 param(
@@ -79,7 +79,7 @@ param(
     [int]$BenchmarkMaxTokens = 32
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 $ProgressPreference = 'SilentlyContinue'
 
 function Invoke-Probe {

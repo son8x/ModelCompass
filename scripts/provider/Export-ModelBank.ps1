@@ -31,7 +31,7 @@
     Chỉ nạp hàm (dot-source cho test), không chạy xuất.
 
 .EXAMPLE
-    PS scripts\Export-ModelBank.ps1
+    PS scripts\provider\Export-ModelBank.ps1
     PS mc export                          # tương đương
 #>
 [CmdletBinding()]
@@ -47,10 +47,10 @@ param(
 # Chụp cờ trước khi dot-source (quirk param trùng tên).
 $skipRunFlag = [bool]$SkipRun
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 # Registry provider (Id, ConfigProviders, IdStripPrefix, KeyEnv) — không gọi mạng.
-. (Join-Path $PSScriptRoot 'Get-ProviderCatalog.ps1') -SkipRun
+. (Get-ScriptPath 'Get-ProviderCatalog.ps1') -SkipRun
 
 function Get-PricesFromName {
     <# Trích giá `In:$X | Out:$Y` từ name model. #>

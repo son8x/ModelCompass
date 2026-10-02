@@ -23,7 +23,7 @@
     Có chênh lệch dev/prod -> exit 2 (chốt cứng sau publish).
 
 .EXAMPLE
-    PS scripts\New-ConfigDriftReport.ps1 -OutFile reports\drift.md
+    PS scripts\config\New-ConfigDriftReport.ps1 -OutFile reports\drift.md
 #>
 [CmdletBinding()]
 param(
@@ -36,7 +36,7 @@ param(
     [switch]$FailOnDrift
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 $repo = Get-RepoRoot
 if ([string]::IsNullOrWhiteSpace($Dev)) { $Dev = Join-Path $repo 'configs\development\opencode.jsonc' }

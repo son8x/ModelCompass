@@ -23,9 +23,9 @@
     Thời gian chờ tối đa mỗi request (mặc định 20s).
 
 .EXAMPLE
-    pwsh scripts\Get-XKiroUsage.ps1                  # xem 1 lần
-    pwsh scripts\Get-XKiroUsage.ps1 -Refresh 60      # theo dõi liên tục mỗi phút
-    pwsh scripts\Get-XKiroUsage.ps1 -Json | ConvertFrom-Json
+    pwsh scripts\provider\Get-XKiroUsage.ps1                  # xem 1 lần
+    pwsh scripts\provider\Get-XKiroUsage.ps1 -Refresh 60      # theo dõi liên tục mỗi phút
+    pwsh scripts\provider\Get-XKiroUsage.ps1 -Json | ConvertFrom-Json
 #>
 [CmdletBinding()]
 param(
@@ -34,7 +34,7 @@ param(
     [int]$TimeoutSeconds = 20
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 $ProgressPreference = 'SilentlyContinue'
 
 function Get-XKiroApiKey {
@@ -42,10 +42,11 @@ function Get-XKiroApiKey {
     $fromEnv = Resolve-EnvValue '{env:XTROUTER_API_KEY}'
     if ($fromEnv) { return $fromEnv }
 
-    # 2) tệp .env.local (scripts\ hoặc repo root)
+    # 2) tệp .env.local (repo root, scripts\, hoặc cạnh script)
     $candidates = @(
-        (Join-Path $PSScriptRoot '.env.local'),
-        (Join-Path (Get-RepoRoot) '.env.local')
+        (Join-Path (Get-RepoRoot) '.env.local'),
+        (Join-Path (Get-ScriptsDir) '.env.local'),
+        (Join-Path $PSScriptRoot '.env.local')
     )
     foreach ($p in $candidates) {
         if (-not (Test-Path -LiteralPath $p -PathType Leaf)) { continue }
@@ -154,7 +155,7 @@ function Show-Usage {
 
 $key = Get-XKiroApiKey
 if (-not $key) {
-    Write-Fail 'Thiếu key xKiro. Chạy: pwsh scripts\setup-opencode-env.ps1  (hoặc đặt XTROUTER_API_KEY).'
+    Write-Fail 'Thiếu key xKiro. Chạy: pwsh scripts\env\setup-opencode-env.ps1  (hoặc đặt XTROUTER_API_KEY).'
     exit 1
 }
 

@@ -18,7 +18,7 @@
     Biến cấu hình thiếu -> coi là LỖI (dùng trong CI khi muốn chặt chẽ).
 
 .EXAMPLE
-    PS scripts\Test-ModelCompassConfig.ps1 -Path configs\development\opencode.jsonc
+    PS scripts\config\Test-ModelCompassConfig.ps1 -Path configs\development\opencode.jsonc
 #>
 [CmdletBinding()]
 param(
@@ -26,7 +26,7 @@ param(
     [switch]$Strict
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 if ([string]::IsNullOrWhiteSpace($Path)) {
     $Path = Join-Path (Get-RepoRoot) 'configs\production\opencode.json'

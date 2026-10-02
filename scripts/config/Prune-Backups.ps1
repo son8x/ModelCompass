@@ -27,8 +27,8 @@
     Chỉ dọn backup global opencode (không đụng repo).
 
 .EXAMPLE
-    PS scripts\Prune-Backups.ps1 -DryRun
-    PS scripts\Prune-Backups.ps1 -KeepRepo 5 -KeepGlobal 20
+    PS scripts\config\Prune-Backups.ps1 -DryRun
+    PS scripts\config\Prune-Backups.ps1 -KeepRepo 5 -KeepGlobal 20
 #>
 [CmdletBinding()]
 param(
@@ -39,7 +39,7 @@ param(
     [switch]$GlobalOnly
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 $repo     = Get-RepoRoot
 $repoBak  = Join-Path $repo 'configs\production\.backup'

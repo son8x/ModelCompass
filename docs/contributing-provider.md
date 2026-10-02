@@ -24,7 +24,7 @@ chấp nhận và mọi thành viên dùng lại được. Bắt đầu từ m�
 2. **Validate cú pháp + cấu trúc**:
    ```powershell
    mc validate -Path configs/development/opencode.jsonc
-   # hoặc: pwsh scripts\Test-ModelCompassConfig.ps1 -Path ...
+   # hoặc: pwsh scripts\config\Test-ModelCompassConfig.ps1 -Path ...
    ```
    Nhớ đặt biến môi trường (xem `mc env`) để bước validate hết cảnh báo `{env:...}`.
 3. **Đối chiếu catalog live** (nếu provider có `GET /v1/models`):

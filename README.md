@@ -43,7 +43,7 @@ opencode đang chạy**.
 12. **CLI `mc`** — gói gọn mọi script thành 1 lệnh: `mc sync`, `mc publish`,
     `mc status`, `mc report`, `mc doctor` (check services local + config),
     `mc benchmark`, `mc export`, `mc help` (`modules/ModelCompass/`).
-13. **Model Bank (dạng dùng chung)** — `scripts/Export-ModelBank.ps1` sinh JSON
+13. **Model Bank (dạng dùng chung)** — `scripts/provider/Export-ModelBank.ps1` sinh JSON
     có schema (`model-bank/schema.json`) từ production config + presets để đồng
     bộ nhiều máy / công cụ khác tiêu thụ.
 14. **Provider plugin tự đóng góp** — template + recipe để thêm provider mới,
@@ -74,8 +74,16 @@ opencode đang chạy**.
 │   └── project-templates/          ← template per-project (code / thesis / pentest)
 ├── modules/ModelCompass/       ← 🧭 CLI `mc` (PowerShell module, Phase 3.1)
 ├── model-bank/                 ← model bank JSON + schema (dạng dùng chung, 3.3)
-├── scripts/                    ← PowerShell 7: validate / test / publish / install / restore / report* / mc / New-SortOrderKey / Export-ModelBank
-├── tests/                      ← Pester: Config, SortOrder, ConfigDiff, Benchmark, StatusUpdate, SpendReport, McCli, Templates, ModelBank, DocsSite
+├── scripts/                    ← PowerShell 7, chia theo nhóm (xem bên dưới)
+│   ├── mc.ps1                     ← shim CLI (giữ ở gốc)
+│   ├── Common-Functions.ps1      ← hàm dùng chung (giữ ở gốc)
+│   ├── config/                    ← validate / publish / install / restore / drift / sort-order
+│   ├── provider/                  ← catalog / prices / usage / model bank / xKiro
+│   ├── spend/                     ← ghi và tổng hợp chi phí
+│   ├── env/                       ← nạp key từ .env.local vào User env
+│   ├── server/                    ← opencode serve: status / start / stop / install
+│   └── test/                      ← Pester suite + connectivity
+├── tests/                      ← Pester: Config, SortOrder, ConfigDiff, Benchmark, StatusUpdate, SpendReport, McCli, Templates, ModelBank, DocsSite, ServerScript
 ├── .opencode/plugins-xkiro/    ← plugin theo dõi hạn mức xKiro (source)
 │   ├── xkiro-usage.js              ← server plugin: poll /v1/usage + log/toast (mặc định bật)
 │   ├── xkiro-statusline.tsx        ← TUI status bar (slot app_bottom)
@@ -91,13 +99,13 @@ opencode đang chạy**.
 
 ```powershell
 # 1) Kiểm tra cấu hình production hợp lệ
-pwsh scripts\Test-ModelCompassConfig.ps1
+pwsh scripts\config\Test-ModelCompassConfig.ps1
 
 # 2) (Tùy chọn) Ping thử connectivity của từng provider/model trong development
-pwsh scripts\Test-ModelConnectivity.ps1 -ConfigPath configs\development\opencode.jsonc
+pwsh scripts\test\Test-ModelConnectivity.ps1 -ConfigPath configs\development\opencode.jsonc
 
 # 3) Cài config production đang có lên opencode global (có backup tự động)
-pwsh scripts\Install-Config.ps1
+pwsh scripts\config\Install-Config.ps1
 #    → Quit & restart opencode
 ```
 
@@ -109,12 +117,12 @@ Key API **không nằm trong repo** — đọc mục **[🔐 Bảo mật](#-bả
 
 ```
 1. Chỉnh sửa configs/development/opencode.jsonc      (không đụng opencode đang chạy)
-2. pwsh scripts\Test-ModelCompassConfig.ps1 ...      (validate cú pháp)
-3. pwsh scripts\Test-ModelConnectivity.ps1 ...       (ping provider/model)
+2. pwsh scripts\config\Test-ModelCompassConfig.ps1 ...      (validate cú pháp)
+3. pwsh scripts\test\Test-ModelConnectivity.ps1 ...       (ping provider/model)
 4. Dùng thử bằng OPENCODE_CONFIG hoặc đổi model thủ công
-5. pwsh scripts\Publish-Config.ps1 -ConnectivityTest (dev → prod, có backup)
+5. pwsh scripts\config\Publish-Config.ps1 -ConnectivityTest (dev → prod, có backup)
 6. git add configs/production/opencode.json && git commit  (quản lý phiên bản)
-7. pwsh scripts\Install-Config.ps1                  (áp dụng lên opencode)
+7. pwsh scripts\config\Install-Config.ps1                  (áp dụng lên opencode)
 8. Restart opencode → kiểm tra → nếu lỗi: Restore-RunningConfig.ps1
 ```
 
@@ -123,8 +131,8 @@ Chi tiết: [`docs/workflow.md`](docs/workflow.md).
 ## 🛟 Khôi phục khi cấu hình mới gây lỗi
 
 ```powershell
-pwsh scripts\Restore-RunningConfig.ps1 -List               # xem các backup
-pwsh scripts\Restore-RunningConfig.ps1 -Backup opencode.json.bak-20260916-100000
+pwsh scripts\config\Restore-RunningConfig.ps1 -List               # xem các backup
+pwsh scripts\config\Restore-RunningConfig.ps1 -Backup opencode.json.bak-20260916-100000
 ```
 
 ## 🔐 Bảo mật
@@ -134,15 +142,105 @@ pwsh scripts\Restore-RunningConfig.ps1 -Backup opencode.json.bak-20260916-100000
 - `.env.local` (key thật) bị `.gitignore` chặn tuyệt đối — **không đặt file lộn
   xộn lên GitHub**. Mẫu an toàn `.env.sample` chỉ chứa **tên trường + placeholder
   (không có giá trị)**, được commit để làm tài liệu.
-- `scripts/setup-opencode-env.ps1` nạp key từ `.env.local` vào môi trường User,
+- `scripts/env/setup-opencode-env.ps1` nạp key từ `.env.local` vào môi trường User,
   tự động **chặn** nếu file key bị git theo dõi, và **che giấu key** trên màn hình:
   ```powershell
-  pwsh scripts\setup-opencode-env.ps1 -CreateSample   # tạo .env.sample (an toàn)
+  pwsh scripts\env\setup-opencode-env.ps1 -CreateSample   # tạo .env.sample (an toàn)
   Copy-Item .env.sample .env.local                    # rồi điền giá trị thật
-  pwsh scripts\setup-opencode-env.ps1 -FileName .env.local -Force
+  pwsh scripts\env\setup-opencode-env.ps1 -FileName .env.local -Force
   ```
 - CI tự quét chuỗi giống API key trong `configs/` + chặn mọi file `.env*`
   (trừ mẫu an toàn) bị theo dõi trong Git → fail nếu lộ bất cứ thứ gì.
+
+### Bảo vệ `opencode serve` / `opencode web`
+
+`OPENCODE_SERVER_PASSWORD` bật HTTP basic-auth cho server của opencode. Đây là
+biến **tùy chọn** (không có nó thì server chạy không bảo vệ, opencode sẽ tự cảnh báo).
+
+| Biến | Mặc định | Ý nghĩa |
+|---|---|---|
+| `OPENCODE_SERVER_PASSWORD` | — | mật khẩu basic-auth. Đặt → **mọi** listener của opencode đều yêu cầu auth, kể cả server do TUI spawn (TUI tự gửi credential nên vẫn chạy bình thường) |
+| `OPENCODE_SERVER_USERNAME` | `opencode` | tên đăng nhập |
+
+> Script chỉ nạp các biến có trong danh sách của nó. Nếu `.env.local` chứa tên lạ
+> (gõ sai, vd `OPENCODE_SERVER_PASS`) sẽ in cảnh báo `BỎ QUA` thay vì im lặng bỏ qua.
+
+```powershell
+# nhập tay (không echo ký tự), không cần .env.local
+pwsh scripts\env\setup-opencode-env.ps1 -PromptOptional
+
+# hoặc điền vào .env.local rồi nạp cả loạt
+pwsh scripts\env\setup-opencode-env.ps1 -FileName .env.local -Force
+
+# kiểm tra (mật khẩu luôn hiện dạng ************, không lộ ký tự nào)
+pwsh scripts\env\setup-opencode-env.ps1 -Check
+```
+
+Sau khi set, mở cửa sổ pwsh **mới** rồi chạy:
+
+```powershell
+opencode serve --port 4096    # hoặc: opencode web
+# đăng nhập: user "opencode" / mật khẩu vừa set
+```
+
+Gỡ bỏ: `[Environment]::SetEnvironmentVariable("OPENCODE_SERVER_PASSWORD", $null, "User")`
+
+> ⚠️ **Vì sao phải mở terminal mới?** opencode đọc `process.env` **một lần lúc khởi động**
+> rồi giữ nguyên. Đổi User env mà không restart tiến trình thì server vẫn dùng mật khẩu
+> cũ — triệu chứng là đăng nhập hoài thất bại dù bạn đã set đúng. `mc server` phát
+> hiện đúng trường hợp này qua trạng thái `AUTH-MISMATCH`.
+
+### 📱 Server tự chạy + truy cập từ điện thoại
+
+Bộ script trong `scripts/server/` thay cho việc gõ `opencode serve` tay mỗi lần
+khởi động máy:
+
+| Lệnh (`mc ...`) | Script | Việc |
+|---|---|---|
+| `mc server` | `Get-OpenCodeServerStatus.ps1` | Trạng thái, PID, IP, URL cho điện thoại, health check |
+| `mc server-start` | `Start-OpenCodeServer.ps1` | Chạy foreground + watchdog tự bật lại |
+| `mc server-stop` | `Stop-OpenCodeServer.ps1` | Dừng đúng thứ tự (watchdog trước) |
+| `mc server-setup` | `Install-OpenCodeServer.ps1` | Task Scheduler + firewall + `-Uninstall` |
+
+Ba điều launcher làm khác lệnh thô:
+
+1. **Nạp lại env từ registry User scope** — miễn nhiễm với terminal đang giữ env cũ,
+   đây chính là nguyên nhân "đổi mật khẩu rồi vẫn 401".
+2. **Watchdog** — Task Scheduler chỉ restart khi *fail*, mà tiến trình bị kill tay thì
+   không tính là lỗi. Vòng lặp này bảo đảm server sống lại sau bất kỳ lần thoát nào.
+3. **PID file** (`reports/opencode-server.pid`) — để `mc server-stop` tìm đúng tiến trình.
+
+```powershell
+# xem trạng thái + URL cần gõ trên điện thoại
+mc server
+# → http://10.0.20.20:4096
+
+# cài tự chạy lúc boot (Task Scheduler, chạy bằng TÀI KHOẢN CỦA BẠN — không phải SYSTEM,
+# vì opencode cần profile người dùng để đọc ~/.config/opencode, auth.json và DB)
+pwsh scripts\server\Install-OpenCodeServer.ps1 -PhoneIp 192.168.1.55
+
+# chạy cả khi chưa đăng nhập Windows (cần lưu mật khẩu Windows)
+pwsh scripts\server\Install-OpenCodeServer.ps1 -PhoneIp 192.168.1.55 -RunWhenLoggedOut `
+     -WindowsPassword (Read-Host -AsSecureString)
+
+# gỡ
+pwsh scripts\server\Install-OpenCodeServer.ps1 -Uninstall
+```
+
+**Về mặt an toàn:**
+
+- Server opencode cho phép **chạy lệnh shell**. Mở `0.0.0.0` mà không mật khẩu là lộ
+  quyền thực thi lệnh cho mọi thiết bị trong mạng — cả launcher và installer đều
+  **từ chối chạy** trong trường hợp đó.
+- Firewall **mặc định KHÔNG mở** gì cả. Chỉ mở khi bạn truyền `-PhoneIp`, và rule
+  đó giới hạn theo **profile Private** + đúng IP điện thoại đó.
+- Không cần `-WriteConfigBlock`: launcher nhận `--hostname/--port` từ scheduled task.
+  Nếu bạn muốn ghim cổng vào `~/.config/opencode/opencode.json` cho công cụ khác đọc,
+  thêm `-WriteConfigBlock` (script backup file cũ trước).
+- Ra ngoài nhà: dùng **Tailscale**, đừng mở port trên router.
+- Đừng mở TUI và web/Android cùng thao tác **cùng một session** — chúng dùng chung
+  `opencode.db` và có thể đè lên nhau.
+- IP Wi-Fi có thể đổi do DHCP; chạy `mc server` để xem lại URL hiện tại.
 
 ## 🧩 Plugin: theo dõi hạn mức xKiro
 
@@ -196,10 +294,10 @@ khi quyết định trả phí, hãy xác nhận lại trên trang chính thức
 
 ```powershell
 # Benchmark 1 model (mặc định 6 lượt gọi, tổng hợp median ms + tokens/giây)
-pwsh scripts\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Model 'minimax/minimax-m3:free'
+pwsh scripts\test\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Model 'minimax/minimax-m3:free'
 
 # Kèm report Markdown vào reports\
-pwsh scripts\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Report
+pwsh scripts\test\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free' -Report
 ```
 
 `-Benchmark` **bắt buộc** thu hẹp bằng `-Provider` hoặc `-Model` để không đốt
@@ -218,7 +316,12 @@ gọi script qua tiến trình pwsh con (an toàn khi script có `exit`):
 & scripts\mc.ps1 report -Month 2026-09      # spend report
 & scripts\mc.ps1 export                     # sinh model-bank/modelbank.json
 & scripts\mc.ps1 sync                       # kéo catalog provider (mạng)
+& scripts\mc.ps1 server                     # trạng thái server + URL cho điện thoại
+& scripts\mc.ps1 server-setup               # cài tự chạy lúc boot (cần PowerShell Admin)
 ```
+
+Có thể import trực tiếp để gõ `mc` không cần `scripts\mc.ps1`:
+thêm vào `$PROFILE` dòng `Import-Module <repo>\modules\ModelCompass\ModelCompass.psd1`.
 
 Import trực tiếp trong PowerShell: `Import-Module modules\ModelCompass\ModelCompass.psd1`,
 rồi dùng `mc <lệnh>`. `mc doctor` cần các env `XTROUTER_API_KEY`, `OMNIROUTE_KEY`,
@@ -226,7 +329,7 @@ rồi dùng `mc <lệnh>`. `mc doctor` cần các env `XTROUTER_API_KEY`, `OMNIR
 
 ## 🗂 Model bank & GitHub Pages docs
 
-- **Model bank**: `scripts/Export-ModelBank.ps1` đọc `configs/production/opencode.json`
+- **Model bank**: `scripts/provider/Export-ModelBank.ps1` đọc `configs/production/opencode.json`
   + `configs/presets/*` + catalog live → `model-bank/modelbank.json` (schema
   `model-bank/schema.json`). Chứa providers, models (giá từ `name` + catalog, tag
   `preset:<tên>`), presets, stats — để công cụ khác/dâ chuyển đồng bộ dùng.

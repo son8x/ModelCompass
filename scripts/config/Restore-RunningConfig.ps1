@@ -21,8 +21,8 @@
     File đích (mặc định: ~/.config/opencode/opencode.json).
 
 .EXAMPLE
-    PS scripts\Restore-RunningConfig.ps1 -List
-    PS scripts\Restore-RunningConfig.ps1 -Backup opencode.json.bak-20260916-100000
+    PS scripts\config\Restore-RunningConfig.ps1 -List
+    PS scripts\config\Restore-RunningConfig.ps1 -Backup opencode.json.bak-20260916-100000
 #>
 [CmdletBinding()]
 param(
@@ -31,7 +31,7 @@ param(
     [string]$Target
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 if ([string]::IsNullOrWhiteSpace($Target)) {
     $Target = Join-Path $env:USERPROFILE '.config\opencode\opencode.json'
@@ -71,7 +71,7 @@ if ($List -or ([string]::IsNullOrWhiteSpace($Backup))) {
         Write-Host ("  {0}   ({1})" -f $b.Name, $b.LastWriteTime.ToString('yyyy-MM-dd HH:mm')) -ForegroundColor Green
     }
     Write-Host ''
-    Write-Info 'Để khôi phục:  scripts\Restore-RunningConfig.ps1 -Backup <tên-file>'
+    Write-Info 'Để khôi phục:  scripts\config\Restore-RunningConfig.ps1 -Backup <tên-file>'
     if (-not $List) { exit 0 }
     exit 0
 }

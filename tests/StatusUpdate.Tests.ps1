@@ -6,7 +6,7 @@ Phủ: ConvertTo-StatusBlock + Update-StatusFile (marker insert/replace) — fil
 #>
 BeforeAll {
     Set-StrictMode -Version Latest
-    . (Join-Path $PSScriptRoot '..\scripts\Test-ModelConnectivity.ps1') -SkipRun
+    . (Join-Path $PSScriptRoot '..\scripts\test\Test-ModelConnectivity.ps1') -SkipRun
     $script:tmpRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('modelcompass-status-' + [guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory -Path $script:tmpRoot -Force | Out-Null
     $script:results = @(

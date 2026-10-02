@@ -2,13 +2,13 @@
 #Requires -Modules Pester
 <#
 ModelCompass.Tests.ps1 — Pester v5 test cho phần lõi scripts/ và cấu hình.
-Chạy bằng:  scripts\Test-Suite.ps1
+Chạy bằng:  scripts\test\Test-Suite.ps1
 #>
 
 BeforeAll {
     $script:RepoRoot  = Split-Path $PSScriptRoot -Parent
     $script:Common    = Join-Path $script:RepoRoot 'scripts\Common-Functions.ps1'
-    $script:TestConf  = Join-Path $script:RepoRoot 'scripts\Test-ModelCompassConfig.ps1'
+    $script:TestConf  = Join-Path $script:RepoRoot 'scripts\config\Test-ModelCompassConfig.ps1'
     $script:DevConfig = Join-Path $script:RepoRoot 'configs\development\opencode.jsonc'
     $script:ProdRepos = Join-Path $script:RepoRoot 'configs\production\opencode.json'
     . $script:Common
@@ -175,7 +175,7 @@ Describe 'Cấu hình production/development hợp lệ' {
 
 Describe 'Compare-Config (dev vs prod)' {
     It 'chạy được và exit 0 (dev/prod hiện đang đồng bộ)' {
-        & (Join-Path $script:RepoRoot 'scripts\Compare-Config.ps1') | Out-Null
+        & (Join-Path $script:RepoRoot 'scripts\config\Compare-Config.ps1') | Out-Null
         [int]$LASTEXITCODE | Should -Be 0
     }
 }

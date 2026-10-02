@@ -9,13 +9,15 @@
     -InstallPester: tự cài Pester v5 nếu chưa có (dùng cho CI/máy mới).
 
 .EXAMPLE
-    PS scripts\Test-Suite.ps1
-    PS scripts\Test-Suite.ps1 -InstallPester
+    PS scripts\test\Test-Suite.ps1
+    PS scripts\test\Test-Suite.ps1 -InstallPester
 #>
 [CmdletBinding()]
 param([switch]$InstallPester)
 
-$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
+
+$repoRoot = Get-RepoRoot
 $testsDir = Join-Path $repoRoot 'tests'
 $testFiles = @(
     Get-ChildItem -LiteralPath $testsDir -Filter '*.Tests.ps1' -ErrorAction SilentlyContinue |

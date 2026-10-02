@@ -4,6 +4,61 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.7.0] — 2026-10-02 — Tách `scripts/` theo nhóm + quản lý opencode server
+
+### Thêm
+- **`scripts/server/` — vòng đời opencode server** (4 script, mới hoàn toàn):
+  - `Get-OpenCodeServerStatus.ps1` — PID/cổng/URL LAN + Tailscale, health probe
+    không auth (`401`) và có auth (`200`), verdict `OK` / `AUTH-MISMATCH` /
+    `UNSECURED`, `-Json`.
+  - `Start-OpenCodeServer.ps1` — nạp **trực tiếp User registry** cho
+    `OPENCODE_SERVER_PASSWORD` / `OPENCODE_SERVER_USERNAME` / API key (tiến trình mới
+    mới thừa hưởng env), watchdog hồi sinh tiến trình con sau 10s, ghi
+    `reports/opencode-server.pid` + `.log`, `-Once` (không watchdog), `-NoReloadEnv`.
+  - `Stop-OpenCodeServer.ps1` — dừng **watchdog trước** (nếu không nó sẽ tự bật lại),
+    chỉ kill PID trong file khi commandline khớp launcher (PID Windows có thể tái
+    sử dụng → tránh kill nhầm tiến trình khác).
+  - `Install-OpenCodeServer.ps1` — Task Scheduler + firewall + `-Uninstall`.
+    - Trigger bám đúng principal: `Interactive` → `AtLogOn`; `-RunWhenLoggedOut`
+      → `AtStartup` + `LogonType Password`, delay qua `$trigger.Delay`
+      (`-RandomDelay` trên `LogonTrigger` **không lưu được**).
+    - `-AllowLanSubnet`: mở `LocalSubnet` profile `Private` — IP điện thoại động
+      và hay đổi khi đổi SSID nên khoanh một IP cứng sẽ hỏng.
+    - `-Tailscale`: khoán theo **interface** Tailscale (IP tailnet `100.x` cố định),
+      mọi rule đều mang `Description` cố định nên `-Uninstall` gỡ đúng rule của
+      script, không đụng rule người khác.
+- Lệnh CLI mới: `mc server`, `mc server-start`, `mc server-stop`, `mc server-setup`.
+- `tests/ServerScript.Tests.ps1` (45 test): parse, nạp registry, thứ tự dừng,
+  trigger khớp principal, phân quyền firewall, verdict status, regression CLI.
+
+### Changed
+- **Tách `scripts/` theo nhóm** — `config/` (9), `provider/` (5), `spend/` (2),
+  `env/`, `test/` (2), `server/` (4); giữ ở root `mc.ps1`, `Common-Functions.ps1`,
+  `.env.local`. Cập nhật mọi tham chiếu (CI, docs, configs, module, cross-reference).
+  `Common-Functions.ps1` có `Get-RepoRoot` / `Get-ScriptsDir` / `Get-ScriptPath`.
+- `mc.ps1`: sửa `$args` là `$null` khi chạy `pwsh -File` không có tham số phụ, và
+  `$code = mc ...` nuốt mất stdout của script con.
+- `Get-OpenCodeServerStatus.ps1`: chỉ in URL LAN khi server thật sự bind mọi
+  interface — trước đó in cả khi bind loopback, khiến người dùng gõ URL không dùng
+  được rồi tưởng server hỏng.
+- `.gitattributes`: `scripts/**/*.ps1` giữ CRLF cho script trong thư mục con.
+- `scripts/test/Test-Suite.ps1` giờ chạy **226 test**, pass toàn bộ.
+
+### Fixed
+- `$listeners.Count` nổ khi server **đang tắt** (`$listeners | Where-Object` trả
+  `$null` thay vì mảng) — đúng trường hợp dùng nhiều nhất.
+- `Install-OpenCodeServer.ps1 -StartNow` không nạp lại tham số mới khi task đã
+  `Running`: `MultipleInstances=IgnoreNew` khiến `Start-ScheduledTask` bị bỏ qua,
+  tiến trình cũ giữ nguyên `-Hostname` cũ (cài lại `-Hostname 0.0.0.0` xong điện
+  thoại vẫn không vào được). Nay dừng task cũ rồi khởi động lại.
+
+### Ghi chú bảo mật
+- `opencode serve` cho phép **thực thi shell**. Bind `0.0.0.0` tức là mọi máy trong
+  mạng đều có thể gọi shell nếu dò đúng mật khẩu.
+- Ưu tiên `-Tailscale`: IP tailnet cố định, không mở cho LAN, dùng được ngoài văn phòng.
+- `-AllowLanSubnet` chỉ áp dụng profile `Private`; Wi-Fi ở quán/cafe thường là
+  `Public` nên đường LAN **không** mở ở đó (đây là hành vi mong muốn).
+
 ## [0.6.0] — 2026-09-18 — Phase 3 hoàn tất (3.1–3.4)
 
 ### Thêm
@@ -19,7 +74,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
   `sortOrder`/`release_date`, ghi chú tiếng Việt trong `readme` model) + `docs/contributing-provider.md`
   (quy ước tên id, ánh xạ catalog, recipe 7 bước, checklist CI). CI `validate.yml` thêm
   step validate **mọi template** (project-templates + provider-template). `tests/Templates.Tests.ps1` (6 test).
-- **3.3 Model Bank**: `scripts/Export-ModelBank.ps1` (`Get-PricesFromName`, `Get-ModelBankPricing`
+- **3.3 Model Bank**: `scripts/provider/Export-ModelBank.ps1` (`Get-PricesFromName`, `Get-ModelBankPricing`
   — giá ưu tiên catalog live, fallback giá trong `name`, tôn trọng strip tiền tố id gateway;
   `New-ModelBank` — providers, models kèm pricing/catalogPricing/tags `preset:<tên>`, presets,
   stats: modelCount/free/paid/tagSet, version 1.0.0) + `model-bank/schema.json` (JSON Schema
@@ -31,12 +86,12 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
   → upload → deploy; bật Pages source = GitHub Actions). `tests/DocsSite.Tests.ps1` (4 test).
 
 ### Changed
-- `scripts/Export-ModelBank.ps1`: đường dẫn preset/source config xuất ra là **tương đối**
+- `scripts/provider/Export-ModelBank.ps1`: đường dẫn preset/source config xuất ra là **tương đối**
   repo (đồng bộ nhiều máy); truy cập property an toàn StrictMode (`PSObject.Properties['...']`)
   — không còn `PropertyNotFoundException` khi model thiếu `release_date`/`name`.
 - `modules/ModelCompass/ModelCompass.psm1`: `ConvertTo-McCommandLine` nhận `$Args` rỗng
   (không còn lỗi bind khi gọi lệnh không tham số).
-- `scripts/Test-Suite.ps1` giờ chạy **136 test** (103 → 136), pass toàn bộ.
+- `scripts/test/Test-Suite.ps1` giờ chạy **136 test** (103 → 136), pass toàn bộ.
 - `README.md`, `ROADMAP.md`: Phase 3 ✅ 4/4 hoàn thành 18/09/2026.
 
 ### Ghi chú
@@ -71,7 +126,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 ### Changed
 - `scripts/Common-Functions.ps1`: `Test-ConfigFile` truy cập property an toàn StrictMode
   (bỏ `@(...)` với 1 phần tử → dùng `List` accumulation), hết `PropertyNotFoundException`.
-- `scripts/Test-Suite.ps1` giờ chạy **103 test** (73 → 103), pass toàn bộ.
+- `scripts/test/Test-Suite.ps1` giờ chạy **103 test** (73 → 103), pass toàn bộ.
 - `ROADMAP.md`: Phase 2 ✅ 6/6 hoàn thành 18/09/2026; next = Phase 3.
 
 ### Ghi chú
@@ -95,7 +150,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 ## [0.3.4] — 2026-09-17 — Phase 1.5: auto-update STATUS.md (bán tự động)
 
 ### Thêm
-- `scripts/Test-ModelConnectivity.ps1`: cờ `-UpdateStatus` sinh khối **"Trạng thái gần nhất"**
+- `scripts/test/Test-ModelConnectivity.ps1`: cờ `-UpdateStatus` sinh khối **"Trạng thái gần nhất"**
   từ kết quả probe (marker `<!-- START/END auto-status -->`) rồi chèn/ghi đè vào `STATUS.md`;
   `-StatusPath` cho test/demo; `-SkipRun` để dot-source test.
 - `tests/StatusUpdate.Tests.ps1` (5 test) — `ConvertTo-StatusBlock` + `Update-StatusFile`
@@ -103,7 +158,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
 ### Changed
 - `Test-ModelConnectivity.ps1` cấu trúc lại: các hàm thuần đặt phía trên điểm chạy chính.
-- `scripts/Test-Suite.ps1` giờ chạy 73 test (68 → 73), pass toàn bộ.
+- `scripts/test/Test-Suite.ps1` giờ chạy 73 test (68 → 73), pass toàn bộ.
 
 ### Ghi chú
 - Demo 17/09/2026 trên config tạm: 3 dòng SKIP (thiếu key) → STATUS.md insert đúng 1 khối
@@ -131,9 +186,9 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 ## [0.3.2] — 2026-09-17 — Phase 1.3: báo cáo chi phí tổng hợp (đa provider)
 
 ### Thêm
-- `scripts/Add-SpendEntry.ps1` — ghi 1 phiên (provider, model, token in/out, $)
+- `scripts/spend/Add-SpendEntry.ps1` — ghi 1 phiên (provider, model, token in/out, $)
   vào `reports/spend.jsonl` (append-only, 1 JSON/dòng); tính cost từ token × giá/1M.
-- `scripts/Get-SpendReport.ps1` — tổng hợp spend log theo **ngày / provider / top model**:
+- `scripts/spend/Get-SpendReport.ps1` — tổng hợp spend log theo **ngày / provider / top model**:
   filter `-Month/-Day/-Provider/-Model`, xuất bảng console, `-Json` (pipe/script khác),
   `-Report` (Markdown `reports/spend-report-*.md`).
 - `scripts/Common-Functions.ps1`: `ConvertTo-SpendCost`, `Get-SpendLogPath`,
@@ -141,7 +196,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 - `tests/SpendReport.Tests.ps1` (18 test) — ghi/đọc round-trip trên file tạm + hàm thuần.
 
 ### Changed
-- `scripts/Test-Suite.ps1` giờ chạy 68 test (34 → 50 → 68), pass toàn bộ.
+- `scripts/test/Test-Suite.ps1` giờ chạy 68 test (34 → 50 → 68), pass toàn bộ.
 
 ### Ghi chú
 - Demo live 17/09/2026: 3 phiên (xkiro gpt-5.6-sol + deepseek free, openrouter deepseek-r2)
@@ -151,7 +206,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 ## [0.3.1] — 2026-09-17 — Phase 1.2: so giá config vs catalog live
 
 ### Thêm
-- `scripts/Compare-Prices.ps1` — trích giá nhồi trong `name` model (`In:$X | Out:$Y`),
+- `scripts/provider/Compare-Prices.ps1` — trích giá nhồi trong `name` model (`In:$X | Out:$Y`),
   đối chiếu với catalog live (`docs/catalogs/`): báo model giá **đã đổi** ($ + %),
   gợi ý tên mới để copy vào config; tôn trọng strip tiền tố id gateway.
 - `tests/Compare-Prices.Tests.ps1` (16 test) — dot-source `-SkipRun`, không gọi mạng.
@@ -167,7 +222,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 ## [0.3.0] — 2026-09-17 — Phase 1.1: catalog live đa provider
 
 ### Thêm
-- `scripts/Get-ProviderCatalog.ps1` — gọi `GET /v1/models` cho xKiro/Teamo/OpenRouter/
+- `scripts/config/Get-ProviderCatalog.ps1` — gọi `GET /v1/models` cho xKiro/Teamo/OpenRouter/
   OmniRoute/9Router; xuất catalog chuẩn hoá (`context_length`, `access_tier`, `pricing`)
   vào `docs/catalogs/<provider>.json` + snapshot có timestamp vào `reports/catalogs/`;
   so với config để liệt kê model **thiếu / cùng họ / mới chưa khai báo** (`-ShowAllNew`).
@@ -175,7 +230,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 - `tests/Get-ProviderCatalog.Tests.ps1` (11 test) — dot-source không gọi mạng (`-SkipRun`).
 
 ### Changed
-- `scripts/Test-Suite.ps1` tự động quét mọi `tests/*.Tests.ps1` (hiện 34 test, pass).
+- `scripts/test/Test-Suite.ps1` tự động quét mọi `tests/*.Tests.ps1` (hiện 34 test, pass).
 - `docs/workflow.md` (Bảo trì) + `configs/README.md` cập nhật cách dùng catalog.
 
 ### Ghi chú
@@ -185,11 +240,11 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 ## [0.2.0] — 2026-09-17 — Phase 0: vững nền móng
 
 ### Thêm
-- `scripts/Compare-Config.ps1` — so sánh development vs production (provider set,
+- `scripts/config/Compare-Config.ps1` — so sánh development vs production (provider set,
   options, model set, model mặc định); mặc định chỉ cảnh báo, `-FailOnDiff` để chốt cứng.
-- `scripts/Prune-Backups.ps1` — chính sách backup (giữ N bản mới nhất cho backup
+- `scripts/config/Prune-Backups.ps1` — chính sách backup (giữ N bản mới nhất cho backup
   repo + backup global), có `-DryRun`.
-- `tests/ModelCompass.Tests.ps1` + `scripts/Test-Suite.ps1` — Pester v5 cho phần
+- `tests/ModelCompass.Tests.ps1` + `scripts/test/Test-Suite.ps1` — Pester v5 cho phần
   lõi scripts/ (JSONC parsing, env resolve, hash, state, validate config, quét key).
 - State file cài đặt (sentry): `Install-Config.ps1` / `Restore-RunningConfig.ps1`
   ghi `<target>.state.json` (thời điểm, nguồn, backup, hash) — `Restore -List` hiện

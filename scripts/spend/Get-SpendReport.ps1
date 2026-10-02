@@ -38,9 +38,9 @@
     Chỉ nạp định nghĩa function (dùng cho test dot-source), không chạy.
 
 .EXAMPLE
-    pwsh scripts\Get-SpendReport.ps1                     # tổng hợp toàn bộ log
-    pwsh scripts\Get-SpendReport.ps1 -Month 2026-09 -Provider xkiro
-    pwsh scripts\Get-SpendReport.ps1 -Json | ConvertFrom-Json
+    pwsh scripts\spend\Get-SpendReport.ps1                     # tổng hợp toàn bộ log
+    pwsh scripts\spend\Get-SpendReport.ps1 -Month 2026-09 -Provider xkiro
+    pwsh scripts\spend\Get-SpendReport.ps1 -Json | ConvertFrom-Json
 #>
 [CmdletBinding()]
 param(
@@ -55,7 +55,7 @@ param(
     [switch]$SkipRun
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 $skipRunFlag = [bool]$SkipRun
 

@@ -44,9 +44,9 @@
     Số model "mới" hiển thị mẫu khi không dùng -ShowAllNew (mặc định 5, 0 = không hiển thị).
 
 .EXAMPLE
-    pwsh scripts/Get-ProviderCatalog.ps1
-    pwsh scripts/Get-ProviderCatalog.ps1 -Provider xkiro -FailOnMissing
-    pwsh scripts/Get-ProviderCatalog.ps1 -NoCompare -NoSnapshots
+    pwsh scripts/config/Get-ProviderCatalog.ps1
+    pwsh scripts/config/Get-ProviderCatalog.ps1 -Provider xkiro -FailOnMissing
+    pwsh scripts/config/Get-ProviderCatalog.ps1 -NoCompare -NoSnapshots
 #>
 [CmdletBinding()]
 param(
@@ -65,7 +65,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Continue'
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 # ───────────────────────────────────────────────
 # Registry provider: ai nào gọi endpoint nào, cấu hình trong config provider nào.

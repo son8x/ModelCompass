@@ -27,7 +27,7 @@ jobs:
       - name: Sinh báo cáo drift (validate + dev/prod + thống kê)
         shell: pwsh
         run: |
-          & ./scripts/New-ConfigDriftReport.ps1 -OutFile "$RUNNER_TEMP/config-drift.md"
+          & ./scripts/config/New-ConfigDriftReport.ps1 -OutFile "$RUNNER_TEMP/config-drift.md"
           Write-Host "exit=$LASTEXITCODE"
 
       - name: Kèm report vào artifact

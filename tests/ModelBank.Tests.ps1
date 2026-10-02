@@ -9,7 +9,7 @@ Dot-source với -SkipRun (giữ pattern Compare-Prices.Tests).
 #>
 BeforeAll {
     Set-StrictMode -Version Latest
-    $script:sut = Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'scripts\Export-ModelBank.ps1'
+    $script:sut = Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'scripts\provider\Export-ModelBank.ps1'
     . $script:sut -SkipRun
 
     $script:fakeConfigProvider = [pscustomobject]@{

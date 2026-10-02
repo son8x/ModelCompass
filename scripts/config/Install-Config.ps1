@@ -18,7 +18,7 @@
     Không hỏi xác nhận (dùng cho tự động hoá).
 
 .EXAMPLE
-    PS scripts\Install-Config.ps1
+    PS scripts\config\Install-Config.ps1
 #>
 [CmdletBinding()]
 param(
@@ -26,7 +26,7 @@ param(
     [switch]$Force
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 $repo = Get-RepoRoot
 $source = Join-Path $repo 'configs\production\opencode.json'
@@ -55,7 +55,7 @@ if (-not (Test-Path -LiteralPath $targetDir -PathType Container)) {
 
 # kiểm tra cấu hình hợp lệ trước khi cài thay
 Write-Info 'Validate source trước khi cài...'
-& (Join-Path $PSScriptRoot 'Test-ModelCompassConfig.ps1') -Path $source | ForEach-Object { Write-Host "  $_" }
+& (Get-ScriptPath 'Test-ModelCompassConfig.ps1') -Path $source | ForEach-Object { Write-Host "  $_" }
 if ($LASTEXITCODE -ne 0) {
     Write-Fail 'Source không hợp lệ — không cài.'
     exit 1
@@ -87,5 +87,5 @@ Write-Host ''
 Write-Ok 'HOÀN TẤT. Quy trình còn lại:'
 Write-Host '  1. Quit opencode hoàn toàn.'
 Write-Host '  2. Mở lại opencode — cấu hình mới sẽ được nạp.'
-Write-Host '  3. Nếu gặp sự cố: scripts\Restore-RunningConfig.ps1 -Backup <tên-file-bak>'
+Write-Host '  3. Nếu gặp sự cố: scripts\config\Restore-RunningConfig.ps1 -Backup <tên-file-bak>'
 exit 0

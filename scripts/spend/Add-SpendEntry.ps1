@@ -42,7 +42,7 @@
     File log khác (mặc định reports/spend.jsonl dưới repo root).
 
 .EXAMPLE
-    pwsh scripts\Add-SpendEntry.ps1 -Provider xkiro -Model 'openai/gpt-5.6-sol' `
+    pwsh scripts\spend\Add-SpendEntry.ps1 -Provider xkiro -Model 'openai/gpt-5.6-sol' `
         -PromptTokens 120000 -CompletionTokens 30000 -PriceIn 4.5 -PriceOut 27
 #>
 [CmdletBinding()]
@@ -59,7 +59,7 @@ param(
     [string]$Path
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 $computed = ConvertTo-SpendCost -PromptTokens $PromptTokens -CompletionTokens $CompletionTokens -PriceIn $PriceIn -PriceOut $PriceOut
 $costIn  = if ($PSBoundParameters.ContainsKey('CostIn'))  { $CostIn  } else { $computed.CostIn  }

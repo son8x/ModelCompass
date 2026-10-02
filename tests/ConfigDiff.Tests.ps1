@@ -135,7 +135,7 @@ Describe 'Test-ConfigFile' {
 Describe 'New-ConfigDriftReport (đồng bộ → OK)' {
     It 'chạy với dev=prod → report OK, exit 0' {
         $out = Join-Path $script:tmpRoot 'report.md'
-        & (Join-Path $script:RepoRoot 'scripts\New-ConfigDriftReport.ps1') `
+        & (Join-Path $script:RepoRoot 'scripts\config\New-ConfigDriftReport.ps1') `
             -Dev $script:cfgApath -Prod $script:cfgApath `
             -PresetsDir (Join-Path $script:tmpRoot 'empty-presets') `
             -BackupDir (Join-Path $script:tmpRoot 'no-backup') `

@@ -1,12 +1,12 @@
 #Requires -Version 7
 #Requires -Modules Pester
 <#
-ModelCompass: Test các hàm thuần của scripts/Get-ProviderCatalog.ps1
+ModelCompass: Test các hàm thuần của scripts/config/Get-ProviderCatalog.ps1
 (chuẩn hoá catalog + đối chiếu config vs catalog) — KHÔNG gọi mạng.
 #>
 BeforeAll {
     Set-StrictMode -Version Latest
-    . (Join-Path $PSScriptRoot '..\scripts\Get-ProviderCatalog.ps1') -Provider @() -NoSave -NoCompare -SkipRun
+    . (Join-Path $PSScriptRoot '..\scripts\config\Get-ProviderCatalog.ps1') -Provider @() -NoSave -NoCompare -SkipRun
 }
 
 Describe 'ConvertTo-NormalizedModel' {

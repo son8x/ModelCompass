@@ -1,13 +1,13 @@
 #Requires -Version 7
 #Requires -Modules Pester
 <#
-ModelCompass: Test các hàm thuần của scripts/Update-XKiroModels.ps1
+ModelCompass: Test các hàm thuần của scripts/provider/Update-XKiroModels.ps1
 (đặt tên thân thiện từ id, xếp nhóm, so catalog, tính thứ tự, gán release_date,
 edit JSONC giữ comment) — không gọi mạng.
 #>
 BeforeAll {
     Set-StrictMode -Version Latest
-    . (Join-Path $PSScriptRoot '..\scripts\Update-XKiroModels.ps1') -SkipRun
+    . (Join-Path $PSScriptRoot '..\scripts\provider\Update-XKiroModels.ps1') -SkipRun
 }
 
 Describe 'ConvertTo-FriendlyName' {

@@ -156,23 +156,23 @@ ta dùng nó làm "khoá sắp xếp tổng hợp" — 2 provider xKiro hiện t
 
 1. Model muốn hiện **trên** → gán `release_date` **lớn hơn** (vì opencode sort GIẢM DẦN).
 2. Dùng vùng năm **`2099`** để phân biệt với ngày phát hành thật (không lẫn khi catalog ra model mới).
-3. Danh sách N liên tiếp: sinh bằng helper (mục §6b) — `scripts\New-SortOrderKey.ps1 -Count N` (giảm dần từ `2099-12-31`, cách 1 ngày; `-From` để đổi điểm bắt đầu cluster). Khi **chèn mới vào giữa**: `-Between <key-trên> -BetweenLower <key-dưới>` — helper chọn ngày nằm giữa, không phải đụng date các model khác.
+3. Danh sách N liên tiếp: sinh bằng helper (mục §6b) — `scripts\config\New-SortOrderKey.ps1 -Count N` (giảm dần từ `2099-12-31`, cách 1 ngày; `-From` để đổi điểm bắt đầu cluster). Khi **chèn mới vào giữa**: `-Between <key-trên> -BetweenLower <key-dưới>` — helper chọn ngày nằm giữa, không phải đụng date các model khác.
 4. **Không trùng `release_date`** giữa 2 model — trùng sẽ rơi xuống sort theo `name` A→Z làm mất thứ tự.
 5. Chỉ áp dụng cho provider muốn ép thứ tự model; provider không đặt `release_date` sẽ hiển thị theo `name` A→Z.
 6. Schema hỗ trợ `release_date` ở mỗi model (`provider.<id>.models.<id>.release_date`, string) — xác nhận tại `https://opencode.ai/config.json`.
 7. Sau khi sửa: validate → `Publish-Config.ps1` → `Install-Config.ps1` → **quit & restart opencode** (config chỉ nạp 1 lần lúc khởi động).
 
-### 6b. Helper "khoá sắp xếp" (`scripts\New-SortOrderKey.ps1`)
+### 6b. Helper "khoá sắp xếp" (`scripts\config\New-SortOrderKey.ps1`)
 
 Mọi việc bấm số `2099-…` giờ hội tụ về 1 helper (Phase 2.3) — **script chỉ IN key, không sửa file** (config chứa nhiều comment, tránh hỏng):
 
 | Thao tác | Lệnh |
 |----------|------|
-| Sinh N key giảm dần (mặc định từ `2099-12-31`) | `pwsh scripts\New-SortOrderKey.ps1 -Count 24` |
-| Sinh key cho cluster khác (vd cụm B trả phí, bắt đầu `2099-10-25`) | `pwsh scripts\New-SortOrderKey.ps1 -From 2099-10-25 -Count 9` |
-| Chèn model giữa 2 model đã có (không đụng date khác) | `pwsh scripts\New-SortOrderKey.ps1 -Between <key-trên> -BetweenLower <key-dưới>` |
-| Thêm N model vào cuối provider (tự đọc key nhỏ nhất, nối tiếp) | `pwsh scripts\New-SortOrderKey.ps1 -Append -Config <config> -Provider <id> -Count N` |
-| Dựng lại toàn bộ key của provider | `pwsh scripts\New-SortOrderKey.ps1 -Rebuild -Config <config> -Provider <id> -From 2099-12-31` |
+| Sinh N key giảm dần (mặc định từ `2099-12-31`) | `pwsh scripts\config\New-SortOrderKey.ps1 -Count 24` |
+| Sinh key cho cluster khác (vd cụm B trả phí, bắt đầu `2099-10-25`) | `pwsh scripts\config\New-SortOrderKey.ps1 -From 2099-10-25 -Count 9` |
+| Chèn model giữa 2 model đã có (không đụng date khác) | `pwsh scripts\config\New-SortOrderKey.ps1 -Between <key-trên> -BetweenLower <key-dưới>` |
+| Thêm N model vào cuối provider (tự đọc key nhỏ nhất, nối tiếp) | `pwsh scripts\config\New-SortOrderKey.ps1 -Append -Config <config> -Provider <id> -Count N` |
+| Dựng lại toàn bộ key của provider | `pwsh scripts\config\New-SortOrderKey.ps1 -Rebuild -Config <config> -Provider <id> -From 2099-12-31` |
 
 Helper tránh trùng key bằng `-Exclude` (tự động nạp key sẵn có trong `-Append`). Hàm thuần dùng chung:
 `New-SortOrderKey` / `Get-SortOrderKeyBetween` trong `scripts\Common-Functions.ps1` (phủ test tại
@@ -187,7 +187,7 @@ Helper tránh trùng key bằng `-Exclude` (tự động nạp key sẵn có tro
 - **Allowance** (trang chính thức mới nhất): **$264/tuần** cho model paid/premium — *con số đo được trước đây trong script là $140/tuần, có thể là mức cũ/promo; chạy lại `Get-XKiroUsage.ps1` để xác nhận*
 - **1.8B token free/tháng** (~60M/ngày) cho model free — *tài liệu cũ ghi 32M/ngày, kiểm tra lại*
 - Burst limit: $20/5 giờ
-- Kiểm tra: `pwsh scripts\Get-XKiroUsage.ps1`
+- Kiểm tra: `pwsh scripts\provider\Get-XKiroUsage.ps1`
 - Theo dõi trong opencode: **status bar cuối màn hình** (TUI plugin `.opencode/plugins-xkiro/xkiro-statusline.tsx`, slot `app_bottom`) — **quota bar đa provider** (Phase 1.4): mặc định 1 dòng `quota · xKiro free 25.92M (19%) · burst $19.96 (0%) · budget $140.00 (0%) · wallet $0.00`, mở rộng thêm provider bằng `QUOTA_PROVIDERS=xkiro,teamo` (provider chưa có API quota → hiện `… chưa có quota API` màu thường, không phải lỗi). Tự làm mới theo chu kỳ và sau mỗi lượt trả lời, tổng tone lấy theo provider dùng nhiều nhất (vàng ≥90%, đỏ hết). Đi kèm plugin `.opencode/plugins-xkiro/xkiro-usage.js` ghi chi tiết xKiro vào `opencode.log` + toast cảnh báo ngưỡng (90%). Logic chung nằm ở `.opencode/plugins-xkiro/quota-common.js`. Biến: `XKIRO_STATUSBAR_DISABLE`, `XKIRO_STATUSBAR_RENDER_MS` (ms, mặc định 5000), `XKIRO_STATUSBAR_WARN_PCT`; `QUOTA_PROVIDERS`, `QUOTA_STATUSBAR_*`, `QUOTA_CACHE_DIR` (provider ngoài xKiro); `XKIRO_USAGE_DISABLE`, `XKIRO_USAGE_INTERVAL` (s, mặc định 300), `XKIRO_USAGE_WARN_PCT`, `XKIRO_USAGE_TOAST_EACH` (mặc định 1), `XKIRO_USAGE_TOAST_GAP` (s, mặc định 60), `XKIRO_USAGE_INJECT` (=1 mới ghi thêm vào transcript chat), `XKIRO_USAGE_INJECT_GAP` (s, mặc định 300).<br>**Lưu ý:** `ctrl+l` (`app_console`) là console debug của renderer, KHÔNG hiển thị log plugin — log chỉ ở file `opencode.log`.
 
 ### xKiro Max — Ứng cứu khi model bị overload (fallback theo tầng)

@@ -3,7 +3,14 @@ Set-StrictMode -Version Latest
 
 <#
 Common-Functions.ps1 — thư viện dùng chung cho các script ModelCompass.
-Mỗi script khác load bằng:  . (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+
+File này nằm ở GỐC scripts/. Script nằm trong thư mục con (config\, provider\,
+spend\, env\, server\, test\) load bằng:
+
+    . (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
+
+Gọi chéo nhóm thì dùng Get-ScriptPath, KHÔNG hard-code đường dẫn:
+    & (Get-ScriptPath 'Publish-Config.ps1') -Source $p
 #>
 
 function Get-ConfigContent {
@@ -92,7 +99,42 @@ function Resolve-EnvValue {
 }
 
 function Get-RepoRoot {
+    <#
+    Thư mục gốc repo. TỪNG BƯỚC đi lên cho tới khi gặp .git (hoặc .git file của worktree)
+    nên đúng dù script nằm ở scripts/ hay scripts/<nhóm>/ — không còn giả định
+    "script luôn cách repo root đúng 1 cấp".
+    #>
+    $dir = $PSScriptRoot
+    while ($dir) {
+        if (Test-Path -LiteralPath (Join-Path $dir '.git')) { return $dir }
+        $parent = Split-Path -Parent $dir
+        if ($parent -eq $dir -or [string]::IsNullOrEmpty($parent)) { break }
+        $dir = $parent
+    }
+    # Dự phòng khi checkout không có .git (ví dụ gói lại thành ZIP)
     return (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+}
+
+function Get-ScriptsDir {
+    <# Thư mục scripts/ — Common-Functions.ps1 luôn nằm ở đây. #>
+    return $PSScriptRoot
+}
+
+function Get-ScriptPath {
+    <#
+    Tìm một script trong scripts/ theo tên, kể cả khi script nằm ở thư mục con
+    (config\, provider\, spend\, env\, server\, test\).
+    Dùng cho tham chiếu CHÉO nhóm:  & (Get-ScriptPath 'Publish-Config.ps1') ...
+    Tham chiếu CÙNG nhóm thì cứ dùng $PSScriptRoot cho ngắn.
+    #>
+    param([Parameter(Mandatory)][string]$Name)
+    $root = Get-ScriptsDir
+    $direct = Join-Path $root $Name
+    if (Test-Path -LiteralPath $direct -PathType Leaf) { return (Get-Item -LiteralPath $direct).FullName }
+    $hit = Get-ChildItem -LiteralPath $root -Filter $Name -File -Recurse -ErrorAction SilentlyContinue |
+           Select-Object -First 1
+    if ($hit) { return $hit.FullName }
+    throw "Không tìm thấy script '$Name' trong $root"
 }
 
 function Get-InstallStatePath {

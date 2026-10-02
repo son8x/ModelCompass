@@ -31,8 +31,8 @@
     Ghi báo cáo Markdown vào reports\.
 
 .EXAMPLE
-    PS scripts\Compare-Config.ps1
-    PS scripts\Compare-Config.ps1 -FailOnDiff    # sau publish: phải khớp trừ model mặc định
+    PS scripts\config\Compare-Config.ps1
+    PS scripts\config\Compare-Config.ps1 -FailOnDiff    # sau publish: phải khớp trừ model mặc định
 #>
 [CmdletBinding()]
 param(
@@ -43,7 +43,7 @@ param(
     [switch]$Report
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 $repo  = Get-RepoRoot
 if ([string]::IsNullOrWhiteSpace($Dev))  { $Dev  = Join-Path $repo 'configs\development\opencode.jsonc' }

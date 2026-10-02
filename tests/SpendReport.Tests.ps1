@@ -8,7 +8,7 @@ và các hàm thuần của Get-SpendReport.ps1 — không gọi mạng, dùng f
 BeforeAll {
     Set-StrictMode -Version Latest
     . (Join-Path $PSScriptRoot '..\scripts\Common-Functions.ps1')
-    . (Join-Path $PSScriptRoot '..\scripts\Get-SpendReport.ps1') -SkipRun
+    . (Join-Path $PSScriptRoot '..\scripts\spend\Get-SpendReport.ps1') -SkipRun
     $script:tmpRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('modelcompass-spend-' + [guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory -Path $script:tmpRoot -Force | Out-Null
 }

@@ -4,8 +4,8 @@
 //  📌 Mục đích: nơi bạn SOẠN THỬ cấu hình mới cho opencode.
 //  - File này KHÔNG được dùng trực tiếp bởi opencode đang chạy.
 //  - Mọi thay đổi ở đây chưa đụng tới phiên làm việc hiện tại.
-//  - Chỉ sau khi TEST OK (scripts/Test-ModelConnectivity.ps1 + dùng thử)
-//    mới Promote lên /configs/production bằng scripts/Publish-Config.ps1.
+//  - Chỉ sau khi TEST OK (scripts/test/Test-ModelConnectivity.ps1 + dùng thử)
+//    mới Promote lên /configs/production bằng scripts/config/Publish-Config.ps1.
 //
 //  ⚠️ Quy ước:
 //    - KHÔNG nhét API key thật vào file. Luôn dùng {env:BIEN_MOI_TRUONG}.
@@ -14,7 +14,7 @@
 //  🧭 Cách dùng:
 //  1. Copy block "provider" từ /configs/presets/*.jsonc (hoặc viết tay).
 //  2. Đổi "model" mặc định theo nhu cầu.
-//  3. PS scripts/Publish-Config.ps1   (validate -> promote lên production)
+//  3. PS scripts/config/Publish-Config.ps1   (validate -> promote lên production)
 //  4. Restart opencode để nạp cấu hình mới.
 // ═══════════════════════════════════════════════════════════════════
 {
@@ -24,7 +24,7 @@
   // 👉 Giữ free (đã test OK): 1-xkiro-free/qwen/qwen3.8-max:free.
   //    Muốn dùng model gói Max, đổi sang "2-xkiro-max/<model-id>".
   //    Để biết model nào nhanh/ổn, chạy:
-  //    PS scripts/Test-ModelConnectivity.ps1 -ConfigPath .\configs\development\opencode.jsonc
+  //    PS scripts/test/Test-ModelConnectivity.ps1 -ConfigPath .\configs\development\opencode.jsonc
   //
   //  🎯 THỨ TỰ HIỂN THỊ TRONG /model = SẮP XẾP THEO KEY (provider id)
   //     (build opencode này xếp nhóm provider theo key/name theo bảng chữ cái,
@@ -340,14 +340,14 @@
 }
 // ═══════════════════════════════════════════════════════════════════
 //  LUỒNG PUBLISH (BẮT BUỘC):
-//  1) scripts/Test-ModelCompassConfig.ps1 -Path configs\development\opencode.jsonc
+//  1) scripts/config/Test-ModelCompassConfig.ps1 -Path configs\development\opencode.jsonc
 //     -> Kiểm tra cú pháp + cấu trúc.
-//  2) scripts/Test-ModelConnectivity.ps1 -ConfigPath configs\development\opencode.jsonc
+//  2) scripts/test/Test-ModelConnectivity.ps1 -ConfigPath configs\development\opencode.jsonc
 //     -> Ping từng provider/model (cần dịch vụ local + API key).
 //  3) Test thực tế bằng opencode với cấu hình development tạm:
 //     $env:OPENCODE_CONFIG = "D:\...\01-ModelCompass\configs\development\opencode.jsonc"; opencode
-//  4) Mọi thứ OK -> scripts/Publish-Config.ps1 (tự validate + backup + promote).
-//  5) scripts/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
+//  4) Mọi thứ OK -> scripts/config/Publish-Config.ps1 (tự validate + backup + promote).
+//  5) scripts/config/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
 //  6) Quit & restart opencode.
 // ═══════════════════════════════════════════════════════════════════
 

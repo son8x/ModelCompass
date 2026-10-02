@@ -33,10 +33,10 @@ ModelCompass quản lý cấu hình opencode theo **3 lớp** để tối ưu 2 
 
 ```powershell
 # B1. Cú pháp + cấu trúc
-pwsh scripts\Test-ModelCompassConfig.ps1 -Path configs\development\opencode.jsonc
+pwsh scripts\config\Test-ModelCompassConfig.ps1 -Path configs\development\opencode.jsonc
 
 # B2. Kết nối thực tế từng provider/model (cần dịch vụ local + bearer key)
-pwsh scripts\Test-ModelConnectivity.ps1 -ConfigPath configs\development\opencode.jsonc -Report
+pwsh scripts\test\Test-ModelConnectivity.ps1 -ConfigPath configs\development\opencode.jsonc -Report
 
 # B3. Dùng thử đúng model trong opencode (không đụng config chính):
 #     chọn manually đổi model trong TUI, hoặc tạm trỏ config:
@@ -52,13 +52,13 @@ dùng thử ổn (không lỗi phiên, tốc độ chấp nhận, không tiêu t
 > sẽ đưa lên prod chuẩn xác, và **-FailOnDiff sau publish** để xác nhận đồng bộ.
 
 ```powershell
-pwsh scripts\Compare-Config.ps1            # xem lệch dev vs prod (cảnh báo)
-pwsh scripts\Publish-Config.ps1 -ConnectivityTest
+pwsh scripts\config\Compare-Config.ps1            # xem lệch dev vs prod (cảnh báo)
+pwsh scripts\config\Publish-Config.ps1 -ConnectivityTest
 # Tự động:
 #   1) validate lại        2) [tuỳ chọn] test kết nối
 #   3) backup production cũ vào configs\production\.backup\
 #   4) chuẩn hoá JSON thuần (bỏ comment) rồi ghi production
-pwsh scripts\Compare-Config.ps1 -FailOnDiff  # sau publish: expected khớp (trừ model mặc định)
+pwsh scripts\config\Compare-Config.ps1 -FailOnDiff  # sau publish: expected khớp (trừ model mặc định)
 git add configs/production/opencode.json
 git commit -m "chore(configs): mô tả model/provider thay đổi"
 git push origin main          # CI validate chạy → xanh mới thôi
@@ -67,19 +67,19 @@ git push origin main          # CI validate chạy → xanh mới thôi
 ## Bảo trì (khi có nhiều backup)
 
 ```powershell
-pwsh scripts\Get-ProviderCatalog.ps1          # tải catalog live → docs/catalogs/ + snapshot + so với config
-pwsh scripts\Get-ProviderCatalog.ps1 -ShowAllNew   # liệt kê model mới chưa khai báo (mặc định ẩn)
-pwsh scripts\Compare-Prices.ps1               # giá nhồi trong name vs catalog live (mặc định chỉ báo)
-pwsh scripts\Compare-Prices.ps1 -ShowAll -Report  # chi tiết + report markdown
+pwsh scripts\config\Get-ProviderCatalog.ps1          # tải catalog live → docs/catalogs/ + snapshot + so với config
+pwsh scripts\config\Get-ProviderCatalog.ps1 -ShowAllNew   # liệt kê model mới chưa khai báo (mặc định ẩn)
+pwsh scripts\provider\Compare-Prices.ps1               # giá nhồi trong name vs catalog live (mặc định chỉ báo)
+pwsh scripts\provider\Compare-Prices.ps1 -ShowAll -Report  # chi tiết + report markdown
 # Giám sát chi phí đa provider (mỗi phiên trả phí ghi 1 dòng log):
-pwsh scripts\Add-SpendEntry.ps1 -Provider xkiro -Model 'openai/gpt-5.6-sol' `
+pwsh scripts\spend\Add-SpendEntry.ps1 -Provider xkiro -Model 'openai/gpt-5.6-sol' `
     -PromptTokens 120000 -CompletionTokens 30000 -PriceIn 4.5 -PriceOut 27
-pwsh scripts\Get-SpendReport.ps1              # tổng hợp theo ngày/provider/model
-pwsh scripts\Get-SpendReport.ps1 -Month 2026-09 -Model deepseek -Report  # lọc + report md
-pwsh scripts\Test-ModelConnectivity.ps1 -UpdateStatus  # cập nhật STATUS.md "Trạng thái gần nhất"
-pwsh scripts\Prune-Backups.ps1 -DryRun        # xem sẽ xoá backup nào (repo + global)
-pwsh scripts\Prune-Backups.ps1                # giữ 10 bản mới nhất mỗi nơi
-pwsh scripts\Test-Suite.ps1                   # chạy toàn bộ test Pester
+pwsh scripts\spend\Get-SpendReport.ps1              # tổng hợp theo ngày/provider/model
+pwsh scripts\spend\Get-SpendReport.ps1 -Month 2026-09 -Model deepseek -Report  # lọc + report md
+pwsh scripts\test\Test-ModelConnectivity.ps1 -UpdateStatus  # cập nhật STATUS.md "Trạng thái gần nhất"
+pwsh scripts\config\Prune-Backups.ps1 -DryRun        # xem sẽ xoá backup nào (repo + global)
+pwsh scripts\config\Prune-Backups.ps1                # giữ 10 bản mới nhất mỗi nơi
+pwsh scripts\test\Test-Suite.ps1                   # chạy toàn bộ test Pester
 ```
 
 > 📌 Khi thêm model mới: chạy `Get-ProviderCatalog.ps1` trước để chắc model nằm
@@ -89,15 +89,15 @@ pwsh scripts\Test-Suite.ps1                   # chạy toàn bộ test Pester
 ### Giai đoạn D — Install (production → máy đang chạy)
 
 ```powershell
-pwsh scripts\Install-Config.ps1        # backup .bak-<timestamp> rồi copy
+pwsh scripts\config\Install-Config.ps1        # backup .bak-<timestamp> rồi copy
 # Quit & restart opencode
 ```
 
 ### Giai đoạn E — Rollback (khi gặp sự cố)
 
 ```powershell
-pwsh scripts\Restore-RunningConfig.ps1 -List
-pwsh scripts\Restore-RunningConfig.ps1 -Backup opencode.json.bak-20260916-100000
+pwsh scripts\config\Restore-RunningConfig.ps1 -List
+pwsh scripts\config\Restore-RunningConfig.ps1 -Backup opencode.json.bak-20260916-100000
 ```
 
 ## Chuẩn hoá production

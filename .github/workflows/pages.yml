@@ -39,7 +39,7 @@ jobs:
       - name: Sinh Model Bank data cho Jekyll (_data/modelbank.json)
         shell: pwsh
         run: |
-          & ./scripts/Export-ModelBank.ps1 -OutDir ./docs/site/_data
+          & ./scripts/provider/Export-ModelBank.ps1 -OutDir ./docs/site/_data
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Jekyll build

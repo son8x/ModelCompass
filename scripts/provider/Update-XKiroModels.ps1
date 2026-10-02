@@ -68,9 +68,9 @@
     Chỉ nạp định nghĩa function cho test (dot-source -SkipRun), không chạy chính.
 
 .EXAMPLE
-    pwsh scripts/Update-XKiroModels.ps1 -NoWrite
-    pwsh scripts/Update-XKiroModels.ps1
-    pwsh scripts/Update-XKiroModels.ps1 -Publish -Install
+    pwsh scripts/provider/Update-XKiroModels.ps1 -NoWrite
+    pwsh scripts/provider/Update-XKiroModels.ps1
+    pwsh scripts/provider/Update-XKiroModels.ps1 -Publish -Install
 #>
 [CmdletBinding()]
 param(
@@ -100,11 +100,11 @@ $uxkConfigPath    = $ConfigPath
 $uxkProvider      = @($Provider)
 $uxkBaseline      = $BaselineConfig
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 # Registry provider + fetch catalog (không gọi mạng khi -SkipRun).
-. (Join-Path $PSScriptRoot 'Get-ProviderCatalog.ps1') -SkipRun
+. (Get-ScriptPath 'Get-ProviderCatalog.ps1') -SkipRun
 # Format-Price / Get-PricesFromName / Update-PricesInName.
-. (Join-Path $PSScriptRoot 'Compare-Prices.ps1') -SkipRun
+. (Get-ScriptPath 'Compare-Prices.ps1') -SkipRun
 
 # Khôi phục cờ sau khi dot-source.
 $SkipRun          = $uxkSkipRun
@@ -997,7 +997,7 @@ Write-Ok "Đã ghi dev config: $ConfigPath"
 # ── 5. Validate ───────────────────────────────
 if (-not $SkipValidation) {
     Write-Info 'Validate dev config...'
-    & (Join-Path $PSScriptRoot 'Test-ModelCompassConfig.ps1') -Path $ConfigPath | ForEach-Object { Write-Host "  $_" }
+    & (Get-ScriptPath 'Test-ModelCompassConfig.ps1') -Path $ConfigPath | ForEach-Object { Write-Host "  $_" }
     if ($LASTEXITCODE -ne 0) {
         Write-Fail 'VALIDATE THẤT BẠI — kiểm tra lại thay đổi.'
         exit 1
@@ -1008,18 +1008,18 @@ if (-not $SkipValidation) {
 }
 
 Write-Step 'BƯỚC TIẾP'
-Write-Host '  • Kiểm tra giá: pwsh scripts/Compare-Prices.ps1 -ConfigMode dev -FailOnDiff'
-Write-Host '  • Quy trình hoàn tất: pwsh scripts/Publish-Config.ps1 -Yes'
-Write-Host '  • Áp dụng global: pwsh scripts/Install-Config.ps1 -Force'
+Write-Host '  • Kiểm tra giá: pwsh scripts/provider/Compare-Prices.ps1 -ConfigMode dev -FailOnDiff'
+Write-Host '  • Quy trình hoàn tất: pwsh scripts/config/Publish-Config.ps1 -Yes'
+Write-Host '  • Áp dụng global: pwsh scripts/config/Install-Config.ps1 -Force'
 
 if ($Publish) {
     Write-Info 'Chạy Publish-Config.ps1...'
-    & (Join-Path $PSScriptRoot 'Publish-Config.ps1') -Source $ConfigPath -Yes
+    & (Get-ScriptPath 'Publish-Config.ps1') -Source $ConfigPath -Yes
     if ($LASTEXITCODE -ne 0) { Write-Fail 'Publish thất bại.'; exit 1 }
 }
 if ($Install) {
     Write-Info 'Chạy Install-Config.ps1...'
-    & (Join-Path $PSScriptRoot 'Install-Config.ps1') -Force
+    & (Get-ScriptPath 'Install-Config.ps1') -Force
     if ($LASTEXITCODE -ne 0) { Write-Fail 'Install thất bại.'; exit 1 }
 }
 

@@ -111,7 +111,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 | # | Hạng mục | Mô tả | Ưu tiên | Kích thước | File liên quan | Trạng thái |
 |---|---|---|---|---|---|---|
 | 0.1 | **Chốt đồng bộ dev ↔ prod** | Thêm script `Compare-Config.ps1 -Dev -Prod` (so model set, options, default model) + chạy trong CI như **warning** (không fail vì 2 file có thể lệch chủ đích) | P0 | S | `scripts/`, `.github/workflows/validate.yml` | ✅ |
-| 0.2 | **Sentry cho rollback** | `Restore-RunningConfig.ps1` thêm chế độ `-StateFile` ghi metadata (ngày, ghi chú, hash) để biết "bản nào đang được install" | P0 | S | `scripts/Restore-RunningConfig.ps1`, `Install-Config.ps1` | ✅ |
+| 0.2 | **Sentry cho rollback** | `Restore-RunningConfig.ps1` thêm chế độ `-StateFile` ghi metadata (ngày, ghi chú, hash) để biết "bản nào đang được install" | P0 | S | `scripts/config/Restore-RunningConfig.ps1`, `Install-Config.ps1` | ✅ |
 | 0.3 | **Policy backup** | Script `Prune-Backups.ps1` (giữ N bản mới nhất mỗi loại, mặc định 10), cài vào workflow của repo | P0 | S | `scripts/`, README | ✅ |
 | 0.4 | **Test Pester cho `Common-Functions` + validate** | `tests/ModelCompass.Tests.ps1` (parse JSONC, resolve env, detect key) — chạy được local lẫn CI | P0 | M | `tests/`, `scripts/Common-Functions.ps1` | ✅ |
 | 0.5 | **Kiểm build plugin TUI trong CI** | `node --check` cho server plugin `.js` + esbuild syntax-check (JSX) cho `xkiro-statusline.tsx` | P0 | S | `.github/workflows/validate.yml` | ✅ |
@@ -144,7 +144,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 |---|---|---|---|---|---|
 | 3.1 | **"ModelCompass CLI"** | Gói gọn các script thành `mc` (PowerShell module) với command: `mc sync`, `mc publish`, `mc status`, `mc report`, `mc doctor` (kiểm local services OmniRoute/9Router) | P2 | L | ✅ `modules/ModelCompass/` + `scripts/mc.ps1`; 17 lệnh, test McCli 11 |
 | 3.2 | **Provider plugin để người dùng tự đóng góp** | Chuẩn hoá cách khai báo provider mới (template + recipe), CI chấp nhận preset mới | P2 | M | ✅ `configs/provider-template/` + `docs/contributing-provider.md`; validate.yml thêm step; test Templates 6 |
-| 3.3 | **Export sang dạng dùng chung** | Sinh `configs/production/opencode.json` + `presets` thành "model bank" JSON có schema, để các công cụ khác (đồng bộ nhiều máy) tiêu thụ | P2 | L | ✅ `scripts/Export-ModelBank.ps1` + `model-bank/schema.json`; test ModelBank 12 |
+| 3.3 | **Export sang dạng dùng chung** | Sinh `configs/production/opencode.json` + `presets` thành "model bank" JSON có schema, để các công cụ khác (đồng bộ nhiều máy) tiêu thụ | P2 | L | ✅ `scripts/provider/Export-ModelBank.ps1` + `model-bank/schema.json`; test ModelBank 12 |
 | 3.4 | **GitHub Pages docs** | Dựng trang kubey đọc `docs/` làm "nơi tra cứu model theo giá/tác vụ" | P2 | M | ✅ `docs/site/` Jekyll + `.github/workflows/pages.yml`; test DocsSite 4 |
 
 ### Phase 4 — Vòng kín tự động hoá (khi cần)

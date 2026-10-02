@@ -9,15 +9,15 @@ Script này chỉ IN key — KHÔNG sửa file config (configs chứa nhiều co
 
 Cách dùng:
   # sinh N key giảm dần (mặc định từ 2099-12-31, cách 1 ngày)
-  pwsh scripts\New-SortOrderKey.ps1 -Count 24
+  pwsh scripts\config\New-SortOrderKey.ps1 -Count 24
   # sinh key cho cụm (cluster) B của provider trả phí, bắt đầu 2099-10-25
-  pwsh scripts\New-SortOrderKey.ps1 -From 2099-10-25 -Count 9
+  pwsh scripts\config\New-SortOrderKey.ps1 -From 2099-10-25 -Count 9
   # key nằm giữa 2 model kề sẵn (chèn model mới không đụng date cũ)
-  pwsh scripts\New-SortOrderKey.ps1 -Between 2099-12-31 -BetweenLower 2099-12-29
+  pwsh scripts\config\New-SortOrderKey.ps1 -Between 2099-12-31 -BetweenLower 2099-12-29
   # thêm N model vào CUỐI provider (đọc key nhỏ nhất sẵn có, nối tiếp phía dưới)
-  pwsh scripts\New-SortOrderKey.ps1 -Append -Config configs\production\opencode.json -Provider 1-xkiro-free -Count 3
+  pwsh scripts\config\New-SortOrderKey.ps1 -Append -Config configs\production\opencode.json -Provider 1-xkiro-free -Count 3
   # dựng LẠI toàn bộ key của provider (in bảng model -> key mới; dán vào file)
-  pwsh scripts\New-SortOrderKey.ps1 -Rebuild -Config configs\development\opencode.jsonc -Provider 1-xkiro-free -From 2099-12-31
+  pwsh scripts\config\New-SortOrderKey.ps1 -Rebuild -Config configs\development\opencode.jsonc -Provider 1-xkiro-free -From 2099-12-31
 #>
 
 param(
@@ -36,7 +36,7 @@ param(
 
 Set-StrictMode -Version Latest
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 function Get-ProviderModels {
     param([string]$Path, [string]$ProviderId)

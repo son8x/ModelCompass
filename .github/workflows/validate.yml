@@ -37,13 +37,13 @@ jobs:
       - name: Validate production config
         shell: pwsh
         run: |
-          & ./scripts/Test-ModelCompassConfig.ps1 -Path configs/production/opencode.json
+          & ./scripts/config/Test-ModelCompassConfig.ps1 -Path configs/production/opencode.json
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Validate development config
         shell: pwsh
         run: |
-          & ./scripts/Test-ModelCompassConfig.ps1 -Path configs/development/opencode.jsonc
+          & ./scripts/config/Test-ModelCompassConfig.ps1 -Path configs/development/opencode.jsonc
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Validate presets (không strict — env không có trong CI)
@@ -53,7 +53,7 @@ jobs:
             $_.Name -ne 'README.md'
           } | ForEach-Object {
             Write-Host "  → $($_.FullName)"
-            & ./scripts/Test-ModelCompassConfig.ps1 -Path $_.FullName
+            & ./scripts/config/Test-ModelCompassConfig.ps1 -Path $_.FullName
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
 
@@ -65,7 +65,7 @@ jobs:
           $files += Get-ChildItem configs/provider-template -Recurse -Filter '*.json' -File
           foreach ($f in $files) {
             Write-Host "  → $($f.FullName)"
-            & ./scripts/Test-ModelCompassConfig.ps1 -Path $f.FullName
+            & ./scripts/config/Test-ModelCompassConfig.ps1 -Path $f.FullName
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
 
@@ -76,13 +76,13 @@ jobs:
           if (-not (Get-Module -ListAvailable Pester)) {
             Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser -MinimumVersion 5.0
           }
-          & ./scripts/Test-Suite.ps1
+          & ./scripts/test/Test-Suite.ps1
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: So sánh development vs production (cảnh báo lệch)
         shell: pwsh
         run: |
-          & ./scripts/Compare-Config.ps1
+          & ./scripts/config/Compare-Config.ps1
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Kiểm tra cú pháp plugin TUI (esbuild) + server plugin (node --check)

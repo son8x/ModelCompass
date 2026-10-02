@@ -44,9 +44,9 @@
     Chỉ nạp định nghĩa function (dùng cho test dot-source), không chạy.
 
 .EXAMPLE
-    pwsh scripts/Compare-Prices.ps1                       # báo chênh lệch so với prod
-    pwsh scripts/Compare-Prices.ps1 -ConfigMode dev       # so với development
-    pwsh scripts/Compare-Prices.ps1 -ShowAll -Report
+    pwsh scripts/provider/Compare-Prices.ps1                       # báo chênh lệch so với prod
+    pwsh scripts/provider/Compare-Prices.ps1 -ConfigMode dev       # so với development
+    pwsh scripts/provider/Compare-Prices.ps1 -ShowAll -Report
 #>
 [CmdletBinding()]
 param(
@@ -61,7 +61,7 @@ param(
     [switch]$SkipRun
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 # Chụp cờ SkipRun TRƯỚC khi dot-source Get-ProviderCatalog: dot-source script có param
 # cùng tên sẽ GHI ĐÈ variable vào scope hiện tại (quirk PowerShell) — làm mất cờ gốc.
@@ -70,7 +70,7 @@ $configModeFlag = $ConfigMode
 $configPathFlag = $ConfigPath
 
 # Tái dùng registry provider (Id, Display, ConfigProviders, IdStripPrefix) — không gọi mạng.
-. (Join-Path $PSScriptRoot 'Get-ProviderCatalog.ps1') -SkipRun
+. (Get-ScriptPath 'Get-ProviderCatalog.ps1') -SkipRun
 # Dot-source trên GHI ĐÈ $ConfigMode/$ConfigPath/$SkipRun sang mặc định của script con → khôi phục.
 $ConfigMode   = $configModeFlag
 $ConfigPath   = $configPathFlag

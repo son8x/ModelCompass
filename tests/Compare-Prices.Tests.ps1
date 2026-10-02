@@ -1,12 +1,12 @@
 #Requires -Version 7
 #Requires -Modules Pester
 <#
-ModelCompass: Test các hàm thuần của scripts/Compare-Prices.ps1
+ModelCompass: Test các hàm thuần của scripts/provider/Compare-Prices.ps1
 (trích giá từ name, định dạng, gợi ý name, đối chiếu giá config vs catalog) — không gọi mạng.
 #>
 BeforeAll {
     Set-StrictMode -Version Latest
-    . (Join-Path $PSScriptRoot '..\scripts\Compare-Prices.ps1') -SkipRun
+    . (Join-Path $PSScriptRoot '..\scripts\provider\Compare-Prices.ps1') -SkipRun
 }
 
 Describe 'Get-PricesFromName' {

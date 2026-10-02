@@ -32,8 +32,8 @@
     Tự xác nhận các bước thủ công (dành cho non-interactive).
 
 .EXAMPLE
-    PS scripts\Publish-Config.ps1 -ConnectivityTest
-    PS scripts\Publish-Config.ps1 -GitCommitMessage "Add DeepSeek V4 Flash vào production"
+    PS scripts\config\Publish-Config.ps1 -ConnectivityTest
+    PS scripts\config\Publish-Config.ps1 -GitCommitMessage "Add DeepSeek V4 Flash vào production"
 #>
 [CmdletBinding()]
 param(
@@ -44,7 +44,7 @@ param(
     [switch]$Yes
 )
 
-. (Join-Path $PSScriptRoot 'Common-Functions.ps1')
+. (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 
 $repo       = Get-RepoRoot
 $prodPath   = Join-Path $repo 'configs\production\opencode.json'
@@ -64,7 +64,7 @@ Write-Step "Publish: $Source -> $prodPath"
 # ── 1. Validate ─────────────────────────────────────────────
 if (-not $SkipValidation) {
     Write-Info 'Bước 1: Validate cấu hình...'
-    & (Join-Path $PSScriptRoot 'Test-ModelCompassConfig.ps1') -Path $Source | ForEach-Object { Write-Host "  $_" }
+    & (Get-ScriptPath 'Test-ModelCompassConfig.ps1') -Path $Source | ForEach-Object { Write-Host "  $_" }
     if ($LASTEXITCODE -ne 0) {
         Write-Fail 'Validate thất bại. Sửa cấu hình rồi chạy lại.'
         exit 1
@@ -76,7 +76,7 @@ if (-not $SkipValidation) {
 # ── 2. Connectivity test ────────────────────────────────────
 if ($ConnectivityTest) {
     Write-Info 'Bước 2: Test kết nối provider/model...'
-    & (Join-Path $PSScriptRoot 'Test-ModelConnectivity.ps1') -ConfigPath $Source | ForEach-Object { Write-Host "  $_" }
+    & (Get-ScriptPath 'Test-ModelConnectivity.ps1') -ConfigPath $Source | ForEach-Object { Write-Host "  $_" }
     if ($LASTEXITCODE -ne 0) {
         Write-Fail 'Connectivity test thất bại. Không publish.'
         exit 1
@@ -136,6 +136,6 @@ if ($GitCommitMessage) {
 }
 
 Write-Info 'Bước kế tiếp (chỉ khi bạn muốn áp dụng vào opencode đang dùng):'
-Write-Host '  scripts\Install-Config.ps1'
+Write-Host '  scripts\config\Install-Config.ps1'
 Write-Ok 'Xong.'
 exit 0

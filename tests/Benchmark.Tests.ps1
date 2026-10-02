@@ -6,7 +6,7 @@ Nạp functions qua dot-source script với -SkipRun (giữ nguyên pattern Stat
 #>
 BeforeAll {
     Set-StrictMode -Version Latest
-    $script:scriptPath = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'scripts\Test-ModelConnectivity.ps1')
+    $script:scriptPath = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'scripts\test\Test-ModelConnectivity.ps1')
     . $script:scriptPath -SkipRun
 }
 

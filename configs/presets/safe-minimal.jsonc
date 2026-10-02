@@ -7,7 +7,7 @@
   //     trả phí (0 rủi ro chi phí).
   //  Cách dùng (rollback nhanh):
   //    1) backup sẽ tự tạo khi Install — chỉ cần:
-  //         pwsh scripts\Install-Config.ps1   (sau khi copy preset
+  //         pwsh scripts\config\Install-Config.ps1   (sau khi copy preset
   //         vào development\opencode.jsonc + publish)
   //       HOẶC nhanh hơn: dùng Restore-RunningConfig.ps1 -List để
   //       về bản backup gần nhất.
