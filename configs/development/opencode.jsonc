@@ -59,7 +59,7 @@
     //  minimax-m2.7:free, minimax-m2.5-highspeed:free → HTTP 500.
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 58 model (+16)",
+      "name": "1. xKiro Free — 68 model (+10)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -117,22 +117,32 @@
         "minimax/minimax-m2:free": { "name": "MiniMax M2 · basic", "release_date": "2099-11-22" },
         "sensenova/sensenova-6.8-flash-lite": { "name": "SenseNova 6.8 · vision", "release_date": "2099-11-21" },
         "sensenova/sensenova-6.7-flash-lite": { "name": "SenseNova 6.7 · vision", "release_date": "2099-11-20" },
-        "cohere/aya-expanse-32b": { "name": "🆕 Aya Expanse 32b · 128K", "release_date": "2099-11-19" },
-        "cohere/aya-vision-32b": { "name": "🆕 Aya Vision 32b · 16.4K", "release_date": "2099-11-18" },
-        "cohere/command-a": { "name": "🆕 Command A · 288K", "release_date": "2099-11-17" },
-        "cohere/command-a-plus": { "name": "🆕 Command A Plus · 436K", "release_date": "2099-11-16" },
-        "cohere/command-a-reasoning": { "name": "🆕 Command A Reasoning · 288.8K", "release_date": "2099-11-15" },
-        "cohere/command-a-translate": { "name": "🆕 Command A Translate · 9K", "release_date": "2099-11-14" },
-        "cohere/command-a-vision": { "name": "🆕 Command A Vision · 128K", "release_date": "2099-11-13" },
-        "cohere/command-r-08-2024": { "name": "🆕 Command R 08 2024 · 128K", "release_date": "2099-11-12" },
-        "cohere/command-r-plus-08-2024": { "name": "🆕 Command R Plus 08 2024 · 128K", "release_date": "2099-11-11" },
-        "cohere/command-r7b-12-2024": { "name": "🆕 Command R7b 12 2024 · 132K", "release_date": "2099-11-10" },
-        "cohere/north-mini-code": { "name": "🆕 North Mini Code · 256K", "release_date": "2099-11-09" },
-        "cohere/north-small-translate": { "name": "🆕 North Small Translate · 32.8K", "release_date": "2099-11-08" },
-        "cohere/tiny-aya-earth": { "name": "🆕 Tiny Aya Earth · 8.2K", "release_date": "2099-11-07" },
-        "cohere/tiny-aya-fire": { "name": "🆕 Tiny Aya Fire · 8.2K", "release_date": "2099-11-06" },
-        "cohere/tiny-aya-global": { "name": "🆕 Tiny Aya Global · 8.2K", "release_date": "2099-11-05" },
-        "cohere/tiny-aya-water": { "name": "🆕 Tiny Aya Water · 8.2K", "release_date": "2099-11-04" }
+        "cohere/aya-expanse-32b": { "name": "Aya Expanse 32b · 128K", "release_date": "2099-11-19" },
+        "cohere/aya-vision-32b": { "name": "Aya Vision 32b · 16.4K", "release_date": "2099-11-18" },
+        "cohere/command-a": { "name": "Command A · 288K", "release_date": "2099-11-17" },
+        "cohere/command-a-plus": { "name": "Command A Plus · 436K", "release_date": "2099-11-16" },
+        "cohere/command-a-reasoning": { "name": "Command A Reasoning · 288.8K", "release_date": "2099-11-15" },
+        "cohere/command-a-translate": { "name": "Command A Translate · 9K", "release_date": "2099-11-14" },
+        "cohere/command-a-vision": { "name": "Command A Vision · 128K", "release_date": "2099-11-13" },
+        "cohere/command-r-08-2024": { "name": "Command R 08 2024 · 128K", "release_date": "2099-11-12" },
+        "cohere/command-r-plus-08-2024": { "name": "Command R Plus 08 2024 · 128K", "release_date": "2099-11-11" },
+        "cohere/command-r7b-12-2024": { "name": "Command R7b 12 2024 · 132K", "release_date": "2099-11-10" },
+        "cohere/north-mini-code": { "name": "North Mini Code · 256K", "release_date": "2099-11-09" },
+        "cohere/north-small-translate": { "name": "North Small Translate · 32.8K", "release_date": "2099-11-08" },
+        "cohere/tiny-aya-earth": { "name": "Tiny Aya Earth · 8.2K", "release_date": "2099-11-07" },
+        "cohere/tiny-aya-fire": { "name": "Tiny Aya Fire · 8.2K", "release_date": "2099-11-06" },
+        "cohere/tiny-aya-global": { "name": "Tiny Aya Global · 8.2K", "release_date": "2099-11-05" },
+        "cohere/tiny-aya-water": { "name": "Tiny Aya Water · 8.2K", "release_date": "2099-11-04" },
+        "dots-studio/dots-3-note-preview:free": { "name": "🆕 Dots 3 Note Preview · 512K", "release_date": "2099-11-03" },
+        "inclusionai/ling-3.0-flash-sante:free": { "name": "🆕 Ling 3.0 Flash Sante · 262.1K", "release_date": "2099-11-02" },
+        "liquid/lfm-2.5-2.6b:free": { "name": "🆕 Lfm 2.5 2.6b · 65.5K", "release_date": "2099-11-01" },
+        "meituan/longcat-2.0": { "name": "🆕 Longcat 2.0 · 1M", "release_date": "2099-10-31" },
+        "meituan/longcat-2.5-preview:free": { "name": "🆕 Longcat 2.5 Preview · 1M", "release_date": "2099-10-30" },
+        "meta/muse-spark-1.2-contributor:free": { "name": "🆕 Muse Spark 1.2 Contributor · 1M", "release_date": "2099-10-29" },
+        "meta/muse-spark-1.3-contributor:free": { "name": "🆕 Muse Spark 1.3 Contributor · 1M", "release_date": "2099-10-28" },
+        "stealth/big-pickle": { "name": "🆕 Big Pickle · 200K", "release_date": "2099-10-27" },
+        "stealth/space-bunny-alpha:free": { "name": "🆕 Space Bunny Alpha · 1M", "release_date": "2099-10-26" },
+        "xiaomi/mimo-v2.6-flash:free": { "name": "🆕 MiMo V2.6 Flash · 1M", "release_date": "2099-10-25" }
       }
     },
 
@@ -152,7 +162,7 @@
     //     gpt-5.6-sol (500), nemotron-3-nano + llama-49b (410 routing).
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max — 56 model (gỡ: nemotron-3-nano, llama-3.3-nemotron-super-49b)",
+      "name": "2. xKiro Max — 57 model (+1)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -172,45 +182,46 @@
         "z-ai/glm-5.3-flash": { "name": "[L] GLM-5.3 Flash · $0.15/$0.50 · vision", "release_date": "2099-10-24" },
         "z-ai/glm-5-turbo": { "name": "[L] GLM-5 Turbo · $1.20/$4.00 · nhanh", "release_date": "2099-10-23" },
         "google/gemini-2.5-flash": { "name": "[L] Gemini 2.5 Flash · $0.30/$2.50 · 1M · nhanh", "release_date": "2099-10-22" },
-        "google/gemini-3-flash": { "name": "[L] Gemini 3 Flash · $0.50/$3.00 · 1M · nhanh", "release_date": "2099-10-21" },
+        "google/gemini-3-flash": { "name": "[L] Gemini 3 Flash · $0.75/$3.75 · 1M · nhanh", "release_date": "2099-10-21" },
         "xiaomi/mimo-v2.6-flash": { "name": "[L] MiMo V2.6 Flash · $0.14/$0.28 · 1M", "release_date": "2099-10-20" },
         "xiaomi/mimo-v2.5": { "name": "[L] MiMo V2.5 · $0.14/$0.28 · 1M", "release_date": "2099-10-19" },
         "z-ai/glm-4.5-flash": { "name": "[L] GLM-4.5 Flash · $0.20/$1.10 · nhẹ", "release_date": "2099-10-18" },
-        "z-ai/glm-4.5-air": { "name": "[L] GLM-4.5 Air · $0.20/$1.10 · nhẹ", "release_date": "2099-10-17" },
+        "z-ai/glm-4.5-air": { "name": "[L] GLM-4.5 Air · $0.13/$0.85 · nhẹ", "release_date": "2099-10-17" },
         "z-ai/glm-4.5-airx": { "name": "[L] GLM-4.5 AirX · $1.10/$4.50 · nhẹ", "release_date": "2099-10-16" },
         "z-ai/glm-4.5v": { "name": "[L] GLM-4.5V · $0.60/$1.80 · vision", "release_date": "2099-10-15" },
         "z-ai/glm-4.6v-flash": { "name": "[L] GLM-4.6V Flash · $0.04/$0.40 · vision/nhanh", "release_date": "2099-10-14" },
         "z-ai/glm-4.6v-flashx": { "name": "[L] GLM-4.6V FlashX · $0.04/$0.40 · vision/nhanh", "release_date": "2099-10-13" },
         "z-ai/glm-5v-turbo": { "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh", "release_date": "2099-10-12" },
         // ── [B] Đa dụng giá tốt — chat hàng ngày, việc chung ──
-        "nvidia/nemotron-3-ultra": { "name": "[B] Nemotron 3 Ultra · $0.50/$2.20 · 1M · mạnh", "release_date": "2099-10-11" },
+        "nvidia/nemotron-3-ultra": { "name": "[B] Nemotron 3 Ultra · $0.60/$2.40 · 1M · mạnh", "release_date": "2099-10-11" },
         "google/gemini-2.5-pro": { "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M", "release_date": "2099-10-09" },
         "z-ai/glm-4.5": { "name": "[B] GLM-4.5 · $0.60/$2.20", "release_date": "2099-10-08" },
         "z-ai/glm-4.5-x": { "name": "[B] GLM-4.5 X · $2.20/$8.90", "release_date": "2099-10-07" },
-        "z-ai/glm-4.6": { "name": "[B] GLM-4.6 · $0.60/$2.20", "release_date": "2099-10-06" },
+        "z-ai/glm-4.6": { "name": "[B] GLM-4.6 · $0.43/$1.75", "release_date": "2099-10-06" },
         "z-ai/glm-4.6v": { "name": "[B] GLM-4.6V · $0.30/$0.90 · vision", "release_date": "2099-10-05" },
         "z-ai/glm-4.7": { "name": "[B] GLM-4.7 · $0.60/$2.20", "release_date": "2099-10-04" },
-        "z-ai/glm-4.7-flash": { "name": "[B] GLM-4.7 Flash · $0.07/$0.40 · nhanh", "release_date": "2099-10-03" },
-        "z-ai/glm-4.7-flashx": { "name": "[B] GLM-4.7 FlashX · $0.07/$0.40 · nhanh", "release_date": "2099-10-02" },
-        "z-ai/glm-5": { "name": "[B] GLM-5 · $1.00/$3.20", "release_date": "2099-10-01" },
+        "z-ai/glm-4.7-flash": { "name": "[B] GLM-4.7 Flash · $0.061/$0.40 · nhanh", "release_date": "2099-10-03" },
+        "z-ai/glm-4.7-flashx": { "name": "[B] GLM-4.7 FlashX · $0.37/$1.25 · nhanh", "release_date": "2099-10-02" },
+        "z-ai/glm-5": { "name": "[B] GLM-5 · $0.60/$1.92", "release_date": "2099-10-01" },
         "z-ai/glm-5.1": { "name": "[B] GLM-5.1 · $1.40/$4.40", "release_date": "2099-09-30" },
-        "z-ai/glm-5.2": { "name": "[B] GLM-5.2 · $1.40/$4.40 · 1M", "release_date": "2099-09-29" },
+        "z-ai/glm-5.2": { "name": "[B] GLM-5.2 · $0.25/$3.99 · 1M", "release_date": "2099-09-29" },
         "xiaomi/mimo-v2.6-pro": { "name": "[B] MiMo V2.6 Pro · $0.435/$0.87 · 1M", "release_date": "2099-09-28" },
         "xiaomi/mimo-v2.5-pro": { "name": "[B] MiMo V2.5 Pro · $0.435/$0.87 · 1M", "release_date": "2099-09-27" },
         // ── [A] Mạnh đa dụng — agent, coding sâu, luận văn ──
         "google/gemini-3.1-pro": { "name": "[A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · mạnh", "release_date": "2099-09-26" },
         "google/gemini-3.5-flash": { "name": "[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M", "release_date": "2099-09-25" },
-        "google/gemini-3.6-flash": { "name": "[A] Gemini 3.6 Flash · $1.50/$7.50 · 1M", "release_date": "2099-09-24" },
-        "google/gemini-3.7-flash": { "name": "[A] Gemini 3.7 Flash · $0.375/$1.875 · 1M", "release_date": "2099-09-23" },
+        "google/gemini-3.6-flash": { "name": "[A] Gemini 3.6 Flash · $0.75/$3.75 · 1M", "release_date": "2099-09-24" },
+        "google/gemini-3.7-flash": { "name": "[A] Gemini 3.7 Flash · $0.75/$3.75 · 1M", "release_date": "2099-09-23" },
         "google/gemini-3.8-flash": { "name": "[A] Gemini 3.8 Flash · $0.75/$3.75 · 1M ⭐premium vẫn OK", "release_date": "2099-09-22" },
         "openai/gpt-5.6-terra": { "name": "[A] GPT-5.6 Terra · $1.00/$6.00 · 1M", "release_date": "2099-09-21" },
         "openai/gpt-5.4": { "name": "[A] GPT-5.4 · $2.50/$15.00 · đa dụng", "release_date": "2099-09-20" },
-        "x-ai/grok-4.7": { "name": "[A] Grok 4.7 · $1.60/$4.80 · 500K · code", "release_date": "2099-09-19" },
+        "x-ai/grok-4.7": { "name": "[A] Grok 4.7 · $2.00/$6.00 · 500K · code", "release_date": "2099-09-19" },
         "anthropic/claude-sonnet-4.6": { "name": "[A] Claude Sonnet 4.6 · $3.00/$15.00", "release_date": "2099-09-18" },
         "anthropic/claude-sonnet-5": { "name": "[A] Claude Sonnet 5 · $2.00/$10.00 · viết lách/agent", "release_date": "2099-09-17" },
         "anthropic/claude-sonnet-4.5": { "name": "[A] Claude Sonnet 4.5 · $3.00/$15.00 · 1M", "release_date": "2099-09-16" },
         "anthropic/claude-sonnet-4": { "name": "[A] Claude Sonnet 4 · $3.00/$15.00 · 1M", "release_date": "2099-09-15" },
         "z-ai/glm-5.3": { "name": "[A] GLM-5.3 · $1.40/$4.40 · VN/code", "release_date": "2099-09-14" },
+        "openai/gpt-6.1-sol": { "name": "🆕 [A] GPT 6.1 Sol · $2.00/$10.00 · 1.1M", "release_date": "2099-10-10" },
         // ── [S] Flagship — chất lượng cao nhất ──
         "anthropic/claude-opus-5.5": { "name": "[S] Claude Opus 5.5 · $4.00/$20.00 · 1M", "release_date": "2099-09-13" },
         "anthropic/claude-opus-4.6": { "name": "[S] Claude Opus 4.6 · $5.00/$25.00 · 1M", "release_date": "2099-09-12" },
@@ -221,7 +232,7 @@
         "openai/gpt-6-sol": { "name": "[S] GPT-6 Sol · $2.00/$10.00 · flagship", "release_date": "2099-09-07" },
         "anthropic/claude-fable-5": { "name": "[S] Claude Fable 5 · $10.00/$50.00 · mạnh nhất", "release_date": "2099-09-06" },
         "openai/gpt-5.5": { "name": "[S] GPT-5.5 · $5.00/$30.00", "release_date": "2099-09-05" },
-        "openai/gpt-5.6-sol": { "name": "[S] GPT-5.6 Sol · $5.00/$30.00", "release_date": "2099-09-04" }
+        "openai/gpt-5.6-sol": { "name": "[S] GPT-5.6 Sol · $2.00/$10.00", "release_date": "2099-09-04" }
       }
     },
 
@@ -339,6 +350,7 @@
 //  5) scripts/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
 //  6) Quit & restart opencode.
 // ═══════════════════════════════════════════════════════════════════
+
 
 
 
