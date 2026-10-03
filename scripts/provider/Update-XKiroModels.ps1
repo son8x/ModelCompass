@@ -840,7 +840,12 @@ if ($BaselineConfig) {
 } else {
     $backupDir = Join-Path $repo 'configs\development\.backup'
     $latestBackup = @(Get-ChildItem -LiteralPath $backupDir -Filter 'opencode.*.jsonc' -File -ErrorAction SilentlyContinue |
-        Sort-Object LastWriteTime -Descending | Select-Object -First 1)
+        Sort-Object -Property @{ Expression = {
+            if ($_.BaseName -match '^opencode\.([0-9]{8})-([0-9]{6})$') {
+                try { [datetime]::ParseExact("$($matches[1])$($matches[2])", 'yyyyMMddHHmmss', $null) }
+                catch { $_.LastWriteTime }
+            } else { $_.LastWriteTime }
+        } } -Descending | Select-Object -First 1)
     if ($latestBackup.Count -gt 0) {
         try {
             $baselineCfg = Get-ConfigContent $latestBackup[0].FullName

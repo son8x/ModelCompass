@@ -16,7 +16,7 @@
   "provider": {
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 68 model (+10)",
+      "name": "1. xKiro Free — 55 model (+1 · gỡ: deepseek-v4-pro, minimax-m3:free, deepseek-v4.1-flash:free, deepseek-v4-flash, deepseek-v3.2, deepseek-chat-v3.1, minimax-m2.7-highspeed:free, minimax-m2.7:free, minimax-m2.5-highspeed:free, minimax-m2.5:free, minimax-m2.1-highspeed:free, minimax-m2.1:free, minimax-m2:free, mimo-v2.6-flash:free)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -26,10 +26,6 @@
           "name": "Qwen3.8 Max · 1M · vision/reasoning",
           "release_date": "2099-12-31"
         },
-        "deepseek/deepseek-v4-pro": {
-          "name": "DeepSeek V4 Pro · 1M · code agent",
-          "release_date": "2099-12-30"
-        },
         "qwen/qwen3.7-plus:free": {
           "name": "Qwen3.7 Plus · 1M · vision",
           "release_date": "2099-12-29"
@@ -38,29 +34,9 @@
           "name": "Qwen3.5 Plus · 1M · vision",
           "release_date": "2099-12-28"
         },
-        "minimax/minimax-m3:free": {
-          "name": "MiniMax M3 · 1M · vision/reasoning",
-          "release_date": "2099-12-27"
-        },
         "qwen/qwen3-coder-plus:free": {
           "name": "Qwen3 Coder Plus · 1M · code",
           "release_date": "2099-12-26"
-        },
-        "deepseek/deepseek-v4.1-flash:free": {
-          "name": "DeepSeek V4.1 Flash · 1M",
-          "release_date": "2099-12-25"
-        },
-        "deepseek/deepseek-v4-flash": {
-          "name": "DeepSeek V4 Flash · 1M",
-          "release_date": "2099-12-24"
-        },
-        "deepseek/deepseek-v3.2": {
-          "name": "DeepSeek V3.2 · 131K",
-          "release_date": "2099-12-23"
-        },
-        "deepseek/deepseek-chat-v3.1": {
-          "name": "DeepSeek Chat V3.1 · 164K",
-          "release_date": "2099-12-22"
         },
         "qwen/qwen3.5-397b-a17b:free": {
           "name": "Qwen3.5 397B-A17B · vision",
@@ -154,34 +130,6 @@
           "name": "Ministral 3B · vision",
           "release_date": "2099-11-29"
         },
-        "minimax/minimax-m2.7-highspeed:free": {
-          "name": "MiniMax M2.7 HS · fast",
-          "release_date": "2099-11-28"
-        },
-        "minimax/minimax-m2.7:free": {
-          "name": "MiniMax M2.7 · balanced",
-          "release_date": "2099-11-27"
-        },
-        "minimax/minimax-m2.5-highspeed:free": {
-          "name": "MiniMax M2.5 HS · fast",
-          "release_date": "2099-11-26"
-        },
-        "minimax/minimax-m2.5:free": {
-          "name": "MiniMax M2.5 · balanced",
-          "release_date": "2099-11-25"
-        },
-        "minimax/minimax-m2.1-highspeed:free": {
-          "name": "MiniMax M2.1 HS · fast",
-          "release_date": "2099-11-24"
-        },
-        "minimax/minimax-m2.1:free": {
-          "name": "MiniMax M2.1 · stable",
-          "release_date": "2099-11-23"
-        },
-        "minimax/minimax-m2:free": {
-          "name": "MiniMax M2 · basic",
-          "release_date": "2099-11-22"
-        },
         "sensenova/sensenova-6.8-flash-lite": {
           "name": "SenseNova 6.8 · vision",
           "release_date": "2099-11-21"
@@ -191,67 +139,67 @@
           "release_date": "2099-11-20"
         },
         "cohere/aya-expanse-32b": {
-          "name": "Aya Expanse 32b · 128K",
+          "name": "🆕 Aya Expanse 32b · 128K",
           "release_date": "2099-11-19"
         },
         "cohere/aya-vision-32b": {
-          "name": "Aya Vision 32b · 16.4K",
+          "name": "🆕 Aya Vision 32b · 16.4K",
           "release_date": "2099-11-18"
         },
         "cohere/command-a": {
-          "name": "Command A · 288K",
+          "name": "🆕 Command A · 288K",
           "release_date": "2099-11-17"
         },
         "cohere/command-a-plus": {
-          "name": "Command A Plus · 436K",
+          "name": "🆕 Command A Plus · 436K",
           "release_date": "2099-11-16"
         },
         "cohere/command-a-reasoning": {
-          "name": "Command A Reasoning · 288.8K",
+          "name": "🆕 Command A Reasoning · 288.8K",
           "release_date": "2099-11-15"
         },
         "cohere/command-a-translate": {
-          "name": "Command A Translate · 9K",
+          "name": "🆕 Command A Translate · 9K",
           "release_date": "2099-11-14"
         },
         "cohere/command-a-vision": {
-          "name": "Command A Vision · 128K",
+          "name": "🆕 Command A Vision · 128K",
           "release_date": "2099-11-13"
         },
         "cohere/command-r-08-2024": {
-          "name": "Command R 08 2024 · 128K",
+          "name": "🆕 Command R 08 2024 · 128K",
           "release_date": "2099-11-12"
         },
         "cohere/command-r-plus-08-2024": {
-          "name": "Command R Plus 08 2024 · 128K",
+          "name": "🆕 Command R Plus 08 2024 · 128K",
           "release_date": "2099-11-11"
         },
         "cohere/command-r7b-12-2024": {
-          "name": "Command R7b 12 2024 · 132K",
+          "name": "🆕 Command R7b 12 2024 · 132K",
           "release_date": "2099-11-10"
         },
         "cohere/north-mini-code": {
-          "name": "North Mini Code · 256K",
+          "name": "🆕 North Mini Code · 256K",
           "release_date": "2099-11-09"
         },
         "cohere/north-small-translate": {
-          "name": "North Small Translate · 32.8K",
+          "name": "🆕 North Small Translate · 32.8K",
           "release_date": "2099-11-08"
         },
         "cohere/tiny-aya-earth": {
-          "name": "Tiny Aya Earth · 8.2K",
+          "name": "🆕 Tiny Aya Earth · 8.2K",
           "release_date": "2099-11-07"
         },
         "cohere/tiny-aya-fire": {
-          "name": "Tiny Aya Fire · 8.2K",
+          "name": "🆕 Tiny Aya Fire · 8.2K",
           "release_date": "2099-11-06"
         },
         "cohere/tiny-aya-global": {
-          "name": "Tiny Aya Global · 8.2K",
+          "name": "🆕 Tiny Aya Global · 8.2K",
           "release_date": "2099-11-05"
         },
         "cohere/tiny-aya-water": {
-          "name": "Tiny Aya Water · 8.2K",
+          "name": "🆕 Tiny Aya Water · 8.2K",
           "release_date": "2099-11-04"
         },
         "dots-studio/dots-3-note-preview:free": {
@@ -290,15 +238,15 @@
           "name": "🆕 Space Bunny Alpha · 1M",
           "release_date": "2099-10-26"
         },
-        "xiaomi/mimo-v2.6-flash:free": {
-          "name": "🆕 MiMo V2.6 Flash · 1M",
+        "apodex/apodex-1.1-mini:free": {
+          "name": "🆕 Apodex 1.1 Mini · 262.1K",
           "release_date": "2099-10-25"
         }
       }
     },
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max — 57 model (+1)",
+      "name": "2. xKiro Max — 62 model (+8 · gỡ: glm-4.5, glm-4.5-x, glm-4.6)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -380,6 +328,26 @@
           "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh",
           "release_date": "2099-10-12"
         },
+        "minimax/minimax-m2": {
+          "name": "🆕 [L] MiniMax M2 · $0.30/$1.20 · 204.8K",
+          "release_date": "2099-10-08"
+        },
+        "minimax/minimax-m2.1": {
+          "name": "🆕 [L] MiniMax M2.1 · $0.30/$1.20 · 204.8K",
+          "release_date": "2099-10-07"
+        },
+        "minimax/minimax-m2.5": {
+          "name": "🆕 [L] MiniMax M2.5 · $0.30/$1.20 · 204.8K",
+          "release_date": "2099-10-06"
+        },
+        "minimax/minimax-m2.7": {
+          "name": "🆕 [L] MiniMax M2.7 · $0.30/$1.20 · 204.8K",
+          "release_date": "2099-09-03"
+        },
+        "minimax/minimax-m3": {
+          "name": "🆕 [L] MiniMax M3 · $0.30/$1.20 · 1M",
+          "release_date": "2099-09-22"
+        },
         "nvidia/nemotron-3-ultra": {
           "name": "[B] Nemotron 3 Ultra · $0.60/$2.40 · 1M · mạnh",
           "release_date": "2099-10-11"
@@ -387,18 +355,6 @@
         "google/gemini-2.5-pro": {
           "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M",
           "release_date": "2099-10-09"
-        },
-        "z-ai/glm-4.5": {
-          "name": "[B] GLM-4.5 · $0.60/$2.20",
-          "release_date": "2099-10-08"
-        },
-        "z-ai/glm-4.5-x": {
-          "name": "[B] GLM-4.5 X · $2.20/$8.90",
-          "release_date": "2099-10-07"
-        },
-        "z-ai/glm-4.6": {
-          "name": "[B] GLM-4.6 · $0.43/$1.75",
-          "release_date": "2099-10-06"
         },
         "z-ai/glm-4.6v": {
           "name": "[B] GLM-4.6V · $0.30/$0.90 · vision",
@@ -435,6 +391,18 @@
         "xiaomi/mimo-v2.5-pro": {
           "name": "[B] MiMo V2.5 Pro · $0.435/$0.87 · 1M",
           "release_date": "2099-09-27"
+        },
+        "minimax/minimax-m2.1-highspeed": {
+          "name": "🆕 [B] MiniMax M2.1 Highspeed · $0.60/$2.40 · 204.8K",
+          "release_date": "2099-09-02"
+        },
+        "minimax/minimax-m2.5-highspeed": {
+          "name": "🆕 [B] MiniMax M2.5 Highspeed · $0.60/$2.40 · 204.8K",
+          "release_date": "2099-09-01"
+        },
+        "minimax/minimax-m2.7-highspeed": {
+          "name": "🆕 [B] MiniMax M2.7 Highspeed · $0.60/$2.40 · 204.8K",
+          "release_date": "2099-09-13"
         },
         "google/gemini-3.1-pro": {
           "name": "[A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · mạnh",
