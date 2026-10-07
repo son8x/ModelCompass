@@ -252,257 +252,257 @@
         "apiKey": "{env:XTROUTER_API_KEY}"
       },
       "models": {
-        "nvidia/nemotron-3-super": {
-          "name": "[L] Nemotron 3 Super · $0.08/$0.45 · 1M · code",
-          "release_date": "2099-10-31"
-        },
-        "nvidia/nemotron-3-nano-omni": {
-          "name": "[L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision",
-          "release_date": "2099-10-29"
-        },
-        "openai/gpt-5.4-mini": {
-          "name": "[L] GPT-5.4 Mini · $0.75/$4.50 · 400K · nhẹ",
-          "release_date": "2099-10-28"
-        },
-        "openai/gpt-6-luna": {
-          "name": "[L] GPT-6 Luna · $0.10/$0.50 · reasoning/vision",
-          "release_date": "2099-10-27"
-        },
-        "openai/gpt-5.6-luna": {
-          "name": "[L] GPT-5.6 Luna · $0.10/$0.60 · reasoning/vision",
-          "release_date": "2099-10-26"
-        },
-        "anthropic/claude-haiku-4.5": {
-          "name": "[L] Claude Haiku 4.5 · $1.00/$5.00 · nhanh",
-          "release_date": "2099-10-25"
-        },
-        "z-ai/glm-5.3-flash": {
-          "name": "[L] GLM-5.3 Flash · $0.15/$0.50 · vision",
-          "release_date": "2099-10-24"
-        },
-        "z-ai/glm-5-turbo": {
-          "name": "[L] GLM-5 Turbo · $1.20/$4.00 · nhanh",
-          "release_date": "2099-10-23"
-        },
-        "google/gemini-2.5-flash": {
-          "name": "[L] Gemini 2.5 Flash · $0.30/$2.50 · 1M · nhanh",
-          "release_date": "2099-10-22"
-        },
-        "google/gemini-3-flash": {
-          "name": "[L] Gemini 3 Flash · $0.75/$3.75 · 1M · nhanh",
-          "release_date": "2099-10-21"
-        },
-        "xiaomi/mimo-v2.6-flash": {
-          "name": "[L] MiMo V2.6 Flash · $0.14/$0.28 · 1M",
-          "release_date": "2099-10-20"
-        },
-        "xiaomi/mimo-v2.5": {
-          "name": "[L] MiMo V2.5 · $0.14/$0.28 · 1M",
-          "release_date": "2099-10-19"
-        },
-        "z-ai/glm-4.5-flash": {
-          "name": "[L] GLM-4.5 Flash · $0.20/$1.10 · nhẹ",
-          "release_date": "2099-10-18"
-        },
-        "z-ai/glm-4.5-air": {
-          "name": "[L] GLM-4.5 Air · $0.13/$0.85 · nhẹ",
-          "release_date": "2099-10-17"
-        },
-        "z-ai/glm-4.5-airx": {
-          "name": "[L] GLM-4.5 AirX · $1.10/$4.50 · nhẹ",
-          "release_date": "2099-10-16"
-        },
-        "z-ai/glm-4.5v": {
-          "name": "[L] GLM-4.5V · $0.60/$1.80 · vision",
-          "release_date": "2099-10-15"
+        "z-ai/glm-4.6v-flashx": {
+          "name": "[L] GLM-4.6V FlashX · $0.04/$0.40 · vision/nhanh",
+          "release_date": "2099-12-31"
         },
         "z-ai/glm-4.6v-flash": {
           "name": "[L] GLM-4.6V Flash · $0.04/$0.40 · vision/nhanh",
-          "release_date": "2099-10-14"
+          "release_date": "2099-12-30"
         },
-        "z-ai/glm-4.6v-flashx": {
-          "name": "[L] GLM-4.6V FlashX · $0.04/$0.40 · vision/nhanh",
-          "release_date": "2099-10-13"
+        "nvidia/nemotron-3-nano-omni": {
+          "name": "[L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision",
+          "release_date": "2099-12-29"
         },
-        "z-ai/glm-5v-turbo": {
-          "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh",
-          "release_date": "2099-10-12"
+        "z-ai/glm-4.7-flash": {
+          "name": "[L] GLM-4.7 Flash · $0.061/$0.40 · nhanh",
+          "release_date": "2099-12-28"
         },
-        "minimax/minimax-m2": {
-          "name": "[L] MiniMax M2 · $0.30/$1.20 · 204.8K",
-          "release_date": "2099-10-08"
+        "nvidia/nemotron-3-super": {
+          "name": "[L] Nemotron 3 Super · $0.08/$0.45 · 1M · code",
+          "release_date": "2099-12-27"
         },
-        "minimax/minimax-m2.1": {
-          "name": "[L] MiniMax M2.1 · $0.30/$1.20 · 204.8K",
-          "release_date": "2099-10-07"
+        "openai/gpt-6-luna": {
+          "name": "[L] GPT-6 Luna · $0.10/$0.50 · reasoning/vision",
+          "release_date": "2099-12-26"
         },
-        "minimax/minimax-m2.5": {
-          "name": "[L] MiniMax M2.5 · $0.30/$1.20 · 204.8K",
-          "release_date": "2099-10-06"
+        "openai/gpt-5.6-luna": {
+          "name": "[L] GPT-5.6 Luna · $0.10/$0.60 · reasoning/vision",
+          "release_date": "2099-12-25"
+        },
+        "z-ai/glm-4.5-air": {
+          "name": "[L] GLM-4.5 Air · $0.13/$0.85 · nhẹ",
+          "release_date": "2099-12-24"
+        },
+        "xiaomi/mimo-v2.6-flash": {
+          "name": "[L] MiMo V2.6 Flash · $0.14/$0.28 · 1M",
+          "release_date": "2099-12-23"
+        },
+        "xiaomi/mimo-v2.5": {
+          "name": "[L] MiMo V2.5 · $0.14/$0.28 · 1M",
+          "release_date": "2099-12-22"
+        },
+        "z-ai/glm-5.3-flash": {
+          "name": "[L] GLM-5.3 Flash · $0.15/$0.50 · vision",
+          "release_date": "2099-12-21"
+        },
+        "z-ai/glm-4.5-flash": {
+          "name": "[L] GLM-4.5 Flash · $0.20/$1.10 · nhẹ",
+          "release_date": "2099-12-20"
+        },
+        "google/gemini-2.5-flash": {
+          "name": "[L] Gemini 2.5 Flash · $0.30/$2.50 · 1M · nhanh",
+          "release_date": "2099-12-19"
         },
         "minimax/minimax-m2.7": {
           "name": "[L] MiniMax M2.7 · $0.30/$1.20 · 204.8K",
-          "release_date": "2099-09-03"
+          "release_date": "2099-12-18"
+        },
+        "minimax/minimax-m2": {
+          "name": "[L] MiniMax M2 · $0.30/$1.20 · 204.8K",
+          "release_date": "2099-12-17"
+        },
+        "minimax/minimax-m2.1": {
+          "name": "[L] MiniMax M2.1 · $0.30/$1.20 · 204.8K",
+          "release_date": "2099-12-16"
+        },
+        "minimax/minimax-m2.5": {
+          "name": "[L] MiniMax M2.5 · $0.30/$1.20 · 204.8K",
+          "release_date": "2099-12-15"
         },
         "minimax/minimax-m3": {
           "name": "[L] MiniMax M3 · $0.30/$1.20 · 1M",
-          "release_date": "2099-09-22"
-        },
-        "nvidia/nemotron-3-ultra": {
-          "name": "[B] Nemotron 3 Ultra · $0.60/$2.40 · 1M · mạnh",
-          "release_date": "2099-10-11"
-        },
-        "google/gemini-2.5-pro": {
-          "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M",
-          "release_date": "2099-10-09"
-        },
-        "z-ai/glm-4.6v": {
-          "name": "[B] GLM-4.6V · $0.30/$0.90 · vision",
-          "release_date": "2099-10-05"
-        },
-        "z-ai/glm-4.7": {
-          "name": "[B] GLM-4.7 · $0.60/$2.20",
-          "release_date": "2099-10-04"
-        },
-        "z-ai/glm-4.7-flash": {
-          "name": "[B] GLM-4.7 Flash · $0.061/$0.40 · nhanh",
-          "release_date": "2099-10-03"
+          "release_date": "2099-12-14"
         },
         "z-ai/glm-4.7-flashx": {
-          "name": "[B] GLM-4.7 FlashX · $0.37/$1.25 · nhanh",
-          "release_date": "2099-10-02"
+          "name": "[L] GLM-4.7 FlashX · $0.37/$1.25 · nhanh",
+          "release_date": "2099-12-13"
         },
-        "z-ai/glm-5": {
-          "name": "[B] GLM-5 · $0.60/$1.92",
-          "release_date": "2099-10-01"
+        "z-ai/glm-4.5v": {
+          "name": "[L] GLM-4.5V · $0.60/$1.80 · vision",
+          "release_date": "2099-12-12"
         },
-        "z-ai/glm-5.1": {
-          "name": "[B] GLM-5.1 · $1.40/$4.40",
-          "release_date": "2099-09-30"
+        "openai/gpt-5.4-mini": {
+          "name": "[L] GPT-5.4 Mini · $0.75/$4.50 · 400K · nhẹ",
+          "release_date": "2099-12-11"
+        },
+        "google/gemini-3-flash": {
+          "name": "[L] Gemini 3 Flash · $0.75/$3.75 · 1M · nhanh",
+          "release_date": "2099-12-10"
+        },
+        "anthropic/claude-haiku-4.5": {
+          "name": "[L] Claude Haiku 4.5 · $1.00/$5.00 · nhanh",
+          "release_date": "2099-12-09"
+        },
+        "z-ai/glm-4.5-airx": {
+          "name": "[L] GLM-4.5 AirX · $1.10/$4.50 · nhẹ",
+          "release_date": "2099-12-08"
+        },
+        "z-ai/glm-5v-turbo": {
+          "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh",
+          "release_date": "2099-12-07"
+        },
+        "z-ai/glm-5-turbo": {
+          "name": "[L] GLM-5 Turbo · $1.20/$4.00 · nhanh",
+          "release_date": "2099-12-06"
         },
         "z-ai/glm-5.2": {
           "name": "[B] GLM-5.2 · $0.25/$3.99 · 1M",
-          "release_date": "2099-09-29"
+          "release_date": "2099-11-30"
+        },
+        "z-ai/glm-4.6v": {
+          "name": "[B] GLM-4.6V · $0.30/$0.90 · vision",
+          "release_date": "2099-11-29"
         },
         "xiaomi/mimo-v2.6-pro": {
           "name": "[B] MiMo V2.6 Pro · $0.435/$0.87 · 1M",
-          "release_date": "2099-09-28"
+          "release_date": "2099-11-28"
         },
         "xiaomi/mimo-v2.5-pro": {
           "name": "[B] MiMo V2.5 Pro · $0.435/$0.87 · 1M",
-          "release_date": "2099-09-27"
+          "release_date": "2099-11-27"
+        },
+        "z-ai/glm-4.7": {
+          "name": "[B] GLM-4.7 · $0.60/$2.20",
+          "release_date": "2099-11-26"
         },
         "minimax/minimax-m2.1-highspeed": {
           "name": "[B] MiniMax M2.1 Highspeed · $0.60/$2.40 · 204.8K",
-          "release_date": "2099-09-02"
+          "release_date": "2099-11-25"
         },
-        "minimax/minimax-m2.5-highspeed": {
-          "name": "[B] MiniMax M2.5 Highspeed · $0.60/$2.40 · 204.8K",
-          "release_date": "2099-09-01"
+        "z-ai/glm-5": {
+          "name": "[B] GLM-5 · $0.60/$1.92",
+          "release_date": "2099-11-24"
         },
         "minimax/minimax-m2.7-highspeed": {
           "name": "[B] MiniMax M2.7 Highspeed · $0.60/$2.40 · 204.8K",
-          "release_date": "2099-09-13"
+          "release_date": "2099-11-23"
+        },
+        "nvidia/nemotron-3-ultra": {
+          "name": "[B] Nemotron 3 Ultra · $0.60/$2.40 · 1M · mạnh",
+          "release_date": "2099-11-22"
+        },
+        "minimax/minimax-m2.5-highspeed": {
+          "name": "[B] MiniMax M2.5 Highspeed · $0.60/$2.40 · 204.8K",
+          "release_date": "2099-11-21"
+        },
+        "google/gemini-2.5-pro": {
+          "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M",
+          "release_date": "2099-11-20"
+        },
+        "z-ai/glm-5.1": {
+          "name": "[B] GLM-5.1 · $1.40/$4.40",
+          "release_date": "2099-11-19"
         },
         "mistralai/mistral-large-4-0": {
-          "name": "🆕 [B] Mistral Large 4 0 · $0.68/$2.09 · 524.3K",
-          "release_date": "2099-09-19"
-        },
-        "google/gemini-3.1-pro": {
-          "name": "[A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · mạnh",
-          "release_date": "2099-09-26"
-        },
-        "google/gemini-3.5-flash": {
-          "name": "[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M",
-          "release_date": "2099-09-25"
+          "name": "🆕 [A] Mistral Large 4 0 · $0.68/$2.09 · 524.3K",
+          "release_date": "2099-10-31"
         },
         "google/gemini-3.6-flash": {
           "name": "[A] Gemini 3.6 Flash · $0.75/$3.75 · 1M",
-          "release_date": "2099-09-24"
+          "release_date": "2099-10-30"
         },
         "google/gemini-3.7-flash": {
           "name": "[A] Gemini 3.7 Flash · $0.75/$3.75 · 1M",
-          "release_date": "2099-09-23"
+          "release_date": "2099-10-29"
         },
         "google/gemini-3.8-flash": {
           "name": "[A] Gemini 3.8 Flash · $0.75/$3.75 · 1M ⭐premium vẫn OK",
-          "release_date": "2099-09-22"
+          "release_date": "2099-10-28"
         },
         "openai/gpt-5.6-terra": {
           "name": "[A] GPT-5.6 Terra · $1.00/$6.00 · 1M",
-          "release_date": "2099-09-21"
-        },
-        "openai/gpt-5.4": {
-          "name": "[A] GPT-5.4 · $2.50/$15.00 · đa dụng",
-          "release_date": "2099-09-20"
-        },
-        "x-ai/grok-4.7": {
-          "name": "[A] Grok 4.7 · $2.00/$6.00 · 500K · code",
-          "release_date": "2099-09-19"
-        },
-        "anthropic/claude-sonnet-4.6": {
-          "name": "[A] Claude Sonnet 4.6 · $3.00/$15.00",
-          "release_date": "2099-09-18"
-        },
-        "anthropic/claude-sonnet-5": {
-          "name": "[A] Claude Sonnet 5 · $2.00/$10.00 · viết lách/agent",
-          "release_date": "2099-09-17"
-        },
-        "anthropic/claude-sonnet-4.5": {
-          "name": "[A] Claude Sonnet 4.5 · $3.00/$15.00 · 1M",
-          "release_date": "2099-09-16"
-        },
-        "anthropic/claude-sonnet-4": {
-          "name": "[A] Claude Sonnet 4 · $3.00/$15.00 · 1M",
-          "release_date": "2099-09-15"
+          "release_date": "2099-10-27"
         },
         "z-ai/glm-5.3": {
           "name": "[A] GLM-5.3 · $1.40/$4.40 · VN/code",
-          "release_date": "2099-09-14"
+          "release_date": "2099-10-26"
+        },
+        "google/gemini-3.5-flash": {
+          "name": "[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M",
+          "release_date": "2099-10-25"
+        },
+        "google/gemini-3.1-pro": {
+          "name": "[A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · mạnh",
+          "release_date": "2099-10-24"
+        },
+        "x-ai/grok-4.7": {
+          "name": "[A] Grok 4.7 · $2.00/$6.00 · 500K · code",
+          "release_date": "2099-10-23"
+        },
+        "anthropic/claude-sonnet-5": {
+          "name": "[A] Claude Sonnet 5 · $2.00/$10.00 · viết lách/agent",
+          "release_date": "2099-10-22"
+        },
+        "openai/gpt-5.4": {
+          "name": "[A] GPT-5.4 · $2.50/$15.00 · đa dụng",
+          "release_date": "2099-10-21"
+        },
+        "anthropic/claude-sonnet-4": {
+          "name": "[A] Claude Sonnet 4 · $3.00/$15.00 · 1M",
+          "release_date": "2099-10-20"
+        },
+        "anthropic/claude-sonnet-4.6": {
+          "name": "[A] Claude Sonnet 4.6 · $3.00/$15.00",
+          "release_date": "2099-10-19"
+        },
+        "anthropic/claude-sonnet-4.5": {
+          "name": "[A] Claude Sonnet 4.5 · $3.00/$15.00 · 1M",
+          "release_date": "2099-10-18"
         },
         "openai/gpt-6.1-sol": {
-          "name": "[A] GPT 6.1 Sol · $2.00/$10.00 · 1.1M",
-          "release_date": "2099-10-10"
-        },
-        "anthropic/claude-opus-5.5": {
-          "name": "[S] Claude Opus 5.5 · $4.00/$20.00 · 1M",
-          "release_date": "2099-09-13"
-        },
-        "anthropic/claude-opus-4.6": {
-          "name": "[S] Claude Opus 4.6 · $5.00/$25.00 · 1M",
-          "release_date": "2099-09-12"
-        },
-        "anthropic/claude-opus-4.7": {
-          "name": "[S] Claude Opus 4.7 · $5.00/$25.00 · 1M",
-          "release_date": "2099-09-11"
-        },
-        "anthropic/claude-opus-4.8": {
-          "name": "[S] Claude Opus 4.8 · $5.00/$25.00 · reasoning",
-          "release_date": "2099-09-10"
-        },
-        "anthropic/claude-opus-5": {
-          "name": "[S] Claude Opus 5 · $5.00/$25.00 · flagship",
-          "release_date": "2099-09-09"
-        },
-        "anthropic/claude-opus-4.5": {
-          "name": "[S] Claude Opus 4.5 · $5.00/$25.00",
-          "release_date": "2099-09-08"
+          "name": "[S] GPT 6.1 Sol · $2.00/$10.00 · 1.1M",
+          "release_date": "2099-09-30"
         },
         "openai/gpt-6-sol": {
           "name": "[S] GPT-6 Sol · $2.00/$10.00 · flagship",
-          "release_date": "2099-09-07"
-        },
-        "anthropic/claude-fable-5": {
-          "name": "[S] Claude Fable 5 · $10.00/$50.00 · mạnh nhất",
-          "release_date": "2099-09-06"
-        },
-        "openai/gpt-5.5": {
-          "name": "[S] GPT-5.5 · $5.00/$30.00",
-          "release_date": "2099-09-05"
+          "release_date": "2099-09-29"
         },
         "openai/gpt-5.6-sol": {
           "name": "[S] GPT-5.6 Sol · $2.00/$10.00",
-          "release_date": "2099-09-04"
+          "release_date": "2099-09-28"
+        },
+        "anthropic/claude-opus-5.5": {
+          "name": "[S] Claude Opus 5.5 · $4.00/$20.00 · 1M",
+          "release_date": "2099-09-27"
+        },
+        "openai/gpt-5.5": {
+          "name": "[S] GPT-5.5 · $5.00/$30.00",
+          "release_date": "2099-09-26"
+        },
+        "anthropic/claude-opus-4.6": {
+          "name": "[S] Claude Opus 4.6 · $5.00/$25.00 · 1M",
+          "release_date": "2099-09-25"
+        },
+        "anthropic/claude-opus-4.7": {
+          "name": "[S] Claude Opus 4.7 · $5.00/$25.00 · 1M",
+          "release_date": "2099-09-24"
+        },
+        "anthropic/claude-opus-4.8": {
+          "name": "[S] Claude Opus 4.8 · $5.00/$25.00 · reasoning",
+          "release_date": "2099-09-23"
+        },
+        "anthropic/claude-opus-5": {
+          "name": "[S] Claude Opus 5 · $5.00/$25.00 · flagship",
+          "release_date": "2099-09-22"
+        },
+        "anthropic/claude-opus-4.5": {
+          "name": "[S] Claude Opus 4.5 · $5.00/$25.00",
+          "release_date": "2099-09-21"
+        },
+        "anthropic/claude-fable-5": {
+          "name": "[S] Claude Fable 5 · $10.00/$50.00 · mạnh nhất",
+          "release_date": "2099-09-20"
         }
       }
     },
