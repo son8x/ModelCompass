@@ -149,7 +149,7 @@
     //     gpt-5.6-sol (500), nemotron-3-nano + llama-49b (410 routing).
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max — 62 model (+8 · gỡ: glm-4.5, glm-4.5-x, glm-4.6)",
+      "name": "2. xKiro Max — 63 model (+1)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -179,11 +179,11 @@
         "z-ai/glm-4.6v-flash": { "name": "[L] GLM-4.6V Flash · $0.04/$0.40 · vision/nhanh", "release_date": "2099-10-14" },
         "z-ai/glm-4.6v-flashx": { "name": "[L] GLM-4.6V FlashX · $0.04/$0.40 · vision/nhanh", "release_date": "2099-10-13" },
         "z-ai/glm-5v-turbo": { "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh", "release_date": "2099-10-12" },
-        "minimax/minimax-m2": { "name": "🆕 [L] MiniMax M2 · $0.30/$1.20 · 204.8K", "release_date": "2099-10-08" },
-        "minimax/minimax-m2.1": { "name": "🆕 [L] MiniMax M2.1 · $0.30/$1.20 · 204.8K", "release_date": "2099-10-07" },
-        "minimax/minimax-m2.5": { "name": "🆕 [L] MiniMax M2.5 · $0.30/$1.20 · 204.8K", "release_date": "2099-10-06" },
-        "minimax/minimax-m2.7": { "name": "🆕 [L] MiniMax M2.7 · $0.30/$1.20 · 204.8K", "release_date": "2099-09-03" },
-        "minimax/minimax-m3": { "name": "🆕 [L] MiniMax M3 · $0.30/$1.20 · 1M", "release_date": "2099-09-22" },
+        "minimax/minimax-m2": { "name": "[L] MiniMax M2 · $0.30/$1.20 · 204.8K", "release_date": "2099-10-08" },
+        "minimax/minimax-m2.1": { "name": "[L] MiniMax M2.1 · $0.30/$1.20 · 204.8K", "release_date": "2099-10-07" },
+        "minimax/minimax-m2.5": { "name": "[L] MiniMax M2.5 · $0.30/$1.20 · 204.8K", "release_date": "2099-10-06" },
+        "minimax/minimax-m2.7": { "name": "[L] MiniMax M2.7 · $0.30/$1.20 · 204.8K", "release_date": "2099-09-03" },
+        "minimax/minimax-m3": { "name": "[L] MiniMax M3 · $0.30/$1.20 · 1M", "release_date": "2099-09-22" },
         // ── [B] Đa dụng giá tốt — chat hàng ngày, việc chung ──
         "nvidia/nemotron-3-ultra": { "name": "[B] Nemotron 3 Ultra · $0.60/$2.40 · 1M · mạnh", "release_date": "2099-10-11" },
         "google/gemini-2.5-pro": { "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M", "release_date": "2099-10-09" },
@@ -196,9 +196,10 @@
         "z-ai/glm-5.2": { "name": "[B] GLM-5.2 · $0.25/$3.99 · 1M", "release_date": "2099-09-29" },
         "xiaomi/mimo-v2.6-pro": { "name": "[B] MiMo V2.6 Pro · $0.435/$0.87 · 1M", "release_date": "2099-09-28" },
         "xiaomi/mimo-v2.5-pro": { "name": "[B] MiMo V2.5 Pro · $0.435/$0.87 · 1M", "release_date": "2099-09-27" },
-        "minimax/minimax-m2.1-highspeed": { "name": "🆕 [B] MiniMax M2.1 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-09-02" },
-        "minimax/minimax-m2.5-highspeed": { "name": "🆕 [B] MiniMax M2.5 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-09-01" },
-        "minimax/minimax-m2.7-highspeed": { "name": "🆕 [B] MiniMax M2.7 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-09-13" },
+        "minimax/minimax-m2.1-highspeed": { "name": "[B] MiniMax M2.1 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-09-02" },
+        "minimax/minimax-m2.5-highspeed": { "name": "[B] MiniMax M2.5 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-09-01" },
+        "minimax/minimax-m2.7-highspeed": { "name": "[B] MiniMax M2.7 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-09-13" },
+        "mistralai/mistral-large-4-0": { "name": "🆕 [B] Mistral Large 4 0 · $0.68/$2.09 · 524.3K", "release_date": "2099-09-19" },
         // ── [A] Mạnh đa dụng — agent, coding sâu, luận văn ──
         "google/gemini-3.1-pro": { "name": "[A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · mạnh", "release_date": "2099-09-26" },
         "google/gemini-3.5-flash": { "name": "[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M", "release_date": "2099-09-25" },
@@ -213,7 +214,7 @@
         "anthropic/claude-sonnet-4.5": { "name": "[A] Claude Sonnet 4.5 · $3.00/$15.00 · 1M", "release_date": "2099-09-16" },
         "anthropic/claude-sonnet-4": { "name": "[A] Claude Sonnet 4 · $3.00/$15.00 · 1M", "release_date": "2099-09-15" },
         "z-ai/glm-5.3": { "name": "[A] GLM-5.3 · $1.40/$4.40 · VN/code", "release_date": "2099-09-14" },
-        "openai/gpt-6.1-sol": { "name": "🆕 [A] GPT 6.1 Sol · $2.00/$10.00 · 1.1M", "release_date": "2099-10-10" },
+        "openai/gpt-6.1-sol": { "name": "[A] GPT 6.1 Sol · $2.00/$10.00 · 1.1M", "release_date": "2099-10-10" },
         // ── [S] Flagship — chất lượng cao nhất ──
         "anthropic/claude-opus-5.5": { "name": "[S] Claude Opus 5.5 · $4.00/$20.00 · 1M", "release_date": "2099-09-13" },
         "anthropic/claude-opus-4.6": { "name": "[S] Claude Opus 4.6 · $5.00/$25.00 · 1M", "release_date": "2099-09-12" },
@@ -342,6 +343,7 @@
 //  5) scripts/config/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
 //  6) Quit & restart opencode.
 // ═══════════════════════════════════════════════════════════════════
+
 
 
 
