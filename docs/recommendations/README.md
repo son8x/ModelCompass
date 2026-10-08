@@ -9,6 +9,8 @@ và **cách cấu hình nhanh**.
 | Lập trình viên (code hàng ngày, fix lỗi, refactor, tìm hiểu repo) | [programming.md](programming.md) |
 | Sinh viên/Viết luận văn (văn phong hàn lâm tiếng Việt, trích dẫn IEEE) | [thesis-writing.md](thesis-writing.md) |
 | Pentest / CTF / bảo mật (phân tích khai thác, đọc mã) | [pentest.md](pentest.md) |
+| Model trả phí (phân tích & chọn mạnh/giá tốt theo từng phân nhóm) | [paid-models.md](paid-models.md) |
+| **Workload thực tế (giảng dạy/PPTX, review luận văn, tooling) — free + paid** | [lecturer-workload.md](lecturer-workload.md) |
 
 ## Công thức chọn model chung
 

@@ -16,7 +16,7 @@
   "provider": {
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 55 model (+1 · gỡ: deepseek-v4-pro, minimax-m3:free, deepseek-v4.1-flash:free, deepseek-v4-flash, deepseek-v3.2, deepseek-chat-v3.1, minimax-m2.7-highspeed:free, minimax-m2.7:free, minimax-m2.5-highspeed:free, minimax-m2.5:free, minimax-m2.1-highspeed:free, minimax-m2.1:free, minimax-m2:free, mimo-v2.6-flash:free)",
+      "name": "1. xKiro Free — 56 model (+1)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -139,108 +139,112 @@
           "release_date": "2099-11-20"
         },
         "cohere/aya-expanse-32b": {
-          "name": "🆕 Aya Expanse 32b · 128K",
+          "name": "Aya Expanse 32b · 128K",
           "release_date": "2099-11-19"
         },
         "cohere/aya-vision-32b": {
-          "name": "🆕 Aya Vision 32b · 16.4K",
+          "name": "Aya Vision 32b · 16.4K",
           "release_date": "2099-11-18"
         },
         "cohere/command-a": {
-          "name": "🆕 Command A · 288K",
+          "name": "Command A · 288K",
           "release_date": "2099-11-17"
         },
         "cohere/command-a-plus": {
-          "name": "🆕 Command A Plus · 436K",
+          "name": "Command A Plus · 436K",
           "release_date": "2099-11-16"
         },
         "cohere/command-a-reasoning": {
-          "name": "🆕 Command A Reasoning · 288.8K",
+          "name": "Command A Reasoning · 288.8K",
           "release_date": "2099-11-15"
         },
         "cohere/command-a-translate": {
-          "name": "🆕 Command A Translate · 9K",
+          "name": "Command A Translate · 9K",
           "release_date": "2099-11-14"
         },
         "cohere/command-a-vision": {
-          "name": "🆕 Command A Vision · 128K",
+          "name": "Command A Vision · 128K",
           "release_date": "2099-11-13"
         },
         "cohere/command-r-08-2024": {
-          "name": "🆕 Command R 08 2024 · 128K",
+          "name": "Command R 08 2024 · 128K",
           "release_date": "2099-11-12"
         },
         "cohere/command-r-plus-08-2024": {
-          "name": "🆕 Command R Plus 08 2024 · 128K",
+          "name": "Command R Plus 08 2024 · 128K",
           "release_date": "2099-11-11"
         },
         "cohere/command-r7b-12-2024": {
-          "name": "🆕 Command R7b 12 2024 · 132K",
+          "name": "Command R7b 12 2024 · 132K",
           "release_date": "2099-11-10"
         },
         "cohere/north-mini-code": {
-          "name": "🆕 North Mini Code · 256K",
+          "name": "North Mini Code · 256K",
           "release_date": "2099-11-09"
         },
         "cohere/north-small-translate": {
-          "name": "🆕 North Small Translate · 32.8K",
+          "name": "North Small Translate · 32.8K",
           "release_date": "2099-11-08"
         },
         "cohere/tiny-aya-earth": {
-          "name": "🆕 Tiny Aya Earth · 8.2K",
+          "name": "Tiny Aya Earth · 8.2K",
           "release_date": "2099-11-07"
         },
         "cohere/tiny-aya-fire": {
-          "name": "🆕 Tiny Aya Fire · 8.2K",
+          "name": "Tiny Aya Fire · 8.2K",
           "release_date": "2099-11-06"
         },
         "cohere/tiny-aya-global": {
-          "name": "🆕 Tiny Aya Global · 8.2K",
+          "name": "Tiny Aya Global · 8.2K",
           "release_date": "2099-11-05"
         },
         "cohere/tiny-aya-water": {
-          "name": "🆕 Tiny Aya Water · 8.2K",
+          "name": "Tiny Aya Water · 8.2K",
           "release_date": "2099-11-04"
         },
         "dots-studio/dots-3-note-preview:free": {
-          "name": "🆕 Dots 3 Note Preview · 512K",
+          "name": "Dots 3 Note Preview · 512K",
           "release_date": "2099-11-03"
         },
         "inclusionai/ling-3.0-flash-sante:free": {
-          "name": "🆕 Ling 3.0 Flash Sante · 262.1K",
+          "name": "Ling 3.0 Flash Sante · 262.1K",
           "release_date": "2099-11-02"
         },
         "liquid/lfm-2.5-2.6b:free": {
-          "name": "🆕 Lfm 2.5 2.6b · 65.5K",
+          "name": "Lfm 2.5 2.6b · 65.5K",
           "release_date": "2099-11-01"
         },
         "meituan/longcat-2.0": {
-          "name": "🆕 Longcat 2.0 · 1M",
+          "name": "Longcat 2.0 · 1M",
           "release_date": "2099-10-31"
         },
         "meituan/longcat-2.5-preview:free": {
-          "name": "🆕 Longcat 2.5 Preview · 1M",
+          "name": "Longcat 2.5 Preview · 1M",
           "release_date": "2099-10-30"
         },
         "meta/muse-spark-1.2-contributor:free": {
-          "name": "🆕 Muse Spark 1.2 Contributor · 1M",
+          "name": "Muse Spark 1.2 Contributor · 1M",
           "release_date": "2099-10-29"
         },
         "meta/muse-spark-1.3-contributor:free": {
-          "name": "🆕 Muse Spark 1.3 Contributor · 1M",
+          "name": "Muse Spark 1.3 Contributor · 1M",
           "release_date": "2099-10-28"
         },
         "stealth/big-pickle": {
-          "name": "🆕 Big Pickle · 200K",
+          "name": "Big Pickle · 200K",
           "release_date": "2099-10-27"
         },
         "stealth/space-bunny-alpha:free": {
-          "name": "🆕 Space Bunny Alpha · 1M",
+          "name": "Space Bunny Alpha · 1M",
           "release_date": "2099-10-26"
         },
         "apodex/apodex-1.1-mini:free": {
-          "name": "🆕 Apodex 1.1 Mini · 262.1K",
+          "name": "Apodex 1.1 Mini · 262.1K",
           "release_date": "2099-10-25"
+        },
+        "mistralai/mistral-large-4-0": {
+          "name": "🆕 Mistral Large 4 0 · 524.3K",
+          "release_date": "2099-10-24"
         }
       }
     },
@@ -405,7 +409,7 @@
           "release_date": "2099-11-19"
         },
         "mistralai/mistral-large-4-0": {
-          "name": "🆕 [A] Mistral Large 4 0 · $0.68/$2.09 · 524.3K",
+          "name": "🆕 [A] Mistral Large 4 0 · $0.00/$0.00 · 524.3K",
           "release_date": "2099-10-31"
         },
         "google/gemini-3.6-flash": {
