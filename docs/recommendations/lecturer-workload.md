@@ -1,7 +1,7 @@
 # 🎯 Đề xuất model theo workload thực tế (của tôi)
 
 > Phân tích từ **170 session** trong `opencode.db` (03/09–07/10/2026) +
-> usage API live xKiro. Cập nhật lần cuối: **07/10/2026**.
+> usage API live xKiro. Cập nhật lần cuối: **12/10/2026**.
 > Mục tiêu: **mạnh — tối ưu chi phí — tận dụng free + paid**.
 
 ## 1. Phân tích nhu cầu thực tế
@@ -29,6 +29,10 @@
 
 - Tuần hiện tại (rolling 7d, API live): **$90 / $140 budget = 64%** —
   pace tuần này ~$110 (nóng nhất từ trước tới nay).
+- **Đo thật từ API `GET /v1/usage/history` (12/10/2026)**: 7 ngày **$79.51**
+  (1.986 req · 252M token) · 30 ngày **$298.44** (8.297 req · 1.12B token)
+  ≈ **$75/tuần** → khớp ước tính DB. Chi tiết tuần: 06/10 $30.37 · 07/10 $23.28
+  · 08/10 $25.86.
 
 ## 2. Gợi ý theo từng nhu cầu
 
@@ -96,11 +100,22 @@ Chốt chất lượng cao  : openai/gpt-6.1-sol (S, $2 input) hoặc claude-son
 ## 5. Cách cập nhật lại phân tích này
 
 ```powershell
-# Lấy usage live (allowance/burst/free tokens)
+# Lấy usage live (allowance/burst/free tokens) — GET /v1/usage
 pwsh scripts\provider\Get-XKiroUsage.ps1
+
+# Chi tiêu ĐÃ DÙNG theo tuần/tháng — GET /v1/usage/history (miễn phí)
+$h = @{ Authorization = "Bearer $env:XTROUTER_API_KEY" }
+Invoke-RestMethod "https://api.xkiro.com/v1/usage/history?period=week" -Headers $h
+
 # Đồng bộ catalog mới nhất (nếu có model đổi giá/thêm mới)
 pwsh scripts\provider\Update-XKiroModels.ps1 -Publish -Install
 ```
 
 > Số liệu session/token lấy từ `~\.local\share\opencode\opencode.db`
 > (bảng `session`: tokens_input/output/cache_read, model, time_created).
+>
+> **Ngày hết hạn gói**: API xKiro **không trả** (field `plan` chỉ cho biết
+> còn hiệu lực `"max"` hay không; `null` = PAYG/gói đã kết thúc). Xem ngày
+> gia hạn ở **LemonSqueezy** (`app.lemonsqueezy.com/my-orders` / email hóa đơn)
+> hoặc console `xkiro.com/dashboard`. Chi tiết: `docs/providers-and-models.md`
+> §"xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói".

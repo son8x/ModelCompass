@@ -284,6 +284,13 @@ nằm trong `.opencode/plugins-xkiro/`:
 **Bảo mật:** plugin chỉ đọc endpoint `/v1/usage` (miễn phí) — **không** in hay lưu
 `XTROUTER_API_KEY`; key chỉ được đọc từ biến môi trường khi gọi model.
 
+**Chi tiêu & ngày hết hạn gói** (12/10/2026): `/v1/usage` cho biết **còn lại**; thêm
+`GET /v1/usage/history?period=day|week|month` (cũng **miễn phí**) trả chi tiêu/token/request
+**đã dùng**. API **không** có ngày hết hạn — field `plan` chỉ cho biết gói còn hiệu lực
+(`null` = PAYG hoặc gói đã kết thúc); xem ngày gia hạn ở **LemonSqueezy**
+(`app.lemonsqueezy.com/my-orders` / email hóa đơn) hoặc console `xkiro.com/dashboard`.
+Chi tiết: `docs/providers-and-models.md` §"xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói".
+
 ## 📊 Nguồn dữ liệu giá
 
 Bảng giá token là **ảnh chụp tại thời điểm viết** (Q4/2026), có ghi nguồn trong

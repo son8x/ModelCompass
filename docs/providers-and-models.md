@@ -190,6 +190,37 @@ Helper tránh trùng key bằng `-Exclude` (tự động nạp key sẵn có tro
 - Kiểm tra: `pwsh scripts\provider\Get-XKiroUsage.ps1`
 - Theo dõi trong opencode: **status bar cuối màn hình** (TUI plugin `.opencode/plugins-xkiro/xkiro-statusline.tsx`, slot `app_bottom`) — **quota bar đa provider** (Phase 1.4): mặc định 1 dòng `quota · xKiro free 25.92M (19%) · burst $19.96 (0%) · budget $140.00 (0%) · wallet $0.00`, mở rộng thêm provider bằng `QUOTA_PROVIDERS=xkiro,teamo` (provider chưa có API quota → hiện `… chưa có quota API` màu thường, không phải lỗi). Tự làm mới theo chu kỳ và sau mỗi lượt trả lời, tổng tone lấy theo provider dùng nhiều nhất (vàng ≥90%, đỏ hết). Đi kèm plugin `.opencode/plugins-xkiro/xkiro-usage.js` ghi chi tiết xKiro vào `opencode.log` + toast cảnh báo ngưỡng (90%). Logic chung nằm ở `.opencode/plugins-xkiro/quota-common.js`. Biến: `XKIRO_STATUSBAR_DISABLE`, `XKIRO_STATUSBAR_RENDER_MS` (ms, mặc định 5000), `XKIRO_STATUSBAR_WARN_PCT`; `QUOTA_PROVIDERS`, `QUOTA_STATUSBAR_*`, `QUOTA_CACHE_DIR` (provider ngoài xKiro); `XKIRO_USAGE_DISABLE`, `XKIRO_USAGE_INTERVAL` (s, mặc định 300), `XKIRO_USAGE_WARN_PCT`, `XKIRO_USAGE_TOAST_EACH` (mặc định 1), `XKIRO_USAGE_TOAST_GAP` (s, mặc định 60), `XKIRO_USAGE_INJECT` (=1 mới ghi thêm vào transcript chat), `XKIRO_USAGE_INJECT_GAP` (s, mặc định 300).<br>**Lưu ý:** `ctrl+l` (`app_console`) là console debug của renderer, KHÔNG hiển thị log plugin — log chỉ ở file `opencode.log`.
 
+### xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói
+
+> Cập nhật **12/10/2026**. Nguồn: `docs.xkiro.com/api/usage/` + probe thực tế tài khoản.
+> Cùng nguồn với plugin `.opencode/plugins-xkiro/` và `scripts\provider\Get-XKiroUsage.ps1`.
+
+xKiro có **2 endpoint MIỄN PHÍ** (không tốn token, không tính allowance lẫn rate limit, không cần key trả phí):
+
+| Endpoint | Trả về | Ghi chú |
+|---|---|---|
+| `GET /v1/usage` | `plan`, `windows[]` (`short` ~5h + `long` 7 ngày), `free_tokens` (ngày), `wallet` | Trả lời **"còn lại bao nhiêu"**. Field `plan`: chuỗi (vd `max`) = gói **đang hiệu lực**; **`null` = pay-as-you-go HOẶC gói đã kết thúc**. |
+| `GET /v1/usage/history?period=day\|week\|month` | `points[]` (`requests`, `tokens`, `spend_usd`) + `total` | Trả lời **"đã dùng bao nhiêu"**. `day`=24 bucket giờ, `week`=7 ngày, `month`=30 ngày. `tokens` gộp cả **cache-read + reasoning** (không chỉ prompt+completion). |
+
+- **KHÔNG có endpoint ngày hết hạn / billing.** Đã dò `/v1/me`, `/v1/subscription`, `/v1/account`, `/v1/billing`, `/v1/plan`, `/v1/user`, `/v1/limits`, `/openapi.json`, `/health` → **tất cả 404**. Tài liệu API chỉ liệt kê 2 endpoint trên.
+- **`resets_in_sec`** của window `long` chỉ là **reset allowance 7 ngày**, **KHÔNG phải** ngày gói hết hạn — đừng nhầm.
+
+**Xem ngày hết hạn / gia hạn gói ở đâu** (theo thứ tự ưu tiên):
+
+1. **LemonSqueezy** — xKiro bán gói qua đây (kể cả subscription): email hóa đơn *"Your subscription to xKiro…"* hoặc cổng `https://app.lemonsqueezy.com/my-orders` → ghi **Next billing date** + nút Manage subscription (gia hạn/hủy/đổi gói).
+2. **Console xKiro** — `https://xkiro.com/dashboard` (plan) · `https://xkiro.com/dashboard/api/usage` (chi tiêu per-key/model/day) · `https://xkiro.com/dashboard/api/keys`.
+
+**Số đo thật** (12/10/2026, từ `/v1/usage/history`): **7 ngày $79.51** (1.986 req · 252M token) · **30 ngày $298.44** (8.297 req · 1.12B token) ≈ **$75/tuần**. Chi tiết 7 ngày: 06/10 **$30.37** · 07/10 **$23.28** · 08/10 **$25.86** → khớp ước tính DB (~$75–90/tuần).
+
+```powershell
+# allowance / burst / free-token còn lại (gọi /v1/usage)
+pwsh scripts\provider\Get-XKiroUsage.ps1
+
+# chi tiêu ĐÃ DÙNG (gọi /v1/usage/history — miễn phí)
+$h = @{ Authorization = "Bearer $env:XTROUTER_API_KEY" }
+Invoke-RestMethod "https://api.xkiro.com/v1/usage/history?period=week" -Headers $h
+```
+
 ### xKiro Max — Ứng cứu khi model bị overload (fallback theo tầng)
 
 > **Bản chất**: xKiro là proxy bán lại — upstream có giới hạn concurrent; model nào **"đáng tiền" nhất trong tầm giá** (giá/hiệu năng ngon) thì đông người dùng nhất → hay bị chạm hạn mức và trả `429 "temporarily at capacity"` / `500`. Không riêng nhóm A: B (giá rẻ) cũng bị ép.

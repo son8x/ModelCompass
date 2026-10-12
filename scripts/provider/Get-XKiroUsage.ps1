@@ -10,6 +10,16 @@
         - Spend windows paid: budget (7 ngày) + window burst (~5 giờ)
         - Wallet balance (nếu có)
 
+    GHI CHÚ:
+        - xKiro cũng có endpoint MIỄN PHÍ GET /v1/usage/history?period=day|week|month
+          trả chi tiêu ĐÃ DÙNG (requests/tokens/spend_usd theo ngày/tuần/tháng) —
+          script này CHƯA gọi (chỉ đọc /v1/usage = "còn lại").
+        - API KHÔNG trả ngày hết hạn gói: field `plan` chỉ cho biết gói còn hiệu
+          lực (chuỗi, vd "max") hay không (null = PAYG/gói đã kết thúc). Ngày gia
+          hạn xem ở LemonSqueezy (app.lemonsqueezy.com/my-orders / email hóa đơn)
+          hoặc console xkiro.com/dashboard.
+          Chi tiết: docs/providers-and-models.md -> "xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói".
+
     Key được đọc theo thứ tự: biến môi trường XTROUTER_API_KEY -> .env.local
     (scripts\ hoặc repo root). Script KHÔNG BAO GIỜ in key ra màn hình.
 
