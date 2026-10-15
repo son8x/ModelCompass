@@ -16,7 +16,7 @@
   "provider": {
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 56 model (+1)",
+      "name": "1. xKiro Free — 55 model (gỡ: sensenova-6.7-flash-lite)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -134,10 +134,6 @@
           "name": "SenseNova 6.8 · vision",
           "release_date": "2099-11-21"
         },
-        "sensenova/sensenova-6.7-flash-lite": {
-          "name": "SenseNova 6.7 · vision",
-          "release_date": "2099-11-20"
-        },
         "cohere/aya-expanse-32b": {
           "name": "Aya Expanse 32b · 128K",
           "release_date": "2099-11-19"
@@ -250,7 +246,7 @@
     },
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max — 63 model (+1)",
+      "name": "2. xKiro Max — 62 model (gỡ: claude-fable-5-1, gpt-6-astra, mimo-v2.5-pro)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -372,10 +368,6 @@
           "name": "[B] MiMo V2.6 Pro · $0.435/$0.87 · 1M",
           "release_date": "2099-11-28"
         },
-        "xiaomi/mimo-v2.5-pro": {
-          "name": "[B] MiMo V2.5 Pro · $0.435/$0.87 · 1M",
-          "release_date": "2099-11-27"
-        },
         "z-ai/glm-4.7": {
           "name": "[B] GLM-4.7 · $0.60/$2.20",
           "release_date": "2099-11-26"
@@ -409,7 +401,7 @@
           "release_date": "2099-11-19"
         },
         "mistralai/mistral-large-4-0": {
-          "name": "🆕 [A] Mistral Large 4 0 · $0.00/$0.00 · 524.3K",
+          "name": "[A] Mistral Large 4 0 · $0.00/$0.00 · 524.3K",
           "release_date": "2099-10-31"
         },
         "google/gemini-3.6-flash": {
