@@ -24,22 +24,26 @@
       "local": false
     },
     {
+      "_comment": "[TODO:OmniRoute] Provider hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ disabled khi cần phát triển lại.",
       "id": "3-omniroute-free",
       "catalogId": "omniroute",
       "name": "3. OmniRoute Free (Model mạnh nhất)",
       "npm": "@ai-sdk/openai-compatible",
       "baseURL": "http://127.0.0.1:20217/v1",
       "apiKeyEnv": "OMNIROUTE_KEY",
-      "local": true
+      "local": true,
+      "disabled": true
     },
     {
+      "_comment": "[TODO:OmniRoute] Provider hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ disabled khi cần phát triển lại.",
       "id": "4-openrouter-free",
       "catalogId": "openrouter",
       "name": "4. OpenRouter Free",
       "npm": "@ai-sdk/openai-compatible",
       "baseURL": "http://127.0.0.1:20217/v1",
       "apiKeyEnv": "OMNIROUTE_KEY",
-      "local": true
+      "local": true,
+      "disabled": true
     },
     {
       "id": "5-9router",
@@ -716,6 +720,7 @@
       "tags": []
     },
     {
+      "_comment": "[TODO:OmniRoute] Models 3-omniroute-free hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ disabled provider ở trên khi cần phát triển lại.",
       "provider": "3-omniroute-free",
       "id": "cfp/zai-org/glm-5.2",
       "releaseDate": "",
@@ -851,6 +856,7 @@
       "tags": []
     },
     {
+      "_comment": "[TODO:OmniRoute] Models 4-openrouter-free hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ disabled provider ở trên khi cần phát triển lại.",
       "provider": "4-openrouter-free",
       "id": "openrouter/inclusionai/ling-3.0-flash-sante:free",
       "releaseDate": "",

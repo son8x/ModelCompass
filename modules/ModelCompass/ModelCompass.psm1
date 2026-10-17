@@ -8,7 +8,7 @@ Mỗi lệnh chạy script tương ứng trong TIẾN TRÌNH pwsh con (pwsh -NoP
 nên `exit` của script con không giết phiên làm việc của bạn; mã thoát được giữ nguyên.
 
 Một số lệnh có logic riêng (không phải wrapper):
-  - mc doctor  : kiểm sức khoẻ (env vars, local service OmniRoute/9Router, config prod).
+  - mc doctor  : kiểm sức khoẻ (env vars, local service 9Router, config prod). [TODO:OmniRoute] OmniRoute tạm bỏ.
   - mc status  : validate production + so sánh dev/prod.
   - mc benchmark: Test-ModelConnectivity.ps1 -Benchmark (thêm sẵn cờ đến các tham số còn lại).
   - mc help    : danh sách lệnh.
@@ -28,6 +28,8 @@ $script:CommandMap = @{
     'report'       = 'config\New-ConfigDriftReport.ps1'
     'sort-order'   = 'config\New-SortOrderKey.ps1'
     'prices'       = 'provider\Compare-Prices.ps1'
+    'recommend'    = 'recommend\New-RecommendReport.ps1'
+    'recommend-docs' = 'recommend\Update-RecommendDocs.ps1'
     'usage'        = 'provider\Get-XKiroUsage.ps1'
     'export'       = 'provider\Export-ModelBank.ps1'
     'spend'        = 'spend\Get-SpendReport.ps1'
@@ -43,13 +45,15 @@ $script:CommandMap = @{
 
 $script:EnvChecks = @(
     @{ Name = 'XTROUTER_API_KEY';    Required = $true; Desc = 'xKiro — api.xkiro.com (1-xkiro-free, 2-xkiro-max)' }
-    @{ Name = 'OMNIROUTE_KEY';       Required = $true; Desc = 'Gateway OmniRoute local 127.0.0.1:20217 (3/4-*)' }
+    # [TODO:OmniRoute] Hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ comment khi cần phát triển lại.
+    # @{ Name = 'OMNIROUTE_KEY';       Required = $true; Desc = 'Gateway OmniRoute local 127.0.0.1:20217 (3/4-*)' }
     @{ Name = 'TEAMO_API_KEY';       Required = $true; Desc = 'TeamoRouter — api.teamorouter.cn (6-teamoRouter)' }
     @{ Name = 'NINE_ROUTER_API_KEY'; Required = $true; Desc = '9Router local 127.0.0.1:20128 (5-9router)' }
 )
 
 $script:PortChecks = @(
-    @{ Name = 'OmniRoute local (3-omniroute-free, 4-openrouter-free)'; Address = '127.0.0.1'; Port = 20217 }
+    # [TODO:OmniRoute] Hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ comment khi cần phát triển lại.
+    # @{ Name = 'OmniRoute local (3-omniroute-free, 4-openrouter-free)'; Address = '127.0.0.1'; Port = 20217 }
     @{ Name = '9Router local (5-9router)';                            Address = '127.0.0.1'; Port = 20128 }
 )
 
@@ -227,12 +231,14 @@ function Show-McHelp {
     Write-Host '  publish     Publish-Config.ps1             (dev -> prod, có backup/validate/connectivity)'
     Write-Host '  status      validate production + compare dev/prod'
     Write-Host '  report      New-ConfigDriftReport.ps1      (báo cáo lệch dev/prod + presets + backup)'
-    Write-Host '  doctor      kiểm env vars + local service OmniRoute/9Router + config prod'
+    Write-Host '  doctor      kiểm env vars + local service 9Router + config prod [TODO:OmniRoute: OmniRoute tạm bỏ]'
     Write-Host '  validate    Test-ModelCompassConfig.ps1    (validate 1 file config)'
     Write-Host '  connectivity Test-ModelConnectivity.ps1    (ping provider/model)'
     Write-Host '  benchmark   Test-ModelConnectivity.ps1 -Benchmark (đo latency/token)'
     Write-Host '  compare     Compare-Config.ps1             (dev vs prod)'
     Write-Host '  prices      Compare-Prices.ps1             (giá config vs catalog live)'
+    Write-Host '  recommend   New-RecommendReport.ps1        (đề xuất ⭐ theo nhóm + mục đích; -Apply để ghi)'
+    Write-Host '  recommend-docs Update-RecommendDocs.ps1    (đồng bộ bảng ⭐ vào docs/model-reference.md §2)'
     Write-Host '  spend       Get-SpendReport.ps1            (tổng hợp chi phí)'
     Write-Host '  add-spend   Add-SpendEntry.ps1             (ghi 1 phiên chi phí)'
     Write-Host '  usage       Get-XKiroUsage.ps1             (hạn mức xKiro)'
@@ -252,7 +258,7 @@ function Show-McHelp {
     Write-Host ''
     Write-Host '  help        danh sách lệnh này'
     Write-Host ''
-    Write-Host 'Ví dụ: mc sync; mc publish -ConnectivityTest; mc doctor; mc report -FailOnInvalid' -ForegroundColor DarkGray
+    Write-Host 'Ví dụ: mc sync; mc publish -ConnectivityTest; mc doctor; mc recommend -Apply' -ForegroundColor DarkGray
     Write-Host ''
 }
 
@@ -260,11 +266,15 @@ function Show-McHelp {
 function mc {
     <#
     Điểm vào CLI. Command đầu tiên là tên lệnh; toàn bộ tham số còn lại
-    ($args) được chuyển tiếp nguyên trạng tới script phía sau.
+    (cả positional lẫn cờ dạng -X) được chuyển tiếp nguyên trạng tới script phía sau.
+    Dùng ValueFromRemainingArguments vì hàm là advanced function — $args không bắt được cờ có tên.
     #>
     [CmdletBinding()]
-    param([Parameter(Mandatory = $true, Position = 0)][string]$Command)
-    $rest = $args
+    param(
+        [Parameter(Mandatory = $true, Position = 0)][string]$Command,
+        [Parameter(ValueFromRemainingArguments = $true)][object[]]$Arguments
+    )
+    $rest = @($Arguments)
     switch ($Command) {
         'help'     { Show-McHelp; return 0 }
         'doctor'   { return Invoke-McDoctor }

@@ -1,0 +1,18 @@
+{
+  "$comment": "Bảng tra khả năng + ưu tiên chọn ⭐ cho xKiro. Do Resolve-StarRules.ps1 đọc (qua New-RecommendReport.ps1). 'preferred' = chốt tay (thương hiệu/ngoại lệ chủ quan) — thắng rule; 'tags' = gán thêm tag cho model mà heuristic tên/id không suy ra được; 'unsupported' = nhóm mục đích xKiro KHÔNG có (chỉ có ở provider khác). Seed 'preferred' = baseline 14 ⭐ trong configs/development/opencode.jsonc.",
+  "unsupported": ["image-gen", "embedding", "rerank", "audio"],
+  "preferred": {
+    "reasoning": { "free": "qwen/qwen3.8-max:free" },
+    "code":      { "free": "qwen/qwen3-coder-plus:free", "paid": "x-ai/grok-4.7" },
+    "vision":    { "free": "qwen/qwen3-vl-plus:free",    "paid": "google/gemini-3.8-flash" },
+    "omni":      { "free": "qwen/qwen3.8-omni-flash:free" },
+    "fast":      { "free": "qwen/qwen3.5-flash:free",    "paid": "z-ai/glm-5.3-flash" },
+    "translate": { "free": "cohere/command-a-translate" },
+    "lecture":   { "free": "mistralai/mistral-large-4-0" },
+    "analysis":  { "paid": "google/gemini-3.1-pro" },
+    "writing":   { "paid": "anthropic/claude-sonnet-5" },
+    "bulk":      { "paid": "z-ai/glm-5.2" },
+    "flagship":  { "paid": "openai/gpt-6.1-sol" }
+  },
+  "tags": {}
+}

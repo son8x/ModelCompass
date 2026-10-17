@@ -289,7 +289,7 @@ function Get-SpendEntries {
 
 function New-SortOrderKey {
     <#
-    Sinh chuỗi khoá sắp xếp dạng yyyy-MM-dd (vùng năm 2099 — xem docs/§6).
+    Sinh chuỗi khoá sắp xếp dạng yyyy-MM-dd (vùng năm 2099 — xem docs/§3).
     Mặc định: giảm 1 ngày/lượt từ 2099-12-31 (model trên cùng có key LỚN nhất).
     -Exclude: bỏ qua các key đã tồn tại (tránh trùng rơi xuống sort theo name).
     An toàn khi chạy lại (àp dụng cho cluster khác, tham số khác).

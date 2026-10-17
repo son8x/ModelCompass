@@ -435,3 +435,20 @@ Describe 'Set-ProviderNameLine' {
             Should -Throw -ErrorId "Không tìm thấy provider '2-xkiro-max' trong config."
     }
 }
+
+Describe 'Wiring cờ -Recommend' {
+    BeforeAll {
+        $script:scriptPath = Join-Path $PSScriptRoot '..\scripts\provider\Update-XKiroModels.ps1'
+        $script:src = Get-Content -LiteralPath $script:scriptPath -Raw -Encoding utf8
+    }
+    It 'có tham số [switch]Recommend trong param block' {
+        $tokens = $null; $errors = $null
+        $ast = [System.Management.Automation.Language.Parser]::ParseFile($script:scriptPath, [ref]$tokens, [ref]$errors)
+        $names = @($ast.ParamBlock.Parameters | ForEach-Object { $_.Name.VariablePath.UserPath })
+        $names | Should -Contain 'Recommend'
+    }
+    It 'hook gọi New-RecommendReport.ps1 -Apply rồi Update-RecommendDocs.ps1' {
+        $script:src | Should -Match "New-RecommendReport\.ps1'\) -ConfigPath \S+ -Apply"
+        $script:src | Should -Match "Update-RecommendDocs\.ps1'\) -ConfigPath \S+"
+    }
+}

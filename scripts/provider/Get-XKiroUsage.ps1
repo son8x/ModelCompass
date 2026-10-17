@@ -18,7 +18,7 @@
           lực (chuỗi, vd "max") hay không (null = PAYG/gói đã kết thúc). Ngày gia
           hạn xem ở LemonSqueezy (app.lemonsqueezy.com/my-orders / email hóa đơn)
           hoặc console xkiro.com/dashboard.
-          Chi tiết: docs/providers-and-models.md -> "xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói".
+          Chi tiết: docs/model-reference.md -> "xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói".
 
     Key được đọc theo thứ tự: biến môi trường XTROUTER_API_KEY -> .env.local
     (scripts\ hoặc repo root). Script KHÔNG BAO GIỜ in key ra màn hình.

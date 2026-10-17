@@ -1,8 +1,8 @@
 {
-  "fetched_at": "2026-10-16 13:36:32",
+  "fetched_at": "2026-10-17 10:39:43",
   "provider": "xkiro",
   "source": "https://api.xkiro.com/v1/models",
-  "count": 124,
+  "count": 109,
   "models": [
     {
       "id": "anthropic/claude-fable-5",
@@ -44,6 +44,22 @@
       "pricing": {
         "input": 1.0,
         "output": 5.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-haiku-5.5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.1,
+        "output": 0.5,
         "request": null
       },
       "modality": {
@@ -198,6 +214,22 @@
     },
     {
       "id": "anthropic/claude-sonnet-5",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "anthropic/claude-sonnet-5.5",
       "name": "",
       "access_tier": "paid",
       "context": 1000000,
@@ -1708,278 +1740,6 @@
       "pricing": {
         "input": 0.435,
         "output": 0.87,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.5-air",
-      "name": "",
-      "access_tier": "paid",
-      "context": 131072,
-      "pricing": {
-        "input": 0.13,
-        "output": 0.85,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.5-airx",
-      "name": "",
-      "access_tier": "paid",
-      "context": 131072,
-      "pricing": {
-        "input": 1.1,
-        "output": 4.5,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.5-flash",
-      "name": "",
-      "access_tier": "paid",
-      "context": 131072,
-      "pricing": {
-        "input": 0.2,
-        "output": 1.1,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.5v",
-      "name": "",
-      "access_tier": "paid",
-      "context": 65536,
-      "pricing": {
-        "input": 0.6,
-        "output": 1.8,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.6v",
-      "name": "",
-      "access_tier": "paid",
-      "context": 128000,
-      "pricing": {
-        "input": 0.3,
-        "output": 0.9,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.6v-flash",
-      "name": "",
-      "access_tier": "paid",
-      "context": 128000,
-      "pricing": {
-        "input": 0.04,
-        "output": 0.4,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.6v-flashx",
-      "name": "",
-      "access_tier": "paid",
-      "context": 128000,
-      "pricing": {
-        "input": 0.04,
-        "output": 0.4,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.7",
-      "name": "",
-      "access_tier": "paid",
-      "context": 200000,
-      "pricing": {
-        "input": 0.6,
-        "output": 2.2,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.7-flash",
-      "name": "",
-      "access_tier": "paid",
-      "context": 200000,
-      "pricing": {
-        "input": 0.0605,
-        "output": 0.4,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-4.7-flashx",
-      "name": "",
-      "access_tier": "paid",
-      "context": 200000,
-      "pricing": {
-        "input": 0.37,
-        "output": 1.25,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-5",
-      "name": "",
-      "access_tier": "paid",
-      "context": 200000,
-      "pricing": {
-        "input": 0.6,
-        "output": 1.92,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-5-turbo",
-      "name": "",
-      "access_tier": "paid",
-      "context": 200000,
-      "pricing": {
-        "input": 1.2,
-        "output": 4.0,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-5.1",
-      "name": "",
-      "access_tier": "paid",
-      "context": 200000,
-      "pricing": {
-        "input": 1.4,
-        "output": 4.4,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-5.2",
-      "name": "",
-      "access_tier": "paid",
-      "context": 1000000,
-      "pricing": {
-        "input": 0.25,
-        "output": 3.99,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-5.3",
-      "name": "",
-      "access_tier": "paid",
-      "context": 1000000,
-      "pricing": {
-        "input": 1.4,
-        "output": 4.4,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-5.3-flash",
-      "name": "",
-      "access_tier": "paid",
-      "context": 1000000,
-      "pricing": {
-        "input": 0.15,
-        "output": 0.5,
-        "request": null
-      },
-      "modality": {
-        "input": [],
-        "output": []
-      },
-      "created": 1
-    },
-    {
-      "id": "z-ai/glm-5v-turbo",
-      "name": "",
-      "access_tier": "paid",
-      "context": 200000,
-      "pricing": {
-        "input": 1.2,
-        "output": 4.0,
         "request": null
       },
       "modality": {

@@ -71,6 +71,13 @@ pwsh scripts\config\Get-ProviderCatalog.ps1          # tải catalog live → do
 pwsh scripts\config\Get-ProviderCatalog.ps1 -ShowAllNew   # liệt kê model mới chưa khai báo (mặc định ẩn)
 pwsh scripts\provider\Compare-Prices.ps1               # giá nhồi trong name vs catalog live (mặc định chỉ báo)
 pwsh scripts\provider\Compare-Prices.ps1 -ShowAll -Report  # chi tiết + report markdown
+pwsh scripts\recommend\New-RecommendReport.ps1     # đề xuất ⭐ theo nhóm + mục đích (chỉ báo cáo)
+pwsh scripts\recommend\New-RecommendReport.ps1 -Report  # + report markdown trong reports/
+pwsh scripts\recommend\New-RecommendReport.ps1 -Apply   # GHI ⭐ vào name (backup + validate)
+pwsh scripts\recommend\Update-RecommendDocs.ps1     # đồng bộ bảng ⭐ vào docs/model-reference.md §2
+pwsh scripts\recommend\Update-RecommendDocs.ps1 -Check  # CI: kiểm tài liệu khớp (exit 1 nếu lệch)
+# Hoặc gộp cả 2 bước ⭐ vào sync (Pha 2 ghi name + Pha 3 docs) TRƯỚC khi publish:
+pwsh scripts\provider\Update-XKiroModels.ps1 -Recommend
 # Giám sát chi phí đa provider (mỗi phiên trả phí ghi 1 dòng log):
 pwsh scripts\spend\Add-SpendEntry.ps1 -Provider xkiro -Model 'openai/gpt-5.6-sol' `
     -PromptTokens 120000 -CompletionTokens 30000 -PriceIn 4.5 -PriceOut 27
@@ -85,6 +92,12 @@ pwsh scripts\test\Test-Suite.ps1                   # chạy toàn bộ test Pest
 > 📌 Khi thêm model mới: chạy `Get-ProviderCatalog.ps1` trước để chắc model nằm
 > trong catalog live (tránh khai báo 404/đổi tên) và đối chiếu model "MISS".
 > Trước khi publish: chạy `Compare-Prices.ps1` để không đưa ra bảng giá cũ trong `name`.
+>
+> 📌 `⭐` (đề xuất model trong `/model`) gắn ở **đầu** `name`. Thứ tự đúng:
+> `Update-XKiroModels.ps1 -Recommend` → `Compare-Prices.ps1` → publish.
+> Lệnh `-Recommend` tự chạy `New-RecommendReport.ps1 -Apply` (ghi `name`) rồi
+> `Update-RecommendDocs.ps1` (đồng bộ bảng §2). `Update-PricesInName` chỉ thay phần
+> `$X/$Y`, **giữ nguyên** `⭐`, nên thứ tự này an toàn.
 
 ### Giai đoạn D — Install (production → máy đang chạy)
 

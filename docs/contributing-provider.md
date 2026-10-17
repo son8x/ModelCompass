@@ -31,6 +31,8 @@ chấp nhận và mọi thành viên dùng lại được. Bắt đầu từ m�
    ```powershell
    mc sync            # Get-ProviderCatalog.ps1 — nạp catalog vào docs/catalogs/
    mc prices          # Compare-Prices.ps1 — so giá config vs catalog
+   mc recommend       # New-RecommendReport.ps1 — đề xuất ⭐ theo nhóm + mục đích (chỉ báo cáo)
+   mc recommend -Apply  # GHI ⭐ vào name (backup + validate) — chạy sau khi đã review báo cáo
    ```
 4. **Test kết nối thật**:
    ```powershell

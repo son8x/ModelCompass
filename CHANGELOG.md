@@ -108,7 +108,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
   (tầng config, `OPENCODE_CONFIG` / `OPENCODE_CONFIG_CONTENT`, restart, cứu hộ).
 - **2.3 Helper sort-order**: `New-SortOrderKey.ps1` (default generate, `-Between/-Append/-Rebuild`,
   chỉ in key không sửa file) + hàm `New-SortOrderKey`/`Get-SortOrderKeyBetween` (tránh trùng key);
-  `tests/SortOrder.Tests.ps1` (14 test). Docs `providers-and-models.md §6b` + `configs/README.md`.
+  `tests/SortOrder.Tests.ps1` (14 test). Docs `model-reference.md §3` + `configs/README.md`.
 - **2.4 Báo cáo drift định kỳ**: `New-ConfigDriftReport.ps1` (validate dev/prod/presets +
   `Get-ConfigDiff` + thống kê model/backup, report offline, `-FailOnInvalid/-FailOnDrift`);
   refactor `Get-ConfigDiff` + `Test-ConfigFile` thành hàm thuần trong `Common-Functions.ps1`
@@ -255,7 +255,7 @@ bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
 ### Changed
 - Giá/model mới xKiro (free + Max 17/09/2026), catalog OmniRoute/OpenRouter/TeamoRouter,
-  `docs/providers-and-models.md`, STATUS.md — snapshot Q3/2026.
+  `docs/market-intel.md`, STATUS.md — snapshot Q3/2026.
 - Tài liệu workflow nhấn mạnh bước `Compare-Config` trước/sau publish.
 
 ## [0.1.0] — 2026-09-16 — Khởi tạo

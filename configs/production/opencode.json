@@ -1,18 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "1-xkiro-free/qwen/qwen3.8-max:free",
-  "plugin": [
-    [
-      "./plugins/omniroute/dist/index.js",
-      {
-        "providerId": "omniroute",
-        "baseURL": "http://127.0.0.1:20217",
-        "features": {
-          "logLevel": "error"
-        }
-      }
-    ]
-  ],
   "mcp": {
     "servers": {
       "playwright": {
@@ -29,7 +17,7 @@
   "provider": {
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 51 model",
+      "name": "1. xKiro Free — 51 model (gỡ: dots-3-note-preview:free, ling-3.0-flash-sante:free, lfm-2.5-2.6b:free, apodex-1.1-mini:free)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -243,27 +231,15 @@
     },
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max — 62 model (gỡ: claude-fable-5-1, gpt-6-astra, mimo-v2.5-pro)",
+      "name": "2. xKiro Max — 47 model (+2 · gỡ: glm-4.5-flash, glm-5.1, glm-5.2, glm-4.6v, glm-4.6v-flashx, glm-5, glm-4.5v, glm-4.5-airx, glm-4.7-flashx, glm-4.6v-flash, glm-5.3-flash, glm-5v-turbo, glm-5-turbo, glm-4.5-air, glm-5.3, glm-4.7, glm-4.7-flash, claude-fable-5-1, gpt-6-astra)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
       },
       "models": {
-        "z-ai/glm-4.6v-flashx": {
-          "name": "[L] GLM-4.6V FlashX · $0.04/$0.40 · vision/nhanh",
-          "release_date": "2099-12-31"
-        },
-        "z-ai/glm-4.6v-flash": {
-          "name": "[L] GLM-4.6V Flash · $0.04/$0.40 · vision/nhanh",
-          "release_date": "2099-12-30"
-        },
         "nvidia/nemotron-3-nano-omni": {
-          "name": "[L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision",
+          "name": "⭐ [L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision",
           "release_date": "2099-12-29"
-        },
-        "z-ai/glm-4.7-flash": {
-          "name": "[L] GLM-4.7 Flash · $0.061/$0.40 · nhanh",
-          "release_date": "2099-12-28"
         },
         "nvidia/nemotron-3-super": {
           "name": "[L] Nemotron 3 Super · $0.08/$0.45 · 1M · code",
@@ -277,10 +253,6 @@
           "name": "[L] GPT-5.6 Luna · $0.10/$0.60 · reasoning/vision",
           "release_date": "2099-12-25"
         },
-        "z-ai/glm-4.5-air": {
-          "name": "[L] GLM-4.5 Air · $0.13/$0.85 · nhẹ",
-          "release_date": "2099-12-24"
-        },
         "xiaomi/mimo-v2.6-flash": {
           "name": "[L] MiMo V2.6 Flash · $0.14/$0.28 · 1M",
           "release_date": "2099-12-23"
@@ -288,14 +260,6 @@
         "xiaomi/mimo-v2.5": {
           "name": "[L] MiMo V2.5 · $0.14/$0.28 · 1M",
           "release_date": "2099-12-22"
-        },
-        "z-ai/glm-5.3-flash": {
-          "name": "⭐ [L] GLM-5.3 Flash · $0.15/$0.50 · vision · subagent",
-          "release_date": "2099-12-21"
-        },
-        "z-ai/glm-4.5-flash": {
-          "name": "[L] GLM-4.5 Flash · $0.20/$1.10 · nhẹ",
-          "release_date": "2099-12-20"
         },
         "google/gemini-2.5-flash": {
           "name": "[L] Gemini 2.5 Flash · $0.30/$2.50 · 1M · nhanh",
@@ -321,14 +285,6 @@
           "name": "[L] MiniMax M3 · $0.30/$1.20 · 1M",
           "release_date": "2099-12-14"
         },
-        "z-ai/glm-4.7-flashx": {
-          "name": "[L] GLM-4.7 FlashX · $0.37/$1.25 · nhanh",
-          "release_date": "2099-12-13"
-        },
-        "z-ai/glm-4.5v": {
-          "name": "[L] GLM-4.5V · $0.60/$1.80 · vision",
-          "release_date": "2099-12-12"
-        },
         "openai/gpt-5.4-mini": {
           "name": "[L] GPT-5.4 Mini · $0.75/$4.50 · 400K · nhẹ",
           "release_date": "2099-12-11"
@@ -341,41 +297,17 @@
           "name": "[L] Claude Haiku 4.5 · $1.00/$5.00 · nhanh",
           "release_date": "2099-12-09"
         },
-        "z-ai/glm-4.5-airx": {
-          "name": "[L] GLM-4.5 AirX · $1.10/$4.50 · nhẹ",
-          "release_date": "2099-12-08"
-        },
-        "z-ai/glm-5v-turbo": {
-          "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh",
-          "release_date": "2099-12-07"
-        },
-        "z-ai/glm-5-turbo": {
-          "name": "[L] GLM-5 Turbo · $1.20/$4.00 · nhanh",
-          "release_date": "2099-12-06"
-        },
-        "z-ai/glm-5.2": {
-          "name": "⭐ [B] GLM-5.2 · $0.25/$3.99 · 1M · bulk",
-          "release_date": "2099-11-30"
-        },
-        "z-ai/glm-4.6v": {
-          "name": "[B] GLM-4.6V · $0.30/$0.90 · vision",
-          "release_date": "2099-11-29"
+        "anthropic/claude-haiku-5.5": {
+          "name": "🆕 [L] Claude Haiku 5.5 · $0.10/$0.50 · 1M",
+          "release_date": "2099-12-03"
         },
         "xiaomi/mimo-v2.6-pro": {
           "name": "[B] MiMo V2.6 Pro · $0.435/$0.87 · 1M",
           "release_date": "2099-11-28"
         },
-        "z-ai/glm-4.7": {
-          "name": "[B] GLM-4.7 · $0.60/$2.20",
-          "release_date": "2099-11-26"
-        },
         "minimax/minimax-m2.1-highspeed": {
           "name": "[B] MiniMax M2.1 Highspeed · $0.60/$2.40 · 204.8K",
           "release_date": "2099-11-25"
-        },
-        "z-ai/glm-5": {
-          "name": "[B] GLM-5 · $0.60/$1.92",
-          "release_date": "2099-11-24"
         },
         "minimax/minimax-m2.7-highspeed": {
           "name": "[B] MiniMax M2.7 Highspeed · $0.60/$2.40 · 204.8K",
@@ -392,10 +324,6 @@
         "google/gemini-2.5-pro": {
           "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M",
           "release_date": "2099-11-20"
-        },
-        "z-ai/glm-5.1": {
-          "name": "[B] GLM-5.1 · $1.40/$4.40",
-          "release_date": "2099-11-19"
         },
         "mistralai/mistral-large-4-0": {
           "name": "[A] Mistral Large 4 0 · $0.00/$0.00 · 524.3K",
@@ -416,10 +344,6 @@
         "openai/gpt-5.6-terra": {
           "name": "[A] GPT-5.6 Terra · $1.00/$6.00 · 1M",
           "release_date": "2099-10-27"
-        },
-        "z-ai/glm-5.3": {
-          "name": "[A] GLM-5.3 · $1.40/$4.40 · VN/code",
-          "release_date": "2099-10-26"
         },
         "google/gemini-3.5-flash": {
           "name": "[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M",
@@ -452,6 +376,10 @@
         "anthropic/claude-sonnet-4.5": {
           "name": "[A] Claude Sonnet 4.5 · $3.00/$15.00 · 1M",
           "release_date": "2099-10-18"
+        },
+        "anthropic/claude-sonnet-5.5": {
+          "name": "🆕 [A] Claude Sonnet 5.5 · $2.00/$10.00 · 1M",
+          "release_date": "2099-10-09"
         },
         "openai/gpt-6.1-sol": {
           "name": "⭐ [S] GPT 6.1 Sol · $2.00/$10.00 · 1.1M · flagship",
@@ -496,77 +424,6 @@
         "anthropic/claude-fable-5": {
           "name": "[S] Claude Fable 5 · $10.00/$50.00 · mạnh nhất",
           "release_date": "2099-09-20"
-        }
-      }
-    },
-    "3-omniroute-free": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "3. OmniRoute Free (Model mạnh nhất)",
-      "options": {
-        "baseURL": "http://127.0.0.1:20217/v1",
-        "apiKey": "{env:OMNIROUTE_KEY}"
-      },
-      "models": {
-        "cfp/zai-org/glm-5.2": {
-          "name": "GLM-5.2 (Free - Cloudflare)"
-        },
-        "cfp/moonshotai/kimi-k2.7-code": {
-          "name": "Kimi K2.7 Code (Free - Cloudflare)"
-        },
-        "cfp/nvidia/nemotron-3-120b-a12b": {
-          "name": "Nemotron 3 120B (Free - Cloudflare)"
-        },
-        "cfp/qwen/qwen3-30b-a3b-fp8": {
-          "name": "Qwen3 30B A3B (Free - Cloudflare)"
-        },
-        "cfp/openai/gpt-oss-120b": {
-          "name": "GPT-OSS 120B (Free - Cloudflare)"
-        },
-        "cfp/deepseek-ai/deepseek-v4-pro-0813": {
-          "name": "DeepSeek V4 Pro (Free - Cloudflare)"
-        },
-        "cfp/deepseek-ai/deepseek-v4-flash-0731": {
-          "name": "DeepSeek V4 Flash (Free - Cloudflare)"
-        },
-        "cfp/qwen/qwen2.5-coder-32b-instruct": {
-          "name": "Qwen 2.5 Coder 32B (Free - Cloudflare)"
-        },
-        "groq/qwen/qwen3.8-27b": {
-          "name": "Qwen3.8 27B (Free - Groq)"
-        },
-        "groq/openai/gpt-oss-120b": {
-          "name": "GPT-OSS 120B (Free - Groq)"
-        },
-        "groq/qwen/qwen3.6-27b": {
-          "name": "Qwen3.6 27B (Free - Groq)"
-        },
-        "gemini/gemini-3.1-flash-lite": {
-          "name": "Gemini 3.1 Flash Lite (Free - 1M ctx)"
-        },
-        "gemini/gemini-2.5-flash-8b-preview-05-20": {
-          "name": "Gemini 2.5 Flash 8B (Free Daily)"
-        }
-      }
-    },
-    "4-openrouter-free": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "4. OpenRouter Free",
-      "options": {
-        "baseURL": "http://127.0.0.1:20217/v1",
-        "apiKey": "{env:OMNIROUTE_KEY}"
-      },
-      "models": {
-        "openrouter/inclusionai/ling-3.0-flash-sante:free": {
-          "name": "Ling 3.0 Flash (Free - OpenRouter)"
-        },
-        "openrouter/nvidia/nemotron-3-super-120b-a12b:free": {
-          "name": "Nemotron 3 Super 120B (Free - OpenRouter)"
-        },
-        "openrouter/cohere/north-mini-code:free": {
-          "name": "North Mini Code (Free - OpenRouter)"
-        },
-        "openrouter/poolside/laguna-s-2.1:free": {
-          "name": "Laguna S 2.1 (Free - OpenRouter)"
         }
       }
     },

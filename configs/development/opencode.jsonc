@@ -31,15 +31,17 @@
   //     nên PHẢI đánh số 1-, 2-, … ở đầu key VÀ name mỗi provider).
   //     Muốn đổi thứ tự: chỉ cần sửa lại số, không cần di chuyển block.
   //     Thứ tự ưu tiên hiện tại:
-  //       1-xkiro-free → 2-xkiro-max → 3-omniroute-free
-  //       → 4-openrouter-free → 5-9router → 6-teamoRouter
+  //       1-xkiro-free → 2-xkiro-max → 5-9router → 6-teamoRouter
+  //       [TODO:OmniRoute] 3-omniroute-free → 4-openrouter-free tạm bỏ, dùng xKiro trực tiếp.
   //
   //  🎯 THỨ TỰ MODEL TRONG MỖI NHÓM = sort theo "release_date" GIẢM DẦN (rồi name A→Z),
   //     KHÔNG theo thứ tự khai báo. Các provider xKiro gán release_date tổng hợp (2099-…)
   //     làm khoá sắp xếp — xem ghi chú trong block "provider" bên dưới.
   "model": "1-xkiro-free/qwen/qwen3.8-max:free",
 
+  // [TODO:OmniRoute] Plugin OmniRoute hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ comment khi cần phát triển lại.
   // Plugin OmniRoute: router model nội bộ (chạy local tại cổng 20217).
+  /*
   "plugin": [
     [
       "./plugins/omniroute/dist/index.js",
@@ -50,6 +52,7 @@
       }
     ]
   ],
+  */
 
   // MCP server: Playwright (dùng để test trình duyệt headless).
   //  ⚠️ KHÔNG khai báo trong ~/.config/opencode/opencode.jsonc riêng — khi có
@@ -71,10 +74,10 @@
     //  Đã gỡ model 404 (16/10): dots-3-note-preview:free, ling-3.0-flash-sante:free,
     //  lfm-2.5-2.6b:free, apodex-1.1-mini:free.
     //  cohere/command-a-reasoning:free hay timeout (>25s) — dùng khi cần, chờ lâu.
-    //  ⭐ = model KHUYẾN NGHỊ, tác vụ tốt nhất ghi ở cuối tên (xem bảng §6 docs).
+    //  ⭐ = model KHUYẾN NGHỊ, tác vụ tốt nhất ghi ở cuối tên (xem bảng §2 docs).
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 51 model",
+      "name": "1. xKiro Free — 51 model (gỡ: dots-3-note-preview:free, ling-3.0-flash-sante:free, lfm-2.5-2.6b:free, apodex-1.1-mini:free)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -85,9 +88,9 @@
         //    release_date GIẢM DẦN rồi mới tới name (A→Z). Các release_date dưới
         //    đây là KHOÁ SẮP XẾP TỔNG HỢP (năm 2099, không phải ngày phát hành
         //    thật) — model có date LỚN NHẤT hiện trên cùng. Muốn chèn/đổi vị trí:
-        //    gán date nằm giữa 2 date lân cận. Chi tiết: docs/providers-and-models.md §6.
+        //    gán date nằm giữa 2 date lân cận. Chi tiết: docs/model-reference.md §3.
         //  Ghi chú cuối tên model = thế mạnh/lĩnh vực + nhãn tác vụ.
-        //  ⭐ ở đầu tên = model khuyến nghị cho tác vụ ghi kèm (bảng §6 docs).
+        //  ⭐ ở đầu tên = model khuyến nghị cho tác vụ ghi kèm (bảng §2 docs).
         //  (DeepSeek/MiniMax đã rời tier free; 4 model HTTP 404 đã gỡ 16/10.)
         "qwen/qwen3.8-max:free": { "name": "⭐ Qwen3.8 Max · 1M · reasoning (mặc định)", "release_date": "2099-12-31" },
         "qwen/qwen3.7-plus:free": { "name": "Qwen3.7 Plus · 1M · vision", "release_date": "2099-12-29" },
@@ -159,7 +162,7 @@
     //     gpt-5.6-sol (500), nemotron-3-nano + llama-49b (410 routing).
     "2-xkiro-max": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max — 62 model (gỡ: claude-fable-5-1, gpt-6-astra, mimo-v2.5-pro)",
+      "name": "2. xKiro Max — 47 model (+2 · gỡ: glm-4.5-flash, glm-5.1, glm-5.2, glm-4.6v, glm-4.6v-flashx, glm-5, glm-4.5v, glm-4.5-airx, glm-4.7-flashx, glm-4.6v-flash, glm-5.3-flash, glm-5v-turbo, glm-5-turbo, glm-4.5-air, glm-5.3, glm-4.7, glm-4.7-flash, claude-fable-5-1, gpt-6-astra)",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -168,53 +171,37 @@
         //  SẮP XẾP THEO NHÓM SỨC MẠNH, TRONG NHÓM THEO GIÁ (rẻ → đắt).
         //  ⚠️ release_date = KHOÁ SẮP XẾP TỔNG HỢP: opencode sort date GIẢM DẦN —
         //  model đầu nhóm (rẻ nhất) hiện trên cùng. Đổi vị trí = đổi đơn giá/date.
-        //  ⭐ = model KHUYẾN NGHỊ cho tác vụ ghi kèm (bảng "Recommended" §6 docs).
+        //  ⭐ = model KHUYẾN NGHỊ cho tác vụ ghi kèm (bảng "Recommended" §2 docs).
         // ── [L] Nhẹ·Nhanh·Rẻ — tác vụ đơn giản, chạy nhiều ──
-        "z-ai/glm-4.6v-flashx": { "name": "[L] GLM-4.6V FlashX · $0.04/$0.40 · vision/nhanh", "release_date": "2099-12-31" },
-        "z-ai/glm-4.6v-flash": { "name": "[L] GLM-4.6V Flash · $0.04/$0.40 · vision/nhanh", "release_date": "2099-12-30" },
-        "nvidia/nemotron-3-nano-omni": { "name": "[L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision", "release_date": "2099-12-29" },
-        "z-ai/glm-4.7-flash": { "name": "[L] GLM-4.7 Flash · $0.061/$0.40 · nhanh", "release_date": "2099-12-28" },
+        "nvidia/nemotron-3-nano-omni": { "name": "⭐ [L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision", "release_date": "2099-12-29" },
         "nvidia/nemotron-3-super": { "name": "[L] Nemotron 3 Super · $0.08/$0.45 · 1M · code", "release_date": "2099-12-27" },
         "openai/gpt-6-luna": { "name": "[L] GPT-6 Luna · $0.10/$0.50 · reasoning/vision", "release_date": "2099-12-26" },
         "openai/gpt-5.6-luna": { "name": "[L] GPT-5.6 Luna · $0.10/$0.60 · reasoning/vision", "release_date": "2099-12-25" },
-        "z-ai/glm-4.5-air": { "name": "[L] GLM-4.5 Air · $0.13/$0.85 · nhẹ", "release_date": "2099-12-24" },
         "xiaomi/mimo-v2.6-flash": { "name": "[L] MiMo V2.6 Flash · $0.14/$0.28 · 1M", "release_date": "2099-12-23" },
         "xiaomi/mimo-v2.5": { "name": "[L] MiMo V2.5 · $0.14/$0.28 · 1M", "release_date": "2099-12-22" },
-        "z-ai/glm-5.3-flash": { "name": "⭐ [L] GLM-5.3 Flash · $0.15/$0.50 · vision · subagent", "release_date": "2099-12-21" },
-        "z-ai/glm-4.5-flash": { "name": "[L] GLM-4.5 Flash · $0.20/$1.10 · nhẹ", "release_date": "2099-12-20" },
         "google/gemini-2.5-flash": { "name": "[L] Gemini 2.5 Flash · $0.30/$2.50 · 1M · nhanh", "release_date": "2099-12-19" },
         "minimax/minimax-m2.7": { "name": "[L] MiniMax M2.7 · $0.30/$1.20 · 204.8K", "release_date": "2099-12-18" },
         "minimax/minimax-m2": { "name": "[L] MiniMax M2 · $0.30/$1.20 · 204.8K", "release_date": "2099-12-17" },
         "minimax/minimax-m2.1": { "name": "[L] MiniMax M2.1 · $0.30/$1.20 · 204.8K", "release_date": "2099-12-16" },
         "minimax/minimax-m2.5": { "name": "[L] MiniMax M2.5 · $0.30/$1.20 · 204.8K", "release_date": "2099-12-15" },
         "minimax/minimax-m3": { "name": "[L] MiniMax M3 · $0.30/$1.20 · 1M", "release_date": "2099-12-14" },
-        "z-ai/glm-4.7-flashx": { "name": "[L] GLM-4.7 FlashX · $0.37/$1.25 · nhanh", "release_date": "2099-12-13" },
-        "z-ai/glm-4.5v": { "name": "[L] GLM-4.5V · $0.60/$1.80 · vision", "release_date": "2099-12-12" },
         "openai/gpt-5.4-mini": { "name": "[L] GPT-5.4 Mini · $0.75/$4.50 · 400K · nhẹ", "release_date": "2099-12-11" },
         "google/gemini-3-flash": { "name": "[L] Gemini 3 Flash · $0.75/$3.75 · 1M · nhanh", "release_date": "2099-12-10" },
         "anthropic/claude-haiku-4.5": { "name": "[L] Claude Haiku 4.5 · $1.00/$5.00 · nhanh", "release_date": "2099-12-09" },
-        "z-ai/glm-4.5-airx": { "name": "[L] GLM-4.5 AirX · $1.10/$4.50 · nhẹ", "release_date": "2099-12-08" },
-        "z-ai/glm-5v-turbo": { "name": "[L] GLM-5V Turbo · $1.20/$4.00 · vision/nhanh", "release_date": "2099-12-07" },
-        "z-ai/glm-5-turbo": { "name": "[L] GLM-5 Turbo · $1.20/$4.00 · nhanh", "release_date": "2099-12-06" },
+        "anthropic/claude-haiku-5.5": { "name": "🆕 [L] Claude Haiku 5.5 · $0.10/$0.50 · 1M", "release_date": "2099-12-03" },
         // ── [B] Đa dụng giá tốt — chat hàng ngày, việc chung ──
-        "z-ai/glm-5.2": { "name": "⭐ [B] GLM-5.2 · $0.25/$3.99 · 1M · bulk", "release_date": "2099-11-30" },
-        "z-ai/glm-4.6v": { "name": "[B] GLM-4.6V · $0.30/$0.90 · vision", "release_date": "2099-11-29" },
         "xiaomi/mimo-v2.6-pro": { "name": "[B] MiMo V2.6 Pro · $0.435/$0.87 · 1M", "release_date": "2099-11-28" },
-        "z-ai/glm-4.7": { "name": "[B] GLM-4.7 · $0.60/$2.20", "release_date": "2099-11-26" },
         "minimax/minimax-m2.1-highspeed": { "name": "[B] MiniMax M2.1 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-11-25" },
-        "z-ai/glm-5": { "name": "[B] GLM-5 · $0.60/$1.92", "release_date": "2099-11-24" },
         "minimax/minimax-m2.7-highspeed": { "name": "[B] MiniMax M2.7 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-11-23" },
         "nvidia/nemotron-3-ultra": { "name": "[B] Nemotron 3 Ultra · $0.60/$2.40 · 1M · mạnh", "release_date": "2099-11-22" },
         "minimax/minimax-m2.5-highspeed": { "name": "[B] MiniMax M2.5 Highspeed · $0.60/$2.40 · 204.8K", "release_date": "2099-11-21" },
         "google/gemini-2.5-pro": { "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M", "release_date": "2099-11-20" },
-        "z-ai/glm-5.1": { "name": "[B] GLM-5.1 · $1.40/$4.40", "release_date": "2099-11-19" },
         // ── [A] Mạnh đa dụng — agent, coding sâu, luận văn ──
         "mistralai/mistral-large-4-0": { "name": "[A] Mistral Large 4 0 · $0.00/$0.00 · 524.3K", "release_date": "2099-10-31" },
         "google/gemini-3.6-flash": { "name": "[A] Gemini 3.6 Flash · $0.75/$3.75 · 1M", "release_date": "2099-10-30" },
         "google/gemini-3.7-flash": { "name": "[A] Gemini 3.7 Flash · $0.75/$3.75 · 1M", "release_date": "2099-10-29" },
         "google/gemini-3.8-flash": { "name": "⭐ [A] Gemini 3.8 Flash · $0.75/$3.75 · 1M · vision (✓Max)", "release_date": "2099-10-28" },
         "openai/gpt-5.6-terra": { "name": "[A] GPT-5.6 Terra · $1.00/$6.00 · 1M", "release_date": "2099-10-27" },
-        "z-ai/glm-5.3": { "name": "[A] GLM-5.3 · $1.40/$4.40 · VN/code", "release_date": "2099-10-26" },
         "google/gemini-3.5-flash": { "name": "[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M", "release_date": "2099-10-25" },
         "google/gemini-3.1-pro": { "name": "⭐ [A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · nghiên cứu", "release_date": "2099-10-24" },
         "x-ai/grok-4.7": { "name": "⭐ [A] Grok 4.7 · $2.00/$6.00 · 500K · code", "release_date": "2099-10-23" },
@@ -223,6 +210,7 @@
         "anthropic/claude-sonnet-4": { "name": "[A] Claude Sonnet 4 · $3.00/$15.00 · 1M", "release_date": "2099-10-20" },
         "anthropic/claude-sonnet-4.6": { "name": "[A] Claude Sonnet 4.6 · $3.00/$15.00", "release_date": "2099-10-19" },
         "anthropic/claude-sonnet-4.5": { "name": "[A] Claude Sonnet 4.5 · $3.00/$15.00 · 1M", "release_date": "2099-10-18" },
+        "anthropic/claude-sonnet-5.5": { "name": "🆕 [A] Claude Sonnet 5.5 · $2.00/$10.00 · 1M", "release_date": "2099-10-09" },
         // ── [S] Flagship — chất lượng cao nhất ──
         "openai/gpt-6.1-sol": { "name": "⭐ [S] GPT 6.1 Sol · $2.00/$10.00 · 1.1M · flagship", "release_date": "2099-09-30" },
         "openai/gpt-6-sol": { "name": "[S] GPT-6 Sol · $2.00/$10.00 · flagship", "release_date": "2099-09-29" },
@@ -238,6 +226,8 @@
       }
     },
 
+    // [TODO:OmniRoute] Provider 3-omniroute-free và 4-openrouter-free hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ comment khi cần phát triển lại.
+    /*
     // ─── OmniRoute Free (model mạnh, miễn phí) ─────────────────────
     //  key: OMNIROUTE_KEY
     "3-omniroute-free": {
@@ -279,6 +269,7 @@
         "openrouter/poolside/laguna-s-2.1:free": { "name": "Laguna S 2.1 (Free - OpenRouter)" }
       }
     },
+    */
 
     // ─── 9Router (router local) ────────────────────────────────────
     //  key: NINE_ROUTER_API_KEY
@@ -336,7 +327,7 @@
     //  👉 Số đánh đầu key/name (1-, 2-, …) quyết định thứ tự NHÓM provider trong /model.
     //  👉 Thứ tự MODEL trong mỗi nhóm do opencode tự sort theo "release_date" GIẢM DẦN
     //     (rồi mới tới name A→Z) — KHÔNG theo thứ tự khai báo. Dùng release_date tổng
-    //     hợp (vd 2099-12-31, 2099-12-30, …) làm khoá sắp xếp. Xem docs/providers-and-models.md §6.
+    //     hợp (vd 2099-12-31, 2099-12-30, …) làm khoá sắp xếp. Xem docs/model-reference.md §3.
     // ─────────────────────────────────────────────────────────────
   }
 }
@@ -352,6 +343,8 @@
 //  5) scripts/config/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
 //  6) Quit & restart opencode.
 // ═══════════════════════════════════════════════════════════════════
+
+
 
 
 

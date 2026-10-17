@@ -4,7 +4,7 @@ title: Model catalog (theo giá / tác vụ)
 ---
 
 Toàn bộ model trong **Model Bank**. Sort mặc định theo `releaseDate` giảm dần
-(key 2099 do helper sort-order sinh ra — xem `docs/providers-and-models.md §6b`).
+(key 2099 do helper sort-order sinh ra — xem `docs/model-reference.md §3`).
 
 ## Bảng model
 

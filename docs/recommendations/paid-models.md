@@ -46,7 +46,7 @@ router bán ngang/đắt hơn chính hãng.
 | DeepSeek | V4 Flash / V4 Pro | $0.14/$0.28 · $0.435/$0.87 | ⚠️ Xem cảnh báo bên dưới |
 | GLM | GLM-5.3 | $1.40/$4.40 | ⚠️ Không giảm giá → bỏ qua |
 
-> ⚠️ **Cảnh báo (docs/providers-and-models.md):** TeamoRouter bán **DeepSeek &
+> ⚠️ **Cảnh báo (docs/market-intel.md §8):** TeamoRouter bán **DeepSeek &
 > GLM-5.3 ngang hoặc đắt ~2× chính hãng**. Với DeepSeek/GLM nên đi thẳng nguồn
 > chính hoặc OpenRouter, đừng qua Teamo.
 

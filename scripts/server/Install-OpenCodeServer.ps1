@@ -190,9 +190,9 @@ if ($exposed -and -not $hasPass) {
     Write-Info 'Hoặc tạm thời chỉ bind localhost:  -Hostname 127.0.0.1'
     exit 1
 }
-if ($hasPass -and $serverPass.Length -lt 12) {
-    Write-Warn "Mật khẩu hiện tại chỉ $($serverPass.Length) ký tự. Nên >= 24 ký tự ngẫu nhiên trước khi mở ra mạng."
-}
+# Không cảnh báo độ dài mật khẩu: người dùng đã chọn giữ mật khẩu hiện tại và muốn
+# output gọn. Ràng buộc bắt buộc phía trên (bind mọi interface mà không có
+# mật khẩu → từ chối cài) vẫn giữ nguyên vì đó là lỗi cấu hình.
 Write-Ok "Server auth: username='$(if ($serverUser) { $serverUser } else { 'opencode' })'  password=$(if ($hasPass) { 'đã có' } else { 'không (chỉ localhost)' })"
 
 # ── 1. FIREWALL ────────────────────────────────────────────────

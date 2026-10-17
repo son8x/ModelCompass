@@ -124,13 +124,9 @@ if ($exposed -and -not $hasPass) {
     Write-Info '   pwsh scripts\env\setup-opencode-env.ps1 -PromptOptional'
     exit 1
 }
-if ($exposed -and $hasPass) {
-    $pwLen = $env:OPENCODE_SERVER_PASSWORD.Length
-    if ($pwLen -lt 12) {
-        Write-Warn "Mật khẩu chỉ $pwLen ký tự — quá yếu cho server đang mở toàn mạng. Nên >= 24 ký tự ngẫu nhiên."
-    }
-    Write-Info "Đang bind '$Hostname' — nhớ mở firewall CHỈ cho IP điện thoại (xem Install-OpenCodeServer.ps1)."
-}
+# Cố ý KHÔNG cảnh báo "mật khẩu ngắn" / "nhớ mở firewall": người dùng đã chọn
+# điểm cân bằng này và muốn output gọn. Ràng buộc bắt buộc (thiếu mật khẩu
+# khi bind mọi interface) vẫn giữ nguyên vì đó là lỗi cấu hình, không phải ý kiến.
 
 New-Item -ItemType Directory -Force -Path (Split-Path $pidFile) | Out-Null
 

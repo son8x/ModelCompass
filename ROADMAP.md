@@ -68,7 +68,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
    `.env.local` lọt vào git, tạo `.env.sample` an toàn để commit.
 3. **CI thực thụ**: validate cú pháp + quét API key trên mỗi push/PR chạm `configs/`.
 4. **Chống sort-order trong `/model`** bằng `release_date` tổng hợp đã được nghiên cứu
-   và ghi recipe kỹ (`docs/providers-and-models.md` §6, `configs/README.md`).
+   và ghi recipe kỹ (`docs/model-reference.md` §3, `configs/README.md`).
 5. **Tài liệu theo use-case** (programming / thesis / pentest) kèm giá + cách cấu hình.
 
 ---
@@ -135,7 +135,7 @@ giám sát chi phí ra khỏi phạm vi xKiro**.
 | 2.2 | **Per-project config** | Tài liệu + template `opencode.json` cho từng project (thesis/pentest/code) dùng `OPENCODE_CONFIG` hook tầng, không đụng global | P2 | M | ✅ |
 | 2.3 | **Phân cụm sort-order** | Tách "khoá sắp xếp" ra 1 quy ước dùng chung (helper tạo key 2099 từ nhóm/giá) để thêm model không phải chỉnh tay date rải rác | P2 | M | ✅ |
 | 2.4 | **Scheduled -report trên CI** | Cron GitHub Actions chạy `Test-ModelCompassConfig` + (không cần mạng local) báo cáo lệch dev/prod + size backup — issue tự động | P2 | S | ✅ |
-| 2.5 | **Đo latency/token thực** | `Test-ModelConnectivity.ps1` thêm tham số `-Benchmark` (N lần, ghi ms + tokens) → dữ liệu tốc độ thực tế cho `docs/providers-and-models.md` | P2 | M | ✅ |
+| 2.5 | **Đo latency/token thực** | `Test-ModelConnectivity.ps1` thêm tham số `-Benchmark` (N lần, ghi ms + tokens) → dữ liệu tốc độ thực tế cho `docs/model-reference.md` | P2 | M | ✅ |
 | 2.6 | **License & chuẩn hoá public** | Thêm LICENSE (MIT), mở rộng README cho người dùng ngoài (env vars, cách fork, disclaimer giá) | P2 | S | ✅ |
 
 ### Phase 3 — Hệ sinh thái mở (tháng 2+, khi cần)

@@ -89,6 +89,8 @@ $Providers = @(
         ConfigProviders = @('6-teamoRouter')
         IdStripPrefix  = @()
     },
+    # [TODO:OmniRoute] OpenRouter qua OmniRoute gateway — hiện không sử dụng. Bỏ comment khi cần phát triển lại.
+    <#
     @{
         Id             = 'openrouter'
         Display        = 'OpenRouter (openrouter.ai)'
@@ -99,6 +101,9 @@ $Providers = @(
         # Gateway local thêm tiền tố 'openrouter/' vào id — catalog live KHÔNG có.
         IdStripPrefix  = @('openrouter/')
     },
+    #>
+    # [TODO:OmniRoute] Provider hiện không sử dụng — đang dùng xKiro trực tiếp. Bỏ comment khi cần phát triển lại.
+    <#
     @{
         Id             = 'omniroute'
         Display        = 'OmniRoute local (127.0.0.1:20217)'
@@ -108,6 +113,7 @@ $Providers = @(
         ConfigProviders = @('3-omniroute-free', '4-openrouter-free')
         IdStripPrefix  = @()
     },
+    #>
     @{
         Id             = '9router'
         Display        = '9Router local (127.0.0.1:20128)'

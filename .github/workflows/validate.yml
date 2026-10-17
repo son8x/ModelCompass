@@ -85,6 +85,12 @@ jobs:
           & ./scripts/config/Compare-Config.ps1
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
+      - name: Kiểm bảng ⭐ trong docs khớp đề xuất (chống drift)
+        shell: pwsh
+        run: |
+          & ./scripts/recommend/Update-RecommendDocs.ps1 -Check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
       - name: Kiểm tra cú pháp plugin TUI (esbuild) + server plugin (node --check)
         shell: bash
         run: |

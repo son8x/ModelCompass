@@ -55,6 +55,11 @@
 .PARAMETER Install
     Sau publish, chạy Install-Config.ps1 (global opencode).
 
+.PARAMETER Recommend
+    Sau validate, chạy Pha 2 (New-RecommendReport.ps1 -Apply: gắn/gỡ ⭐ theo nhóm + mục đích)
+    rồi Pha 3 (Update-RecommendDocs.ps1: đồng bộ bảng ⭐ trong docs/model-reference.md §2).
+    Nên đặt TRƯỚC -Publish để ⭐ được đưa lên production.
+
 .PARAMETER SkipValidation
     Bỏ qua bước validate (không khuyến khích).
 
@@ -85,6 +90,7 @@ param(
     [int]$TimeoutSeconds = 20,
     [switch]$Publish,
     [switch]$Install,
+    [switch]$Recommend,
     [switch]$SkipValidation,
     [string]$BaselineConfig,
     [switch]$SkipRun
@@ -99,6 +105,7 @@ $uxkNoProbe       = [bool]$NoProbe
 $uxkConfigPath    = $ConfigPath
 $uxkProvider      = @($Provider)
 $uxkBaseline      = $BaselineConfig
+$uxkRecommend     = [bool]$Recommend
 
 . (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 # Registry provider + fetch catalog (không gọi mạng khi -SkipRun).
@@ -113,6 +120,7 @@ $NoProbe          = $uxkNoProbe
 $ConfigPath       = $uxkConfigPath
 $Provider         = $uxkProvider
 $BaselineConfig   = $uxkBaseline
+$Recommend        = $uxkRecommend
 
 # ═══════════════════════════════════════════════════════════════
 # Các hàm thuần (test bằng dot-source -SkipRun) — không gọi mạng
@@ -1010,6 +1018,15 @@ if (-not $SkipValidation) {
     Write-Ok 'Validate OK.'
 } else {
     Write-Warn '(-SkipValidation) bỏ qua validate.'
+}
+
+# ── 5b. Đề xuất ⭐ (Pha 2 ghi name + Pha 3 docs) ──
+if ($Recommend) {
+    Write-Step 'ĐỀ XUẤT ⭐ (Pha 2: ghi name · Pha 3: docs)'
+    & (Get-ScriptPath 'New-RecommendReport.ps1') -ConfigPath $ConfigPath -Apply -SkipValidation
+    if ($LASTEXITCODE -ne 0) { Write-Fail 'Recommend (Pha 2) thất bại.'; exit 1 }
+    & (Get-ScriptPath 'Update-RecommendDocs.ps1') -ConfigPath $ConfigPath
+    if ($LASTEXITCODE -ne 0) { Write-Fail 'Recommend (Pha 3 docs) thất bại.'; exit 1 }
 }
 
 Write-Step 'BƯỚC TIẾP'

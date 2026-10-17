@@ -357,6 +357,35 @@ It 'rule LAN dùng LocalSubnet + Private, KHÔNG khoanh IP cu the' {
         # StrictMode Latest ném lỗi "variable has not been set".
         $s | Should -Match '\$exposed -and -not \$hasPass'
     }
+
+    It 'KHÔNG cảnh báo độ dài mật khẩu (người dùng đã chọn giữ) ' {
+        $s = Get-Content -LiteralPath $installer -Raw
+        $s | Should -Not -Match 'Length -lt 12'
+        $s | Should -Not -Match 'ký tự\.'
+    }
+}
+
+Describe 'Start-OpenCodeServer - im lặng khi bind rộng' {
+
+    BeforeAll {
+        $start = Join-Path $repoRoot 'scripts\server\Start-OpenCodeServer.ps1'
+    }
+
+    It 'không cảnh báo mật khẩu ngắn và không nhắc mở firewall' {
+        # Bỏ dòng comment: chính comment giải thích trong script cũng nhắc tới
+        # các cụm từ này và sẽ làm test trượt.
+        $code = @(Get-Content -LiteralPath $start | Where-Object { $_ -notmatch '^\s*#' })
+        ($code -join "`n") | Should -Not -Match 'nhớ mở firewall'
+        ($code -join "`n") | Should -Not -Match 'quá yếu cho server'
+        ($code -join "`n") | Should -Not -Match 'Length -lt 12'
+    }
+
+    It 'VẪN từ chối chạy khi bind mọi interface mà không có mật khẩu' {
+        $s = Get-Content -LiteralPath $start -Raw
+        # Đây là lỗi cấu hình (không phải cảnh báo) nên phải giữ.
+        $s | Should -Match '\$exposed -and -not \$hasPass'
+        $s | Should -Match 'exit 1'
+    }
 }
 
 Describe 'StartNow phải nạp lại tham số mới' {

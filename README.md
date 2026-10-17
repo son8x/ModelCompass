@@ -17,7 +17,7 @@ opencode đang chạy**.
 ## ✨ Tính năng
 
 1. **Phân tích provider & model** — bảng giá API (input/output per 1M token),
-   model free/paid, tốc độ, thế mạnh theo từng tác vụ → xem `docs/providers-and-models.md`.
+   model free/paid, tốc độ, thế mạnh theo từng tác vụ → xem `docs/model-reference.md` (config) + `docs/market-intel.md` (thị trường).
 2. **Đề xuất theo nhu cầu** — chọn nhanh model phù hợp:
    `docs/recommendations/*.md` (lập trình, viết luận văn, pentest).
 3. **Cấu hình opencode nhanh nhất** — Các preset "model pick" trong
@@ -50,6 +50,12 @@ opencode đang chạy**.
     CI validate mọi template (`configs/provider-template/`, `docs/contributing-provider.md`).
 15. **GitHub Pages docs** — trang tra cứu model theo giá/tác vụ tự sinh bởi CI
     (`docs/site/`, `.github/workflows/pages.yml`).
+16. **Đề xuất `⭐` tự động** — `scripts/recommend/` (tầng 1 `Get-ModelCandidates.ps1` +
+    tầng 2 `Resolve-StarRules.ps1` + tầng 3 `New-RecommendReport.ps1`) gợi ý model nên gắn
+    `⭐` theo **nhóm** (free/L/B/A/S) và **mục đích** (reasoning/code/vision/…); `mc recommend`
+    chỉ báo cáo, `-Apply` mới ghi vào `name` (backup + validate). `Update-RecommendDocs.ps1`
+    đồng bộ bảng `⭐` vào `docs/model-reference.md` §2 (CI `-Check` chống drift); gộp cả
+    hai bằng `Update-XKiroModels.ps1 -Recommend`.
 
 ---
 
@@ -60,7 +66,8 @@ opencode đang chạy**.
 ├── README.md                  ← bạn đang ở đây
 ├── LICENSE                    ← MIT
 ├── docs/
-│   ├── providers-and-models.md   ← phân tích chi tiết provider/model
+│   ├── model-reference.md       ← tham chiếu provider/model trong config (bảng ⭐ tự sinh)
+│   ├── market-intel.md          ← phân tích thị trường: giá, cộng đồng, router, xu hướng
 │   ├── workflow.md               ← quy trình development → production → release
 │   ├── per-project-config.md     ← cấu hình theo từng dự án (OPENCODE_CONFIG)
 │   ├── contributing-provider.md  ← recipe thêm provider mới (Phase 3.2)
@@ -289,12 +296,12 @@ nằm trong `.opencode/plugins-xkiro/`:
 **đã dùng**. API **không** có ngày hết hạn — field `plan` chỉ cho biết gói còn hiệu lực
 (`null` = PAYG hoặc gói đã kết thúc); xem ngày gia hạn ở **LemonSqueezy**
 (`app.lemonsqueezy.com/my-orders` / email hóa đơn) hoặc console `xkiro.com/dashboard`.
-Chi tiết: `docs/providers-and-models.md` §"xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói".
+Chi tiết: `docs/model-reference.md` §"xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói".
 
 ## 📊 Nguồn dữ liệu giá
 
 Bảng giá token là **ảnh chụp tại thời điểm viết** (Q4/2026), có ghi nguồn trong
-`docs/providers-and-models.md`. Giá nhà cung cấp thay đổi thường xuyên — trước
+`docs/market-intel.md`. Giá nhà cung cấp thay đổi thường xuyên — trước
 khi quyết định trả phí, hãy xác nhận lại trên trang chính thức của provider.
 
 ## 📏 Đo tốc độ model (benchmark)

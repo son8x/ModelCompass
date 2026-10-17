@@ -3,7 +3,7 @@
 <#
 New-SortOrderKey.ps1 — helper "khoá sắp xếp 2099" cho thứ tự model trong /model.
 
-Quy ước (docs/providers-and-models.md §6): opencode sắp model theo release_date
+Quy ước (docs/model-reference.md §3): opencode sắp model theo release_date
 GIẢM DẦN. Ta dùng release_date (không hiển thị trên UI) làm khoá 2099 để ép thứ tự.
 Script này chỉ IN key — KHÔNG sửa file config (configs chứa nhiều comment, tránh hỏng).
 

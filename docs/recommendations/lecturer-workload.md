@@ -76,8 +76,8 @@
 ## 3. Bộ preset khuyên dùng (mặc định hằng ngày)
 
 > Trong `/model`, model khuyến nghị đã gắn **`⭐` + nhãn tác vụ** (free 51 · max 62 model).
-> Bảng đầy đủ theo **nhóm** lẫn **tác vụ**: `docs/providers-and-models.md` §
-> "⭐ Model khuyến nghị xKiro — theo nhóm & theo tác vụ".
+> Bảng đầy đủ theo **nhóm** lẫn **tác vụ**: `docs/model-reference.md` §2
+> "⭐ Model khuyến nghị xKiro (tự sinh)".
 
 ```
 Mặc định (default)   : 1-xkiro-free/qwen/qwen3.8-max:free  ⭐ reasoning   ← đã set, miễn phí
@@ -124,5 +124,5 @@ pwsh scripts\provider\Update-XKiroModels.ps1 -Publish -Install
 > **Ngày hết hạn gói**: API xKiro **không trả** (field `plan` chỉ cho biết
 > còn hiệu lực `"max"` hay không; `null` = PAYG/gói đã kết thúc). Xem ngày
 > gia hạn ở **LemonSqueezy** (`app.lemonsqueezy.com/my-orders` / email hóa đơn)
-> hoặc console `xkiro.com/dashboard`. Chi tiết: `docs/providers-and-models.md`
+> hoặc console `xkiro.com/dashboard`. Chi tiết: `docs/model-reference.md`
 > §"xKiro — Kiểm tra hạn mức, chi tiêu & ngày hết hạn gói".

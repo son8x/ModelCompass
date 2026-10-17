@@ -46,6 +46,17 @@ Describe 'mc — mapping lệnh' {
     }
 }
 
+Describe 'mc — chuyển tiếp cờ tới script con' {
+    It 'cờ dạng -X KHÔNG gây lỗi binding (regression: trước đây advanced function nuốt lỗi)' {
+        { mc nonsense -Apply -Provider 1-xkiro-free } | Should -Not -Throw
+    }
+
+    It 'lệnh lạ kèm cờ vẫn trả mã 2 (không throw)' {
+        $code = mc nonsense -Apply
+        $code | Should -Be 2
+    }
+}
+
 Describe 'ConvertTo-McCommandLine' {
     It 'bọc giá trị chứa khoảng trắng bằng nháy đơn' {
         InModuleScope ModelCompass {
@@ -100,14 +111,14 @@ Describe 'New-McDoctorTable' {
         }
     }
 
-    It 'trả đủ 4 dòng env + N port + 1 config' {
+    It 'trả đủ 3 dòng env + N port + 1 config' {
         InModuleScope ModelCompass {
             $rows = New-McDoctorTable -Environment @{} `
                 -Ports @(
                     [pscustomobject]@{ Name = 'a'; Address = 'x'; Port = 1; Ok = $true },
                     [pscustomobject]@{ Name = 'b'; Address = 'x'; Port = 2; Ok = $false }
                 ) -ConfigValid $true
-            $rows.Count | Should -Be (4 + 2 + 1)
+            $rows.Count | Should -Be (3 + 2 + 1)
         }
     }
 }

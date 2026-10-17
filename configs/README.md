@@ -49,8 +49,8 @@ development/  ──Publish-->  production/  ──Install-->  ~/.config/opencod
 > gán `"release_date"` (string, chỉ dùng làm khoá sắp xếp — không hiển thị trên UI):
 > model hiện trên cùng có `release_date` LỚN nhất; đặt trùng nhau sẽ fallback về `name` A→Z.
 > 2 provider xKiro đang dùng quy ước `2099-<MM>-<DD>` giảm dần 1 ngày/lượt — sinh key bằng
-> `scripts\config\New-SortOrderKey.ps1` (Phase 2.3, xem `docs\providers-and-models.md §6b`).
-> Chi tiết + recipe: `docs/providers-and-models.md` §6.
+> `scripts\config\New-SortOrderKey.ps1` (Phase 2.3, xem `docs\model-reference.md §3`).
+> Chi tiết + recipe: `docs/model-reference.md` §3.
 
 ## Các script liên quan (xem `../scripts/`)
 
