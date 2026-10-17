@@ -680,7 +680,8 @@ function Remove-HandAnnotation {
 <#
 .SYNOPSIS
     Sinh tiêu đề provider hiển thị trong opencode picker: "<name> — <count> model".
-    Nếu có thêm/gỡ, phụ chú "(+N · gỡ: a, b)" để nhìn list biết ngay.
+    KHÔNG còn phụ chú thêm/gỡ "(+N · gỡ: a, b)" (đã bỏ 17/10 — tránh làm hàng provider
+    trong picker/khung chat quá dài; chi tiết thêm/gỡ vẫn ghi ở STATUS/CHANGELOG).
     THUẦN. Nếu name đã mang hậu tố "— N model" thì strip trước khi tái tạo.
 #>
 function Format-ProviderHeader {
@@ -693,16 +694,6 @@ function Format-ProviderHeader {
     $base = $Name -replace '\s*—\s*\d+ model.*$', ''
     if ([string]::IsNullOrWhiteSpace($base)) { $base = $Name }
     $h = "{0} — {1} model" -f $base, $Count
-
-    $notes = [System.Collections.Generic.List[string]]::new()
-    $added = @($Added); $removed = @($Removed)
-    if ($added.Count -gt 0) { $notes.Add("+$($added.Count)") }
-    if ($removed.Count -gt 0) {
-        # Tên ngắn: bỏ tiền tố provider ("anthropic/claude-opus-5.5" -> "claude-opus-5.5").
-        $short = @($removed | ForEach-Object { if ($_ -match '^[^/]+/') { $_.Substring($_.IndexOf('/') + 1) } else { $_ } })
-        $notes.Add("gỡ: " + ($short -join ', '))
-    }
-    if ($notes.Count -gt 0) { $h += " (" + ($notes -join ' · ') + ")" }
     return $h
 }
 
@@ -945,19 +936,11 @@ foreach ($cpKey in $selected) {
         $newRaw = Set-ProviderModelsBlock -Raw $newRaw -ProviderKey $cpKey -Models $final
     }
 
-    # Cập nhật tiêu đề provider (nhìn picker opencode là biết tổng số + mới/gỡ).
-    # Chỉ tái tạo KHI có thêm/gỡ (live hoặc hồi tố) — nếu không, giữ nguyên note cũ
-    # (vd "(+16)", "gỡ: ...") để thông tin không biến mất giữa các lần chạy.
+    # Cập nhật tiêu đề provider: luôn đồng bộ thành "<base> — <count> model" (bỏ (+N · gỡ: ...) khỏi tên hiển thị)
     $provName = [string]$cp.Value.name
-    $hdrAdded = @(@(@($cmp.Add) | ForEach-Object { $_.id }) + $backfillAdded | Select-Object -Unique)
-    $hdrRemoved = @(@($cmp.RemoveReason.Keys) + $backfillRemoved | Select-Object -Unique)
-    if ($provName -and ($hdrAdded.Count -gt 0 -or $hdrRemoved.Count -gt 0)) {
-        $hdr = Format-ProviderHeader -Name $provName -Count @($final).Count `
-            -Added $hdrAdded `
-            -Removed $hdrRemoved
-        if ($hdr -ne $provName) {
-            $newRaw = Set-ProviderNameLine -Raw $newRaw -ProviderKey $cpKey -NewName $hdr
-        }
+    $hdr = Format-ProviderHeader -Name $provName -Count @($final).Count
+    if ($hdr -ne $provName) {
+        $newRaw = Set-ProviderNameLine -Raw $newRaw -ProviderKey $cpKey -NewName $hdr
     }
 }
 

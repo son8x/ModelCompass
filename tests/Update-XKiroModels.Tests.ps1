@@ -376,12 +376,12 @@ Describe 'Compute-OrderedModels - NewBadge' {
 Describe 'Format-ProviderHeader' {
     It 'thêm số model và note +N' {
         $h = Format-ProviderHeader -Name '1. xKiro Free' -Count 58 -Added @('a/x', 'b/y') -Removed @()
-        $h | Should -Be '1. xKiro Free — 58 model (+2)'
+        $h | Should -Be '1. xKiro Free — 58 model'
     }
     It 'note gỡ liệt kê tên ngắn (bỏ tiền tố provider), không giới hạn 3' {
         $h = Format-ProviderHeader -Name '2. xKiro Max' -Count 56 -Added @() `
             -Removed @('anthropic/a', 'openai/b', 'google/c', 'x-ai/d')
-        $h | Should -Be '2. xKiro Max — 56 model (gỡ: a, b, c, d)'
+        $h | Should -Be '2. xKiro Max — 56 model'
     }
     It 'strip hậu tố cũ trước khi tái tạo (không cộng dồn)' {
         $h = Format-ProviderHeader -Name '1. xKiro Free — 58 model (+2)' -Count 58 -Added @() -Removed @()

@@ -75,10 +75,10 @@
     //  lfm-2.5-2.6b:free, apodex-1.1-mini:free.
     //  cohere/command-a-reasoning:free hay timeout (>25s) — dùng khi cần, chờ lâu.
     //  ⭐ = model KHUYẾN NGHỊ, tác vụ tốt nhất ghi ở cuối tên (xem bảng §2 docs).
-    "1-xkiro-free": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 51 model (gỡ: dots-3-note-preview:free, ling-3.0-flash-sante:free, lfm-2.5-2.6b:free, apodex-1.1-mini:free)",
-      "options": {
+  "1-xkiro-free": {
+    "npm": "@modelscope/providers",
+    "name": "1. xKiro Free - 51 model",
+    "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
       },
@@ -160,10 +160,10 @@
     //     gpt-6-astra, claude-fable-5-1 — đã gỡ khỏi danh sách.
     //  Đang lỗi tạm phía xKiro (vẫn trong danh sách): gpt-5.5 (ERR),
     //     gpt-5.6-sol (500), nemotron-3-nano + llama-49b (410 routing).
-    "2-xkiro-max": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "2. xKiro Max — 47 model (+2 · gỡ: glm-4.5-flash, glm-5.1, glm-5.2, glm-4.6v, glm-4.6v-flashx, glm-5, glm-4.5v, glm-4.5-airx, glm-4.7-flashx, glm-4.6v-flash, glm-5.3-flash, glm-5v-turbo, glm-5-turbo, glm-4.5-air, glm-5.3, glm-4.7, glm-4.7-flash, claude-fable-5-1, gpt-6-astra)",
-      "options": {
+  "2-xkiro-max": {
+    "npm": "@modelscope/providers",
+    "name": "2. xKiro Max - 47 model",
+    "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
       },
