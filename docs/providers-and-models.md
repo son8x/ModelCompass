@@ -136,12 +136,49 @@
 
 | # | Provider | Loại | Thế mạnh | Lưu ý |
 |---|---|---|---|---|
-| 1 | `1-xkiro-free` | Router free tier | MiniMax `:free`, DeepSeek, Mistral | Free plan: 5M token/ngày + 40+ model free |
-| 2 | `2-xkiro-max` | Router $20/tháng | Claude/GPT/Grok/GLM + $140/tuần | Premium tier mở sau khi trả tiền |
+| 1 | `1-xkiro-free` | Router free tier | Qwen, Cohere, Mistral | **51 model free** (16/10) — ⭐ theo tác vụ |
+| 2 | `2-xkiro-max` | Router $20/tháng | Claude/GPT/Grok/GLM | **62 model**, 4 nhóm `[L]/[B]/[A]/[S]`, budget $264/tuần — ⭐ theo nhóm/tác vụ |
 | 3 | `3-omniroute-free` | Route local | Cloudflare free (GLM-5.2, DeepSeek V4 Pro) | Cần local 127.0.0.1:20217 |
 | 4 | `4-openrouter-free` | Route local | OpenRouter `:free` | 50 RPD, 1K nếu nạp $10 |
 | 5 | `5-9router` | Router local | GPT-OSS 120B local | Cổng 20128 |
 | 6 | `6-teamoRouter` | Router ưu đãi | GPU free + GPT/Claude giá rẻ | `TEAMO_API_KEY` |
+
+### ⭐ Model khuyến nghị xKiro — theo nhóm & theo tác vụ
+
+> **16/10/2026** — model được khuyến nghị có gắn **`⭐` ở đầu tên** trong `/model`
+> (14 model: 7 free + 7 paid), kèm 1 nhãn tác vụ ở cuối tên. Bảng này là "bản dịch":
+>
+> - **Nhóm**: dùng tag `[L]/[B]/[A]/[S]` (max) — ⭐ = model **nên chọn mặc định** của nhóm đó.
+> - **Tác vụ**: ⭐ model nào phù hợp nhất cho việc đó (free lẫn paid).
+
+**`2-xkiro-max` (62 model) — ⭐ 1 model mỗi nhóm:**
+
+| Nhóm | ⭐ Model | Giá in/out | Dùng cho |
+|---|---|---|---|
+| `[L]` Nhẹ·Nhanh·Rẻ | `z-ai/glm-5.3-flash` | $0.15 / $0.50 | Subagent, việc nhẹ, chạy nhiều lần |
+| `[B]` Đa dụng giá tốt | `z-ai/glm-5.2` | $0.25 / $3.99 | Bulk, 1M ctx, input rẻ nhất nhóm |
+| `[A]` Mạnh đa dụng | `google/gemini-3.1-pro` | $2.00 / $12.00 | Nghiên cứu sâu, 1M ctx |
+| `[S]` Flagship | `openai/gpt-6.1-sol` | $2.00 / $10.00 | Chất lượng cao nhất mà input **vẫn rẻ** (như Sonnet) |
+
+**Theo tác vụ (khớp đúng label trong `/model`):**
+
+| Tác vụ | ⭐ Trả phí (`2-xkiro-max`) | ⭐ Miễn phí (`1-xkiro-free`) |
+|---|---|---|
+| Nghiên cứu / Review (1M ctx) | `[A] google/gemini-3.1-pro` · $2/$12 | `qwen/qwen3.8-max:free` · 1M |
+| Viết / Soạn bài / PPTX | `[A] google/gemini-3.8-flash` · 1M · $0.75 in | `mistralai/mistral-large-4-0` · 524K (free) |
+| Coding / Tooling | `[A] x-ai/grok-4.7` · 500K | `qwen/qwen3-coder-plus:free` · 1M |
+| Vision (ảnh / bảng / biểu) | `[A] google/gemini-3.8-flash` · 1M | `qwen/qwen3-vl-plus:free` |
+| Omni (nhiều modal) | — | `qwen/qwen3.8-omni-flash:free` · 1M |
+| Dịch thuật | — | `cohere/command-a-translate` |
+| Subagent / hỏi nhanh | `[L] z-ai/glm-5.3-flash` · $0.15/$0.50 | `qwen/qwen3.5-flash:free` · 1M |
+| Bulk input giá rẻ | `[B] z-ai/glm-5.2` · $0.25 in | — |
+| Chất lượng cao nhất | `[S] openai/gpt-6.1-sol` · $2/$10 | — |
+
+> **Lưu ý chọn model:**
+> - Bulk đọc tài liệu / tạo slide (input chiếm ~85% chi phí) → chọn model **input ≤ $0.75 hoặc free**;
+>   tránh `[S] claude-opus-5` ($5 in) nếu chỉ cần số lượng.
+> - `mistralai/mistral-large-4-0` (free, 524K) = mặc định cho **soạn bài/PPTX** — đặt ở nhóm Mistral trong picker.
+> - `cohere/command-a-reasoning` (free) hay **timeout >25s** → né khi cần phản hồi nhanh.
 
 ### Thứ tự model trong `/models` — cách ép theo ý muốn
 
@@ -149,8 +186,8 @@ opencode dùng `release_date` của model làm **khoá sắp xếp chính** tron
 (model có `release_date` LỚN hơn hiện TRƯỚC). Vì field này **không hiển thị ở bất kỳ đâu trên UI**,
 ta dùng nó làm "khoá sắp xếp tổng hợp" — 2 provider xKiro hiện tại đã áp dụng:
 
-- `1-xkiro-free` — **55 model free** (catalog `GET /v1/models` xKiro 15/10; **cập nhật 15/10**: gỡ `sensenova/sensenova-6.7-flash-lite`, DeepSeek đã rời tier free — hiện Qwen 19 · Cohere 16 · Mistral 9 · Meituan 2 · Meta 2 · Stealth 2 · SenseNova 1 · +4), thứ tự **theo độ mạnh giảm dần** (Qwen3.8 Max trên cùng), `release_date` từ `2099-12-31` giảm dần → `2099-11-20`. Thành phần: Qwen (19: 3.x/3.5/3.6/3.7/3.8, coder/vl/omni), DeepSeek (5, xKiro đưa lại 25/09: `v4-pro`, `v4-flash`, `v4.1-flash:free`, `v3.2`, `chat-v3.1`), MiniMax (8: M2→M3), Mistral (8: Mistral Large 3, Medium 3.5, Small 4, Codestral, Devstral, Ministral 14B/8B/3B), SenseNova (2: 6.8/6.7). Đã gỡ `gpt-5.3-codex-spark` (xKiro gỡ khỏi tier free — HTTP 404). Đang lỗi phía xKiro (HTTP 500, 21/09): `minimax-m3:free`, `minimax-m2.7:free`, `minimax-m2.5-highspeed:free`.
-- `2-xkiro-max` — **62 model dùng được trên gói Max** (probe thực tế 15/10; **cập nhật 15/10**: gỡ `xiaomi/mimo-v2.5-pro` — biến mất khỏi catalog; nhóm `[L]`26/`[B]`11/`[A]`14/`[S]`11), hiển thị **theo 4 nhóm sức mạnh** đi từ rẻ-nhanh → mạnh nhất: `[L] Nhẹ·Nhanh·Rẻ` → `[B] Đa dụng giá tốt` → `[A] Mạnh đa dụng` → `[S] Flagship`. `release_date` từ `2099-10-31` giảm dần → `2099-09-04`. Tag nhóm ngay trong `name` để nhận biết model **cùng tầng / thay thế được cho nhau**. Thành phần nhóm: `[L]` = Nemotron 3 Super/Nano/Nano-Omni, GPT-5.4 Mini, GPT-6 Luna/5.6 Luna, Haiku 4.5, GLM-5.3 Flash/5-Turbo/4.5-Flash/4.5-Air/AirX/4.5V/4.6V-Flash/4.6V-FlashX/5V-Turbo, Gemini 2.5 Flash/3 Flash, Xiaomi MiMo V2.6 Flash/V2.5; `[B]` = Nemotron 3 Ultra, Llama-3.3-Nemotron-49B, Gemini 2.5 Pro, GLM-4.5/4.5-X/4.6/4.6V/4.7/4.7-Flash/4.7-FlashX/5/5.1/5.2, Xiaomi MiMo V2.6 Pro/V2.5 Pro; `[A]` = Gemini 3.1 Pro/3.5-Flash/3.6-Flash/3.7-Flash/3.8-Flash, GPT-5.6 Terra, GPT-5.4, Grok 4.7, Claude Sonnet 4.6/5/4.5/4, GLM-5.3; `[S]` = Claude Opus 5.5/4.6/4.7/4.8/5/4.5, GPT-6 Sol, Claude Fable 5, GPT-5.5, GPT-5.6 Sol. **Tên hiển thị ghi giá đầy đủ `In/Out` (USD/1M token) lấy từ catalog live 25/09** — trên gói Max các model này tính theo allowance $264/tuần (không trừ per-token) nên giá dùng để ước lượng khi nạp thêm wallet. **Đã loại 27 model 403** (Kimi/Grok 4.5/4.6/DeepSeek/Qwen-premium/MiniMax-premium/Tencent/`gpt-6-astra`/`claude-fable-5-1` — tính wallet hoặc cần gói ≥ Ultra) + 4 model đang lỗi tạm (ghi tag ⚠️): `gpt-5.5` (ERR), `gpt-5.6-sol` (500), `nemotron-3-nano`, `llama-3.3-nemotron-super-49b` (410). Lưu ý 25/09: xKiro mở thêm nhóm Xiaomi MiMo (V2.5/V2.6) + Grok 4.7 + GPT-6 Sol/Luna + Claude Opus 4.5/5.5 + Sonnet 4/4.5 cho gói Max; `gemini-3.8-flash` catalog ghi premium nhưng probe vẫn OK trên Max (ghi tag ⭐).
+- `1-xkiro-free` — **51 model free** (probe trực tiếp từng model **16/10/2026**; **cập nhật 16/10**: gỡ 4 model HTTP 404 — `dots-studio/dots-3-note-preview:free`, `inclusionai/ling-3.0-flash-sante:free`, `liquid/lfm-2.5-2.6b:free`, `apodex/apodex-1.1-mini:free`). Thành phần: **Qwen 19** (3.8/3.7/3.6/3.5/3.x + coder/vl/omni) · **Cohere 16** (Command A/R, Aya, Tiny Aya, translate/vision/code) · **Mistral 9** (Medium 3.5, Large 3, Large 4, Small 4, Codestral, Devstral, Ministral 14B/8B/3B) · Meituan 2 · Meta 2 · Stealth 2 · SenseNova 1. Thứ tự **theo độ mạnh giảm dần** (Qwen3.8 Max trên cùng), `release_date` từ `2099-12-31` giảm dần → `2099-10-26`; `mistral-large-4-0` đặt ở **`2099-11-25`** (giữa nhóm Mistral). DeepSeek, MiniMax, SenseNova 6.7 đã rời tier free / bị gỡ 404 (16/09–16/10). 7 model được gắn **⭐ khuyến nghị** (mục "⭐ Model khuyến nghị xKiro" ở trên). Lỗi còn lại: `cohere/command-a-reasoning` hay **timeout >25s**.
+- `2-xkiro-max` — **62 model dùng được trên gói Max** (probe thực tế 15/10; **cập nhật 15/10**: gỡ `xiaomi/mimo-v2.5-pro` — biến mất khỏi catalog; nhóm `[L]`26/`[B]`11/`[A]`14/`[S]`11), hiển thị **theo 4 nhóm sức mạnh** đi từ rẻ-nhanh → mạnh nhất: `[L] Nhẹ·Nhanh·Rẻ` → `[B] Đa dụng giá tốt` → `[A] Mạnh đa dụng` → `[S] Flagship`. `release_date` từ `2099-10-31` giảm dần → `2099-09-04`. Tag nhóm ngay trong `name` để nhận biết model **cùng tầng / thay thế được cho nhau**. Thành phần nhóm: `[L]` = Nemotron 3 Super/Nano/Nano-Omni, GPT-5.4 Mini, GPT-6 Luna/5.6 Luna, Haiku 4.5, GLM-5.3 Flash/5-Turbo/4.5-Flash/4.5-Air/AirX/4.5V/4.6V-Flash/4.6V-FlashX/5V-Turbo, Gemini 2.5 Flash/3 Flash, Xiaomi MiMo V2.6 Flash/V2.5; `[B]` = Nemotron 3 Ultra, Llama-3.3-Nemotron-49B, Gemini 2.5 Pro, GLM-4.5/4.5-X/4.6/4.6V/4.7/4.7-Flash/4.7-FlashX/5/5.1/5.2, Xiaomi MiMo V2.6 Pro/V2.5 Pro; `[A]` = Gemini 3.1 Pro/3.5-Flash/3.6-Flash/3.7-Flash/3.8-Flash, GPT-5.6 Terra, GPT-5.4, Grok 4.7, Claude Sonnet 4.6/5/4.5/4, GLM-5.3; `[S]` = Claude Opus 5.5/4.6/4.7/4.8/5/4.5, GPT-6 Sol, Claude Fable 5, GPT-5.5, GPT-5.6 Sol. **Tên hiển thị ghi giá đầy đủ `In/Out` (USD/1M token) lấy từ catalog live 25/09** — trên gói Max các model này tính theo allowance $264/tuần (không trừ per-token) nên giá dùng để ước lượng khi nạp thêm wallet. **Đã loại 27 model 403** (Kimi/Grok 4.5/4.6/DeepSeek/Qwen-premium/MiniMax-premium/Tencent/`gpt-6-astra`/`claude-fable-5-1` — tính wallet hoặc cần gói ≥ Ultra) + 4 model đang lỗi tạm (ghi tag ⚠️): `gpt-5.5` (ERR), `gpt-5.6-sol` (500), `nemotron-3-nano`, `llama-3.3-nemotron-super-49b` (410). Lưu ý 25/09: xKiro mở thêm nhóm Xiaomi MiMo (V2.5/V2.6) + Grok 4.7 + GPT-6 Sol/Luna + Claude Opus 4.5/5.5 + Sonnet 4/4.5 cho gói Max; `gemini-3.8-flash` catalog ghi premium nhưng probe vẫn OK trên Max (đánh dấu `✓Max`). **7 model gắn `⭐` khuyến nghị** (1 model/nhóm `[L]/[B]/[A]/[S]` + theo tác vụ) — bảng chi tiết ở mục **"⭐ Model khuyến nghị xKiro — theo nhóm & theo tác vụ"** phía trên.
 
 **Quy ước đặt `release_date` tổng hợp khi cần kiểm soát thứ tự model:**
 

@@ -3,6 +3,7 @@
 > Phân tích từ **170 session** trong `opencode.db` (03/09–07/10/2026) +
 > usage API live xKiro. Cập nhật lần cuối: **12/10/2026**.
 > Mục tiêu: **mạnh — tối ưu chi phí — tận dụng free + paid**.
+> Danh sách xKiro free **51 model** / max **62 model** (16/10/2026), model ⭐ khuyến nghị đã gắn nhãn trong `/model`.
 
 ## 1. Phân tích nhu cầu thực tế
 
@@ -70,17 +71,23 @@
 |---|---|
 | `[L] z-ai/glm-5.3-flash` · $0.15/$0.50 · vision | `qwen/qwen3.5-flash:free` · 1M · fast |
 | `[L] openai/gpt-6-luna` · $0.10/$0.50 · reasoning/vision | `qwen/qwen3.7-flash:free` · vision |
-| `[L] google/gemini-3-flash` · $0.75/$3.75 · 1M | `minimax/minimax-m3:free` (probe lại nếu lỗi 500) |
+| `[L] google/gemini-3-flash` · $0.75/$3.75 · 1M | `mistralai/mistral-small-2603` · vision (nhỏ, nhanh) |
 
 ## 3. Bộ preset khuyên dùng (mặc định hằng ngày)
 
+> Trong `/model`, model khuyến nghị đã gắn **`⭐` + nhãn tác vụ** (free 51 · max 62 model).
+> Bảng đầy đủ theo **nhóm** lẫn **tác vụ**: `docs/providers-and-models.md` §
+> "⭐ Model khuyến nghị xKiro — theo nhóm & theo tác vụ".
+
 ```
-Mặc định (default)   : 1-xkiro-free/qwen/qwen3.8-max:free   ← đã set, miễn phí
-Nghiên cứu/Review    : google/gemini-3.1-pro   (fallback: qwen3.8-max:free)
-Soạn bài/PPTX/CTĐT   : mistralai/mistral-large-4-0 (FREE 08/10) hoặc z-ai/glm-5.2   ← input rẻ nhất
-Coding               : openai/gpt-5.6-terra    (fallback: qwen3-coder-plus:free)
-Subagent/nhẹ         : z-ai/glm-5.3-flash      (hoặc qwen3.5-flash:free)
-Chốt chất lượng cao  : openai/gpt-6.1-sol (S, $2 input) hoặc claude-sonnet-5
+Mặc định (default)   : 1-xkiro-free/qwen/qwen3.8-max:free  ⭐ reasoning   ← đã set, miễn phí
+Nghiên cứu/Review    : google/gemini-3.1-pro    [A] ⭐       (fallback: ⭐ qwen3.8-max:free)
+Soạn bài/PPTX/CTĐT   : mistralai/mistral-large-4-0 ⭐ (free) hoặc [B] glm-5.2 ⭐  ← input rẻ nhất
+Coding               : x-ai/grok-4.7            [A] ⭐       (fallback: ⭐ qwen3-coder-plus:free)
+Viết / văn phong VN : anthropic/claude-sonnet-5 [A] ⭐
+Vision (bảng/biểu)   : google/gemini-3.8-flash  [A] ⭐ (✓Max) (fallback: ⭐ qwen3-vl-plus:free)
+Subagent/nhẹ         : z-ai/glm-5.3-flash       [L] ⭐       (fallback: ⭐ qwen3.5-flash:free)
+Chốt chất lượng cao  : openai/gpt-6.1-sol       [S] ⭐  $2 input — rẻ hơn Opus 5 ($5)
 ```
 
 ## 4. Quy tắc vàng tối ưu chi phí
