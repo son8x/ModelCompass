@@ -51,6 +51,19 @@
     ]
   ],
 
+  // MCP server: Playwright (dùng để test trình duyệt headless).
+  //  ⚠️ KHÔNG khai báo trong ~/.config/opencode/opencode.jsonc riêng — khi có
+  //  CẢ opencode.json lẫn opencode.jsonc, opencode chỉ nạp được 1 trong 2 →
+  //  dễ mất model hoặc mất MCP. Gộp vào đây để mỗi lần Install-Config giữ đủ cả 2.
+  "mcp": {
+    "servers": {
+      "playwright": {
+        "type": "local",
+        "command": ["npx", "-y", "@playwright/mcp@latest", "--headless"]
+      }
+    }
+  },
+
   "provider": {
     // ─── xKiro Free (model miễn phí trên mọi gói) ─────────────────
     //  key: XTROUTER_API_KEY
