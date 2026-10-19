@@ -4,6 +4,36 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.7.1] — 2026-10-19 — Sửa lỗi `Failed to initialize provider` (xKiro)
+
+### Fixed
+- **Nguyên nhân gốc:** `configs/{development,production}` bị đổi
+  `"npm": "@ai-sdk/openai-compatible"` → `"npm": "@modelscope/providers"`
+  (commit `f388b2a`). Package đó **404 trên npm**, nên opencode không khởi tạo
+  được `1-xkiro-free` / `2-xkiro-max` → 7 lần
+  `Failed to initialize provider` trong log (19/10 09:00–09:24), mọi model
+  xKiro biến mất khỏi picker. Đã khôi phục `@ai-sdk/openai-compatible`.
+- **`Format-ProviderHeader` cộng dồn `provider.name`:** regex strip hậu tố cũ
+  chỉ khớp em dash `—` (U+2014), không khớp ASCII `-` (U+002D) → name thành
+  `1. xKiro Free - 51 model — 49 model`. Đã sửa regex
+  `\s*(?:—|-)\s*\d+\s*model.*$` + 3 test regression.
+- Trả `provider.name` về dạng chuẩn `<base> — <count> model`
+  (`1. xKiro Free — 49 model`, `2. xKiro Max — 47 model`) và sửa lại indent
+  khối provider trong `configs/development/opencode.jsonc`.
+
+### Thêm
+- **`AGENTS.md`** — tài liệu bắt buộc cho mọi session làm việc trong repo:
+  quy tắc không sửa dòng `"npm"`, quy tắc sửa `provider.name`, cách chẩn đoán
+  `Failed to initialize provider`, và các bẫy môi trường PowerShell 5.1.
+- `docs/contributing-provider.md`: mục ⚠️ riêng cho dòng `"npm"` + checklist
+  yêu cầu `npm view` trước khi ghi package lạ.
+
+### Kiểm chứng
+- `Test-Suite.ps1`: **303/303** pass; `Test-ModelCompassConfig` OK;
+  `Compare-Config` 0 diff; `Install-Config` có backup.
+- `opencode models` liệt kê 49 + 47 model, 0 lỗi; `opencode run --print-logs`
+  trả lời thành công, không còn `Failed to initialize provider`.
+
 ## [0.7.0] — 2026-10-02 — Tách `scripts/` theo nhóm + quản lý opencode server
 
 ### Thêm

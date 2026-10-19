@@ -683,6 +683,8 @@ function Remove-HandAnnotation {
     KHÔNG còn phụ chú thêm/gỡ "(+N · gỡ: a, b)" (đã bỏ 17/10 — tránh làm hàng provider
     trong picker/khung chat quá dài; chi tiết thêm/gỡ vẫn ghi ở STATUS/CHANGELOG).
     THUẦN. Nếu name đã mang hậu tố "— N model" thì strip trước khi tái tạo.
+    Strip phải khớp CẢ hai kiểu gạch: em dash "—" (U+2014) VÀ ASCII "-" (U+002D),
+    nếu không name sẽ bị cộng dồn ("1. xKiro Free - 51 model — 49 model").
 #>
 function Format-ProviderHeader {
     param(
@@ -691,7 +693,7 @@ function Format-ProviderHeader {
         [string[]]$Added = @(),
         [string[]]$Removed = @()
     )
-    $base = $Name -replace '\s*—\s*\d+ model.*$', ''
+    $base = $Name -replace '\s*(?:—|-)\s*\d+\s*model.*$', ''
     if ([string]::IsNullOrWhiteSpace($base)) { $base = $Name }
     $h = "{0} — {1} model" -f $base, $Count
     return $h

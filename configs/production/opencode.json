@@ -16,8 +16,8 @@
   },
   "provider": {
     "1-xkiro-free": {
-      "npm": "@modelscope/providers",
-      "name": "1. xKiro Free - 51 model — 49 model",
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "1. xKiro Free — 49 model",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -222,8 +222,8 @@
       }
     },
     "2-xkiro-max": {
-      "npm": "@modelscope/providers",
-      "name": "2. xKiro Max - 47 model — 47 model",
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "2. xKiro Max — 47 model",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"

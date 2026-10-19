@@ -7,6 +7,26 @@ chấp nhận và mọi thành viên dùng lại được. Bắt đầu từ m�
 - `configs/project-templates/{code,thesis,pentest}/opencode.json` — template per-project
   (dùng `OPENCODE_CONFIG`; xem `docs/per-project-config.md`).
 
+## ⚠️ Dòng `"npm"` — cấm sửa khi chưa kiểm chứng
+
+Dòng `"npm"` quyết định opencode **nạp được provider hay không**. Sai một package
+là toàn bộ model của provider biến mất với log:
+
+```text
+Failed to initialize provider: <provider-id>
+```
+
+- **Package đã dùng sẵn trong repo: `"npm": "@ai-sdk/openai-compatible"`** —
+  mọi provider OpenAI-compatible (xKiro, 9router, OmniRoute…) đều dùng nó.
+  Khi chỉ đổi `name`/`models`/`options`, **giữ nguyên dòng này**.
+- Chỉ ghi package khác khi bạn **tự thêm provider mới** và đã chạy:
+  ```powershell
+  npm view <package-name> version     # E404 = KHÔNG được dùng
+  ```
+  (Ví dụ thật: `@modelscope/providers` trả **404**, đã làm hỏng opencode ngày 2026-10-19.)
+- Sau khi sửa config, **soi `git diff` từng dòng** để chắc bạn không vô tình
+  đổi `npm` (hoặc indent) ngoài mục tiêu.
+
 ## Quy ước đặt tên
 
 | Thành phần | Quy ước | Ví dụ |
@@ -53,6 +73,7 @@ chấp nhận và mọi thành viên dùng lại được. Bắt đầu từ m�
 - [ ] File config parse được (JSON/JSONC hợp lệ).
 - [ ] Có `"$schema"` và `"model"` đúng dạng `provider/model-id`.
 - [ ] Mọi provider có ≥ 1 model; `options.baseURL` + `npm` khai báo.
+- [ ] `"npm"` là `@ai-sdk/openai-compatible` (hoặc package **đã kiểm tra tồn tại** bằng `npm view`).
 - [ ] API key chỉ qua `{env:TÊN_BIẾN}` — **không được có giá trị key trong repo**.
 - [ ] Đã ping OK (`mc connectivity`) — với free model thường là `OK`.
 - [ ] `release_date` dùng helper sort-order (tránh date trùng nhau).

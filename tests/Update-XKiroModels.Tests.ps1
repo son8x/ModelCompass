@@ -387,6 +387,20 @@ Describe 'Format-ProviderHeader' {
         $h = Format-ProviderHeader -Name '1. xKiro Free — 58 model (+2)' -Count 58 -Added @() -Removed @()
         $h | Should -Be '1. xKiro Free — 58 model'
     }
+    It 'strip hậu tố ASCII "- 51 model" (không chỉ em dash)' {
+        $h = Format-ProviderHeader -Name '1. xKiro Free - 51 model' -Count 49 -Added @() -Removed @()
+        $h | Should -Be '1. xKiro Free — 49 model'
+    }
+    It 'gỡ name đã bị cộng dồn "base - N model — M model" (bug 17/10)' {
+        $h = Format-ProviderHeader -Name '1. xKiro Free - 51 model — 49 model' -Count 49 `
+            -Added @() -Removed @()
+        $h | Should -Be '1. xKiro Free — 49 model'
+    }
+    It 'idempotent: chạy 2 lần cho cùng kết quả' {
+        $once = Format-ProviderHeader -Name '2. xKiro Max - 47 model' -Count 47 -Added @() -Removed @()
+        $twice = Format-ProviderHeader -Name $once -Count 47 -Added @() -Removed @()
+        $twice | Should -Be $once
+    }
 }
 
 Describe 'Remove-HandAnnotation' {
