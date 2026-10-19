@@ -30,7 +30,7 @@
 ## 2. ⭐ Model khuyến nghị xKiro (tự sinh)
 
 <!-- BEGIN:recommend-stars — TỰ SINH bởi scripts/recommend/Update-RecommendDocs.ps1; ĐỪNG sửa tay (chạy `mc recommend-docs` để cập nhật) -->
-> Cập nhật tự động: **17/10/2026** — **13 model** được khuyến nghị
+> Cập nhật tự động: **19/10/2026** — **13 model** được khuyến nghị
 > (7 free + 6 trả phí) — ⭐ ở đầu `name` trong `/model`. Sinh bởi
 > `scripts/recommend/Update-RecommendDocs.ps1`; chạy `mc recommend-docs` để cập nhật.
 
