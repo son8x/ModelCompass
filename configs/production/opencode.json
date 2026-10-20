@@ -17,7 +17,7 @@
   "provider": {
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 49 model",
+      "name": "1. xKiro Free — 48 model",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -214,10 +214,6 @@
         "stealth/big-pickle": {
           "name": "Big Pickle · 200K",
           "release_date": "2099-10-27"
-        },
-        "stealth/space-bunny-alpha:free": {
-          "name": "Space Bunny Alpha · 1M",
-          "release_date": "2099-10-26"
         }
       }
     },
