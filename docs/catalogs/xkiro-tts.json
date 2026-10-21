@@ -1,0 +1,16 @@
+{
+  "fetched_at": "2026-10-21 08:03:02",
+  "provider": "xkiro",
+  "modality": "tts",
+  "source": "https://api.xkiro.com/v1/models?modality=tts",
+  "note": "Modality service (KHÔNG chạy qua /v1/chat/completions). opencode picker không hiển thị.",
+  "count": 1,
+  "models": [
+    {
+      "id": "xkiro-voice",
+      "display_name": "xKiro Voice",
+      "modality": "tts",
+      "endpoint": "POST /v1/audio/speech"
+    }
+  ]
+}

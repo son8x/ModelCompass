@@ -1,8 +1,8 @@
 {
-  "fetched_at": "2026-10-20 10:07:40",
+  "fetched_at": "2026-10-21 08:03:01",
   "provider": "xkiro",
   "source": "https://api.xkiro.com/v1/models",
-  "count": 107,
+  "count": 108,
   "models": [
     {
       "id": "anthropic/claude-fable-5",
@@ -828,6 +828,22 @@
       "pricing": {
         "input": 0.3,
         "output": 1.2,
+        "request": null
+      },
+      "modality": {
+        "input": [],
+        "output": []
+      },
+      "created": 1
+    },
+    {
+      "id": "minimax/minimax-m3.1-flash",
+      "name": "",
+      "access_tier": "paid",
+      "context": 1000000,
+      "pricing": {
+        "input": 0.15,
+        "output": 0.6,
         "request": null
       },
       "modality": {

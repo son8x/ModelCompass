@@ -13,6 +13,14 @@
       - So với config production: model trong config NHƯNG vắng trong catalog (nguy cơ 404),
         model trong catalog NHƯNG chưa khai báo (thông tin), gợi ý near-match khi đổi tên/`:free`.
 
+    RIÊNG xKiro — modality service (KHÔNG nằm trong /v1/models mặc định):
+      - GET /v1/models?modality=all trả thêm entry image / tts / search (không phải chat).
+      - Các model này KHÔNG dùng được qua /v1/chat/completions (endpoint riêng:
+        /v1/images/generations, /v1/images/edits, /v1/audio/speech, /v1/search, /v1/fetch).
+      - Ghi riêng vào `docs/catalogs/xkiro-image.json` (modality=image) và
+        `docs/catalogs/xkiro-tts.json` (modality=tts) để KHÔNG lẫn với catalog chat.
+      - KHÔNG đối chiếu với config (opencode chỉ chạy chat completions, không hiển thị image/tts).
+
     Provider local (OmniRoute/9Router) không bật sẽ BỊ BỎ QUA (cảnh báo) — không làm fail run.
 
 .PARAMETER Provider
@@ -79,6 +87,7 @@ $Providers = @(
         KeyRequired    = $true
         ConfigProviders = @('1-xkiro-free', '2-xkiro-max')
         IdStripPrefix  = @()
+        ServiceModalities = @('image', 'tts')
     },
     @{
         Id             = 'teamo'
@@ -352,7 +361,15 @@ function Compare-ConfigSetToCatalog {
 # Các hàm chạy chính
 # ───────────────────────────────────────────────
 function Get-CatalogRaw {
-    param([hashtable]$Prov)
+    <#
+    .SYNOPSIS
+        GET {base}/v1/models — trả mảng model thô (chat). -Modality để lọc phía server
+        (xKiro: `?modality=all|image|tts`); provider không hỗ trợ sẽ bỏ qua tham số.
+    #>
+    param(
+        [hashtable]$Prov,
+        [string]$Modality
+    )
     $key = Get-EnvValueAny $Prov.KeyEnv
     if ($Prov.KeyRequired -and [string]::IsNullOrWhiteSpace($key)) {
         Write-Warn ("BỎ QUA '{0}': thiếu biến {1}" -f $Prov.Id, $Prov.KeyEnv)
@@ -364,8 +381,11 @@ function Get-CatalogRaw {
     $headers = @{ Accept = 'application/json' }
     if ($key) { $headers['Authorization'] = "Bearer $key" }
 
+    $uri = "$($Prov.BaseUrl)/models"
+    if (-not [string]::IsNullOrWhiteSpace($Modality)) { $uri += "?modality=$Modality" }
+
     try {
-        $resp = Invoke-RestMethod -Method Get -Uri "$($Prov.BaseUrl)/models" -Headers $headers -TimeoutSec 60
+        $resp = Invoke-RestMethod -Method Get -Uri $uri -Headers $headers -TimeoutSec 60
     } catch {
         Write-Warn ("LỖI '{0}': {1}" -f $Prov.Id, $_.Exception.Message)
         return $null, "error"
@@ -384,6 +404,40 @@ function Get-CatalogRaw {
         return $null, "empty"
     }
     return $rows, $null
+}
+
+function Get-ServiceModalityCatalog {
+    <#
+    .SYNOPSIS
+        Lấy catalog theo 1 modality service (image / tts) từ GET /v1/models?modality=<m>.
+        Trả về mảng entry ĐÃ LỌC đúng modality (giữ id, display_name, endpoint hint).
+        Dùng cho nhóm chức năng KHÔNG nằm trong /v1/models chat mặc định.
+    #>
+    param(
+        [Parameter(Mandatory)][hashtable]$Prov,
+        [Parameter(Mandatory)][string]$Modality
+    )
+    $rows, $err = Get-CatalogRaw -Prov $Prov -Modality $Modality
+    if ($null -eq $rows) { return @(), $err }
+
+    $out = @()
+    foreach ($m in $rows) {
+        $mod = $null
+        $p = $m.PSObject.Properties['modality']
+        if ($null -ne $p -and $null -ne $p.Value) { $mod = [string]$p.Value }
+        if ($mod -ne $Modality) { continue }
+        $idp = $m.PSObject.Properties['id']
+        $id = if ($null -ne $idp) { [string]$idp.Value } else { $null }
+        if ([string]::IsNullOrWhiteSpace($id)) { continue }
+        $dnp = $m.PSObject.Properties['display_name']
+        $out += [pscustomobject]@{
+            id           = $id
+            display_name = if ($null -ne $dnp -and $null -ne $dnp.Value) { [string]$dnp.Value } else { '' }
+            modality     = $Modality
+            endpoint     = if ($Modality -eq 'image') { 'POST /v1/images/generations (+ /v1/images/edits)' } else { 'POST /v1/audio/speech' }
+        }
+    }
+    return @($out | Sort-Object id), $null
 }
 
 function Resolve-ConfigFilePath {
@@ -509,6 +563,37 @@ foreach ($prov in $selected) {
             if (-not $ShowAllNew -and $MaxNew -gt 0 -and $cmp.New.Count -gt $MaxNew) {
                 Write-Host ("        ... còn {0} model mới nữa (-ShowAllNew để xem hết)" -f ($cmp.New.Count - $MaxNew)) -ForegroundColor DarkGray
             }
+        }
+    }
+
+    # ── Modality service (image/tts): KHÔNG nằm trong /v1/models chat — ghi file riêng ──
+    if (-not $NoSave -and $null -ne $prov.ServiceModalities -and @($prov.ServiceModalities).Count -gt 0) {
+        $svcCatalogDir = Join-Path $repoRoot 'docs/catalogs'
+        New-Item -ItemType Directory -Force -Path $svcCatalogDir | Out-Null
+        foreach ($modName in @($prov.ServiceModalities)) {
+            $svcModels, $svcErr = Get-ServiceModalityCatalog -Prov $prov -Modality $modName
+            if ($null -eq $svcModels -or $svcModels.Count -eq 0) {
+                if ($svcErr) { Write-Warn ("  [{0}] modality '{1}' — bỏ qua ({2})" -f $prov.Id, $modName, $svcErr) }
+                else { Write-Info ("  [{0}] modality '{1}' — không có model" -f $prov.Id, $modName) }
+                continue
+            }
+            $svcPath = Join-Path $svcCatalogDir "$($prov.Id)-$modName.json"
+            $svcDoc = [ordered]@{
+                fetched_at = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+                provider   = $prov.Id
+                modality   = $modName
+                source     = "$($prov.BaseUrl)/models?modality=$modName"
+                note       = 'Modality service (KHÔNG chạy qua /v1/chat/completions). opencode picker không hiển thị.'
+                count      = $svcModels.Count
+                models     = $svcModels
+            }
+            try {
+                $svcDoc | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $svcPath -Encoding utf8
+                Write-Ok ("  [{0}] modality '{1}': {2} model -> {3}" -f $prov.Id, $modName, $svcModels.Count, (Split-Path $svcPath -Leaf))
+            } catch {
+                Write-Warn "Ghi catalog modality thất bại: $($_.Exception.Message)"
+            }
+            foreach ($sm in $svcModels) { Write-Host ("     $modName  {0}" -f $sm.id) -ForegroundColor DarkGray }
         }
     }
 }

@@ -86,6 +86,47 @@ Describe 'ConvertTo-NormalizedCatalog' {
     }
 }
 
+Describe 'Get-ServiceModalityCatalog' {
+    It 'lọc đúng modality và gắn endpoint tương ứng (image)' {
+        $prov = @{ Id = 'xkiro'; BaseUrl = 'https://api.xkiro.com/v1'; KeyEnv = 'XTROUTER_API_KEY'; KeyRequired = $false }
+        Mock Get-CatalogRaw {
+            return @(
+                [pscustomobject]@{ id = 'openai/gpt-image-2.5';          modality = 'image'; display_name = 'ChatGPT Images 2.5' },
+                [pscustomobject]@{ id = 'sensenova/sensenova-u1.5-lite'; modality = 'image'; display_name = 'SenseNova U1.5 Lite' },
+                [pscustomobject]@{ id = 'xkiro-voice';                   modality = 'tts';   display_name = 'xKiro Voice' }
+            ), $null
+        }
+        $models, $err = Get-ServiceModalityCatalog -Prov $prov -Modality 'image'
+        @($models).Count | Should -Be 2
+        $models[0].id         | Should -Be 'openai/gpt-image-2.5'
+        $models[0].modality   | Should -Be 'image'
+        $models[0].endpoint   | Should -Match 'images/generations'
+        ($models.id | Should -Not -Contain 'xkiro-voice')
+    }
+
+    It 'gắn endpoint speech cho modality tts' {
+        $prov = @{ Id = 'xkiro'; BaseUrl = 'https://api.xkiro.com/v1'; KeyEnv = 'XTROUTER_API_KEY'; KeyRequired = $false }
+        Mock Get-CatalogRaw {
+            return @(
+                [pscustomobject]@{ id = 'xkiro-voice';                   modality = 'tts' },
+                [pscustomobject]@{ id = 'openai/gpt-image-2.5';          modality = 'image' }
+            ), $null
+        }
+        $models, $err = Get-ServiceModalityCatalog -Prov $prov -Modality 'tts'
+        @($models).Count | Should -Be 1
+        $models[0].id       | Should -Be 'xkiro-voice'
+        $models[0].endpoint | Should -Be 'POST /v1/audio/speech'
+    }
+
+    It 'trả mảng rỗng khi fetch lỗi (không ném)' {
+        $prov = @{ Id = 'xkiro'; BaseUrl = 'https://api.xkiro.com/v1'; KeyEnv = 'XTROUTER_API_KEY'; KeyRequired = $false }
+        Mock Get-CatalogRaw { return $null, 'error' }
+        $models, $err = Get-ServiceModalityCatalog -Prov $prov -Modality 'image'
+        @($models).Count | Should -Be 0
+        $err | Should -Be 'error'
+    }
+}
+
 Describe 'Compare-ConfigSetToCatalog' {
     It 'liệt kê missing / near-match / new' {
         $cmp = Compare-ConfigSetToCatalog -ConfigIds @('a', 'b', 'c:free', 'x') -CatalogIds @('a', 'c', 'x-fresh')

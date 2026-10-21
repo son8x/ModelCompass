@@ -103,6 +103,23 @@ Dạng chuẩn: `<base> — <count> model` (**em dash U+2014**, không phải `-
 Chi tiết thêm/gỡ ghi ở `STATUS.md` / `CHANGELOG.md`.
 Xem thêm `docs/market-intel.md` (chiến lược), `docs/model-reference.md` (canonical ⭐).
 
+## xKiro có nhiều modality — `/v1/models` mặc định CHỈ trả chat
+
+`GET /v1/models` **loại image/audio/search khỏi picker**. Xin thêm bằng
+`?modality=image|tts|search|all`. `mc sync` tự lưu riêng:
+`docs/catalogs/xkiro-image.json` + `xkiro-tts.json` (đừng trộn vào `xkiro.json`).
+
+- **CHỈ model `modality=chat` mới thêm được vào khối `provider.models`** trong config.
+  Image/TTS gọi qua **endpoint riêng** (`/v1/images/generations`, `/v1/audio/speech`),
+  opencode không hiển thị → đừng đưa vào config.
+- **xKiro KHÔNG có text→video.** Chỉ hiểu video đầu vào (Qwen VL) + TTS. MiniMax ở
+  xKiro là model chat M-series, KHÔNG phải Hailuo/video.
+- Image là job bất đồng bộ (POST `202` → poll job id); TTS tính phí theo ký tự.
+- Chi tiết 4 nhóm: `docs/model-reference.md` §1b.
+
+> ⚠️ Bẫy PowerShell: trong **hashtable**, `$h.PSObject.Properties['X']` LUÔN false —
+> phải dùng trực tiếp `$h.X` (bug guard `ServiceModalities` 21/10).
+
 ---
 
 ## Môi trường (Windows / PowerShell)

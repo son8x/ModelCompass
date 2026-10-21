@@ -18,19 +18,39 @@
 
 | # | Provider | Loại | Thế mạnh | Lưu ý |
 |---|---|---|---|---|
-| 1 | `1-xkiro-free` | Router free tier | Qwen, Cohere, Mistral | **51 model free** (16/10) — ⭐ theo tác vụ |
-| 2 | `2-xkiro-max` | Router $20/tháng | Claude/GPT/Grok/GLM | **62 model**, 4 nhóm `[L]/[B]/[A]/[S]`, budget $264/tuần — ⭐ theo nhóm/tác vụ |
+| 1 | `1-xkiro-free` | Router free tier | Qwen, Cohere, Mistral | **48 model free** (20/10) — ⭐ theo tác vụ |
+| 2 | `2-xkiro-max` | Router $20/tháng | Claude/GPT/Grok/GLM | **47 model**, 4 nhóm `[L]/[B]/[A]/[S]`, budget $140/tuần — ⭐ theo nhóm/tác vụ |
 | 3 | `3-omniroute-free` | Route local | Cloudflare free (GLM-5.2, DeepSeek V4 Pro) | Cần local 127.0.0.1:20217 |
 | 4 | `4-openrouter-free` | Route local | OpenRouter `:free` | 50 RPD, 1K nếu nạp $10 |
 | 5 | `5-9router` | Router local | GPT-OSS 120B local | Cổng 20128 |
 | 6 | `6-teamoRouter` | Router ưu đãi | GPU free + GPT/Claude giá rẻ | `TEAMO_API_KEY` |
+
+### 1b. xKiro — nhóm chức năng KHÁC chat (image / speech / web)
+
+> ⚠️ **CHỈ model `modality=chat` mới dùng được trong opencode.** Các nhóm dưới đây gọi
+> qua **endpoint riêng** (không phải `/v1/chat/completions`), opencode **không hiển thị**
+> trong picker `/model`. Đừng thêm chúng vào khối `provider.models` của config.
+
+`GET /v1/models` **mặc định chỉ trả model chat**; xin thêm bằng `?modality=image|tts|search|all`.
+`mc sync` tự lưu riêng vào `docs/catalogs/xkiro-image.json` + `xkiro-tts.json`.
+
+| Nhóm | Model | Endpoint | Billing | Ghi chú |
+|---|---|---|---|---|
+| **Image** (text→ảnh) | `openai/gpt-image-2.5` | `POST /v1/images/generations` | 1 ảnh = 1 unit (wallet) | Nhận ảnh nguồn → dùng được `/v1/images/edits` + re-frame |
+| **Image** (miễn phí) | `sensenova/sensenova-u1.5-lite` | `POST /v1/images/generations` | free tier (hạn mức/ngày) | Generation only — **không** edit/re-frame |
+| **Speech** (TTS) | `xkiro-voice` | `POST /v1/audio/speech` | theo **ký tự** input | 148 giọng (`GET /v1/audio/voices`), mp3/opus/aac/flac/wav/pcm |
+| **Web** | (search/fetch, không có model id) | `POST /v1/search`, `POST /v1/fetch` | $10/1000 req | Trả dữ liệu thô, không phải prose |
+
+- **Không có video generation** (text→video). xKiro chỉ có **hiểu video đầu vào** (Qwen VL); MiniMax ở xKiro là **model chat M-series**, không phải Hailuo/video. API overview không liệt kê endpoint video nào.
+- Job ảnh là **bất đồng bộ**: `POST` trả `202` + job id → poll `GET /v1/images/generations/{id}` (trạng thái `processing|succeeded|failed|blocked`). Cache theo prompt+size+style.
+- `GET /v1/audio/voices` là **public**, cache 5 phút.
 
 ---
 
 ## 2. ⭐ Model khuyến nghị xKiro (tự sinh)
 
 <!-- BEGIN:recommend-stars — TỰ SINH bởi scripts/recommend/Update-RecommendDocs.ps1; ĐỪNG sửa tay (chạy `mc recommend-docs` để cập nhật) -->
-> Cập nhật tự động: **20/10/2026** — **13 model** được khuyến nghị
+> Cập nhật tự động: **21/10/2026** — **13 model** được khuyến nghị
 > (7 free + 6 trả phí) — ⭐ ở đầu `name` trong `/model`. Sinh bởi
 > `scripts/recommend/Update-RecommendDocs.ps1`; chạy `mc recommend-docs` để cập nhật.
 
@@ -75,8 +95,8 @@ opencode dùng `release_date` của model làm **khoá sắp xếp chính** tron
 (model có `release_date` LỚN hơn hiện TRƯỚC). Vì field này **không hiển thị ở bất kỳ đâu trên UI**,
 ta dùng nó làm "khoá sắp xếp tổng hợp" — 2 provider xKiro hiện tại đã áp dụng:
 
-- `1-xkiro-free` — **51 model free** (probe 16/10/2026): Qwen 19 · Cohere 16 · Mistral 9 · Meituan 2 · Meta 2 · Stealth 2 · SenseNova 1. Thứ tự **theo độ mạnh giảm dần** (Qwen3.8 Max trên cùng), `release_date` từ `2099-12-31` giảm dần → `2099-10-26`; `mistral-large-4-0` đặt ở **`2099-11-25`** (giữa nhóm Mistral). Lỗi còn lại: `cohere/command-a-reasoning` hay **timeout >25s**.
-- `2-xkiro-max` — **62 model** dùng được trên gói Max (probe 15/10), hiển thị **theo 4 nhóm sức mạnh** rẻ-nhanh → mạnh nhất: `[L] Nhẹ·Nhanh·Rẻ` (26) → `[B] Đa dụng giá tốt` (11) → `[A] Mạnh đa dụng` (14) → `[S] Flagship` (11). `release_date` từ `2099-10-31` giảm dần → `2099-09-04`. Tag nhóm ngay trong `name` để nhận biết model **cùng tầng / thay thế được cho nhau**. Tên hiển thị ghi giá đầy đủ `In/Out` (USD/1M token) lấy từ catalog live — trên gói Max tính theo allowance $264/tuần (không trừ per-token), giá dùng để ước lượng khi nạp thêm wallet.
+- `1-xkiro-free` — **48 model free** (20/10/2026): Qwen 19 · Cohere 16 · Mistral 9 · Stealth 1 · Meituan 2 · SenseNova 1. Thứ tự **theo độ mạnh giảm dần** (Qwen3.8 Max trên cùng), `release_date` từ `2099-12-31` giảm dần; `mistral-large-4-0` đặt ở **`2099-11-25`** (giữa nhóm Mistral). Stealth `space-bunny-alpha:free` đã gỡ (probe 404). Lỗi còn lại: `cohere/command-a-reasoning` hay **timeout >25s**.
+- `2-xkiro-max` — **47 model** dùng được trên gói Max (probe 20/10), hiển thị **theo 4 nhóm sức mạnh** rẻ-nhanh → mạnh nhất: `[L] Nhẹ·Nhanh·Rẻ` → `[B] Đa dụng giá tốt` → `[A] Mạnh đa dụng` → `[S] Flagship`. Tag nhóm ngay trong `name` để nhận biết model **cùng tầng / thay thế được cho nhau**. Tên hiển thị ghi giá đầy đủ `In/Out` (USD/1M token) lấy từ catalog live — trên gói Max tính theo allowance (không trừ per-token), giá dùng để ước lượng khi nạp thêm wallet.
 
 > 📌 Lịch sử thêm/gỡ model, danh sách model bị `403` (tính wallet / cần gói ≥ Ultra), model lỗi tạm
 > (`⚠️`), và các đợt sync theo ngày: xem **[STATUS.md](../STATUS.md)** (mục "Lịch sử đáng nhớ").
