@@ -156,7 +156,7 @@
           "release_date": "2099-11-16"
         },
         "cohere/command-a-reasoning": {
-          "name": "Command A Reasoning · 288.8K",
+          "name": "Command A Reasoning · 288.8K · reasoning",
           "release_date": "2099-11-15"
         },
         "cohere/command-a-translate": {
@@ -164,7 +164,7 @@
           "release_date": "2099-11-14"
         },
         "cohere/command-a-vision": {
-          "name": "Command A Vision · 128K",
+          "name": "Command A Vision · 128K · vision",
           "release_date": "2099-11-13"
         },
         "cohere/command-r-08-2024": {
