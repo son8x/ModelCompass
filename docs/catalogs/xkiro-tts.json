@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-21 08:03:02",
+  "fetched_at": "2026-10-21 08:11:31",
   "provider": "xkiro",
   "modality": "tts",
   "source": "https://api.xkiro.com/v1/models?modality=tts",
@@ -10,7 +10,9 @@
       "id": "xkiro-voice",
       "display_name": "xKiro Voice",
       "modality": "tts",
-      "endpoint": "POST /v1/audio/speech"
+      "owned_by": "voice",
+      "created": 1,
+      "endpoint": "POST /v1/audio/speech (GET /v1/audio/voices)"
     }
   ]
 }

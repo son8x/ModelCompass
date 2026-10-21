@@ -4,28 +4,33 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
-## [0.7.2] — 2026-10-21 — Catalog xKiro theo modality (image/speech)
+## [0.7.2] — 2026-10-21 — Catalog xKiro theo modality (image/speech/web)
 
 ### Thêm
 - **`Get-ProviderCatalog.ps1`: catalog modality service cho xKiro.** `GET /v1/models`
   mặc định chỉ trả model **chat**; xin thêm bằng `?modality=image|tts|search|all`.
-  `mc sync` giờ tự lưu riêng `docs/catalogs/xkiro-image.json` (2 model:
-  `openai/gpt-image-2.5`, `sensenova/sensenova-u1.5-lite`) và `xkiro-tts.json`
-  (`xkiro-voice`, 148 giọng). KHÔNG trộn vào catalog chat, KHÔNG đối chiếu config
-  (opencode chỉ hiển thị model chat).
-- Hàm `Get-ServiceModalityCatalog` (thuần, có mock test) + `-Modality` cho `Get-CatalogRaw`,
-  + thuộc tính `ServiceModalities` trong registry provider.
+  `mc sync` giờ tự lưu riêng: `docs/catalogs/xkiro-image.json` (2 model:
+  `openai/gpt-image-2.5`, `sensenova/sensenova-u1.5-lite`), `xkiro-tts.json`
+  (`xkiro-voice`), `xkiro-search.json` (`xkiro/web-search`, `xkiro/web-fetch`) và
+  catalog giọng `xkiro-voices.json` (**145 giọng**). KHÔNG trộn vào catalog chat,
+  KHÔNG đối chiếu config (opencode chỉ hiển thị model chat).
+- Hàm `Get-ServiceModalityCatalog` (giữ đủ metadata gốc: `owned_by`, `created`)
+  + `Get-VoiceCatalog` + `-Modality` cho `Get-CatalogRaw`, + `ServiceModalities`
+  và `VoiceCatalog` trong registry provider.
+- Entry modality lưu **đầy đủ** trường API trả về (`id`, `display_name`, `modality`,
+  `owned_by`, `created`, `endpoint`).
 
 ### Ghi chú
 - **xKiro KHÔNG có text→video.** Chỉ có hiểu video đầu vào (Qwen VL) và TTS;
   MiniMax ở xKiro là model chat M-series, không phải video (Hailuo).
 - Image là job **bất đồng bộ** (`POST /v1/images/generations` → poll job); TTS tính phí
   theo ký tự (`POST /v1/audio/speech`); web search/fetch riêng (`/v1/search`, `/v1/fetch`).
+- TTS: 145 giọng, phân bố locale 120 en / 4 vi / 3 zh / 18 chưa rõ; có cờ `isVip`.
 - `docs/model-reference.md` §1b mô tả 4 nhóm modality ngoài chat; cập nhật số model
   free 48 / max 47.
 
 ### Kiểm chứng
-- `Test-Suite.ps1`: **306/306** pass (thêm 3 test `Get-ServiceModalityCatalog`).
+- `Test-Suite.ps1`: **308/308** pass (thêm test `Get-ServiceModalityCatalog` + `Get-VoiceCatalog`).
 
 ## [0.7.1] — 2026-10-19 — Sửa lỗi `Failed to initialize provider` (xKiro)
 

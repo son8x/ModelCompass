@@ -1,0 +1,1761 @@
+{
+  "fetched_at": "2026-10-21 08:11:31",
+  "provider": "xkiro",
+  "modality": "tts",
+  "source": "https://api.xkiro.com/v1/audio/voices",
+  "note": "Catalog giọng TTS (GET /v1/audio/voices, public, cache 5 phút). Dùng với POST /v1/audio/speech.",
+  "count": 145,
+  "by_locale": {
+    "vi": 4,
+    "en": 120,
+    "(không rõ)": 18,
+    "zh": 3
+  },
+  "voices": [
+    {
+      "id": "alexstrasza",
+      "name": "Alexstrasza",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "alfred",
+      "name": "Alfred",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "alvin",
+      "name": "Alvin",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "ambitious-male",
+      "name": "Ambitious Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "american-female",
+      "name": "American Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "american-male",
+      "name": "American Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "angry-penguin",
+      "name": "Angry Penguin",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "announcer",
+      "name": "Announcer",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": true,
+      "categories": null
+    },
+    {
+      "id": "asmr",
+      "name": "ASMR",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "bar-bouncer",
+      "name": "Bar Bouncer",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "beauty-vlogger",
+      "name": "Beauty Vlogger",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "bestie",
+      "name": "Bestie",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": false,
+      "categories": [
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "betty-boop",
+      "name": "Betty Boop",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "bianca",
+      "name": "Bianca",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "bibble",
+      "name": "Bibble",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "boman-h",
+      "name": "Boman H",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "british-female",
+      "name": "British Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "british-male",
+      "name": "British Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "caleb",
+      "name": "Caleb",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "callum",
+      "name": "Callum",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": true,
+      "categories": null
+    },
+    {
+      "id": "calm-girl",
+      "name": "Calm Girl",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "camile",
+      "name": "Camile",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "caroline",
+      "name": "Caroline",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "charming-female",
+      "name": "Charming Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "charming-male",
+      "name": "Charming Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "child",
+      "name": "Child",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "classic-electric",
+      "name": "Classic Electric",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "commentary-male",
+      "name": "Commentary Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "confident-male",
+      "name": "Confident Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "confident-male-vietnamese",
+      "name": "Confident Male (Vietnamese)",
+      "locale": "vi",
+      "languageKey": "vietnamese",
+      "gender": null,
+      "isVip": false,
+      "categories": [
+        "trend",
+        "vietnamese"
+      ]
+    },
+    {
+      "id": "country-style",
+      "name": "Country Style",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "cozy",
+      "name": "Cozy",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "cute-boy",
+      "name": "Cute Boy",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "cute-girl",
+      "name": "Cute Girl",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "daisy",
+      "name": "Daisy",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "daniel",
+      "name": "Daniel",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "david",
+      "name": "David",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "deep-male",
+      "name": "Deep Male",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "doll-effect",
+      "name": "Doll Effect",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "drag-performer",
+      "name": "Drag Performer",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "dramarama",
+      "name": "Dramarama",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "elf",
+      "name": "Elf",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": false,
+      "categories": [
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "empathetic-woman",
+      "name": "Empathetic Woman",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "energetic-female",
+      "name": "Energetic Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "energetic-male",
+      "name": "Energetic Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "energetic-male-ii",
+      "name": "Energetic Male II",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "euphoric",
+      "name": "Euphoric",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "excited-male",
+      "name": "Excited Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "expressive-male",
+      "name": "Expressive Male",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": true,
+      "categories": null
+    },
+    {
+      "id": "female-sales",
+      "name": "Female Sales",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "female-storyteller",
+      "name": "Female Storyteller",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "female-voice",
+      "name": "Female Voice",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "female-voice-german",
+      "name": "Female Voice (German)",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "female-voice-russian",
+      "name": "Female Voice (Russian)",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "fender",
+      "name": "Fender",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "flirty-female",
+      "name": "Flirty Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "flirty-male",
+      "name": "Flirty Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "french-male",
+      "name": "French Male",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "funny-gil",
+      "name": "Funny Gil",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "fussy-male",
+      "name": "Fussy male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "gentle-female-chinese",
+      "name": "Gentle Female (Chinese)",
+      "locale": "zh",
+      "languageKey": "chinese",
+      "gender": null,
+      "isVip": false,
+      "categories": "chinese"
+    },
+    {
+      "id": "gentle-female-vietnamese",
+      "name": "Gentle Female (Vietnamese)",
+      "locale": "vi",
+      "languageKey": "vietnamese",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "vietnamese"
+      ]
+    },
+    {
+      "id": "german-female",
+      "name": "German Female",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "gingerbread-man",
+      "name": "Gingerbread Man",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "gloria",
+      "name": "Gloria",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "gnome",
+      "name": "Gnome",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "golden-monkey",
+      "name": "Golden Monkey",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "good-guy",
+      "name": "Good Guy",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "granny",
+      "name": "Granny",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "greek-guy",
+      "name": "Greek Guy",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "grim-rock",
+      "name": "Grim Rock",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "grumpy-kitten",
+      "name": "Grumpy Kitten",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "gump",
+      "name": "Gump",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "harmony",
+      "name": "Harmony",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": true,
+      "categories": null
+    },
+    {
+      "id": "homer",
+      "name": "Homer",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "hypetrain",
+      "name": "Hypetrain",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "jeffrey",
+      "name": "Jeffrey",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "jessie",
+      "name": "Jessie",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "joey",
+      "name": "Joey",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "john",
+      "name": "John",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "leo",
+      "name": "Leo",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "little-critter",
+      "name": "Little Critter",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "lively-female-chinese",
+      "name": "Lively Female (Chinese)",
+      "locale": "zh",
+      "languageKey": "chinese",
+      "gender": null,
+      "isVip": false,
+      "categories": "chinese"
+    },
+    {
+      "id": "lois",
+      "name": "Lois",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "low-pitched-shout",
+      "name": "Low-Pitched Shout",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "male-narrator",
+      "name": "Male Narrator",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "male-professor",
+      "name": "Male Professor",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "male-scientist",
+      "name": "Male Scientist",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "male-storyteller",
+      "name": "Male Storyteller",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "male-voice",
+      "name": "Male Voice",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "male-voice-arabic",
+      "name": "Male Voice (Arabic)",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "matthew",
+      "name": "Matthew",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": true,
+      "categories": null
+    },
+    {
+      "id": "mentor",
+      "name": "Mentor",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "mexican-female",
+      "name": "Mexican Female",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "minion",
+      "name": "Minion",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "modern-blogger",
+      "name": "Modern Blogger",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "movie-trailer-announcer",
+      "name": "Movie Trailer Announcer",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "mr-meticulous",
+      "name": "Mr. Meticulous",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "nail-artist",
+      "name": "Nail Artist",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "naive-girl",
+      "name": "Naive Girl",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "narrative-female",
+      "name": "Narrative Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "nigel",
+      "name": "Nigel",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "normal-female",
+      "name": "Normal Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "normal-male",
+      "name": "Normal Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "open-mic",
+      "name": "Open Mic",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "opera",
+      "name": "Opera",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "optimistic-guy",
+      "name": "Optimistic Guy",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "owen",
+      "name": "Owen",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": true,
+      "categories": null
+    },
+    {
+      "id": "pam",
+      "name": "Pam",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "peaceful-female",
+      "name": "Peaceful Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": false,
+      "categories": "english"
+    },
+    {
+      "id": "peaceful-male",
+      "name": "Peaceful Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "pierce-g",
+      "name": "Pierce G",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "police-officer",
+      "name": "Police Officer",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "pop-lullaby",
+      "name": "Pop Lullaby",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "princess",
+      "name": "Princess",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "queen",
+      "name": "Queen",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "quirky-neighbour",
+      "name": "Quirky Neighbour",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "quirky-time",
+      "name": "Quirky Time",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice",
+        "memesong"
+      ]
+    },
+    {
+      "id": "rhythmic-voice",
+      "name": "Rhythmic Voice",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": false,
+      "categories": [
+        "english",
+        "memesong"
+      ]
+    },
+    {
+      "id": "rick",
+      "name": "Rick",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "roba",
+      "name": "Roba",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "robust-male-portuguese",
+      "name": "Robust Male (Portuguese)",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "santa-ii",
+      "name": "Santa II",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": false,
+      "categories": [
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "serious-female",
+      "name": "Serious Female",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": false,
+      "categories": [
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "serious-male",
+      "name": "Serious Male",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": false,
+      "categories": [
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "simon",
+      "name": "Simon",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "spanish",
+      "name": "Spanish",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "spanish-mexico",
+      "name": "Spanish (Mexico)",
+      "locale": null,
+      "languageKey": null,
+      "gender": null,
+      "isVip": false,
+      "categories": null
+    },
+    {
+      "id": "sports-commentator",
+      "name": "Sports Commentator",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "sports-host",
+      "name": "Sports Host",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "standard-female-vietnamese",
+      "name": "Standard Female (Vietnamese)",
+      "locale": "vi",
+      "languageKey": "vietnamese",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "vietnamese"
+      ]
+    },
+    {
+      "id": "steady-male-chinese",
+      "name": "Steady Male (Chinese)",
+      "locale": "zh",
+      "languageKey": "chinese",
+      "gender": null,
+      "isVip": false,
+      "categories": "chinese"
+    },
+    {
+      "id": "story-reveal",
+      "name": "Story Reveal",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "sweet-female-vietnamese",
+      "name": "Sweet Female (Vietnamese)",
+      "locale": "vi",
+      "languageKey": "vietnamese",
+      "gender": null,
+      "isVip": false,
+      "categories": [
+        "trend",
+        "vietnamese"
+      ]
+    },
+    {
+      "id": "teacher-luaren",
+      "name": "Teacher Luaren",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "tech-blogger",
+      "name": "Tech Blogger",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "male",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "male_voice"
+      ]
+    },
+    {
+      "id": "tina",
+      "name": "Tina",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "tiny-teena",
+      "name": "Tiny Teena",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "tipsy-girl",
+      "name": "Tipsy Girl",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english"
+      ]
+    },
+    {
+      "id": "trickster",
+      "name": "Trickster",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": false,
+      "categories": [
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "valley-girl-ii",
+      "name": "Valley Girl II",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": "female",
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "female_voice"
+      ]
+    },
+    {
+      "id": "wacky",
+      "name": "Wacky",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": false,
+      "categories": [
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "werewolf",
+      "name": "Werewolf",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "witch",
+      "name": "Witch",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "anime"
+      ]
+    },
+    {
+      "id": "zombie",
+      "name": "Zombie",
+      "locale": "en",
+      "languageKey": "english",
+      "gender": null,
+      "isVip": true,
+      "categories": [
+        "trend",
+        "english",
+        "anime"
+      ]
+    }
+  ]
+}

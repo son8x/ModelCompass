@@ -17,9 +17,10 @@
       - GET /v1/models?modality=all trả thêm entry image / tts / search (không phải chat).
       - Các model này KHÔNG dùng được qua /v1/chat/completions (endpoint riêng:
         /v1/images/generations, /v1/images/edits, /v1/audio/speech, /v1/search, /v1/fetch).
-      - Ghi riêng vào `docs/catalogs/xkiro-image.json` (modality=image) và
-        `docs/catalogs/xkiro-tts.json` (modality=tts) để KHÔNG lẫn với catalog chat.
-      - KHÔNG đối chiếu với config (opencode chỉ chạy chat completions, không hiển thị image/tts).
+      - Ghi riêng: `docs/catalogs/xkiro-image.json` (image), `xkiro-tts.json` (tts),
+        `xkiro-search.json` (search), + `xkiro-voices.json` (GET /audio/voices) —
+        KHÔNG lẫn với catalog chat.
+      - KHÔNG đối chiếu với config (opencode chỉ chạy chat completions, không hiển thị image/tts/search).
 
     Provider local (OmniRoute/9Router) không bật sẽ BỊ BỎ QUA (cảnh báo) — không làm fail run.
 
@@ -87,7 +88,8 @@ $Providers = @(
         KeyRequired    = $true
         ConfigProviders = @('1-xkiro-free', '2-xkiro-max')
         IdStripPrefix  = @()
-        ServiceModalities = @('image', 'tts')
+        ServiceModalities = @('image', 'tts', 'search')
+        VoiceCatalog = $true
     },
     @{
         Id             = 'teamo'
@@ -406,12 +408,27 @@ function Get-CatalogRaw {
     return $rows, $null
 }
 
+function Get-ServiceEndpointHint {
+    <#
+    .SYNOPSIS
+        Gợi ý endpoint cho 1 modality service (không phải chat).
+    #>
+    param([string]$Modality)
+    switch ($Modality) {
+        'image' { return 'POST /v1/images/generations (+ /v1/images/edits, GET /v1/images/generations/{id})' }
+        'tts'   { return 'POST /v1/audio/speech (GET /v1/audio/voices)' }
+        'search' { return 'POST /v1/search, POST /v1/fetch' }
+        default { return '' }
+    }
+}
+
 function Get-ServiceModalityCatalog {
     <#
     .SYNOPSIS
-        Lấy catalog theo 1 modality service (image / tts) từ GET /v1/models?modality=<m>.
-        Trả về mảng entry ĐÃ LỌC đúng modality (giữ id, display_name, endpoint hint).
-        Dùng cho nhóm chức năng KHÔNG nằm trong /v1/models chat mặc định.
+        Lấy catalog theo 1 modality service (image / tts / search) từ GET /v1/models?modality=<m>.
+        Trả về mảng entry ĐÃ LỌC đúng modality, GIỮ ĐẦY ĐỦ metadata gốc (id, display_name,
+        owned_by, created, object, type) + endpoint hint. Dùng cho nhóm chức năng
+        KHÔNG nằm trong /v1/models chat mặc định.
     #>
     param(
         [Parameter(Mandatory)][hashtable]$Prov,
@@ -430,11 +447,65 @@ function Get-ServiceModalityCatalog {
         $id = if ($null -ne $idp) { [string]$idp.Value } else { $null }
         if ([string]::IsNullOrWhiteSpace($id)) { continue }
         $dnp = $m.PSObject.Properties['display_name']
+        $obp = $m.PSObject.Properties['owned_by']
+        $crp = $m.PSObject.Properties['created']
         $out += [pscustomobject]@{
             id           = $id
             display_name = if ($null -ne $dnp -and $null -ne $dnp.Value) { [string]$dnp.Value } else { '' }
             modality     = $Modality
-            endpoint     = if ($Modality -eq 'image') { 'POST /v1/images/generations (+ /v1/images/edits)' } else { 'POST /v1/audio/speech' }
+            owned_by     = if ($null -ne $obp -and $null -ne $obp.Value) { [string]$obp.Value } else { '' }
+            created      = if ($null -ne $crp -and $null -ne $crp.Value) { $crp.Value } else { $null }
+            endpoint     = Get-ServiceEndpointHint $Modality
+        }
+    }
+    return @($out | Sort-Object id), $null
+}
+
+function Get-VoiceCatalog {
+    <#
+    .SYNOPSIS
+        Lấy catalog giọng TTS từ GET {base}/audio/voices (xKiro, public, cache 5 phút).
+        Trả về mảng giọng (id, name, locale, languageKey, gender, isVip, categories).
+    #>
+    param([Parameter(Mandatory)][hashtable]$Prov)
+    $key = Get-EnvValueAny $Prov.KeyEnv
+    $headers = @{ Accept = 'application/json' }
+    if ($key) { $headers['Authorization'] = "Bearer $key" }
+    try {
+        $resp = Invoke-RestMethod -Method Get -Uri "$($Prov.BaseUrl)/audio/voices" -Headers $headers -TimeoutSec 60
+    } catch {
+        Write-Warn ("LỖI voices '{0}': {1}" -f $Prov.Id, $_.Exception.Message)
+        return @(), "error"
+    }
+    $voices = $null
+    if ($resp -is [System.Array]) { $voices = @($resp) }
+    elseif ($null -ne $resp) {
+        foreach ($k in @('data', 'voices', 'result')) {
+            $v = $resp.PSObject.Properties[$k]
+            if ($null -ne $v -and $null -ne $v.Value) { $voices = @($v.Value); break }
+        }
+    }
+    if ($null -eq $voices) { return @(), "empty" }
+
+    $out = @()
+    foreach ($v in $voices) {
+        $idp = $v.PSObject.Properties['id']
+        $id = if ($null -ne $idp) { [string]$idp.Value } else { $null }
+        if ([string]::IsNullOrWhiteSpace($id)) { continue }
+        $namep = $v.PSObject.Properties['name']
+        $locp  = $v.PSObject.Properties['locale']
+        $langp = $v.PSObject.Properties['languageKey']
+        $genp  = $v.PSObject.Properties['gender']
+        $vipp  = $v.PSObject.Properties['isVip']
+        $catp  = $v.PSObject.Properties['categories']
+        $out += [pscustomobject]@{
+            id          = $id
+            name        = if ($null -ne $namep -and $null -ne $namep.Value) { [string]$namep.Value } else { '' }
+            locale      = if ($null -ne $locp -and $null -ne $locp.Value) { [string]$locp.Value } else { $null }
+            languageKey = if ($null -ne $langp -and $null -ne $langp.Value) { [string]$langp.Value } else { $null }
+            gender      = if ($null -ne $genp -and $null -ne $genp.Value) { [string]$genp.Value } else { $null }
+            isVip       = if ($null -ne $vipp -and $null -ne $vipp.Value) { [bool]$vipp.Value } else { $false }
+            categories  = if ($null -ne $catp -and $null -ne $catp.Value) { @($catp.Value) } else { @() }
         }
     }
     return @($out | Sort-Object id), $null
@@ -594,6 +665,38 @@ foreach ($prov in $selected) {
                 Write-Warn "Ghi catalog modality thất bại: $($_.Exception.Message)"
             }
             foreach ($sm in $svcModels) { Write-Host ("     $modName  {0}" -f $sm.id) -ForegroundColor DarkGray }
+        }
+
+        # Voice catalog (TTS): GET /audio/voices — ghi kèm file riêng
+        if ($prov.VoiceCatalog) {
+            $voices, $vErr = Get-VoiceCatalog -Prov $prov
+            if ($null -eq $voices -or $voices.Count -eq 0) {
+                if ($vErr) { Write-Warn ("  [{0}] voices — bỏ qua ({1})" -f $prov.Id, $vErr) }
+            } else {
+                $vPath = Join-Path $svcCatalogDir "$($prov.Id)-voices.json"
+                $byLocale = @{}
+                foreach ($vo in $voices) {
+                    $lk = if ([string]::IsNullOrWhiteSpace($vo.locale)) { '(không rõ)' } else { $vo.locale }
+                    if (-not $byLocale.ContainsKey($lk)) { $byLocale[$lk] = 0 }
+                    $byLocale[$lk] = $byLocale[$lk] + 1
+                }
+                $vDoc = [ordered]@{
+                    fetched_at  = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+                    provider    = $prov.Id
+                    modality    = 'tts'
+                    source      = "$($prov.BaseUrl)/audio/voices"
+                    note        = 'Catalog giọng TTS (GET /v1/audio/voices, public, cache 5 phút). Dùng với POST /v1/audio/speech.'
+                    count       = $voices.Count
+                    by_locale   = $byLocale
+                    voices      = $voices
+                }
+                try {
+                    $vDoc | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $vPath -Encoding utf8
+                    Write-Ok ("  [{0}] voices: {1} giọng -> {2}" -f $prov.Id, $voices.Count, (Split-Path $vPath -Leaf))
+                } catch {
+                    Write-Warn "Ghi catalog voices thất bại: $($_.Exception.Message)"
+                }
+            }
         }
     }
 }

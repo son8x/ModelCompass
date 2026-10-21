@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-21 08:03:01",
+  "fetched_at": "2026-10-21 08:11:30",
   "provider": "xkiro",
   "modality": "image",
   "source": "https://api.xkiro.com/v1/models?modality=image",
@@ -10,13 +10,17 @@
       "id": "openai/gpt-image-2.5",
       "display_name": "ChatGPT Images 2.5",
       "modality": "image",
-      "endpoint": "POST /v1/images/generations (+ /v1/images/edits)"
+      "owned_by": "openai",
+      "created": 1,
+      "endpoint": "POST /v1/images/generations (+ /v1/images/edits, GET /v1/images/generations/{id})"
     },
     {
       "id": "sensenova/sensenova-u1.5-lite",
       "display_name": "SenseNova U1.5 Lite",
       "modality": "image",
-      "endpoint": "POST /v1/images/generations (+ /v1/images/edits)"
+      "owned_by": "sensenova-image",
+      "created": 1,
+      "endpoint": "POST /v1/images/generations (+ /v1/images/edits, GET /v1/images/generations/{id})"
     }
   ]
 }

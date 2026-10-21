@@ -32,14 +32,15 @@
 > trong picker `/model`. Đừng thêm chúng vào khối `provider.models` của config.
 
 `GET /v1/models` **mặc định chỉ trả model chat**; xin thêm bằng `?modality=image|tts|search|all`.
-`mc sync` tự lưu riêng vào `docs/catalogs/xkiro-image.json` + `xkiro-tts.json`.
+`mc sync` tự lưu riêng: `docs/catalogs/xkiro-image.json`, `xkiro-tts.json`, `xkiro-search.json`
++ catalog giọng `xkiro-voices.json` (tổng 5 file: `xkiro.json` chat + 4 file service).
 
 | Nhóm | Model | Endpoint | Billing | Ghi chú |
 |---|---|---|---|---|
 | **Image** (text→ảnh) | `openai/gpt-image-2.5` | `POST /v1/images/generations` | 1 ảnh = 1 unit (wallet) | Nhận ảnh nguồn → dùng được `/v1/images/edits` + re-frame |
 | **Image** (miễn phí) | `sensenova/sensenova-u1.5-lite` | `POST /v1/images/generations` | free tier (hạn mức/ngày) | Generation only — **không** edit/re-frame |
-| **Speech** (TTS) | `xkiro-voice` | `POST /v1/audio/speech` | theo **ký tự** input | 148 giọng (`GET /v1/audio/voices`), mp3/opus/aac/flac/wav/pcm |
-| **Web** | (search/fetch, không có model id) | `POST /v1/search`, `POST /v1/fetch` | $10/1000 req | Trả dữ liệu thô, không phải prose |
+| **Speech** (TTS) | `xkiro-voice` | `POST /v1/audio/speech` | theo **ký tự** input | **145 giọng** (`GET /v1/audio/voices`; 120 en / 4 vi / 3 zh / 18 chưa rõ locale), có `isVip`; mp3/opus/aac/flac/wav/pcm |
+| **Web** | `xkiro/web-search`, `xkiro/web-fetch` | `POST /v1/search`, `POST /v1/fetch` | $10/1000 req | Trả dữ liệu thô, không phải prose |
 
 - **Không có video generation** (text→video). xKiro chỉ có **hiểu video đầu vào** (Qwen VL); MiniMax ở xKiro là **model chat M-series**, không phải Hailuo/video. API overview không liệt kê endpoint video nào.
 - Job ảnh là **bất đồng bộ**: `POST` trả `202` + job id → poll `GET /v1/images/generations/{id}` (trạng thái `processing|succeeded|failed|blocked`). Cache theo prompt+size+style.

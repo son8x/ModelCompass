@@ -104,18 +104,35 @@ Describe 'Get-ServiceModalityCatalog' {
         ($models.id | Should -Not -Contain 'xkiro-voice')
     }
 
-    It 'gắn endpoint speech cho modality tts' {
+    It 'giữ metadata gốc (owned_by, created)' {
         $prov = @{ Id = 'xkiro'; BaseUrl = 'https://api.xkiro.com/v1'; KeyEnv = 'XTROUTER_API_KEY'; KeyRequired = $false }
         Mock Get-CatalogRaw {
             return @(
-                [pscustomobject]@{ id = 'xkiro-voice';                   modality = 'tts' },
-                [pscustomobject]@{ id = 'openai/gpt-image-2.5';          modality = 'image' }
+                [pscustomobject]@{ id = 'openai/gpt-image-2.5'; modality = 'image'; display_name = 'ChatGPT Images 2.5'; owned_by = 'openai'; created = 1 }
             ), $null
         }
-        $models, $err = Get-ServiceModalityCatalog -Prov $prov -Modality 'tts'
-        @($models).Count | Should -Be 1
-        $models[0].id       | Should -Be 'xkiro-voice'
-        $models[0].endpoint | Should -Be 'POST /v1/audio/speech'
+        $models, $err = Get-ServiceModalityCatalog -Prov $prov -Modality 'image'
+        $models[0].owned_by | Should -Be 'openai'
+        $models[0].created  | Should -Be 1
+    }
+
+    It 'gắn endpoint cho modality tts và search' {
+        $prov = @{ Id = 'xkiro'; BaseUrl = 'https://api.xkiro.com/v1'; KeyEnv = 'XTROUTER_API_KEY'; KeyRequired = $false }
+        Mock Get-CatalogRaw {
+            return @(
+                [pscustomobject]@{ id = 'xkiro-voice';    modality = 'tts' },
+                [pscustomobject]@{ id = 'xkiro/web-search'; modality = 'search' }
+            ), $null
+        }
+        $tts, $e1 = Get-ServiceModalityCatalog -Prov $prov -Modality 'tts'
+        @($tts).Count | Should -Be 1
+        $tts[0].id       | Should -Be 'xkiro-voice'
+        $tts[0].endpoint | Should -Be 'POST /v1/audio/speech (GET /v1/audio/voices)'
+
+        $search, $e2 = Get-ServiceModalityCatalog -Prov $prov -Modality 'search'
+        @($search).Count | Should -Be 1
+        $search[0].id       | Should -Be 'xkiro/web-search'
+        $search[0].endpoint | Should -Match '/v1/search'
     }
 
     It 'trả mảng rỗng khi fetch lỗi (không ném)' {
@@ -123,6 +140,16 @@ Describe 'Get-ServiceModalityCatalog' {
         Mock Get-CatalogRaw { return $null, 'error' }
         $models, $err = Get-ServiceModalityCatalog -Prov $prov -Modality 'image'
         @($models).Count | Should -Be 0
+        $err | Should -Be 'error'
+    }
+}
+
+Describe 'Get-VoiceCatalog' {
+    It 'trả mảng rỗng khi fetch lỗi' {
+        $prov = @{ Id = 'xkiro'; BaseUrl = 'https://api.xkiro.com/v1'; KeyEnv = 'XTROUTER_API_KEY'; KeyRequired = $false }
+        Mock Invoke-RestMethod { throw 'boom' }
+        $voices, $err = Get-VoiceCatalog -Prov $prov
+        @($voices).Count | Should -Be 0
         $err | Should -Be 'error'
     }
 }

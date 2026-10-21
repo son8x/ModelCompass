@@ -60,7 +60,7 @@ development/  ──Publish-->  production/  ──Install-->  ~/.config/opencod
 - `Install-Config.ps1` — cài `production` vào thư mục global opencode (ghi state file).
 - `Restore-RunningConfig.ps1` — khôi phục backup nếu có sự cố (xem state + hash).
 - `Compare-Config.ps1` — so sánh dev vs prod (chống lệch trước/sau publish).
-- `Get-ProviderCatalog.ps1` — tải catalog live của xKiro/Teamo/OpenRouter/OmniRoute/9Router → `docs/catalogs/`, so với config để liệt kê model **thiếu/đổi tên/mới** (hỗ trợ strip tiền tố id gateway, `-ShowAllNew`). Riêng xKiro còn tải **modality service** (`?modality=image|tts`) → `docs/catalogs/xkiro-image.json` + `xkiro-tts.json` (KHÔNG lẫn với catalog chat).
+- `Get-ProviderCatalog.ps1` — tải catalog live của xKiro/Teamo/OpenRouter/OmniRoute/9Router → `docs/catalogs/`, so với config để liệt kê model **thiếu/đổi tên/mới** (hỗ trợ strip tiền tố id gateway, `-ShowAllNew`). Riêng xKiro còn tải **modality service** (`?modality=image|tts|search`) → `docs/catalogs/xkiro-image.json` + `xkiro-tts.json` + `xkiro-search.json`, kèm catalog giọng `xkiro-voices.json` (`GET /audio/voices`) (KHÔNG lẫn với catalog chat).
 - `Compare-Prices.ps1` — so giá nhồi trong `name` mỗi model (vd `In:$1.40 | Out:$4.40`) vs catalog live → báo model **giá đã đổi** + gợi ý tên mới để copy (chống hiển thị giá cũ trong `/model`).
 - `Add-SpendEntry.ps1` — ghi chi phí 1 phiên (provider, model, token in/out) vào `reports/spend.jsonl` — dùng bởi script/plugin giám sát **đa provider**, không chỉ xKiro.
 - `Get-SpendReport.ps1` — tổng hợp spend log theo **ngày/provider/model** (bảng console, `-Json` cho pipe, `-Report` ra Markdown); lọc theo `-Month/-Day/-Provider/-Model`.

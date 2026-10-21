@@ -1,0 +1,26 @@
+{
+  "fetched_at": "2026-10-21 08:11:31",
+  "provider": "xkiro",
+  "modality": "search",
+  "source": "https://api.xkiro.com/v1/models?modality=search",
+  "note": "Modality service (KHÔNG chạy qua /v1/chat/completions). opencode picker không hiển thị.",
+  "count": 2,
+  "models": [
+    {
+      "id": "xkiro/web-fetch",
+      "display_name": "Web Fetch",
+      "modality": "search",
+      "owned_by": "xkiro-web",
+      "created": 1,
+      "endpoint": "POST /v1/search, POST /v1/fetch"
+    },
+    {
+      "id": "xkiro/web-search",
+      "display_name": "Web Search",
+      "modality": "search",
+      "owned_by": "xkiro-web",
+      "created": 1,
+      "endpoint": "POST /v1/search, POST /v1/fetch"
+    }
+  ]
+}
