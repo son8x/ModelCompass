@@ -229,8 +229,11 @@ function Get-CapabilityTags {
 <#
 .SYNOPSIS
     Gắn nhãn chức năng còn THIẾU vào name model (không phá nhãn ghi tay sẵn có).
-    Nhãn đã có trong name (không phân biệt hoa thường) sẽ bỏ qua. THUẦN.
+    Chỉ xét phần NHÃN (các segment sau dấu '·' đầu tiên) — KHÔNG tính từ nằm
+    trong tên model (segment đầu, vd "Command A Vision") để tránh false-positive.
+    Khớp theo từ (word-boundary) để "dev/code" vẫn tính là có 'code'. THUẦN.
     VD: 'Qwen3.7 Plus · 1M · vision' + tags @('vision','reasoning') → '...· vision · reasoning'
+        'Command A Vision · 128K' + @('vision') → 'Command A Vision · 128K · vision'
 #>
 function Add-CapabilitySuffix {
     param(
@@ -238,10 +241,12 @@ function Add-CapabilitySuffix {
         [string[]]$Tags = @()
     )
     if (@($Tags).Count -eq 0) { return $Name }
-    $lower = $Name.ToLowerInvariant()
+    # Bỏ segment đầu (tên model); chỉ kiểm nhãn ở phần sau.
+    $parts = @($Name -split '·')
+    $labelPart = if ($parts.Count -gt 1) { ($parts[1..($parts.Count - 1)] -join ' · ') } else { '' }
     $missing = @()
     foreach ($t in @($Tags)) {
-        if ($lower -notmatch ('\b' + [regex]::Escape($t.ToLowerInvariant()) + '\b')) { $missing += $t }
+        if ($labelPart -notmatch ('\b' + [regex]::Escape($t.ToLowerInvariant()) + '\b')) { $missing += $t }
     }
     if ($missing.Count -eq 0) { return $Name }
     return ($Name + ' · ' + ($missing -join ' · ')).Trim()

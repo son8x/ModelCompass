@@ -4,6 +4,27 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.8.1] — 2026-10-21 — Sửa khớp nhãn chức năng + ghi rõ modality service
+
+### Sửa
+- **`Add-CapabilitySuffix` khớp nhãn theo WORD-BOUNDARY PHẦN NHÃN** (không phải
+  toàn bộ name): nhãn coi là "đã có" nếu xuất hiện trong các segment **sau** dấu
+  `·` đầu tiên (bỏ segment tên model). Trước đó khớp cả tên → `Command A Vision`
+  bị coi là đã có `vision` (false-positive) nên **không gắn** nhãn. Nay gắn đúng;
+  đồng thời vẫn không nhân đôi `dev/code` (khớp từ) hay `reasoning (mặc định)`.
+- Config dev: `cohere/command-a-vision` thêm `· vision`;
+  `cohere/command-a-reasoning` thêm `· reasoning`. 14 model free còn lại (Cohere
+  `aya-*`, `command-a`, `command-r*`, `north-small-translate`, `tiny-aya-*`) API trả
+  `capabilities` all-false → **không** gắn nhãn (đúng — không bịa).
+
+### Ghi chú
+- `docs/model-reference.md` §1b làm rõ **vì sao model image/voice/search không nằm
+  trong `provider.models`** (service endpoint riêng; `capabilities` của chat model
+  không mô tả sinh ảnh/giọng/tìm kiếm).
+
+### Kiểm chứng
+- `Test-Suite.ps1`: **319/319** pass (+11 test `Add-CapabilitySuffix`/`Get-CapabilityTags`).
+
 ## [0.8.0] — 2026-10-21 — Nhãn chức năng tự động + provider xKiro Ultra
 
 ### Thêm

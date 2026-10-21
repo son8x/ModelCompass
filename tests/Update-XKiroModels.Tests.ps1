@@ -466,3 +466,58 @@ Describe 'Wiring cờ -Recommend' {
         $script:src | Should -Match "Update-RecommendDocs\.ps1'\) -ConfigPath \S+"
     }
 }
+
+Describe 'Add-CapabilitySuffix' {
+    It 'không gắn khi không có tag' {
+        Add-CapabilitySuffix -Name 'Qwen3.7 Plus · 1M · vision' -Tags @() |
+            Should -Be 'Qwen3.7 Plus · 1M · vision'
+    }
+    It 'gắn tag còn thiếu vào cuối' {
+        Add-CapabilitySuffix -Name 'Qwen3.7 Plus · 1M' -Tags @('vision', 'reasoning') |
+            Should -Be 'Qwen3.7 Plus · 1M · vision · reasoning'
+    }
+    It 'không nhân đôi tag đã có (segment ·)' {
+        Add-CapabilitySuffix -Name 'Qwen3.7 Plus · 1M · vision' -Tags @('vision', 'reasoning') |
+            Should -Be 'Qwen3.7 Plus · 1M · vision · reasoning'
+    }
+    It 'KHÔNG coi từ trong tên là nhãn — Command A Vision vẫn được gắn · vision' {
+        Add-CapabilitySuffix -Name 'Command A Vision · 128K' -Tags @('vision') |
+            Should -Be 'Command A Vision · 128K · vision'
+    }
+    It 'KHÔNG coi từ trong tên là nhãn — Command A Reasoning' {
+        Add-CapabilitySuffix -Name 'Command A Reasoning · 288.8K' -Tags @('reasoning') |
+            Should -Be 'Command A Reasoning · 288.8K · reasoning'
+    }
+    It 'khớp từ trong PHẦN NHÃN — dev/code vẫn tính là code' {
+        Add-CapabilitySuffix -Name 'Devstral 2 · dev/code' -Tags @('code') |
+            Should -Be 'Devstral 2 · dev/code'
+    }
+    It 'không nhân đôi khi nhãn nằm trong ngoặc — reasoning (mặc định)' {
+        Add-CapabilitySuffix -Name 'Qwen3.8 Max · 1M · reasoning (mặc định) · vision' -Tags @('vision', 'reasoning') |
+            Should -Be 'Qwen3.8 Max · 1M · reasoning (mặc định) · vision'
+    }
+}
+
+Describe 'Get-CapabilityTags' {
+    It 'vision từ capabilities API' {
+        $cap = [pscustomobject]@{ vision = $true; tools = $true; reasoning = $false }
+        $t = @(Get-CapabilityTags -ModelId 'x/y' -Name 'X · 1M' -Capabilities $cap)
+        $t | Should -Contain 'vision'
+        $t | Should -Not -Contain 'reasoning'
+    }
+    It 'reasoning từ capabilities API' {
+        $cap = [pscustomobject]@{ vision = $false; tools = $true; reasoning = $true }
+        $t = @(Get-CapabilityTags -ModelId 'x/y' -Name 'X · 1M' -Capabilities $cap)
+        $t | Should -Contain 'reasoning'
+        $t | Should -Not -Contain 'vision'
+    }
+    It 'code từ tên/id (API không phát cờ)' {
+        $cap = [pscustomobject]@{ vision = $false; tools = $true; reasoning = $false }
+        $t = @(Get-CapabilityTags -ModelId 'x/qwen3-coder-plus' -Name 'Qwen3 Coder Plus · 1M' -Capabilities $cap)
+        $t | Should -Contain 'code'
+    }
+    It 'fallback theo tên khi API thiếu' {
+        $t = @(Get-CapabilityTags -ModelId 'x/y' -Name 'Qwen3 VL Plus · vision')
+        $t | Should -Contain 'vision'
+    }
+}

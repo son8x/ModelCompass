@@ -47,6 +47,13 @@
 - Job ảnh là **bất đồng bộ**: `POST` trả `202` + job id → poll `GET /v1/images/generations/{id}` (trạng thái `processing|succeeded|failed|blocked`). Cache theo prompt+size+style.
 - `GET /v1/audio/voices` là **public**, cache 5 phút.
 
+> 📌 **Vì sao các model image/voice/search KHÔNG có trong `provider.models`:** chúng là
+> **service endpoint riêng**, không phải model chat — thuộc tính `capabilities` của model
+> chat (`vision/tools/reasoning`) **không** mô tả khả năng sinh ảnh/giọng/tìm kiếm. Muốn
+> dùng, gọi trực tiếp endpoint (vd `curl -X POST .../v1/images/generations`), không qua
+> picker `/model`. Catalog chat `xkiro.json` cũng **không** chứa field chỉ ra "model này
+> gọi được image/search/voice" — đó là đặc quyền của **endpoint**, không của model.
+
 ---
 
 ## 2. ⭐ Model khuyến nghị xKiro (tự sinh)

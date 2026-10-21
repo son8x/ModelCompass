@@ -150,6 +150,15 @@ xKiro có **3 nhóm** trong config, cùng key `XTROUTER_API_KEY` + baseURL
 đôi nhãn đã có. `ConvertTo-NormalizedModel` giữ `capabilities` + `reasoning_efforts`.
 Đừng sửa `name` model để thêm/bớt nhãn — sync sẽ tái tạo.
 
+- ⚠️ `Add-CapabilitySuffix` chỉ kiểm nhãn ở **segment sau dấu `·` đầu tiên** (bỏ
+  segment tên model). Nhờ vậy `Command A Vision` **vẫn được** gắn `· vision`, còn
+  `dev/code` (khớp từ trong phần nhãn) thì **không** bị nhân đôi. Đừng đổi về khớp
+  cả name (bug false-positive 21/10).
+- Model API trả `capabilities` all-false (vd Cohere `aya-*`, `command-r*`,
+  `tiny-aya-*`) thì **không** có nhãn — đúng, không bịa.
+- Model image/voice/search KHÔNG vào `provider.models` (endpoint riêng) — xem §1b
+  `docs/model-reference.md`.
+
 ---
 
 ## Môi trường (Windows / PowerShell)

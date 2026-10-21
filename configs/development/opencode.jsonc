@@ -125,9 +125,9 @@
         "cohere/aya-vision-32b": { "name": "Aya Vision 32b · 16.4K", "release_date": "2099-11-18" },
         "cohere/command-a": { "name": "Command A · 288K", "release_date": "2099-11-17" },
         "cohere/command-a-plus": { "name": "Command A Plus · 436K · vision · reasoning", "release_date": "2099-11-16" },
-        "cohere/command-a-reasoning": { "name": "Command A Reasoning · 288.8K", "release_date": "2099-11-15" },
+        "cohere/command-a-reasoning": { "name": "Command A Reasoning · 288.8K · reasoning", "release_date": "2099-11-15" },
         "cohere/command-a-translate": { "name": "⭐ Command A Translate · 9K · dịch", "release_date": "2099-11-14" },
-        "cohere/command-a-vision": { "name": "Command A Vision · 128K", "release_date": "2099-11-13" },
+        "cohere/command-a-vision": { "name": "Command A Vision · 128K · vision", "release_date": "2099-11-13" },
         "cohere/command-r-08-2024": { "name": "Command R 08 2024 · 128K", "release_date": "2099-11-12" },
         "cohere/command-r-plus-08-2024": { "name": "Command R Plus 08 2024 · 128K", "release_date": "2099-11-11" },
         "cohere/command-r7b-12-2024": { "name": "Command R7b 12 2024 · 132K", "release_date": "2099-11-10" },
@@ -368,6 +368,7 @@
 //  5) scripts/config/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
 //  6) Quit & restart opencode.
 // ═══════════════════════════════════════════════════════════════════
+
 
 
 
