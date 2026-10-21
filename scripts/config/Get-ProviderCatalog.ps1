@@ -86,7 +86,7 @@ $Providers = @(
         BaseUrl        = 'https://api.xkiro.com/v1'
         KeyEnv         = 'XTROUTER_API_KEY'
         KeyRequired    = $true
-        ConfigProviders = @('1-xkiro-free', '2-xkiro-max')
+        ConfigProviders = @('1-xkiro-free', '2-xkiro-max', '3-xkiro-ultra')
         IdStripPrefix  = @()
         ServiceModalities = @('image', 'tts', 'search')
         VoiceCatalog = $true
@@ -253,6 +253,21 @@ function ConvertTo-NormalizedModel {
     $at = $Model.PSObject.Properties['access_tier']
     if ($null -ne $at -and $null -ne $at.Value) { $accessTier = [string]$at.Value }
 
+    # capabilities: xKiro trả { vision; tools; reasoning } (bool) cho model chat.
+    $vision = $null; $tools = $null; $reasoning = $null
+    $cp = $Model.PSObject.Properties['capabilities']
+    if ($null -ne $cp -and $null -ne $cp.Value) {
+        $cv = $cp.Value.PSObject.Properties['vision'];    if ($null -ne $cv -and $null -ne $cv.Value) { $vision = [bool]$cv.Value }
+        $ct = $cp.Value.PSObject.Properties['tools'];     if ($null -ne $ct -and $null -ne $ct.Value) { $tools = [bool]$ct.Value }
+        $crn = $cp.Value.PSObject.Properties['reasoning']; if ($null -ne $crn -and $null -ne $crn.Value) { $reasoning = [bool]$crn.Value }
+    }
+    $reasoningLevels = @()
+    $re = $Model.PSObject.Properties['reasoning_efforts']
+    if ($null -ne $re -and $null -ne $re.Value) {
+        $lvl = $re.Value.PSObject.Properties['levels']
+        if ($null -ne $lvl -and $null -ne $lvl.Value) { $reasoningLevels = @($lvl.Value) }
+    }
+
     return [pscustomobject]@{
         id          = $id
         name        = if ($null -ne $Model.PSObject.Properties['name']) { [string]$Model.name } else { '' }
@@ -261,6 +276,8 @@ function ConvertTo-NormalizedModel {
         pricing     = [pscustomobject]@{ input = $input; output = $output; request = $request }
         modality    = $modality
         created     = $created
+        capabilities = [pscustomobject]@{ vision = $vision; tools = $tools; reasoning = $reasoning }
+        reasoning_efforts = $reasoningLevels
     }
 }
 

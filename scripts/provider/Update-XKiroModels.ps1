@@ -1,20 +1,22 @@
 #Requires -Version 7
 <#
 .SYNOPSIS
-    ModelCompass: Tự động đồng bộ 2 provider xKiro (1-xkiro-free, 2-xkiro-max)
+    ModelCompass: Tự động đồng bộ 3 provider xKiro (1-xkiro-free, 2-xkiro-max, 3-xkiro-ultra)
     trong dev config với catalog live — thêm model mới dùng được, gỡ model 403/404/biến mất,
     cập nhật giá, sinh release_date, rồi validate. Bật -Publish/-Install để chạy tiếp.
 
 .DESCRIPTION
     Luồng tự động:
       1. Fetch catalog live (GET /v1/models) qua Get-ProviderCatalog.ps1.
-      2. Probe TẤT CẢ model tier free+paid (song song) để biết OK / AUTH(403) / NOTFOUND / lỗi tạm.
+      2. Probe TẤT CẢ model tier free+paid+premium (song song) để biết OK / AUTH(403) / NOTFOUND / lỗi tạm.
       3. Đồng bộ vào dev config (.jsonc) — GIỮ NGUYÊN comment/structure xung quanh:
          - 1-xkiro-free: giữ model CÓ trong catalog tier free; gỡ 404/biến mất;
            thêm model free mới probe OK (thêm CUỐI danh sách).
          - 2-xkiro-max:   giữ model probe OK (hoặc lỗi tạm đã có); gỡ 403/404/biến mất;
            thêm model paid mới probe OK; chèn ĐÚNG vị trí nhóm [L]/[B]/[A]/[S]
            (kẹp vào giữa các model cùng nhóm — giữ thứ tự hiển thị hiện có).
+         - 3-xkiro-ultra: model trả 403 (tính wallet / cần gói ≥Ultra). Chỉ nhận
+           model probe AUTH; gỡ khi biến mất khỏi catalog. Thứ tự nhóm như max.
       4. release_date: model cũ GIỮ NGUYÊN; model mới sinh date KẸP GIỮA 2 model kề
          (bảo toàn thứ tự sắp xếp opencode date-giảm-dần, giảm diff git).
       5. Validate config bằng Test-ModelCompassConfig.ps1 (-SkipValidation để bỏ qua).
@@ -32,7 +34,7 @@
     File config cần cập nhật. Mặc định: configs\development\opencode.jsonc
 
 .PARAMETER Provider
-    Chỉ đồng bộ provider nào: '1-xkiro-free', '2-xkiro-max' hoặc cả hai (mặc định).
+    Chỉ đồng bộ provider nào: '1-xkiro-free', '2-xkiro-max', '3-xkiro-ultra' hoặc tất cả (mặc định).
 
 .PARAMETER NoWrite
     Chỉ BÁO CÁO thay đổi đề xuất, không ghi file.
@@ -188,6 +190,78 @@ function ConvertTo-FriendlyName {
 
 <#
 .SYNOPSIS
+    Sinh cụm nhãn CHỨC NĂNG cho name model từ capabilities API xKiro
+    ({vision,tools,reasoning}) + heuristic tên/id (code, omni).
+    THUẦN. Trả mảng nhãn ngắn, thứ tự: code → omni → vision → reasoning.
+    KHÔNG thêm 'tools' (gần như mọi model đều có → nhiễu).
+#>
+function Get-CapabilityTags {
+    param(
+        [string]$ModelId = '',
+        [string]$Name = '',
+        $Capabilities
+    )
+    $tags = [System.Collections.Generic.List[string]]::new()
+
+    $hay = (($ModelId + ' ' + $Name).ToLowerInvariant())
+    $tok = @{}
+    foreach ($t in ($hay -split '[^\p{L}\p{Nd}]+')) { if ($t) { $tok[$t] = $true } }
+    $any = { param([string[]]$ws) foreach ($w in $ws) { if ($tok.ContainsKey($w)) { return $true } } return $false }
+
+    # code / omni từ tên (API không phát cờ này).
+    if ((& $any @('coder', 'codex', 'codestral', 'devstral', 'north-mini-code'))) { $tags.Add('code') }
+    if ((& $any @('omni'))) { $tags.Add('omni') }
+
+    # vision / reasoning từ API (ưu tiên API; fallback heuristic tên khi API thiếu).
+    $vision = $null; $reasoning = $null
+    if ($null -ne $Capabilities) {
+        $v = $Capabilities.PSObject.Properties['vision'];    if ($null -ne $v -and $null -ne $v.Value) { $vision = [bool]$v.Value }
+        $r = $Capabilities.PSObject.Properties['reasoning']; if ($null -ne $r -and $null -ne $r.Value) { $reasoning = [bool]$r.Value }
+    }
+    if ($null -eq $vision)    { $vision = [bool](& $any @('vl', 'vision', 'multimodal')) }
+    if ($null -eq $reasoning) { $reasoning = [bool](& $any @('reasoning', 'thinking', 'think')) }
+
+    if ($vision)    { $tags.Add('vision') }
+    if ($reasoning) { $tags.Add('reasoning') }
+    return @($tags)
+}
+
+<#
+.SYNOPSIS
+    Gắn nhãn chức năng còn THIẾU vào name model (không phá nhãn ghi tay sẵn có).
+    Nhãn đã có trong name (không phân biệt hoa thường) sẽ bỏ qua. THUẦN.
+    VD: 'Qwen3.7 Plus · 1M · vision' + tags @('vision','reasoning') → '...· vision · reasoning'
+#>
+function Add-CapabilitySuffix {
+    param(
+        [Parameter(Mandatory)][string]$Name,
+        [string[]]$Tags = @()
+    )
+    if (@($Tags).Count -eq 0) { return $Name }
+    $lower = $Name.ToLowerInvariant()
+    $missing = @()
+    foreach ($t in @($Tags)) {
+        if ($lower -notmatch ('\b' + [regex]::Escape($t.ToLowerInvariant()) + '\b')) { $missing += $t }
+    }
+    if ($missing.Count -eq 0) { return $Name }
+    return ($Name + ' · ' + ($missing -join ' · ')).Trim()
+}
+
+<#
+.SYNOPSIS
+    Đọc an toàn thuộc tính '.capabilities' của 1 entry (Add/Keep). Trả $null nếu thiếu.
+    THUẦN. Dùng để không ném khi entry (vd trong test) không có trường này.
+#>
+function Get-EntryCapabilities {
+    param($Entry)
+    if ($null -eq $Entry) { return $null }
+    $p = $Entry.PSObject.Properties['capabilities']
+    if ($null -ne $p) { return $p.Value }
+    return $null
+}
+
+<#
+.SYNOPSIS
     Đọc nhóm [L]/[B]/[A]/[S] từ name model. Trả $null nếu không có tag.
 #>
 function Resolve-TierFromName {
@@ -273,6 +347,7 @@ function Compare-ToLive {
         [Parameter(Mandatory)]$CatalogModels,
         [Parameter(Mandatory)][hashtable]$ProbeResults,
         [switch]$IsFree,
+        [switch]$UltraMode,
         [double]$LThreshold = 0.50,
         [double]$BThreshold = 1.50,
         [double]$AThreshold = 4.00,
@@ -293,11 +368,12 @@ function Compare-ToLive {
             continue
         }
         $status = $ProbeResults[$m.id]
-        if (-not $IsFree -and $status -in $badProbe) {
+        if ($UltraMode) {
+            # Nhóm Ultra: model vốn trả 403 (wallet/≥Ultra) — chỉ gỡ khi biến mất khỏi catalog.
+        } elseif (-not $IsFree -and $status -in $badProbe) {
             $remove[$m.id] = "probe $status (403/404) — không còn dùng được"
             continue
-        }
-        if ($IsFree -and $status -eq 'NOTFOUND') {
+        } elseif ($IsFree -and $status -eq 'NOTFOUND') {
             $remove[$m.id] = 'probe NOTFOUND — không còn tồn tại'
             continue
         }
@@ -311,6 +387,7 @@ function Compare-ToLive {
             CatIn        = $in
             CatOut       = $out
             Context      = $ctx
+            Capabilities = (Get-EntryCapabilities $cat)
         })
     }
 
@@ -318,11 +395,17 @@ function Compare-ToLive {
     foreach ($catId in @($CatalogModels | ForEach-Object { $_.id })) {
         if ($existingIds -contains $catId) { continue }
         $cat = $byId[$catId]
-        if ([string]::IsNullOrWhiteSpace($TierFilter)) { $at = '' } else { $at = $cat.access_tier }
-        if ($TierFilter -and $at -ne $TierFilter) { continue }
         $status = $ProbeResults[$catId]
         if ($null -eq $status) { $status = 'OK' }   # -NoProbe: coi như OK
-        if ($status -notin @('OK', 'RATE')) { continue }
+
+        if ($UltraMode) {
+            # Chỉ nhận model probe AUTH (403 = tính wallet / cần gói ≥Ultra).
+            if ($status -ne 'AUTH') { continue }
+        } else {
+            if ([string]::IsNullOrWhiteSpace($TierFilter)) { $at = '' } else { $at = $cat.access_tier }
+            if ($TierFilter -and $at -ne $TierFilter) { continue }
+            if ($status -notin @('OK', 'RATE')) { continue }
+        }
 
         $in = $null; $out = $null; $ctx = 0
         if ($null -ne $cat.pricing) { $in = $cat.pricing.input; $out = $cat.pricing.output }
@@ -330,12 +413,13 @@ function Compare-ToLive {
 
         $friendly = ConvertTo-FriendlyName $catId
         $tier = ''
-        if (-not $IsFree -and $null -ne $in) {
+        if ((-not $IsFree) -and $null -ne $in) {
             $tier = Resolve-TierFromPrice -InputPrice $in -L $LThreshold -B $BThreshold -A $AThreshold
         }
         $add.Add([pscustomobject]@{
             id = $catId; friendly = $friendly; tier = $tier
             in = $in; out = $out; context = $ctx
+            capabilities = (Get-EntryCapabilities $cat)
         })
     }
 
@@ -388,6 +472,11 @@ function Compute-OrderedModels {
         # Gỡ annotation ghi tay (vd " ⚠️đang 500") — không được probe kiểm tra.
         $name = Remove-HandAnnotation $name
 
+        # Gắn nhãn chức năng còn thiếu (vision/reasoning/code/omni) từ capabilities API.
+        $keepCaps = $k.PSObject.Properties['Capabilities']
+        $capTags = @(Get-CapabilityTags -ModelId $k.id -Name $name -Capabilities $(if ($null -ne $keepCaps) { $keepCaps.Value } else { $null }))
+        $name = Add-CapabilitySuffix -Name $name -Tags $capTags
+
         if (-not $IsFree) {
             $cur = Get-PricesFromName $name
             if ($cur.Has -and $null -ne $k.CatIn -and $null -ne $k.CatOut) {
@@ -407,14 +496,13 @@ function Compute-OrderedModels {
             tier = if ($IsFree) { '' } else { Resolve-TierFromName $name }
         })
     }
-
-    # ══ 2) Model mới. ══
     $newList = @($Compare.Add | Sort-Object @{ Expression = { if ($_.in) { [double]$_.in } else { [double]::MaxValue } } })
     $groupOrder = @{ 'L' = 0; 'B' = 1; 'A' = 2; 'S' = 3 }
 
     if ($IsFree) {
         foreach ($a in $newList) {
             $nm = New-ModelDisplayName -FriendlyName $a.friendly -Context $a.context
+            $nm = Add-CapabilitySuffix -Name $nm -Tags @(Get-CapabilityTags -ModelId $a.id -Name $nm -Capabilities (Get-EntryCapabilities $a))
             if ($NewBadge) { $nm = "$NewBadge$nm" }
             $ordered.Add([pscustomobject]@{ id = $a.id; name = $nm; tier = '' })
         }
@@ -446,6 +534,7 @@ function Compute-OrderedModels {
             }
 
             $nm = New-ModelDisplayName -FriendlyName $a.friendly -Tier $tier -In $a.in -Out $a.out -Context $a.context
+            $nm = Add-CapabilitySuffix -Name $nm -Tags @(Get-CapabilityTags -ModelId $a.id -Name $nm -Capabilities (Get-EntryCapabilities $a))
             if ($NewBadge) { $nm = "$NewBadge$nm" }
             $ordered.Insert($insertIdx, [pscustomobject]@{ id = $a.id; name = $nm; tier = $tier })
         }
@@ -746,11 +835,12 @@ if (-not (Test-Path -LiteralPath $ConfigPath -PathType Leaf)) {
     exit 2
 }
 
-$selected = @('1-xkiro-free', '2-xkiro-max')
+$validProviders = @('1-xkiro-free', '2-xkiro-max', '3-xkiro-ultra')
+$selected = @('1-xkiro-free', '2-xkiro-max', '3-xkiro-ultra')
 if ($Provider -and $Provider.Count -gt 0) {
-    $selected = @($Provider | Where-Object { $_ -in @('1-xkiro-free', '2-xkiro-max') })
+    $selected = @($Provider | Where-Object { $_ -in $validProviders })
     if ($selected.Count -eq 0) {
-        Write-Fail 'Provider không hợp lệ (chỉ hỗ trợ: 1-xkiro-free, 2-xkiro-max).'
+        Write-Fail ('Provider không hợp lệ (chỉ hỗ trợ: ' + ($validProviders -join ', ') + ').')
         exit 2
     }
 }
@@ -774,7 +864,7 @@ $catalog = ConvertTo-NormalizedCatalog @($rows)
 Write-Ok "Catalog live: $($catalog.Count) model."
 
 # ── 2. Probe (song song). ──
-$probeIds = @($catalog | Where-Object { $_.access_tier -in @('free', 'paid') } |
+$probeIds = @($catalog | Where-Object { $_.access_tier -in @('free', 'paid', 'premium') } |
     ForEach-Object { $_.id } | Sort-Object)
 
 if ($NoProbe) {
@@ -866,11 +956,12 @@ foreach ($cpKey in $selected) {
         continue
     }
     $isFree = ($cpKey -eq '1-xkiro-free')
+    $isUltra = ($cpKey -eq '3-xkiro-ultra')
     $tierLabel = if ($isFree) { 'free' } else { 'paid' }
 
     $cur = Get-ConfigModels $cp.Value
     $cmp = Compare-ToLive -ConfigModels $cur -CatalogModels $catalog -ProbeResults $probeResults `
-        -IsFree:$isFree -TierFilter $tierLabel `
+        -IsFree:$isFree -UltraMode:$isUltra -TierFilter $tierLabel `
         -LThreshold $LThreshold -BThreshold $BThreshold -AThreshold $AThreshold
 
     Write-Step "[$cpKey] sync"
@@ -879,6 +970,7 @@ foreach ($cpKey in $selected) {
     foreach ($rId in @($cmp.RemoveReason.Keys)) { Write-Warn "  GỠ  $rId — $($cmp.RemoveReason[$rId])" }
     foreach ($a in @($cmp.Add)) {
         $nm = New-ModelDisplayName -FriendlyName $a.friendly -Tier $a.tier -In $a.in -Out $a.out -Context $a.context
+        $nm = Add-CapabilitySuffix -Name $nm -Tags @(Get-CapabilityTags -ModelId $a.id -Name $nm -Capabilities (Get-EntryCapabilities $a))
         Write-Ok "  THÊM $($a.id) -> $NewBadge$nm"
     }
 
@@ -893,7 +985,7 @@ foreach ($cpKey in $selected) {
     $provChange = $computed.ChangedPrice.Count + $cmp.RemoveReason.Count + $cmp.Add.Count
 
     $final = Assign-ReleaseDates -Ordered $computed.Ordered -ConfigModels $cur `
-        -BaseDate $(if ($isFree) { '2099-12-31' } else { '2099-11-30' })
+        -BaseDate $(if ($isFree) { '2099-12-31' } elseif ($isUltra) { '2099-10-31' } else { '2099-11-30' })
 
     # ── Hồi tố badge + liệt kê model bị gỡ so với baseline ──
     # (chỉ khi truyền -BaselineConfig). Model có trong config nhưng không có trong

@@ -4,6 +4,36 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.8.0] — 2026-10-21 — Nhãn chức năng tự động + provider xKiro Ultra
+
+### Thêm
+- **Nhãn chức năng tự động từ catalog `capabilities`.** `ConvertTo-NormalizedModel`
+  (`Get-ProviderCatalog.ps1`) giờ giữ `capabilities {vision,tools,reasoning}` +
+  `reasoning_efforts`; `Update-XKiroModels.ps1` có `Get-CapabilityTags`,
+  `Add-CapabilitySuffix`, `Get-EntryCapabilities` → tự ghép hậu tố `· vision`,
+  `· reasoning`, `· code`... vào `name` cho MỌI model (không đoán tay, không nhân
+  đôi nhãn đã có).
+- **Provider mới `3-xkiro-ultra`** — nhóm model **cần trả thêm phí** (ngoài gói Max):
+  chứa các model probe trả **403** (tính wallet pay-as-you-go / yêu cầu gói ≥ Ultra).
+  `Update-XKiroModels.ps1` nhận 3 provider; `Compare-ToLive` có `-UltraMode` (chỉ nhận
+  model probe `AUTH`, gỡ khi biến mất khỏi catalog). `Get-ProviderCatalog.ps1`
+  `ConfigProviders` thêm `3-xkiro-ultra`.
+- 6 model Ultra (probe 403): `deepseek/deepseek-v4.1-flash`,
+  `deepseek/deepseek-v4-flash-0731`, `deepseek/deepseek-v4-pro-0813`, `x-ai/grok-4.5`,
+  `anthropic/claude-fable-5-1`, `openai/gpt-6-astra`.
+
+### Sửa
+- `-Provider` của `Update-XKiroModels.ps1` nhận `3-xkiro-ultra`; probe mở rộng sang
+  cả tier `premium` (trước chỉ free+paid).
+
+### Ghi chú
+- Model Ultra **chưa dùng được ngay** — chỉ có tác dụng sau khi nạp thêm wallet hoặc
+  nâng gói. Đổi provider chỉ để tách khỏi danh sách chạy được trên gói Max.
+- `docs/model-reference.md` §1 thêm dòng `3-xkiro-ultra`.
+
+### Kiểm chứng
+- `Test-Suite.ps1`: **308/308** pass; dev config validate OK.
+
 ## [0.7.2] — 2026-10-21 — Catalog xKiro theo modality (image/speech/web)
 
 ### Thêm

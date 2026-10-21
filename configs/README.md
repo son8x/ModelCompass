@@ -30,7 +30,7 @@ development/  ──Publish-->  production/  ──Install-->  ~/.config/opencod
 |------|----------|
 | `TEAMO_API_KEY` | Provider `6-teamoRouter` |
 | `OMNIROUTE_KEY` | Provider `3-omniroute-free`, `4-openrouter-free` |
-| `XTROUTER_API_KEY` | Provider `1-xkiro-free`, `2-xkiro-max` |
+| `XTROUTER_API_KEY` | Provider `1-xkiro-free`, `2-xkiro-max`, `3-xkiro-ultra` |
 | `NINE_ROUTER_API_KEY` | Provider `5-9router` |
 
 > Cấu hình dùng cơ chế `{env:TÊN_BIEN}` của opencode — repo không chứa key.

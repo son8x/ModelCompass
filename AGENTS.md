@@ -122,6 +122,34 @@ Xem thêm `docs/market-intel.md` (chiến lược), `docs/model-reference.md` (c
 > ⚠️ Bẫy PowerShell: trong **hashtable**, `$h.PSObject.Properties['X']` LUÔN false —
 > phải dùng trực tiếp `$h.X` (bug guard `ServiceModalities` 21/10).
 
+## 3 provider xKiro — free / max / ultra
+
+xKiro có **3 nhóm** trong config, cùng key `XTROUTER_API_KEY` + baseURL
+`https://api.xkiro.com/v1`:
+
+| Provider | Nhận model nào | Cơ chế chọn của `Update-XKiroModels.ps1` |
+|---|---|---|
+| `1-xkiro-free` | `access_tier=free`, probe `OK` | `-IsFree`, tier filter `free` |
+| `2-xkiro-max` | `access_tier=paid`, probe `OK`/`RATE` | tier filter `paid`; gỡ `AUTH/NOTFOUND/DOWN` |
+| `3-xkiro-ultra` | probe **`AUTH` (403)** | `-UltraMode` — chỉ nhận `AUTH`; CHỈ gỡ khi biến mất khỏi catalog |
+
+- `3-xkiro-ultra` = model **tính wallet (pay-as-you-go) hoặc cần gói ≥Ultra**;
+  gói Max **không phủ**. Đổi provider chỉ để **tách khỏi danh sách chạy được** —
+  model vẫn `403` cho tới khi nạp thêm phí.
+- `403` (`AUTH`) đúng là **tín hiệu phân loại**, không phải lỗi.
+  `premium` tier bị filter `paid` của max loại tự động.
+- Probe giờ quét cả tier `premium` (trước chỉ free+paid).
+- ⚠️ Model tier theo `access_tier` có thể lệch với 403 thực tế (vd `gemini-3.8-flash`
+  catalog ghi `premium` nhưng probe `200` → vẫn nằm ở max, tag `✓Max`). **Khi mâu
+  thuẫn, probe thắng.**
+
+## Nhãn chức năng tự động (`· vision`/`· reasoning`/`· code`)
+
+`name` model tự ghép hậu tố từ `capabilities {vision,tools,reasoning}` của catalog
+(hàm `Get-CapabilityTags`/`Add-CapabilitySuffix`), **không viết tay**, không nhân
+đôi nhãn đã có. `ConvertTo-NormalizedModel` giữ `capabilities` + `reasoning_efforts`.
+Đừng sửa `name` model để thêm/bớt nhãn — sync sẽ tái tạo.
+
 ---
 
 ## Môi trường (Windows / PowerShell)

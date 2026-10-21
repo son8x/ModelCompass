@@ -20,6 +20,7 @@
 |---|---|---|---|---|
 | 1 | `1-xkiro-free` | Router free tier | Qwen, Cohere, Mistral | **48 model free** (20/10) — ⭐ theo tác vụ |
 | 2 | `2-xkiro-max` | Router $20/tháng | Claude/GPT/Grok/GLM | **47 model**, 4 nhóm `[L]/[B]/[A]/[S]`, budget $140/tuần — ⭐ theo nhóm/tác vụ |
+| 3 | `3-xkiro-ultra` | Router — cần nạp thêm phí | DeepSeek V4, Grok 4.5, Claude Fable 5.1, GPT-6 Astra | **6 model** probe 403 (wallet / gói ≥Ultra); cùng key `XTROUTER_API_KEY` |
 | 3 | `3-omniroute-free` | Route local | Cloudflare free (GLM-5.2, DeepSeek V4 Pro) | Cần local 127.0.0.1:20217 |
 | 4 | `4-openrouter-free` | Route local | OpenRouter `:free` | 50 RPD, 1K nếu nạp $10 |
 | 5 | `5-9router` | Router local | GPT-OSS 120B local | Cổng 20128 |
@@ -98,6 +99,7 @@ ta dùng nó làm "khoá sắp xếp tổng hợp" — 2 provider xKiro hiện t
 
 - `1-xkiro-free` — **48 model free** (20/10/2026): Qwen 19 · Cohere 16 · Mistral 9 · Stealth 1 · Meituan 2 · SenseNova 1. Thứ tự **theo độ mạnh giảm dần** (Qwen3.8 Max trên cùng), `release_date` từ `2099-12-31` giảm dần; `mistral-large-4-0` đặt ở **`2099-11-25`** (giữa nhóm Mistral). Stealth `space-bunny-alpha:free` đã gỡ (probe 404). Lỗi còn lại: `cohere/command-a-reasoning` hay **timeout >25s**.
 - `2-xkiro-max` — **47 model** dùng được trên gói Max (probe 20/10), hiển thị **theo 4 nhóm sức mạnh** rẻ-nhanh → mạnh nhất: `[L] Nhẹ·Nhanh·Rẻ` → `[B] Đa dụng giá tốt` → `[A] Mạnh đa dụng` → `[S] Flagship`. Tag nhóm ngay trong `name` để nhận biết model **cùng tầng / thay thế được cho nhau**. Tên hiển thị ghi giá đầy đủ `In/Out` (USD/1M token) lấy từ catalog live — trên gói Max tính theo allowance (không trừ per-token), giá dùng để ước lượng khi nạp thêm wallet.
+- `3-xkiro-ultra` — **6 model** chưa dùng được trên gói Max: probe trả **403** = tính theo **wallet (pay-as-you-go)** hoặc yêu cầu gói **≥ Ultra/Power**. Gồm DeepSeek V4 (v4.1-flash, v4-flash-0731, v4-pro-0813), Grok 4.5, Claude Fable 5.1, GPT-6 Astra. Cùng key `XTROUTER_API_KEY`, đổi provider chỉ để **tách khỏi danh sách chạy được** — CHỈ có tác dụng sau khi nạp thêm phí. Tag nhóm `[L]/[B]/[A]/[S]` theo giá như Max.
 
 > 📌 Lịch sử thêm/gỡ model, danh sách model bị `403` (tính wallet / cần gói ≥ Ultra), model lỗi tạm
 > (`⚠️`), và các đợt sync theo ngày: xem **[STATUS.md](../STATUS.md)** (mục "Lịch sử đáng nhớ").
@@ -196,7 +198,7 @@ Invoke-RestMethod "https://api.xkiro.com/v1/usage/history?period=week" -Headers 
 | `google/gemini-2.5-pro` (B) | `gemini-3-flash` (B) | `gemini-2.5-flash` (L) | `claude-opus-5` / `gpt-5.6-sol` (S) |
 | `openai/gpt-5.6-luna` (L) | `glm-5.3-flash` (L) | `glm-4.6v-flash` / `claude-haiku-4.5` (L) | `glm-5.3` / `gpt-5.6-terra` (A) |
 
-> **Đã gỡ khỏi danh sách (403 — không dùng được trên gói Max):** `kimi-k2.5/k2.6/k2.7-code/k3`, `grok-4.5/4.6/build-0.1`, `deepseek-v4-*`, `qwen3.5+/3.6+/3.7±/3.8-max`, `minimax-m2.5/m2.7/m3`, `tencent-hy3/hy4`, `xiaomi-mimo*`, `gpt-6-astra`, `claude-fable-5-1` — các model này nay tính phí theo **wallet (pay-as-you-go)** hoặc yêu cầu gói ≥ Ultra/Power, gói Max ($20/tháng) không phủ.
+> **Đã gỡ khỏi danh sách Max (403 — không dùng được trên gói Max):** `kimi-k2.5/k2.6/k2.7-code/k3`, `grok-4.5/4.6/build-0.1`, `deepseek-v4-*`, `qwen3.5+/3.6+/3.7±/3.8-max`, `minimax-m2.5/m2.7/m3`, `tencent-hy3/hy4`, `xiaomi-mimo*`, `gpt-6-astra`, `claude-fable-5-1` — các model này nay tính phí theo **wallet (pay-as-you-go)** hoặc yêu cầu gói ≥ Ultra/Power, gói Max ($20/tháng) không phủ. **Từ 21/10/2026** các model probe `403` được gom vào provider riêng **`3-xkiro-ultra`** (6 model đang gặp 403: DeepSeek V4.1 Flash / V4 Flash 0731 / V4 Pro 0813, Grok 4.5, Claude Fable 5.1, GPT-6 Astra) — xem §1.
 
 ---
 
