@@ -103,6 +103,21 @@ Dạng chuẩn: `<base> — <count> model` (**em dash U+2014**, không phải `-
 Chi tiết thêm/gỡ ghi ở `STATUS.md` / `CHANGELOG.md`.
 Xem thêm `docs/market-intel.md` (chiến lược), `docs/model-reference.md` (canonical ⭐).
 
+## Badge sức khoẻ là do script quản lý (`⚡🐌🟡🔒⛔`)
+
+`scripts/health/Test-ModelHealth.ps1` đo độ trễ và gắn badge **đầu `name`** (sau `⭐`/`🆕`)
+để hiện trong `/model`. **Không ghi tay, không sửa/xoá badge bằng tay** — lần `mc health -Apply`
+sau sẽ tái tạo.
+
+- Thứ tự đúng: **`mc sync` → `mc health -Apply` → `mc publish` → `mc install`**.
+  `mc sync` (`Remove-HandAnnotation`) **gỡ badge cũ** (tránh lỗi thời); health gắn lại.
+- `🟡 busy` (429) là trạng thái **tạm thời** — `-Apply` **không** ghi vào `name`.
+- `🔒 locked` gồm cả **paywall/hết ví** (HTTP 400/403 có `insufficient|paywall|wallet|balance|quota|credit`),
+  không phải model chết — đừng gỡ khỏi config chỉ vì badge này.
+- Badge scope theo **provider**, không theo id (`mistralai/mistral-large-4-0` có ở cả free và max).
+- Test: `tests/Health.Tests.ps1` (hàm thuần) + `tests/Update-XKiroModels.Tests.ps1`
+  (strip badge khi sync).
+
 ## xKiro có nhiều modality — `/v1/models` mặc định CHỈ trả chat
 
 `GET /v1/models` **loại image/audio/search khỏi picker**. Xin thêm bằng

@@ -419,6 +419,16 @@ Describe 'Remove-HandAnnotation' {
     It 'vẫn giữ badge 🆕 (không nhầm với annotation)' {
         Remove-HandAnnotation '🆕 Command A · 288K' | Should -Be '🆕 Command A · 288K'
     }
+    It 'gỡ badge trạng thái sức khoẻ (⚡🐌🟡🔒⛔) — sync tái tạo sau' {
+        Remove-HandAnnotation '⚡[L] Model A · 128K' | Should -Be '[L] Model A · 128K'
+        Remove-HandAnnotation '🐌Model B · 64K' | Should -Be 'Model B · 64K'
+        Remove-HandAnnotation '🔒[S] Model C · 256K' | Should -Be '[S] Model C · 256K'
+        Remove-HandAnnotation '⛔Model D · 32K' | Should -Be 'Model D · 32K'
+    }
+    It 'gỡ badge sức khoẻ NHƯNG giữ ⭐/🆕' {
+        Remove-HandAnnotation '⭐⚡Qwen3.8 Max · 1M' | Should -Be '⭐Qwen3.8 Max · 1M'
+        Remove-HandAnnotation '🆕🐌Model E · 16K' | Should -Be '🆕Model E · 16K'
+    }
 }
 
 Describe 'Set-ProviderNameLine' {

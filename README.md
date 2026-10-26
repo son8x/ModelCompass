@@ -42,7 +42,8 @@ opencode đang chạy**.
     N lần mỗi model, tổng hợp median ms + tokens/giây.
 12. **CLI `mc`** — gói gọn mọi script thành 1 lệnh: `mc sync`, `mc publish`,
     `mc status`, `mc report`, `mc doctor` (check services local + config),
-    `mc benchmark`, `mc export`, `mc help` (`modules/ModelCompass/`).
+    `mc health` (độ trễ + trạng thái), `mc benchmark`, `mc export`, `mc help`
+    (`modules/ModelCompass/`).
 13. **Model Bank (dạng dùng chung)** — `scripts/provider/Export-ModelBank.ps1` sinh JSON
     có schema (`model-bank/schema.json`) từ production config + presets để đồng
     bộ nhiều máy / công cụ khác tiêu thụ.
@@ -56,6 +57,11 @@ opencode đang chạy**.
     chỉ báo cáo, `-Apply` mới ghi vào `name` (backup + validate). `Update-RecommendDocs.ps1`
     đồng bộ bảng `⭐` vào `docs/model-reference.md` §2 (CI `-Check` chống drift); gộp cả
     hai bằng `Update-XKiroModels.ps1 -Recommend`.
+17. **Trạng thái model trong picker** — `scripts/health/Test-ModelHealth.ps1` đo độ trễ
+    từng model và gắn **badge** vào đầu `name` để nhìn ngay trong `/model`:
+    `⚡` nhanh (≤1.5s), `🐌` chậm/timeout, `🟡` rate-limit, `🔒` khoá (403/hết ví),
+    `⛔` chết; model bình thường không badge. `mc health` chỉ báo cáo, `-Apply` mới ghi
+    (backup + validate), `-Json` xuất `reports/model-health.json`. Chạy **sau** `mc sync`.
 
 ---
 
@@ -317,6 +323,31 @@ pwsh scripts\test\Test-ModelConnectivity.ps1 -Benchmark -Provider '1-xkiro-free'
 `-Benchmark` **bắt buộc** thu hẹp bằng `-Provider` hoặc `-Model` để không đốt
 quota khi chạy cả catalog.
 
+## 🩺 Kiểm tra sức khoẻ model (badge trong picker)
+
+`Test-ModelHealth.ps1` đo độ trễ từng model (mặc định 1 lượt, lấy median nếu `-Runs`
+lớn hơn) và **gắn badge vào đầu `name`** để bạn thấy ngay trong danh sách `/model`:
+
+| Badge | Lớp | Ý nghĩa |
+|---|---|---|
+| `⚡` | fast | OK, ≤ `-FastMs` (mặc định 1500ms) — **nên dùng** |
+| — | ok | OK, ≤ `-SlowMs` (5000ms) — bình thường |
+| `🐌` | slow | OK nhưng > `-SlowMs`, hoặc timeout — chậm/treo |
+| `🟡` | busy | HTTP 429 — rate limit (tạm thời, **không** ghi vào name) |
+| `🔒` | locked | HTTP 402/403 hoặc paywall (hết ví/quota) — cần nạp/gói cao hơn |
+| `⛔` | down | 401/404/503/lỗi mạng — không dùng được |
+
+```powershell
+mc health                                  # báo cáo toàn bộ, không sửa file
+mc health -Provider '1-xkiro-free' -ShowTop 15
+mc health -Runs 3 -Json                    # ổn định hơn + reports/model-health.json
+mc health -Apply                           # gắn badge vào config development
+mc publish; mc install                     # đưa badge lên picker đang dùng
+```
+
+Quy trình đúng: **`mc sync` → `mc health -Apply`** (sync gỡ badge cũ để tránh lỗi thời,
+health gắn lại theo số đo mới). Badge là do script quản lý, **không ghi tay**.
+
 ## 🧭 ModelCompass CLI (`mc`)
 
 Gói gọn mọi script thành 1 lệnh — module PowerShell tại `modules/ModelCompass/`,
@@ -330,6 +361,7 @@ gọi script qua tiến trình pwsh con (an toàn khi script có `exit`):
 & scripts\mc.ps1 report -Month 2026-09      # spend report
 & scripts\mc.ps1 export                     # sinh model-bank/modelbank.json
 & scripts\mc.ps1 sync                       # kéo catalog provider (mạng)
+& scripts\mc.ps1 health -Apply             # đo độ trễ + gắn badge trạng thái
 & scripts\mc.ps1 server                     # trạng thái server + URL cho điện thoại
 & scripts\mc.ps1 server-setup               # cài tự chạy lúc boot (cần PowerShell Admin)
 ```

@@ -4,6 +4,41 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.9.0] — 2026-10-26 — Trạng thái sức khoẻ model ngay trong picker
+
+### Thêm
+- **`scripts/health/Test-ModelHealth.ps1`** + lệnh **`mc health`**: probe song song
+  từng model, đo độ trễ (median khi `-Runs > 1`) và gắn **badge vào đầu `name`**
+  để hiện trong `/model`: `⚡` nhanh (≤1500ms), `🐌` chậm/timeout, `🟡` rate-limit,
+  `🔒` khoá, `⛔` chết; model bình thường không badge.
+  `-Apply` ghi config (backup + validate + tự khôi phục), `-Json` xuất
+  `reports/model-health.json`, `-ShowTop`, `-Provider`, `-Model`, `-Parallel`.
+- **Nhận diện paywall** → `🔒 locked`: HTTP `402`, hoặc `400/403` với body chứa
+  `insufficient|paywall|wallet|balance|quota|credit` (ví dụ teamoRouter
+  `insufficient_balance`). `TIMEOUT` xếp `🐌 slow` (kết nối được nhưng không trả lời),
+  không phải `⛔`.
+- **`Remove-HandAnnotation` gỡ badge sức khoẻ** khi `mc sync` (giữ `⭐`/`🆕`) để
+  trạng thái không bị lỗi thời; quy trình: `mc sync` → `mc health -Apply` →
+  `mc publish` → `mc install`.
+- Test: `tests/Health.Tests.ps1` (28 test hàm thuần) + 2 test strip badge trong
+  `tests/Update-XKiroModels.Tests.ps1`.
+
+### Sửa (dữ liệu sync 26/10)
+- `1-xkiro-free`: **48 model** (giữ nguyên).
+- `2-xkiro-max`: **44 model** (gỡ `openai/gpt-5.4`, `gpt-5.5`, `gpt-5.4-mini`,
+  `nvidia/nemotron-3-super` — rời catalog).
+- `3-xkiro-ultra`: **3 model** (3 `deepseek/*` biến mất khỏi catalog).
+- Giá `mistralai/mistral-large-4-0`: `$0.00/$0.00` → **`$0.68/$2.09`**.
+- Đồng bộ lại bảng `⭐` trong `docs/model-reference.md` §2 (ngày 26/10).
+
+### Ghi chú
+- `🟡 busy` (429) là tạm thời — `-Apply` **không** ghi vào `name` (tránh đóng băng
+  trạng thái do chính đợt probe gây ra). Badge scope theo **provider**, không theo id.
+
+### Kiểm chứng
+- `Test-Suite.ps1`: **349/349** pass; config dev validate OK; 109/109 badge khớp
+  `reports/model-health.json`.
+
 ## [0.8.1] — 2026-10-21 — Sửa khớp nhãn chức năng + ghi rõ modality service
 
 ### Sửa

@@ -18,9 +18,9 @@
 
 | # | Provider | Loại | Thế mạnh | Lưu ý |
 |---|---|---|---|---|
-| 1 | `1-xkiro-free` | Router free tier | Qwen, Cohere, Mistral | **48 model free** (20/10) — ⭐ theo tác vụ |
-| 2 | `2-xkiro-max` | Router $20/tháng | Claude/GPT/Grok/GLM | **47 model**, 4 nhóm `[L]/[B]/[A]/[S]`, budget $140/tuần — ⭐ theo nhóm/tác vụ |
-| 3 | `3-xkiro-ultra` | Router — cần nạp thêm phí | DeepSeek V4, Grok 4.5, Claude Fable 5.1, GPT-6 Astra | **6 model** probe 403 (wallet / gói ≥Ultra); cùng key `XTROUTER_API_KEY` |
+| 1 | `1-xkiro-free` | Router free tier | Qwen, Cohere, Mistral | **48 model free** (26/10) — ⭐ theo tác vụ |
+| 2 | `2-xkiro-max` | Router $20/tháng | Claude/GPT/Grok/GLM | **44 model**, 4 nhóm `[L]/[B]/[A]/[S]`, budget $140/tuần — ⭐ theo nhóm/tác vụ |
+| 3 | `3-xkiro-ultra` | Router — cần nạp thêm phí | Grok 4.5, Claude Fable 5.1, GPT-6 Astra | **3 model** probe 403 (wallet / gói ≥Ultra); cùng key `XTROUTER_API_KEY` |
 | 3 | `3-omniroute-free` | Route local | Cloudflare free (GLM-5.2, DeepSeek V4 Pro) | Cần local 127.0.0.1:20217 |
 | 4 | `4-openrouter-free` | Route local | OpenRouter `:free` | 50 RPD, 1K nếu nạp $10 |
 | 5 | `5-9router` | Router local | GPT-OSS 120B local | Cổng 20128 |
@@ -59,7 +59,7 @@
 ## 2. ⭐ Model khuyến nghị xKiro (tự sinh)
 
 <!-- BEGIN:recommend-stars — TỰ SINH bởi scripts/recommend/Update-RecommendDocs.ps1; ĐỪNG sửa tay (chạy `mc recommend-docs` để cập nhật) -->
-> Cập nhật tự động: **21/10/2026** — **13 model** được khuyến nghị
+> Cập nhật tự động: **26/10/2026** — **13 model** được khuyến nghị
 > (7 free + 6 trả phí) — ⭐ ở đầu `name` trong `/model`. Sinh bởi
 > `scripts/recommend/Update-RecommendDocs.ps1`; chạy `mc recommend-docs` để cập nhật.
 
@@ -104,9 +104,9 @@ opencode dùng `release_date` của model làm **khoá sắp xếp chính** tron
 (model có `release_date` LỚN hơn hiện TRƯỚC). Vì field này **không hiển thị ở bất kỳ đâu trên UI**,
 ta dùng nó làm "khoá sắp xếp tổng hợp" — 2 provider xKiro hiện tại đã áp dụng:
 
-- `1-xkiro-free` — **48 model free** (20/10/2026): Qwen 19 · Cohere 16 · Mistral 9 · Stealth 1 · Meituan 2 · SenseNova 1. Thứ tự **theo độ mạnh giảm dần** (Qwen3.8 Max trên cùng), `release_date` từ `2099-12-31` giảm dần; `mistral-large-4-0` đặt ở **`2099-11-25`** (giữa nhóm Mistral). Stealth `space-bunny-alpha:free` đã gỡ (probe 404). Lỗi còn lại: `cohere/command-a-reasoning` hay **timeout >25s**.
-- `2-xkiro-max` — **47 model** dùng được trên gói Max (probe 20/10), hiển thị **theo 4 nhóm sức mạnh** rẻ-nhanh → mạnh nhất: `[L] Nhẹ·Nhanh·Rẻ` → `[B] Đa dụng giá tốt` → `[A] Mạnh đa dụng` → `[S] Flagship`. Tag nhóm ngay trong `name` để nhận biết model **cùng tầng / thay thế được cho nhau**. Tên hiển thị ghi giá đầy đủ `In/Out` (USD/1M token) lấy từ catalog live — trên gói Max tính theo allowance (không trừ per-token), giá dùng để ước lượng khi nạp thêm wallet.
-- `3-xkiro-ultra` — **6 model** chưa dùng được trên gói Max: probe trả **403** = tính theo **wallet (pay-as-you-go)** hoặc yêu cầu gói **≥ Ultra/Power**. Gồm DeepSeek V4 (v4.1-flash, v4-flash-0731, v4-pro-0813), Grok 4.5, Claude Fable 5.1, GPT-6 Astra. Cùng key `XTROUTER_API_KEY`, đổi provider chỉ để **tách khỏi danh sách chạy được** — CHỈ có tác dụng sau khi nạp thêm phí. Tag nhóm `[L]/[B]/[A]/[S]` theo giá như Max.
+- `1-xkiro-free` — **48 model free** (26/10/2026): Qwen 19 · Cohere 16 · Mistral 9 · Stealth 1 · Meituan 2 · SenseNova 1. Thứ tự **theo độ mạnh giảm dần** (Qwen3.8 Max trên cùng), `release_date` từ `2099-12-31` giảm dần; `mistral-large-4-0` đặt ở **`2099-11-25`** (giữa nhóm Mistral). Stealth `space-bunny-alpha:free` đã gỡ (probe 404). `cohere/command-a-*` có lúc **timeout** rồi nhanh trở lại → xem badge `🐌`/`⚡` thay vì tin cố định.
+- `2-xkiro-max` — **44 model** dùng được trên gói Max (probe 26/10; đã gỡ `openai/gpt-5.4`, `gpt-5.5`, `gpt-5.4-mini`, `nvidia/nemotron-3-super` vì rời catalog), hiển thị **theo 4 nhóm sức mạnh** rẻ-nhanh → mạnh nhất: `[L] Nhẹ·Nhanh·Rẻ` → `[B] Đa dụng giá tốt` → `[A] Mạnh đa dụng` → `[S] Flagship`. Tag nhóm ngay trong `name` để nhận biết model **cùng tầng / thay thế được cho nhau**. Tên hiển thị ghi giá đầy đủ `In/Out` (USD/1M token) lấy từ catalog live — trên gói Max tính theo allowance (không trừ per-token), giá dùng để ước lượng khi nạp thêm wallet.
+- `3-xkiro-ultra` — **3 model** chưa dùng được trên gói Max: probe trả **403** = tính theo **wallet (pay-as-you-go)** hoặc yêu cầu gói **≥ Ultra/Power**. Gồm Grok 4.5, Claude Fable 5.1, GPT-6 Astra (3 model DeepSeek V4 đã biến mất khỏi catalog ngày 26/10). Cùng key `XTROUTER_API_KEY`, đổi provider chỉ để **tách khỏi danh sách chạy được** — CHỈ có tác dụng sau khi nạp thêm phí. Tag nhóm `[L]/[B]/[A]/[S]` theo giá như Max.
 
 > 📌 Lịch sử thêm/gỡ model, danh sách model bị `403` (tính wallet / cần gói ≥ Ultra), model lỗi tạm
 > (`⚠️`), và các đợt sync theo ngày: xem **[STATUS.md](../STATUS.md)** (mục "Lịch sử đáng nhớ").
@@ -140,6 +140,27 @@ Helper tránh trùng key bằng `-Exclude` (tự động nạp key sẵn có tro
 > Cách thay thế (không khuyến khích): đánh số vào `name` ("01 · DeepSeek V4 Pro"…) cũng ép được thứ tự
 > khi không có `release_date`, nhưng làm **nhiễu fuzzy search** (`fuzzysort` gõ chữ số) và hiển thị số xấu
 > trong picker/badge — chỉ dùng khi buộc phải ưu tiên "minh bạch trong file".
+
+### 3c. Badge trạng thái sức khoẻ (`scripts\health\Test-ModelHealth.ps1`)
+
+Badge là **prefix trong `name`**, chèn **sau** `⭐`/`🆕`, để thấy ngay trong `/model`:
+
+| Badge | Lớp | Điều kiện |
+|---|---|---|
+| `⚡` | fast | `200`, độ trễ ≤ `-FastMs` (1500ms) |
+| *(không)* | ok | `200`, ≤ `-SlowMs` (5000ms) |
+| `🐌` | slow | `200` nhưng > `-SlowMs`, hoặc `TIMEOUT` |
+| `🟡` | busy | `429` — **tạm thời**, `-Apply` KHÔNG ghi vào `name` |
+| `🔒` | locked | `402`; hoặc `400/403` + body khớp `insufficient\|paywall\|wallet\|balance\|quota\|credit` |
+| `⛔` | down | `401/404/5xx`/lỗi mạng |
+
+- Chạy **sau `mc sync`**: sync gỡ badge cũ (`Remove-HandAnnotation`) để trạng thái không bị lỗi thời;
+  `mc health -Apply` đo lại và gắn badge mới (backup + validate, tự khôi phục nếu config hỏng).
+- `-Apply` **bỏ qua `busy`** vì 429 là hệ quả của chính đợt probe dồn dập, không phải trạng thái thật.
+- Badge được scope theo **provider**, không theo id: `mistralai/mistral-large-4-0` xuất hiện ở cả
+  `1-xkiro-free` và `2-xkiro-max` nên có thể mang badge khác nhau.
+- `-Json` ghi `reports/model-health.json` (gitignored) để so sánh giữa các lần đo.
+- Ví dụ: `mc health -Provider '1-xkiro-free' -ShowTop 15`; `mc health -Runs 3 -Apply`.
 
 ---
 

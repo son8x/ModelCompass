@@ -763,11 +763,14 @@ function Set-ProviderModelsBlock {
 .SYNOPSIS
     Gỡ annotation GHI TAY khỏi name model (vd " ⚠️đang 500", " ⚠️ERR tạm").
     Annotation không được probe kiểm tra nên dễ lỗi thời/gây rối — sync sẽ tự strip
-    mọi thứ từ dấu ⚠️ đến cuối name. THUẦN.
+    mọi thứ từ dấu ⚠️ đến cuối name.
+    Gỡ LUÔN badge trạng thái (⚡🐌🟡🔒⛔) do Test-ModelHealth.ps1 gắn — tránh tích
+    tụ/lỗi thời; chạy `mc health -Apply` SAU sync để gắn lại theo số đo mới. THUẦN.
 #>
 function Remove-HandAnnotation {
     param([Parameter(Mandatory)][string]$Name)
     $clean = $Name -replace '\s*⚠️.*$', ''
+    $clean = $clean -replace '^(?<pre>(?:⭐|🆕|\s)*)(?:⚡|🐌|🟡|🔒|⛔)\s*', '${pre}'
     return $clean.TrimEnd()
 }
 
@@ -1113,6 +1116,7 @@ if ($Recommend) {
 
 Write-Step 'BƯỚC TIẾP'
 Write-Host '  • Kiểm tra giá: pwsh scripts/provider/Compare-Prices.ps1 -ConfigMode dev -FailOnDiff'
+Write-Host '  • Trạng thái model: pwsh scripts/health/Test-ModelHealth.ps1 -Apply  (badge ⚡🐌🟡🔒⛔)'
 Write-Host '  • Quy trình hoàn tất: pwsh scripts/config/Publish-Config.ps1 -Yes'
 Write-Host '  • Áp dụng global: pwsh scripts/config/Install-Config.ps1 -Force'
 
