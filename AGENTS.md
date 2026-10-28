@@ -118,6 +118,22 @@ sau sẽ tái tạo.
 - Test: `tests/Health.Tests.ps1` (hàm thuần) + `tests/Update-XKiroModels.Tests.ps1`
   (strip badge khi sync).
 
+## Tier đề xuất do script quản lý (`⭐✦·`)
+
+`scripts/recommend/*` gắn tiền tố mức ưu tiên vào **đầu `name`**, trước badge sức khoẻ:
+`⭐` primary · `✦` fallback · `·` alt (mặc định `-Top 3`). **Không ghi tay, không đổi tier
+bằng tay** — `mc recommend -Apply` tái tạo; `mc recommend-docs` đồng bộ §2 `docs/model-reference.md`.
+
+- Layout chuẩn: **`[tier][health badge][phần còn lại]`** — vd `⭐ ⚡[A] Gemini 3.1 Pro …`.
+- `mc sync` **giữ** tier (chỉ gỡ badge sức khoẻ). `Remove-HandAnnotation` và
+  `Add/Remove-HealthBadge` phải nhận `⭐|✦|·` trong prefix class — nếu thiếu, badge bị chèn
+  trước tier hoặc tier bị xoá.
+- `Test-ModelHasStar` = có **bất kỳ** tier; strip chỉ `^\s*(?:⭐|✦|·)\s*` (không đụng `·`
+  phân cách capability ở giữa tên).
+- Model `slow/down/locked` bị đẩy xuống cuối pool, không bị loại; `-Top 1` = hành vi cũ (chỉ ⭐).
+- Thứ tự: **`mc recommend -Apply` → `mc recommend-docs` → `mc health -Apply` → publish/install**.
+- Test: `tests/Recommend.Tests.ps1`, `tests/RecommendDocs.Tests.ps1` (drift guard §2).
+
 ## xKiro có nhiều modality — `/v1/models` mặc định CHỈ trả chat
 
 `GET /v1/models` **loại image/audio/search khỏi picker**. Xin thêm bằng

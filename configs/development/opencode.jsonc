@@ -88,7 +88,7 @@
     //  ⭐ = model KHUYẾN NGHỊ, tác vụ tốt nhất ghi ở cuối tên (xem bảng §2 docs).
     "1-xkiro-free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "1. xKiro Free — 48 model",
+      "name": "1. xKiro Free — 46 model",
       "options": {
         "baseURL": "https://api.xkiro.com/v1",
         "apiKey": "{env:XTROUTER_API_KEY}"
@@ -104,8 +104,8 @@
         //  ⭐ ở đầu tên = model khuyến nghị cho tác vụ ghi kèm (bảng §2 docs).
         //  (DeepSeek/MiniMax đã rời tier free; 4 model HTTP 404 đã gỡ 16/10.)
         "qwen/qwen3.8-max:free": { "name": "⭐ Qwen3.8 Max · 1M · reasoning (mặc định) · vision", "release_date": "2099-12-31" },
-        "qwen/qwen3.7-plus:free": { "name": "Qwen3.7 Plus · 1M · vision · reasoning", "release_date": "2099-12-29" },
-        "qwen/qwen3.5-plus:free": { "name": "Qwen3.5 Plus · 1M · vision · reasoning", "release_date": "2099-12-28" },
+        "qwen/qwen3.7-plus:free": { "name": "✦ Qwen3.7 Plus · 1M · vision · reasoning", "release_date": "2099-12-29" },
+        "qwen/qwen3.5-plus:free": { "name": "· Qwen3.5 Plus · 1M · vision · reasoning", "release_date": "2099-12-28" },
         "qwen/qwen3-coder-plus:free": { "name": "⭐ Qwen3 Coder Plus · 1M · code · vision · reasoning", "release_date": "2099-12-26" },
         "qwen/qwen3.5-397b-a17b:free": { "name": "Qwen3.5 397B-A17B · vision · reasoning", "release_date": "2099-12-21" },
         "qwen/qwen3.6-35b-a3b:free": { "name": "Qwen3.6 35B-A3B · vision · reasoning", "release_date": "2099-12-20" },
@@ -113,20 +113,20 @@
         "qwen/qwen3.6-plus:free": { "name": "Qwen3.6 Plus · 1M · vision · reasoning", "release_date": "2099-12-18" },
         "qwen/qwen3.6-27b:free": { "name": "Qwen3.6 27B · vision · reasoning", "release_date": "2099-12-17" },
         "qwen/qwen3.5-flash:free": { "name": "⭐ Qwen3.5 Flash · 1M · nhanh · vision · reasoning", "release_date": "2099-12-16" },
-        "qwen/qwen3.7-flash:free": { "name": "Qwen3.7 Flash · 1M · vision · reasoning", "release_date": "2099-12-15" },
+        "qwen/qwen3.7-flash:free": { "name": "✦ Qwen3.7 Flash · 1M · vision · reasoning", "release_date": "2099-12-15" },
         "qwen/qwen3.7-max:free": { "name": "Qwen3.7 Max · 1M · reasoning", "release_date": "2099-12-14" },
         "qwen/qwen3-max:free": { "name": "Qwen3 Max · vision · reasoning", "release_date": "2099-12-13" },
         "qwen/qwen3.8-omni-flash:free": { "name": "⭐ Qwen3.8 Omni · 1M · omni · vision · reasoning", "release_date": "2099-12-12" },
-        "qwen/qwen3.5-omni-plus:free": { "name": "Qwen3.5 Omni Plus · omni · vision", "release_date": "2099-12-11" },
-        "qwen/qwen3.5-omni-flash:free": { "name": "Qwen3.5 Omni Flash · omni · vision", "release_date": "2099-12-10" },
+        "qwen/qwen3.5-omni-plus:free": { "name": "✦ Qwen3.5 Omni Plus · omni · vision", "release_date": "2099-12-11" },
+        "qwen/qwen3.5-omni-flash:free": { "name": "· Qwen3.5 Omni Flash · omni · vision", "release_date": "2099-12-10" },
         "qwen/qwen3-omni-flash:free": { "name": "Qwen3 Omni Flash · omni · vision", "release_date": "2099-12-09" },
         "qwen/qwen3-vl-plus:free": { "name": "⭐ Qwen3 VL Plus · vision · reasoning", "release_date": "2099-12-08" },
         "qwen/qwen-plus-2025-07-28:free": { "name": "Qwen Plus 0728 · vision · reasoning", "release_date": "2099-12-07" },
         "mistralai/mistral-medium-3.5": { "name": "⚡Mistral Medium 3.5 · 256K · reasoning · vision", "release_date": "2099-12-06" },
         "mistralai/mistral-large-2512": { "name": "⚡Mistral Large 3 · 256K · vision", "release_date": "2099-12-05" },
         "mistralai/mistral-small-2603": { "name": "⚡Mistral Small 4 · vision · reasoning", "release_date": "2099-12-04" },
-        "mistralai/codestral-2508": { "name": "⚡Codestral · code", "release_date": "2099-12-03" },
-        "mistralai/devstral-medium": { "name": "⚡Devstral 2 · dev/code", "release_date": "2099-12-02" },
+        "mistralai/codestral-2508": { "name": "✦ ⚡Codestral · code", "release_date": "2099-12-03" },
+        "mistralai/devstral-medium": { "name": "· ⚡Devstral 2 · dev/code", "release_date": "2099-12-02" },
         "mistralai/ministral-14b": { "name": "⚡Ministral 14B · vision", "release_date": "2099-12-01" },
         "mistralai/ministral-8b": { "name": "⚡Ministral 8B · vision", "release_date": "2099-11-30" },
         "mistralai/ministral-3b": { "name": "⚡Ministral 3B · vision", "release_date": "2099-11-29" },
@@ -143,13 +143,11 @@
         "cohere/command-r-plus-08-2024": { "name": "⚡Command R Plus 08 2024 · 128K", "release_date": "2099-11-11" },
         "cohere/command-r7b-12-2024": { "name": "⚡Command R7b 12 2024 · 132K", "release_date": "2099-11-10" },
         "cohere/north-mini-code": { "name": "⚡North Mini Code · 256K · reasoning", "release_date": "2099-11-09" },
-        "cohere/north-small-translate": { "name": "⚡North Small Translate · 32.8K", "release_date": "2099-11-08" },
+        "cohere/north-small-translate": { "name": "✦ ⚡North Small Translate · 32.8K", "release_date": "2099-11-08" },
         "cohere/tiny-aya-earth": { "name": "⚡Tiny Aya Earth · 8.2K", "release_date": "2099-11-07" },
         "cohere/tiny-aya-fire": { "name": "⚡Tiny Aya Fire · 8.2K", "release_date": "2099-11-06" },
         "cohere/tiny-aya-global": { "name": "⚡Tiny Aya Global · 8.2K", "release_date": "2099-11-05" },
         "cohere/tiny-aya-water": { "name": "⚡Tiny Aya Water · 8.2K", "release_date": "2099-11-04" },
-        "meituan/longcat-2.0": { "name": "⛔Longcat 2.0 · 1M · reasoning", "release_date": "2099-10-31" },
-        "meituan/longcat-2.5-preview:free": { "name": "⛔Longcat 2.5 Preview · 1M · reasoning", "release_date": "2099-10-30" },
         "stealth/big-pickle": { "name": "⛔Big Pickle · 200K · reasoning", "release_date": "2099-10-27" }
       }
     },
@@ -181,37 +179,37 @@
         //  model đầu nhóm (rẻ nhất) hiện trên cùng. Đổi vị trí = đổi đơn giá/date.
         //  ⭐ = model KHUYẾN NGHỊ cho tác vụ ghi kèm (bảng "Recommended" §2 docs).
         // ── [L] Nhẹ·Nhanh·Rẻ — tác vụ đơn giản, chạy nhiều ──
-        "nvidia/nemotron-3-nano-omni": { "name": "⭐ ⚡[L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision · reasoning · omni", "release_date": "2099-12-29" },
-        "openai/gpt-6-luna": { "name": "[L] GPT-6 Luna · $0.10/$0.50 · reasoning/vision", "release_date": "2099-12-26" },
-        "openai/gpt-5.6-luna": { "name": "[L] GPT-5.6 Luna · $0.10/$0.60 · reasoning/vision", "release_date": "2099-12-25" },
-        "xiaomi/mimo-v2.6-flash": { "name": "[L] MiMo V2.6 Flash · $0.14/$0.28 · 1M · vision · reasoning", "release_date": "2099-12-23" },
-        "xiaomi/mimo-v2.5": { "name": "⚡[L] MiMo V2.5 · $0.14/$0.28 · 1M · vision · reasoning", "release_date": "2099-12-22" },
-        "google/gemini-2.5-flash": { "name": "[L] Gemini 2.5 Flash · $0.30/$2.50 · 1M · nhanh · vision · reasoning", "release_date": "2099-12-19" },
-        "minimax/minimax-m2.7": { "name": "⚡[L] MiniMax M2.7 · $0.30/$1.20 · 204.8K · reasoning", "release_date": "2099-12-18" },
-        "minimax/minimax-m2": { "name": "⚡[L] MiniMax M2 · $0.30/$1.20 · 204.8K · reasoning", "release_date": "2099-12-17" },
-        "minimax/minimax-m2.1": { "name": "⚡[L] MiniMax M2.1 · $0.30/$1.20 · 204.8K · reasoning", "release_date": "2099-12-16" },
-        "minimax/minimax-m2.5": { "name": "⚡[L] MiniMax M2.5 · $0.30/$1.20 · 204.8K · reasoning", "release_date": "2099-12-15" },
-        "minimax/minimax-m3": { "name": "⚡[L] MiniMax M3 · $0.30/$1.20 · 1M · vision · reasoning", "release_date": "2099-12-14" },
-        "google/gemini-3-flash": { "name": "[L] Gemini 3 Flash · $0.75/$3.75 · 1M · nhanh · vision · reasoning", "release_date": "2099-12-10" },
+        "nvidia/nemotron-3-nano-omni": { "name": "⭐ [L] Nemotron 3 Nano Omni · $0.05/$0.20 · vision · reasoning · omni", "release_date": "2099-12-29" },
+        "openai/gpt-6-luna": { "name": "· ⛔[L] GPT-6 Luna · $0.10/$0.50 · reasoning/vision", "release_date": "2099-12-26" },
+        "openai/gpt-5.6-luna": { "name": "⛔[L] GPT-5.6 Luna · $0.10/$0.60 · reasoning/vision", "release_date": "2099-12-25" },
+        "xiaomi/mimo-v2.6-flash": { "name": "✦ [L] MiMo V2.6 Flash · $0.14/$0.28 · 1M · vision · reasoning", "release_date": "2099-12-23" },
+        "xiaomi/mimo-v2.5": { "name": "[L] MiMo V2.5 · $0.14/$0.28 · 1M · vision · reasoning", "release_date": "2099-12-22" },
+        "google/gemini-2.5-flash": { "name": "· ⛔[L] Gemini 2.5 Flash · $0.30/$2.50 · 1M · nhanh · vision · reasoning", "release_date": "2099-12-19" },
+        "minimax/minimax-m2.7": { "name": "[L] MiniMax M2.7 · $0.30/$1.20 · 204.8K · reasoning", "release_date": "2099-12-18" },
+        "minimax/minimax-m2": { "name": "[L] MiniMax M2 · $0.30/$1.20 · 204.8K · reasoning", "release_date": "2099-12-17" },
+        "minimax/minimax-m2.1": { "name": "[L] MiniMax M2.1 · $0.30/$1.20 · 204.8K · reasoning", "release_date": "2099-12-16" },
+        "minimax/minimax-m2.5": { "name": "[L] MiniMax M2.5 · $0.30/$1.20 · 204.8K · reasoning", "release_date": "2099-12-15" },
+        "minimax/minimax-m3": { "name": "[L] MiniMax M3 · $0.30/$1.20 · 1M · vision · reasoning", "release_date": "2099-12-14" },
+        "google/gemini-3-flash": { "name": "⛔[L] Gemini 3 Flash · $0.75/$3.75 · 1M · nhanh · vision · reasoning", "release_date": "2099-12-10" },
         "anthropic/claude-haiku-4.5": { "name": "[L] Claude Haiku 4.5 · $1.00/$5.00 · nhanh · vision · reasoning", "release_date": "2099-12-09" },
         "anthropic/claude-haiku-5.5": { "name": "[L] Claude Haiku 5.5 · $0.10/$0.50 · 1M · vision · reasoning", "release_date": "2099-12-03" },
         "minimax/minimax-m3.1-flash": { "name": "[L] MiniMax M3.1 Flash · $0.15/$0.60 · 1M · vision · reasoning", "release_date": "2099-11-30" },
         // ── [B] Đa dụng giá tốt — chat hàng ngày, việc chung ──
         "xiaomi/mimo-v2.6-pro": { "name": "[B] MiMo V2.6 Pro · $0.435/$0.87 · 1M · vision · reasoning", "release_date": "2099-11-28" },
-        "minimax/minimax-m2.1-highspeed": { "name": "⚡[B] MiniMax M2.1 Highspeed · $0.60/$2.40 · 204.8K · reasoning", "release_date": "2099-11-25" },
-        "minimax/minimax-m2.7-highspeed": { "name": "🐌[B] MiniMax M2.7 Highspeed · $0.60/$2.40 · 204.8K · reasoning", "release_date": "2099-11-23" },
-        "nvidia/nemotron-3-ultra": { "name": "🐌[B] Nemotron 3 Ultra · $0.60/$2.40 · 1M · mạnh · reasoning", "release_date": "2099-11-22" },
-        "minimax/minimax-m2.5-highspeed": { "name": "🐌[B] MiniMax M2.5 Highspeed · $0.60/$2.40 · 204.8K · reasoning", "release_date": "2099-11-21" },
-        "google/gemini-2.5-pro": { "name": "[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M · vision · reasoning", "release_date": "2099-11-20" },
+        "minimax/minimax-m2.1-highspeed": { "name": "[B] MiniMax M2.1 Highspeed · $0.60/$2.40 · 204.8K · reasoning", "release_date": "2099-11-25" },
+        "minimax/minimax-m2.7-highspeed": { "name": "[B] MiniMax M2.7 Highspeed · $0.60/$2.40 · 204.8K · reasoning", "release_date": "2099-11-23" },
+        "nvidia/nemotron-3-ultra": { "name": "[B] Nemotron 3 Ultra · $0.60/$2.40 · 1M · mạnh · reasoning", "release_date": "2099-11-22" },
+        "minimax/minimax-m2.5-highspeed": { "name": "[B] MiniMax M2.5 Highspeed · $0.60/$2.40 · 204.8K · reasoning", "release_date": "2099-11-21" },
+        "google/gemini-2.5-pro": { "name": "⛔[B] Gemini 2.5 Pro · $1.25/$10.00 · 1M · vision · reasoning", "release_date": "2099-11-20" },
         // ── [A] Mạnh đa dụng — agent, coding sâu, luận văn ──
-        "mistralai/mistral-large-4-0": { "name": "⚡[A] Mistral Large 4 0 · $0.68/$2.09 · 524.3K · vision · reasoning", "release_date": "2099-10-31" },
-        "google/gemini-3.6-flash": { "name": "[A] Gemini 3.6 Flash · $0.75/$3.75 · 1M · vision · reasoning", "release_date": "2099-10-30" },
-        "google/gemini-3.7-flash": { "name": "[A] Gemini 3.7 Flash · $0.75/$3.75 · 1M · vision · reasoning", "release_date": "2099-10-29" },
-        "google/gemini-3.8-flash": { "name": "⭐ [A] Gemini 3.8 Flash · $0.75/$3.75 · 1M · vision (✓Max) · reasoning", "release_date": "2099-10-28" },
+        "mistralai/mistral-large-4-0": { "name": "[A] Mistral Large 4 0 · $0.68/$2.09 · 524.3K · vision · reasoning", "release_date": "2099-10-31" },
+        "google/gemini-3.6-flash": { "name": "⛔[A] Gemini 3.6 Flash · $0.75/$3.75 · 1M · vision · reasoning", "release_date": "2099-10-30" },
+        "google/gemini-3.7-flash": { "name": "⛔[A] Gemini 3.7 Flash · $0.75/$3.75 · 1M · vision · reasoning", "release_date": "2099-10-29" },
+        "google/gemini-3.8-flash": { "name": "⭐ ⛔[A] Gemini 3.8 Flash · $0.75/$3.75 · 1M · vision (✓Max) · reasoning", "release_date": "2099-10-28" },
         "openai/gpt-5.6-terra": { "name": "[A] GPT-5.6 Terra · $1.00/$6.00 · 1M · vision · reasoning", "release_date": "2099-10-27" },
-        "google/gemini-3.5-flash": { "name": "[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M · vision · reasoning", "release_date": "2099-10-25" },
-        "google/gemini-3.1-pro": { "name": "⭐ [A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · nghiên cứu · vision · reasoning", "release_date": "2099-10-24" },
-        "x-ai/grok-4.7": { "name": "⭐ 🐌[A] Grok 4.7 · $2.00/$6.00 · 500K · code · vision · reasoning", "release_date": "2099-10-23" },
+        "google/gemini-3.5-flash": { "name": "⛔[A] Gemini 3.5 Flash · $1.50/$9.00 · 1M · vision · reasoning", "release_date": "2099-10-25" },
+        "google/gemini-3.1-pro": { "name": "⭐ ⛔[A] Gemini 3.1 Pro · $2.00/$12.00 · 1M · nghiên cứu · vision · reasoning", "release_date": "2099-10-24" },
+        "x-ai/grok-4.7": { "name": "⭐ [A] Grok 4.7 · $2.00/$6.00 · 500K · code · vision · reasoning", "release_date": "2099-10-23" },
         "anthropic/claude-sonnet-5": { "name": "⭐ [A] Claude Sonnet 5 · $2.00/$10.00 · viết lách/agent · vision · reasoning", "release_date": "2099-10-22" },
         "anthropic/claude-sonnet-4": { "name": "[A] Claude Sonnet 4 · $3.00/$15.00 · 1M · vision · reasoning", "release_date": "2099-10-20" },
         "anthropic/claude-sonnet-4.6": { "name": "[A] Claude Sonnet 4.6 · $3.00/$15.00 · vision · reasoning", "release_date": "2099-10-19" },
@@ -219,8 +217,8 @@
         "anthropic/claude-sonnet-5.5": { "name": "[A] Claude Sonnet 5.5 · $2.00/$10.00 · 1M · vision · reasoning", "release_date": "2099-10-09" },
         // ── [S] Flagship — chất lượng cao nhất ──
         "openai/gpt-6.1-sol": { "name": "⭐ [S] GPT 6.1 Sol · $2.00/$10.00 · 1.1M · flagship · vision · reasoning", "release_date": "2099-09-30" },
-        "openai/gpt-6-sol": { "name": "[S] GPT-6 Sol · $2.00/$10.00 · flagship · vision · reasoning", "release_date": "2099-09-29" },
-        "openai/gpt-5.6-sol": { "name": "[S] GPT-5.6 Sol · $2.00/$10.00 · vision · reasoning", "release_date": "2099-09-28" },
+        "openai/gpt-6-sol": { "name": "✦ [S] GPT-6 Sol · $2.00/$10.00 · flagship · vision · reasoning", "release_date": "2099-09-29" },
+        "openai/gpt-5.6-sol": { "name": "· [S] GPT-5.6 Sol · $2.00/$10.00 · vision · reasoning", "release_date": "2099-09-28" },
         "anthropic/claude-opus-5.5": { "name": "[S] Claude Opus 5.5 · $4.00/$20.00 · 1M · vision · reasoning", "release_date": "2099-09-27" },
         "anthropic/claude-opus-4.6": { "name": "[S] Claude Opus 4.6 · $5.00/$25.00 · 1M · vision · reasoning", "release_date": "2099-09-25" },
         "anthropic/claude-opus-4.7": { "name": "[S] Claude Opus 4.7 · $5.00/$25.00 · 1M · vision · reasoning", "release_date": "2099-09-24" },
@@ -326,7 +324,7 @@
       "models": {
         "deepseek-v4-flash-free": { "name": "🔒DeepSeek V4 Flash Free (In:$0.00 | Out:$0.00 - Miễn phí)" },
         "glm-5.3-flash-free": { "name": "🔒GLM-5.3 Flash Free (In:$0.00 | Out:$0.00 - Miễn phí)" },
-        "gpt-5.4-mini": { "name": "⚡GPT-5.4-Mini (In:$0.09 | Out:$0.51 - Rẻ nhất còn mạnh)" },
+        "gpt-5.4-mini": { "name": "GPT-5.4-Mini (In:$0.09 | Out:$0.51 - Rẻ nhất còn mạnh)" },
         "gpt-5.6-luna": { "name": "🔒GPT-5.6 Luna (In:$0.11 | Out:$0.64 - Reasoning rẻ ổn định)" },
         "deepseek-v4-flash": { "name": "🔒DeepSeek V4 Flash (In:$0.14 | Out:$0.28 - Fast reasoning)" },
         "gpt-5.6-terra": { "name": "🔒GPT-5.6 Terra (In:$0.27 | Out:$1.61 - Sustained session)" },
@@ -371,6 +369,8 @@
 //  5) scripts/config/Install-Config.ps1 -> đưa production vào ~/.config/opencode.
 //  6) Quit & restart opencode.
 // ═══════════════════════════════════════════════════════════════════
+
+
 
 
 

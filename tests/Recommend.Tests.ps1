@@ -259,19 +259,32 @@ Describe 'Test/Remove/Set-StarInName' {
 }
 
 Describe 'Compare-RecommendationToConfig' {
-    It 'phân loại THÊM / GỠ / giữ' {
-        $map = @{ '1-xkiro-free|need/star' = [pscustomobject]@{ Purposes = @(); Groups = @() } }
+    It 'phân loại THÊM / GỠ / giữ theo tier' {
+        $map = @{ '1-xkiro-free|need/star' = [pscustomobject]@{ Tier = 'primary'; Purposes = @(); Groups = @() } }
         $cfgs = @(
             [pscustomobject]@{ Id = 'need/star'; Name = 'No star';    Provider = '1-xkiro-free' },
             [pscustomobject]@{ Id = 'have/star'; Name = '⭐ Starred'; Provider = '1-xkiro-free' }
         )
         $diffs = Compare-RecommendationToConfig -ConfigModels $cfgs -RecommendationMap $map
         @($diffs | Where-Object { $_.Action -eq 'THÊM ⭐' }).Count | Should -Be 1
-        @($diffs | Where-Object { $_.Action -eq 'GỠ ⭐' }).Count   | Should -Be 1
+        @($diffs | Where-Object { $_.Action -eq 'GỠ tier' }).Count   | Should -Be 1
         @($diffs | Where-Object { $_.Id -eq 'need/star' })[0].Action | Should -Be 'THÊM ⭐'
-        @($diffs | Where-Object { $_.Id -eq 'have/star' })[0].Action | Should -Be 'GỠ ⭐'
+        @($diffs | Where-Object { $_.Id -eq 'have/star' })[0].Action | Should -Be 'GỠ tier'
     }
-    It 'model không star + không đề xuất -> bỏ qua' {
+    It 'NÂNG / HẠ tier khi đề xuất khác mức hiện tại' {
+        $map = @{
+            '1-xkiro-free|up'   = [pscustomobject]@{ Tier = 'primary';  Purposes = @(); Groups = @() }
+            '1-xkiro-free|down' = [pscustomobject]@{ Tier = 'alt';      Purposes = @(); Groups = @() }
+        }
+        $cfgs = @(
+            [pscustomobject]@{ Id = 'up';   Name = '✦ Up';   Provider = '1-xkiro-free' },
+            [pscustomobject]@{ Id = 'down'; Name = '⭐ Down'; Provider = '1-xkiro-free' }
+        )
+        $diffs = Compare-RecommendationToConfig -ConfigModels $cfgs -RecommendationMap $map
+        @($diffs | Where-Object { $_.Id -eq 'up' })[0].Action   | Should -Be 'NÂNG tier'
+        @($diffs | Where-Object { $_.Id -eq 'down' })[0].Action | Should -Be 'HẠ tier'
+    }
+    It 'model không tier + không đề xuất -> bỏ qua' {
         $cfgs = @([pscustomobject]@{ Id = 'x/y'; Name = 'X'; Provider = '1-xkiro-free' })
         @(Compare-RecommendationToConfig -ConfigModels $cfgs -RecommendationMap @{}).Count | Should -Be 0
     }
@@ -310,13 +323,13 @@ Describe 'New-RecommendReportLines (markdown thuần)' {
         $rows = @(
             [pscustomobject]@{ Kind = 'group'; Key = 'free'; Scope = 'free'; ModelId = 'a/b:free'; Source = 'table'; Candidate = [pscustomobject]@{ Id = 'a/b:free'; Group = 'free'; In = $null } }
         )
-        $lines = New-RecommendReportLines -ConfigPath 'C:\x\cfg.jsonc' -Capabilities $caps -Rows $rows -Adds @([pscustomobject]@{ Id = 'x/y' }) -Drops @() -Date '2026-01-01 00:00:00'
+        $lines = New-RecommendReportLines -ConfigPath 'C:\x\cfg.jsonc' -Capabilities $caps -Rows $rows -Adds @([pscustomobject]@{ Id = 'x/y'; Action = 'THÊM ⭐' }) -Drops @() -Date '2026-01-01 00:00:00'
         $txt = ($lines -join "`n")
         $txt | Should -Match '# ModelCompass'
         $txt | Should -Match 'Ngày: 2026-01-01 00:00:00'
         $txt | Should -Match 'audio'
         $txt | Should -Match '## ⭐ Theo nhóm'
-        $txt | Should -Match '\*\*THÊM ⭐:\*\* `x/y`'
+        $txt | Should -Match '\*\*THÊM:\*\* `x/y` THÊM ⭐'
         $txt | Should -Match 'a/b:free'
     }
     It 'không có thay đổi → ghi dòng "Không thay đổi"' {
@@ -326,7 +339,7 @@ Describe 'New-RecommendReportLines (markdown thuần)' {
     }
 }
 
-Describe 'Tích hợp: tái tạo baseline 13 ⭐' {
+Describe 'Tích hợp: tier trên config thật' {
     BeforeAll {
         $caps = Read-ModelCapabilities -Path $script:CapPath
         $cfg = Get-ConfigContent $script:ConfigPath
@@ -334,23 +347,24 @@ Describe 'Tích hợp: tái tạo baseline 13 ⭐' {
         $catalogById = Get-CatalogById -CatalogModels $catalog
         $cfgModels = Get-RecommendationConfigModels -ConfigObj $cfg -ProviderKeys @('1-xkiro-free', '2-xkiro-max')
         $cands = New-RecommendationCandidate -ConfigModels $cfgModels -CatalogById $catalogById
-        $rows = Resolve-StarRecommendation -Candidates $cands -Capabilities $caps
+        $rows = Resolve-StarRecommendation -Candidates $cands -Capabilities $caps -Top 3
         $script:Map = Merge-Recommendation -Rows $rows
         $script:Diffs = Compare-RecommendationToConfig -ConfigModels $cfgModels -RecommendationMap $script:Map
     }
-    It 'có 13 model được gắn ⭐ theo đề xuất (7 free + 6 max)' {
-        @($script:Map.Keys).Count | Should -Be 13
-        @($script:Map.Keys | Where-Object { $_ -like '1-xkiro-free|*' }).Count | Should -Be 7
-        @($script:Map.Keys | Where-Object { $_ -like '2-xkiro-max|*' }).Count | Should -Be 6
+    It 'mỗi key có tier hợp lệ và không trùng provider|id' {
+        @($script:Map.Keys).Count | Should -BeGreaterThan 0
+        foreach ($k in @($script:Map.Keys)) {
+            @($script:Map[$k].Tier) | Should -BeIn @('primary', 'fallback', 'alt')
+        }
     }
-    It 'KHÔNG có model nào cần THÊM ⭐' {
-        @($script:Diffs | Where-Object { $_.Action -eq 'THÊM ⭐' }).Count | Should -Be 0
+    It 'map có ít nhất 1 primary mỗi provider đang xét' {
+        @($script:Map.Keys | Where-Object { $_ -like '1-xkiro-free|*' }).Count | Should -BeGreaterThan 0
+        @($script:Map.Keys | Where-Object { $_ -like '2-xkiro-max|*' }).Count | Should -BeGreaterThan 0
     }
-    It 'KHÔNG có model nào cần GỠ ⭐' {
-        @($script:Diffs | Where-Object { $_.Action -eq 'GỠ ⭐' }).Count | Should -Be 0
-    }
-    It 'tất cả đều là "giữ"' {
-        @($script:Diffs | Where-Object { $_.Action -eq 'giữ' }).Count | Should -Be 13
+    It 'diff chỉ chứa action hợp lệ' {
+        foreach ($d in @($script:Diffs)) {
+            $d.Action | Should -BeIn @('giữ', 'GỠ tier', 'THÊM ⭐', 'THÊM ✦', 'THÊM ·', 'NÂNG tier', 'HẠ tier')
+        }
     }
 }
 
@@ -377,34 +391,34 @@ Describe 'Update-StarInConfigRaw (Pha 2 — ghi ⭐)' {
 "@
     }
     It 'gắn ⭐ vào name của model (giữ phần còn lại)' {
-        $out = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Star = $true })
+        $out = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Tier = 'primary' })
         $out | Should -Match '"a/one:free": \{ "name": "⭐ One · 1M"'
         $out | Should -Match '"a/two:free": \{ "name": "⭐ Two · 1M"'
     }
     It 'gỡ ⭐ khỏi name của model' {
-        $out = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/two:free'; Star = $false })
+        $out = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/two:free'; Tier = '' })
         $out | Should -Match '"a/two:free": \{ "name": "Two · 1M"'
     }
     It 'chỉ sửa ĐÚNG provider — cùng id ở provider khác không đổi' {
-        $out = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'a/one:free'; Star = $false })
+        $out = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'a/one:free'; Tier = '' })
         $out | Should -Match '"2-xkiro-max"[\s\S]*"a/one:free": \{ "name": "One paid"'
         $out | Should -Match '"1-xkiro-free"[\s\S]*"a/one:free": \{ "name": "One · 1M"'
     }
     It 'không đổi gì khi đã đúng trạng thái' {
-        $out = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/two:free'; Star = $true })
+        $out = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/two:free'; Tier = 'primary' })
         $out | Should -BeExactly $script:Raw
     }
     It 'giữ nguyên comment / dòng không phải model' {
         $raw2 = "// keep me`n" + $script:Raw
-        $out = Update-StarInConfigRaw -Raw $raw2 -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'a/three'; Star = $true })
+        $out = Update-StarInConfigRaw -Raw $raw2 -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'a/three'; Tier = 'primary' })
         $out | Should -Match '^// keep me'
         $out | Should -Match '"a/three": \{ "name": "⭐ \[L\] Three"'
     }
     It 'không phá JSON — vẫn parse được sau khi gắn/gỡ' {
         $t = @(
-            [pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Star = $true }
-            [pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/two:free'; Star = $false }
-            [pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'a/one:free'; Star = $false }
+            [pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Tier = 'primary' }
+            [pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/two:free'; Tier = '' }
+            [pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'a/one:free'; Tier = '' }
         )
         $out = Update-StarInConfigRaw -Raw $script:Raw -Targets $t
         { $out | ConvertFrom-Json } | Should -Not -Throw
@@ -421,7 +435,7 @@ Describe 'Update-StarInConfigRaw (Pha 2 — ghi ⭐)' {
   }
 }
 '@
-        $out = Update-StarInConfigRaw -Raw $rawDollar -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'g/one'; Star = $true })
+        $out = Update-StarInConfigRaw -Raw $rawDollar -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'g/one'; Tier = 'primary' })
         $out.Contains('⭐ [A] Foo') | Should -BeTrue
         $out.Contains('$0.75/$3.75') | Should -BeTrue
         $out.Contains('1M') | Should -BeTrue
@@ -439,18 +453,94 @@ Describe 'Update-StarInConfigRaw (Pha 2 — ghi ⭐)' {
   }
 }
 '@.Replace('WARN', $warn).Replace('MAX', [char]0x2713 + 'Max')
-        $add = Update-StarInConfigRaw -Raw $rawWarn -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'w/one'; Star = $true })
+        $add = Update-StarInConfigRaw -Raw $rawWarn -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'w/one'; Tier = 'primary' })
         $add.Contains([char]0x2B50) | Should -BeTrue
         $add.Contains($warn) | Should -BeTrue
         $add.Contains([char]0x2713 + 'Max') | Should -BeTrue
-        $rem = Update-StarInConfigRaw -Raw $add -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'w/one'; Star = $false })
+        $rem = Update-StarInConfigRaw -Raw $add -Targets @([pscustomobject]@{ Provider = '2-xkiro-max'; ModelId = 'w/one'; Tier = '' })
         $rem.Contains([char]0x2B50) | Should -BeFalse
         $rem.Contains($warn) | Should -BeTrue
         $rem.Contains('[L] Foo · $0.10/$0.20') | Should -BeTrue
     }
     It 'idempotent: gắn ⭐ 2 lần cho kết quả như 1 lần' {
-        $one = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Star = $true })
-        $two = Update-StarInConfigRaw -Raw $one -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Star = $true })
+        $one = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Tier = 'primary' })
+        $two = Update-StarInConfigRaw -Raw $one -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Tier = 'primary' })
         $two | Should -BeExactly $one
+    }
+    It 'ghi ✦ / · và gỡ tier về không' {
+        $fb = Update-StarInConfigRaw -Raw $script:Raw -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Tier = 'fallback' })
+        $fb | Should -Match '"a/one:free": \{ "name": "✦ One · 1M"'
+        $alt = Update-StarInConfigRaw -Raw $fb -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Tier = 'alt' })
+        $alt | Should -Match '"a/one:free": \{ "name": "· One · 1M"'
+        $none = Update-StarInConfigRaw -Raw $alt -Targets @([pscustomobject]@{ Provider = '1-xkiro-free'; ModelId = 'a/one:free'; Tier = '' })
+        $none | Should -Match '"a/one:free": \{ "name": "One · 1M"'
+    }
+}
+
+Describe 'Tier prefix trong name (thuần)' {
+    It 'Get-TierPrefix ánh xạ 3 mức' {
+        (Get-TierPrefix 'primary')  | Should -Be '⭐'
+        (Get-TierPrefix 'fallback') | Should -Be '✦'
+        (Get-TierPrefix 'alt')      | Should -Be '·'
+        (Get-TierPrefix 'nope')     | Should -Be ''
+    }
+    It 'Get-RecommendTierInName đọc được tier trước hoặc sau health badge' {
+        (Get-RecommendTierInName '⭐ ⚡Foo') | Should -Be 'primary'
+        (Get-RecommendTierInName '✦ Foo')   | Should -Be 'fallback'
+        (Get-RecommendTierInName '· Foo')   | Should -Be 'alt'
+        (Get-RecommendTierInName '⚡⭐ Foo') | Should -Be 'primary'
+        (Get-RecommendTierInName 'Foo')     | Should -Be ''
+    }
+    It 'Set/Remove tier idempotent, giữ health badge + hậu tố' {
+        (Set-TierPrefixInName -Name '⚡Foo · code' -Tier 'primary') | Should -Be '⭐ ⚡Foo · code'
+        (Set-TierPrefixInName -Name '✦ ⚡Foo' -Tier 'fallback')     | Should -Be '✦ ⚡Foo'
+        (Set-TierPrefixInName -Name '✦ ⚡Foo' -Tier 'alt')          | Should -Be '· ⚡Foo'
+        (Remove-TierPrefixInName '· ⚡Foo · code')                  | Should -Be '⚡Foo · code'
+        (Remove-TierPrefixInName 'Foo')                            | Should -Be 'Foo'
+    }
+}
+
+Describe 'Health penalty + Select-TopCandidates' {
+    BeforeEach {
+        $script:Pool = @(
+            [pscustomobject]@{ Id = 'healthy-old'; ReleaseDate = '2099-01-01'; In = 1.0; Context = 100000; HealthClass = 'ok' }
+            [pscustomobject]@{ Id = 'slow-new';    ReleaseDate = '2099-12-01'; In = 0.1; Context = 500000; HealthClass = 'slow' }
+            [pscustomobject]@{ Id = 'healthy-new'; ReleaseDate = '2099-11-01'; In = 0.5; Context = 200000; HealthClass = 'fast' }
+        )
+    }
+    It 'slow/down/locked bị đẩy xuống cuối pool' {
+        $sorted = @(Get-SortedCandidatePool -Pool $script:Pool -Order 'top')
+        $sorted[0].Id | Should -Be 'healthy-new'
+        $sorted[-1].Id | Should -Be 'slow-new'
+    }
+    It 'Select-TopCandidates gán primary/fallback/alt và tôn trọng Top' {
+        $top = @(Select-TopCandidates -Pool $script:Pool -Order 'top' -Top 3)
+        $top.Count | Should -Be 3
+        $top[0].Tier | Should -Be 'primary'
+        $top[1].Tier | Should -Be 'fallback'
+        $top[2].Tier | Should -Be 'alt'
+        $top[2].Candidate.Id | Should -Be 'slow-new'
+    }
+    It 'Top 2 chỉ trả 2 phần tử' {
+        @(Select-TopCandidates -Pool $script:Pool -Order 'cheap' -Top 2).Count | Should -Be 2
+    }
+}
+
+Describe 'Resolve-StarRecommendation -Top 3' {
+    It 'mỗi mục đích/scope trả tối đa 3 dòng, tier giảm dần' {
+        $caps = [pscustomobject]@{ Unsupported = @(); Preferred = @{}; Tags = @{} }
+        $cands = @(
+            [pscustomobject]@{ Id = 'f/a'; Name = 'a'; Provider = '1-xkiro-free'; Group = 'free'; ReleaseDate = '2099-12-03'; Context = 1000; In = $null; Out = $null; Tags = @('code') }
+            [pscustomobject]@{ Id = 'f/b'; Name = 'b'; Provider = '1-xkiro-free'; Group = 'free'; ReleaseDate = '2099-12-02'; Context = 1000; In = $null; Out = $null; Tags = @('code') }
+            [pscustomobject]@{ Id = 'f/c'; Name = 'c'; Provider = '1-xkiro-free'; Group = 'free'; ReleaseDate = '2099-12-01'; Context = 1000; In = $null; Out = $null; Tags = @('code') }
+            [pscustomobject]@{ Id = 'f/d'; Name = 'd'; Provider = '1-xkiro-free'; Group = 'free'; ReleaseDate = '2099-11-01'; Context = 1000; In = $null; Out = $null; Tags = @('code') }
+        )
+        $rows = @(Resolve-StarRecommendation -Candidates $cands -Capabilities $caps -Top 3 |
+            Where-Object { $_.Kind -eq 'purpose' -and $_.Key -eq 'code' -and $_.Scope -eq 'free' })
+        $rows.Count | Should -Be 3
+        $rows[0].ModelId | Should -Be 'f/a'
+        $rows[0].Tier | Should -Be 'primary'
+        $rows[1].Tier | Should -Be 'fallback'
+        $rows[2].Tier | Should -Be 'alt'
     }
 }

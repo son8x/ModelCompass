@@ -144,18 +144,18 @@ function Get-HealthBadge {
 
 <#
 .SYNOPSIS
-    Gỡ badge trạng thái (nếu có) khỏi name, GIỮ tiền tố ⭐/🆕. THUẦN.
+    Gỡ badge trạng thái (nếu có) khỏi name, GIỮ tiền tố ⭐/✦/·/🆕. THUẦN.
 #>
 function Remove-HealthBadge {
     param([string]$Name)
     if ([string]::IsNullOrWhiteSpace($Name)) { return $Name }
-    $pattern = '^(?<pre>(?:⭐|🆕|\s)*)' + $script:HealthBadgePattern + '\s*'
+    $pattern = '^(?<pre>(?:⭐|✦|·|🆕|\s)*)' + $script:HealthBadgePattern + '\s*'
     return [regex]::Replace($Name, $pattern, '${pre}').TrimEnd()
 }
 
 <#
 .SYNOPSIS
-    Gắn badge trạng thái vào name (sau tiền tố ⭐/🆕, idempotent — gỡ cũ trước). THUẦN.
+    Gắn badge trạng thái vào name (sau tiền tố ⭐/✦/·/🆕, idempotent — gỡ cũ trước). THUẦN.
     Badge rỗng → chỉ gỡ badge cũ.
 #>
 function Add-HealthBadge {
@@ -163,7 +163,7 @@ function Add-HealthBadge {
     if ([string]::IsNullOrWhiteSpace($Name)) { return $Name }
     $clean = Remove-HealthBadge -Name $Name
     if ([string]::IsNullOrWhiteSpace($Badge)) { return $clean }
-    $m = [regex]::Match($clean, '^(?:⭐|🆕|\s)*')
+    $m = [regex]::Match($clean, '^(?:⭐|✦|·|🆕|\s)*')
     $prefix = $m.Value
     $rest = $clean.Substring($prefix.Length)
     return ($prefix + $Badge + $rest)

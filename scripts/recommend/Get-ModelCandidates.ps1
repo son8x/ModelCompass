@@ -67,14 +67,35 @@ function Get-RecommendationKey {
     return ("{0}|{1}" -f $Provider, $ModelId)
 }
 
+function Read-HealthReportMap {
+    <#
+    .SYNOPSIS
+        Đọc reports/model-health.json → hashtable "provider|id" -> class. THUẦN.
+        Trả hashtable rỗng nếu file không tồn tại.
+    #>
+    param([string]$Path)
+    $map = @{}
+    if ([string]::IsNullOrWhiteSpace($Path) -or -not (Test-Path -LiteralPath $Path -PathType Leaf)) { return $map }
+    $obj = Get-Content -LiteralPath $Path -Raw -Encoding utf8 | ConvertFrom-Json
+    foreach ($m in @($obj.models)) {
+        if ($null -eq $m) { continue }
+        $p = [string]$m.provider; $id = [string]$m.id
+        if (-not [string]::IsNullOrWhiteSpace($p) -and -not [string]::IsNullOrWhiteSpace($id)) {
+            $map[(Get-RecommendationKey -Provider $p -ModelId $id)] = [string]$m.class
+        }
+    }
+    return $map
+}
+
 function New-RecommendationCandidate {
     <#
     .SYNOPSIS
         Ghép model config với catalog (giá/ctx) + suy NHÓM → ứng viên đề xuất. THUẦN.
         Nhóm: free provider → 'free'; max → tag [L/B/A/S] trong name, không có thì theo giá input.
+        HealthMap (tuỳ chọn) gán HealthClass để rule ưu tiên model còn sống.
         KHÔNG gán tag khả năng (Resolve-StarRules.ps1 lo).
     #>
-    param($ConfigModels, $CatalogById)
+    param($ConfigModels, $CatalogById, $HealthMap = @{})
     $out = [System.Collections.Generic.List[object]]::new()
     foreach ($cm in @($ConfigModels)) {
         $isFree = ($cm.Provider -eq '1-xkiro-free')
@@ -99,6 +120,8 @@ function New-RecommendationCandidate {
                 $group = if ($null -ne $in) { Resolve-TierFromPrice -InputPrice $in } else { 'L' }
             }
         }
+        $hKey = Get-RecommendationKey -Provider $cm.Provider -ModelId $cm.Id
+        $health = if ($HealthMap.ContainsKey($hKey)) { [string]$HealthMap[$hKey] } else { '' }
         $out.Add([pscustomobject]@{
             Id          = $cm.Id
             Name        = $cm.Name
@@ -108,6 +131,7 @@ function New-RecommendationCandidate {
             Context     = $ctx
             In          = $in
             Out         = $outP
+            HealthClass = $health
         })
     }
     return @($out)
@@ -117,12 +141,14 @@ function Get-ModelCandidates {
     <#
     .SYNOPSIS
         Orchestrator tầng 1: config obj + catalog models → bộ ứng viên + chỉ mục phụ trợ. THUẦN.
+        HealthReportPath (tuỳ chọn) để gán HealthClass từ reports/model-health.json.
         Trả { CatalogById; ConfigModels; Candidates }.
     #>
-    param($ConfigObj, $CatalogModels, [string[]]$ProviderKeys)
+    param($ConfigObj, $CatalogModels, [string[]]$ProviderKeys, [string]$HealthReportPath)
     $catalogById = Get-CatalogById -CatalogModels $CatalogModels
     $configModels = Get-RecommendationConfigModels -ConfigObj $ConfigObj -ProviderKeys $ProviderKeys
-    $candidates = New-RecommendationCandidate -ConfigModels $configModels -CatalogById $catalogById
+    $healthMap = Read-HealthReportMap -Path $HealthReportPath
+    $candidates = New-RecommendationCandidate -ConfigModels $configModels -CatalogById $catalogById -HealthMap $healthMap
     return [pscustomobject]@{
         CatalogById  = $catalogById
         ConfigModels = $configModels

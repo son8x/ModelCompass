@@ -33,8 +33,12 @@
 .PARAMETER Report
     Ghi báo cáo Markdown vào reports/recommend-<timestamp>.md.
 
+.PARAMETER Top
+    Số ứng viên tối đa cho mỗi mục đích/scope: 1 ⭐ chính + (Top-1) dự phòng.
+    Mặc định: 3 (1 chính + 2 dự phòng). 1 = hành vi cũ (chỉ ⭐).
+
 .PARAMETER Apply
-    GHI ⭐ vào name trong config (Pha 2). Mặc định KHÔNG ghi — chỉ báo cáo diff.
+    GHI ⭐/✦/· vào name trong config (Pha 2). Mặc định KHÔNG ghi — chỉ báo cáo diff.
     Tự backup config (configs\development\.backup) rồi validate.
 
 .PARAMETER SkipValidation
@@ -57,7 +61,8 @@ param(
     [switch]$Report,
     [switch]$Apply,
     [switch]$SkipValidation,
-    [switch]$SkipRun
+    [switch]$SkipRun,
+    [int]$Top = 3
 )
 Set-StrictMode -Version Latest
 
@@ -70,6 +75,7 @@ $repProvider     = @($Provider)
 $repReport       = [bool]$Report
 $repApply        = [bool]$Apply
 $repSkipVal      = [bool]$SkipValidation
+$repTop          = [int]$Top
 
 . (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 # Format-Price (Compare-Prices) + Resolve-TierFromName / Resolve-TierFromPrice (Update-XKiroModels).
@@ -87,6 +93,7 @@ $Provider         = $repProvider
 $Report           = $repReport
 $Apply            = $repApply
 $SkipValidation   = $repSkipVal
+$Top              = $repTop
 
 # ═══════════════════════════════════════════════════════════════
 # Hàm thuần của tầng 3 (diff + định dạng)
@@ -95,22 +102,38 @@ $SkipValidation   = $repSkipVal
 function Compare-RecommendationToConfig {
     <#
     .SYNOPSIS
-        So đề xuất với ⭐ hiện tại trong config → các dòng có thay đổi.
-        Action: 'THÊM ⭐' | 'GỠ ⭐' | 'giữ'. THUẦN.
+        So đề xuất (có tier) với tier hiện tại trong config → các dòng có thay đổi.
+        Action: 'THÊM ⭐/✦/·' | 'NÂNG tier' | 'HẠ tier' | 'GỠ tier' | 'giữ'. THUẦN.
     #>
     param($ConfigModels, $RecommendationMap)
     $rows = [System.Collections.Generic.List[object]]::new()
     foreach ($cm in @($ConfigModels)) {
-        $has = Test-ModelHasStar $cm.Name
+        $curTier = Get-RecommendTierInName $cm.Name
         $key = Get-RecommendationKey -Provider $cm.Provider -ModelId $cm.Id
         $proposed = $RecommendationMap.ContainsKey($key)
-        if (-not $has -and -not $proposed) { continue }
-        $action = if ($has -and $proposed) { 'giữ' } elseif ($proposed) { 'THÊM ⭐' } else { 'GỠ ⭐' }
+        $wantTier = if ($proposed) { [string]$RecommendationMap[$key].Tier } else { '' }
+
+        if ([string]::IsNullOrWhiteSpace($curTier) -and [string]::IsNullOrWhiteSpace($wantTier)) { continue }
+
+        $action = 'giữ'
+        if ($curTier -eq $wantTier) {
+            $action = 'giữ'
+        } elseif ([string]::IsNullOrWhiteSpace($wantTier)) {
+            $action = 'GỠ tier'
+        } elseif ([string]::IsNullOrWhiteSpace($curTier)) {
+            $action = 'THÊM ' + (Get-TierPrefix $wantTier)
+        } elseif ((Get-TierRank $wantTier) -lt (Get-TierRank $curTier)) {
+            $action = 'NÂNG tier'
+        } else {
+            $action = 'HẠ tier'
+        }
         $rows.Add([pscustomobject]@{
-            Key      = $key
-            Id       = $cm.Id
-            Provider = $cm.Provider
-            Action   = $action
+            Key         = $key
+            Id          = $cm.Id
+            Provider    = $cm.Provider
+            Action      = $action
+            CurrentTier = $curTier
+            Tier        = $wantTier
         })
     }
     return @($rows)
@@ -126,13 +149,13 @@ function Format-RecommendPrice {
 function New-RecommendReportLines {
     <#
     .SYNOPSIS
-        Sinh nội dung Markdown báo cáo đề xuất ⭐. THUẦN (không I/O).
+        Sinh nội dung Markdown báo cáo đề xuất ⭐/✦/·. THUẦN (không I/O).
         Dùng chung cho cả Pha 1 (-Report) lẫn Pha 2 (-Apply -Report).
     #>
     param($ConfigPath, $Capabilities, $Rows, $Adds, $Drops, $Date = $null)
     if ($null -eq $Date) { $Date = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') }
     $lines = [System.Collections.Generic.List[string]]::new()
-    $lines.Add('# ModelCompass — Đề xuất ⭐ xKiro')
+    $lines.Add('# ModelCompass — Đề xuất ⭐/✦/· xKiro')
     $lines.Add('')
     $lines.Add("Ngày: $Date")
     $lines.Add('')
@@ -142,6 +165,8 @@ function New-RecommendReportLines {
         $lines.Add("> xKiro KHÔNG có mục đích: $(@($Capabilities.Unsupported) -join ', ')")
         $lines.Add('')
     }
+    $lines.Add('> ⭐ = chính · ✦ = dự phòng · · = tham khảo')
+    $lines.Add('')
     $lines.Add('## ⭐ Theo nhóm')
     $lines.Add('')
     $lines.Add('| Nhóm | Model | Giá in | Nguồn |')
@@ -150,19 +175,20 @@ function New-RecommendReportLines {
         $lines.Add("| $($r.Key) | ``$($r.Candidate.Id)`` | $(Format-RecommendPrice $r.Candidate) | $($r.Source) |")
     }
     $lines.Add('')
-    $lines.Add('## ⭐ Theo mục đích')
+    $lines.Add('## ⭐/✦/· Theo mục đích')
     $lines.Add('')
-    $lines.Add('| Mục đích | Scope | Model | Giá in | Nguồn |')
-    $lines.Add('|---|---|---|---|---|')
+    $lines.Add('| Mục đích | Scope | Tier | Model | Giá in | Nguồn |')
+    $lines.Add('|---|---|---|---|---|---|')
     foreach ($r in @($Rows | Where-Object { $_.Kind -eq 'purpose' })) {
-        $lines.Add("| $($r.Key) | $($r.Scope) | ``$($r.Candidate.Id)`` | $(Format-RecommendPrice $r.Candidate) | $($r.Source) |")
+        $tierLabel = Get-TierPrefix $r.Tier
+        $lines.Add("| $($r.Key) | $($r.Scope) | $tierLabel $($r.Tier) | ``$($r.Candidate.Id)`` | $(Format-RecommendPrice $r.Candidate) | $($r.Source) |")
     }
     $lines.Add('')
-    $lines.Add('## Thay đổi so với ⭐ hiện tại')
+    $lines.Add('## Thay đổi so với config hiện tại')
     $lines.Add('')
-    if (@($Adds).Count -gt 0) { $lines.Add('**THÊM ⭐:** ' + ((@($Adds) | ForEach-Object { "``$($_.Id)``" }) -join ', ')); $lines.Add('') }
-    if (@($Drops).Count -gt 0) { $lines.Add('**GỠ ⭐:** ' + ((@($Drops) | ForEach-Object { "``$($_.Id)``" }) -join ', ')); $lines.Add('') }
-    if (@($Adds).Count -eq 0 -and @($Drops).Count -eq 0) { $lines.Add('_Không thay đổi — đề xuất trùng ⭐ hiện tại._'); $lines.Add('') }
+    if (@($Adds).Count -gt 0) { $lines.Add('**THÊM:** ' + ((@($Adds) | ForEach-Object { "``$($_.Id)`` $($_.Action)" }) -join ', ')); $lines.Add('') }
+    if (@($Drops).Count -gt 0) { $lines.Add('**GỠ:** ' + ((@($Drops) | ForEach-Object { "``$($_.Id)``" }) -join ', ')); $lines.Add('') }
+    if (@($Adds).Count -eq 0 -and @($Drops).Count -eq 0) { $lines.Add('_Không thay đổi — đề xuất trùng config hiện tại._'); $lines.Add('') }
     return @($lines)
 }
 
@@ -190,7 +216,9 @@ function Update-StarInConfigRaw {
     foreach ($l in ($Raw -split "`r?`n")) { $lines.Add($l) }
 
     $want = @{}
-    foreach ($t in @($Targets)) { $want[(Get-RecommendationKey -Provider $t.Provider -ModelId $t.ModelId)] = [bool]$t.Star }
+    foreach ($t in @($Targets)) {
+        $want[(Get-RecommendationKey -Provider $t.Provider -ModelId $t.ModelId)] = [string]$t.Tier
+    }
 
     foreach ($pk in @(@($Targets) | ForEach-Object { $_.Provider } | Select-Object -Unique)) {
         $start = -1
@@ -216,7 +244,12 @@ function Update-StarInConfigRaw {
             $nm = [regex]::Match($lines[$i], '"name"\s*:\s*"((?:[^"\\]|\\.)*)"')
             if (-not $nm.Success) { continue }
             $cur = $nm.Groups[1].Value
-            $new = if ($want[$key]) { Set-StarInName $cur } else { Remove-StarInName $cur }
+            $tier = [string]$want[$key]
+            $new = if ([string]::IsNullOrWhiteSpace($tier)) {
+                Remove-TierPrefixInName $cur
+            } else {
+                Set-TierPrefixInName -Name $cur -Tier $tier
+            }
             if ($new -eq $cur) { continue }
             $escaped = $new -replace '\\', '\\' -replace '"', '\"'
             # Dùng MatchEvaluator để trả về literal — tránh .NET hiểu `$0`/`$3` trong
@@ -255,20 +288,21 @@ if ($Provider -and @($Provider).Count -gt 0) {
 }
 
 $mode = if ($Apply) { 'Pha 2 — GHI config' } else { 'Pha 1 — chỉ báo cáo' }
-Write-Step "ĐỀ XUẤT ⭐ xKiro ($mode)"
+Write-Step "ĐỀ XUẤT ⭐/✦/· xKiro ($mode · Top $Top)"
 
 $capabilities = Read-ModelCapabilities -Path $CapabilitiesPath
 $configRaw = Get-Content -LiteralPath $ConfigPath -Raw -Encoding utf8
 $configObj = Get-ConfigContent $ConfigPath
 $catalogModels = @((Get-Content -LiteralPath $CatalogPath -Raw -Encoding utf8 | ConvertFrom-Json).models)
+$healthPath = Join-Path $repo 'reports\model-health.json'
 
 # Tầng 1: ứng viên → Tầng 2: áp rule → dòng đề xuất.
-$bundle = Get-ModelCandidates -ConfigObj $configObj -CatalogModels $catalogModels -ProviderKeys $selected
+$bundle = Get-ModelCandidates -ConfigObj $configObj -CatalogModels $catalogModels -ProviderKeys $selected -HealthReportPath $healthPath
 $catalogById = $bundle.CatalogById
 $configModels = $bundle.ConfigModels
 $candidates = $bundle.Candidates
 
-$resolved = Resolve-StarRules -Candidates $candidates -Capabilities $capabilities
+$resolved = Resolve-StarRules -Candidates $candidates -Capabilities $capabilities -Top $Top
 $rows = $resolved.Rows
 $map = $resolved.Map
 $diffs = Compare-RecommendationToConfig -ConfigModels $configModels -RecommendationMap $map
@@ -290,51 +324,54 @@ foreach ($r in @($rows | Where-Object { $_.Kind -eq 'group' })) {
     Write-Host ('  {0,-6} {1,-42} {2,-10} {3,-6} {4}' -f $r.Key, $c.Id, (Format-RecommendPrice $c), $ctx, $r.Source)
 }
 
-# ── Bảng 2: Theo mục đích ──
+# ── Bảng 2: Theo mục đích (Top N + tier) ──
 Write-Host ''
-Write-Host '  ⭐ THEO MỤC ĐÍCH' -ForegroundColor DarkCyan
-Write-Host ('  {0,-18} {1,-5} {2,-42} {3,-10} {4}' -f 'Mục đích', 'Scope', 'Model', 'Giá in', 'Nguồn')
+Write-Host "  ⭐/✦/· THEO MỤC ĐÍCH (Top $Top)" -ForegroundColor DarkCyan
+Write-Host ('  {0,-18} {1,-5} {2,-8} {3,-42} {4,-10} {5}' -f 'Mục đích', 'Scope', 'Tier', 'Model', 'Giá in', 'Health')
 foreach ($r in @($rows | Where-Object { $_.Kind -eq 'purpose' })) {
     $c = $r.Candidate
-    Write-Host ('  {0,-18} {1,-5} {2,-42} {3,-10} {4}' -f $r.Key, $r.Scope, $c.Id, (Format-RecommendPrice $c), $r.Source)
+    $h = Get-CandidateHealthClass $c
+    $tierLabel = (Get-TierPrefix $r.Tier) + ' ' + $r.Tier
+    Write-Host ('  {0,-18} {1,-5} {2,-8} {3,-42} {4,-10} {5}' -f $r.Key, $r.Scope, $tierLabel, $c.Id, (Format-RecommendPrice $c), $h)
 }
 
-# ── Bảng 3: Khác biệt so với ⭐ hiện tại ──
+# ── Bảng 3: Khác biệt so với config hiện tại ──
 Write-Host ''
-Write-Step 'THAY ĐỔI SO VỚI ⭐ HIỆN TẠI'
-$adds = @($diffs | Where-Object { $_.Action -eq 'THÊM ⭐' })
-$drops = @($diffs | Where-Object { $_.Action -eq 'GỠ ⭐' })
+Write-Step 'THAY ĐỔI SO VỚI CONFIG HIỆN TẠI'
+$adds = @($diffs | Where-Object { $_.Action -ne 'giữ' -and -not [string]::IsNullOrWhiteSpace($_.Tier) })
+$drops = @($diffs | Where-Object { -not [string]::IsNullOrWhiteSpace($_.CurrentTier) -and [string]::IsNullOrWhiteSpace($_.Tier) })
 $keep = @($diffs | Where-Object { $_.Action -eq 'giữ' })
 
 if ($adds.Count -gt 0) {
-    Write-Ok "THÊM ⭐ ($($adds.Count)):"
+    Write-Ok "GẮN/ĐỔI TIER ($($adds.Count)):"
     foreach ($d in $adds) {
         $tasks = @($map[$d.Key].Purposes); $groups = @($map[$d.Key].Groups)
         $note = @()
         if ($groups.Count -gt 0) { $note += "nhóm: $($groups -join ',')" }
         if ($tasks.Count -gt 0) { $note += "mục đích: $($tasks -join ',')" }
-        Write-Host "    + $($d.Id)  ($($note -join ' · '))" -ForegroundColor Green
+        Write-Host "    + $($d.Id)  $($d.Action)  ($($note -join ' · '))" -ForegroundColor Green
     }
-} else { Write-Info 'Không có model nào cần THÊM ⭐.' }
+} else { Write-Info 'Không có model nào cần gắn/đổi tier.' }
 
 if ($drops.Count -gt 0) {
-    Write-Warn "GỠ ⭐ ($($drops.Count)):"
-    foreach ($d in $drops) { Write-Host "    - $($d.Id)" -ForegroundColor Yellow }
-} else { Write-Info 'Không có model nào cần GỠ ⭐.' }
+    Write-Warn "GỠ TIER ($($drops.Count)):"
+    foreach ($d in $drops) { Write-Host "    - $($d.Id)  ($($d.CurrentTier) → không)" -ForegroundColor Yellow }
+} else { Write-Info 'Không có model nào cần gỡ tier.' }
 
 Write-Host ''
-Write-Info "Giữ ⭐: $($keep.Count) model (đề xuất trùng với hiện tại)."
+Write-Info "Giữ tier: $($keep.Count) model (đề xuất trùng với hiện tại)."
 Write-Host ''
 
 $reportLines = if ($Report) { New-RecommendReportLines -ConfigPath $ConfigPath -Capabilities $capabilities -Rows $rows -Adds $adds -Drops $drops } else { @() }
 
-# ── Pha 2: GHI ⭐ vào config (chỉ khi -Apply) ──
+# ── Pha 2: GHI tier vào config (chỉ khi -Apply) ──
 if ($Apply) {
     $targets = @()
-    foreach ($d in $adds)  { $targets += [pscustomobject]@{ Provider = $d.Provider; ModelId = $d.Id; Star = $true } }
-    foreach ($d in $drops) { $targets += [pscustomobject]@{ Provider = $d.Provider; ModelId = $d.Id; Star = $false } }
+    foreach ($d in @($diffs | Where-Object { $_.Action -ne 'giữ' })) {
+        $targets += [pscustomobject]@{ Provider = $d.Provider; ModelId = $d.Id; Tier = $d.Tier }
+    }
     if ($targets.Count -eq 0) {
-        Write-Ok 'Không có thay đổi ⭐ — config đã khớp đề xuất, không ghi.'
+        Write-Ok 'Không có thay đổi tier — config đã khớp đề xuất, không ghi.'
         if ($Report) { Write-Info "Report: $(Save-RecommendReportFile -RepoRoot $repo -Lines $reportLines)" }
         exit 0
     }
@@ -352,7 +389,7 @@ if ($Apply) {
     Write-Info "Backup: $backup"
 
     Set-Content -LiteralPath $ConfigPath -Value $newRaw -Encoding utf8NoBOM
-    Write-Ok "Đã ghi ⭐ vào config: +$($adds.Count) · -$($drops.Count) · giữ $($keep.Count)."
+    Write-Ok "Đã ghi tier vào config: gắn/đổi $($adds.Count) · gỡ $($drops.Count) · giữ $($keep.Count)."
 
     if (-not $SkipValidation) {
         Write-Info 'Validate config...'
@@ -375,7 +412,7 @@ if ($Apply) {
     exit 0
 }
 
-Write-Host '  (Pha 1 chỉ báo cáo — chưa ghi config. Thêm -Apply để ghi ⭐ vào name.)' -ForegroundColor DarkGray
+Write-Host '  (Pha 1 chỉ báo cáo — chưa ghi config. Thêm -Apply để ghi ⭐/✦/· vào name.)' -ForegroundColor DarkGray
 
 if ($Report) {
     Write-Info "Report: $(Save-RecommendReportFile -RepoRoot $repo -Lines $reportLines)"

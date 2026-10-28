@@ -51,12 +51,14 @@ opencode đang chạy**.
     CI validate mọi template (`configs/provider-template/`, `docs/contributing-provider.md`).
 15. **GitHub Pages docs** — trang tra cứu model theo giá/tác vụ tự sinh bởi CI
     (`docs/site/`, `.github/workflows/pages.yml`).
-16. **Đề xuất `⭐` tự động** — `scripts/recommend/` (tầng 1 `Get-ModelCandidates.ps1` +
+16. **Đề xuất `⭐/✦/·` tự động** — `scripts/recommend/` (tầng 1 `Get-ModelCandidates.ps1` +
     tầng 2 `Resolve-StarRules.ps1` + tầng 3 `New-RecommendReport.ps1`) gợi ý model nên gắn
-    `⭐` theo **nhóm** (free/L/B/A/S) và **mục đích** (reasoning/code/vision/…); `mc recommend`
-    chỉ báo cáo, `-Apply` mới ghi vào `name` (backup + validate). `Update-RecommendDocs.ps1`
-    đồng bộ bảng `⭐` vào `docs/model-reference.md` §2 (CI `-Check` chống drift); gộp cả
-    hai bằng `Update-XKiroModels.ps1 -Recommend`.
+    tiền tố theo **nhóm** (free/L/B/A/S) và **mục đích** (reasoning/code/vision/…):
+    `⭐` chính · `✦` dự phòng · `·` tham khảo (mặc định `-Top 3`; `-Top 1` = chỉ ⭐).
+    Ưu tiên model còn sống — model `slow/down/locked` bị đẩy xuống cuối pool.
+    `mc recommend` chỉ báo cáo, `-Apply` mới ghi vào `name` (backup + validate).
+    `Update-RecommendDocs.ps1` đồng bộ bảng tier vào `docs/model-reference.md` §2
+    (CI `-Check` chống drift); gộp cả hai bằng `Update-XKiroModels.ps1 -Recommend`.
 17. **Trạng thái model trong picker** — `scripts/health/Test-ModelHealth.ps1` đo độ trễ
     từng model và gắn **badge** vào đầu `name` để nhìn ngay trong `/model`:
     `⚡` nhanh (≤1.5s), `🐌` chậm/timeout, `🟡` rate-limit, `🔒` khoá (403/hết ví),

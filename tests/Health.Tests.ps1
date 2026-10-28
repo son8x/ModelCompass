@@ -64,6 +64,10 @@ Describe 'Remove-HealthBadge' {
         Remove-HealthBadge -Name '⭐🐌Qwen3.8 Max · 1M' | Should -Be '⭐Qwen3.8 Max · 1M'
         Remove-HealthBadge -Name '🆕⛔New Model · 64K' | Should -Be '🆕New Model · 64K'
     }
+    It 'gỡ badge nhưng GIỮ ✦ và · (tier dự phòng)' {
+        Remove-HealthBadge -Name '✦ ⚡Foo · code' | Should -Be '✦ Foo · code'
+        Remove-HealthBadge -Name '· 🐌Bar · 1M'   | Should -Be '· Bar · 1M'
+    }
     It 'name không có badge -> giữ nguyên' {
         Remove-HealthBadge -Name 'Qwen3.7 Plus · 1M · vision' | Should -Be 'Qwen3.7 Plus · 1M · vision'
     }
@@ -78,6 +82,10 @@ Describe 'Add-HealthBadge' {
     }
     It 'gắn SAU tiền tố ⭐' {
         Add-HealthBadge -Name '⭐Qwen3.8 Max · 1M' -Badge '🐌' | Should -Be '⭐🐌Qwen3.8 Max · 1M'
+    }
+    It 'gắn SAU tiền tố ✦ / · (tier dự phòng), đúng thứ tự [tier][badge]' {
+        Add-HealthBadge -Name '✦ Foo · code' -Badge '⚡' | Should -Be '✦ ⚡Foo · code'
+        Add-HealthBadge -Name '· Bar · 1M'   -Badge '🔒' | Should -Be '· 🔒Bar · 1M'
     }
     It 'idempotent — gắn 2 lần không nhân đôi' {
         $once = Add-HealthBadge -Name '[A] Model · 256K' -Badge '⚡'

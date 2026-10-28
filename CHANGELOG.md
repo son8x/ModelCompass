@@ -4,6 +4,30 @@ Tạo theo chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) +
 [Semantic Versioning](https://semver.org/). Mỗi release = một mốc cấu hình hoặc
 bộ nâng cấp quy trình được "đóng gói" và commit lên GitHub.
 
+## [0.10.0] — 2026-10-28 — Đề xuất phân tầng ⭐/✦/· + health-aware
+
+### Thêm
+- **Đề xuất nhiều mức** trong `name` (mặc định `-Top 3`): `⭐` primary · `✦` fallback ·
+  `·` alt. Mỗi mục đích/scope có 1 chính + 2 dự phòng để thay thế khi model lỗi.
+  `-Top 1` giữ hành vi cũ (chỉ ⭐).
+- **Health-aware chọn ứng viên**: `Get-ModelCandidates` nạp `reports/model-health.json`
+  (field `HealthClass`); model `slow/down/locked` bị đẩy xuống cuối pool thay vì loại bỏ.
+- **`Select-TopCandidates` / `Get-SortedCandidatePool`** + các hàm tier
+  (`Get-TierPrefix`, `Get-TierRank`, `Get-RecommendTierInName`, `Set/Remove-TierPrefixInName`).
+- **Diff theo tier**: `mc recommend` báo `THÊM ⭐|✦|·`, `NÂNG tier`, `HẠ tier`, `GỠ tier`, `giữ`.
+- `mc recommend-docs` sinh bảng §2 với đủ 3 mức (`<br>` mỗi model), kèm bảng nhóm ⭐.
+
+### Sửa
+- Layout `name` chuẩn hoá: **`[tier][health badge][phần còn lại]`**.
+  `Remove-HandAnnotation` (sync) **giữ** tier, chỉ gỡ badge sức khoẻ;
+  `Add/Remove-HealthBadge` nhận `⭐|✦|·` trong prefix class để không chèn sai thứ tự.
+- `Resolve-StarRecommendation` dedupe theo **provider|id** (id trùng ở free và max
+  vẫn được xử lý riêng).
+
+### Kiểm chứng
+- `Test-Suite.ps1`: **361/361** pass (thêm test tier prefix, health penalty, Top 3,
+  strip badge sau tier, drift guard §2).
+
 ## [0.9.0] — 2026-10-26 — Trạng thái sức khoẻ model ngay trong picker
 
 ### Thêm

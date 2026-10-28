@@ -770,7 +770,7 @@ function Set-ProviderModelsBlock {
 function Remove-HandAnnotation {
     param([Parameter(Mandatory)][string]$Name)
     $clean = $Name -replace '\s*⚠️.*$', ''
-    $clean = $clean -replace '^(?<pre>(?:⭐|🆕|\s)*)(?:⚡|🐌|🟡|🔒|⛔)\s*', '${pre}'
+    $clean = $clean -replace '^(?<pre>(?:⭐|✦|·|🆕|\s)*)(?:⚡|🐌|🟡|🔒|⛔)\s*', '${pre}'
     return $clean.TrimEnd()
 }
 

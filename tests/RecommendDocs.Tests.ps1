@@ -53,7 +53,7 @@ Describe 'New-RecommendStarsMarkdown (thuần)' {
         $txt | Should -Match '\*\*2 model\*\* được khuyến nghị'
         $txt | Should -Match '\(1 free \+ 1 trả phí\)'
         $txt | Should -Match '\*\*⭐ Theo nhóm\*\*'
-        $txt | Should -Match '\*\*⭐ Theo mục đích\*\*'
+        $txt | Should -Match '\*\*⭐/✦/· Theo mục đích\*\*'
         $txt | Should -Match '01/01/2026'
     }
     It 'liệt kê model của nhóm + mục đích' {
@@ -66,6 +66,22 @@ Describe 'New-RecommendStarsMarkdown (thuần)' {
     It 'mục đích không có model nào → KHÔNG xuất dòng' {
         $txt = (New-RecommendStarsMarkdown -Rows $script:Rows -Groups $script:Groups -Purposes $script:Purposes -Date 'x') -join "`n"
         $txt | Should -Not -Match 'flagship'
+    }
+    It 'nhiều tier → render ⭐/✦/· theo thứ tự, thiếu Tier = primary' {
+        $a = New-TestCandidate -Id 'qwen/a:free' -Provider '1-xkiro-free' -Group 'free' -Context 1000000
+        $b = New-TestCandidate -Id 'qwen/b:free' -Provider '1-xkiro-free' -Group 'free' -Context 500000
+        $c = New-TestCandidate -Id 'qwen/c:free' -Provider '1-xkiro-free' -Group 'free' -Context 250000
+        $rows = @(
+            [pscustomobject]@{ Kind = 'purpose'; Key = 'reasoning'; Label = 'reasoning (mặc định)'; Scope = 'free'; ModelId = $c.Id; Source = 'rule'; Tier = 'alt'; Candidate = $c }
+            [pscustomobject]@{ Kind = 'purpose'; Key = 'reasoning'; Label = 'reasoning (mặc định)'; Scope = 'free'; ModelId = $a.Id; Source = 'table'; Candidate = $a }
+            [pscustomobject]@{ Kind = 'purpose'; Key = 'reasoning'; Label = 'reasoning (mặc định)'; Scope = 'free'; ModelId = $b.Id; Source = 'rule'; Tier = 'fallback'; Candidate = $b }
+        )
+        $txt = (New-RecommendStarsMarkdown -Rows $rows -Groups $script:Groups -Purposes $script:Purposes -Date 'x') -join "`n"
+        $txt | Should -Match '⭐ `qwen/a:free`'
+        $txt | Should -Match '✦ `qwen/b:free`'
+        $txt | Should -Match '· `qwen/c:free`'
+        $txt.IndexOf('⭐ `qwen/a:free`') | Should -BeLessThan $txt.IndexOf('✦ `qwen/b:free`')
+        $txt.IndexOf('✦ `qwen/b:free`') | Should -BeLessThan $txt.IndexOf('· `qwen/c:free`')
     }
 }
 
@@ -111,8 +127,8 @@ Describe 'Tích hợp: bảng ⭐ trong docs khớp đề xuất hiện tại (d
         $caps = Read-ModelCapabilities -Path $script:capPath
         $configObj = Get-ConfigContent $script:cfgPath
         $catalogModels = @((Get-Content -LiteralPath $script:catPath -Raw -Encoding utf8 | ConvertFrom-Json).models)
-        $bundle = Get-ModelCandidates -ConfigObj $configObj -CatalogModels $catalogModels -ProviderKeys @('1-xkiro-free', '2-xkiro-max')
-        $resolved = Resolve-StarRules -Candidates $bundle.Candidates -Capabilities $caps
+        $bundle = Get-ModelCandidates -ConfigObj $configObj -CatalogModels $catalogModels -ProviderKeys @('1-xkiro-free', '2-xkiro-max') -HealthReportPath (Join-Path $script:repo 'reports\model-health.json')
+        $resolved = Resolve-StarRules -Candidates $bundle.Candidates -Capabilities $caps -Top 3
         $body = New-RecommendStarsMarkdown -Rows $resolved.Rows -Groups $script:Groups -Purposes $script:Purposes
         $docRaw = Get-Content -LiteralPath $script:docPath -Raw -Encoding utf8
         $existing = Get-MarkerBlock -Content $docRaw -Begin '<!-- BEGIN:recommend-stars' -End '<!-- END:recommend-stars -->'

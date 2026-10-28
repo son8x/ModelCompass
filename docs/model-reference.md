@@ -59,8 +59,8 @@
 ## 2. ⭐ Model khuyến nghị xKiro (tự sinh)
 
 <!-- BEGIN:recommend-stars — TỰ SINH bởi scripts/recommend/Update-RecommendDocs.ps1; ĐỪNG sửa tay (chạy `mc recommend-docs` để cập nhật) -->
-> Cập nhật tự động: **26/10/2026** — **13 model** được khuyến nghị
-> (7 free + 6 trả phí) — ⭐ ở đầu `name` trong `/model`. Sinh bởi
+> Cập nhật tự động: **28/10/2026** — **26 model** được khuyến nghị
+> (15 free + 11 trả phí). Tiền tố trong `/model`: ⭐ chính · ✦ dự phòng · · tham khảo. Sinh bởi
 > `scripts/recommend/Update-RecommendDocs.ps1`; chạy `mc recommend-docs` để cập nhật.
 
 **⭐ Theo nhóm** (⭐ = model mặc định nên chọn của nhóm):
@@ -72,20 +72,20 @@
 | [A] Mạnh đa dụng | `google/gemini-3.1-pro` | $2.00 / $12.00 | phân tích/nghiên cứu |
 | [S] Flagship | `openai/gpt-6.1-sol` | $2.00 / $10.00 | flagship |
 
-**⭐ Theo mục đích** (khớp đúng label trong `/model`):
+**⭐/✦/· Theo mục đích** (khớp đúng label trong `/model`):
 
-| Mục đích | ⭐ Trả phí (`2-xkiro-max`) | ⭐ Miễn phí (`1-xkiro-free`) |
+| Mục đích | ⭐/✦/· Trả phí (`2-xkiro-max`) | ⭐/✦/· Miễn phí (`1-xkiro-free`) |
 |---|---|---|
-| reasoning (mặc định) | — | `qwen/qwen3.8-max:free` · 1M |
-| code | `[A] x-ai/grok-4.7` · $2.00 / $6.00 | `qwen/qwen3-coder-plus:free` · 1M |
-| phân tích/nghiên cứu | `[A] google/gemini-3.1-pro` · $2.00 / $12.00 | — |
-| viết/văn phong | `[A] anthropic/claude-sonnet-5` · $2.00 / $10.00 | — |
-| vision (hiểu ảnh) | `[A] google/gemini-3.8-flash` · $0.75 / $3.75 | `qwen/qwen3-vl-plus:free` · 262.1K |
-| omni | — | `qwen/qwen3.8-omni-flash:free` · 1M |
-| dịch | — | `cohere/command-a-translate` · 9K |
-| nhanh/subagent | `[L] nvidia/nemotron-3-nano-omni` · $0.05 / $0.20 | `qwen/qwen3.5-flash:free` · 1M |
-| soạn bài/PPTX | — | `mistralai/mistral-large-4-0` · 524.3K |
-| flagship | `[S] openai/gpt-6.1-sol` · $2.00 / $10.00 | — |
+| reasoning (mặc định) | — | ⭐ `qwen/qwen3.8-max:free` · 1M<br>✦ `qwen/qwen3.7-plus:free` · 1M<br>· `qwen/qwen3.5-plus:free` · 1M |
+| code | ⭐ `[A] x-ai/grok-4.7` · $2.00 / $6.00 | ⭐ `qwen/qwen3-coder-plus:free` · 1M<br>✦ `mistralai/codestral-2508` · 256K<br>· `mistralai/devstral-medium` · 256K |
+| phân tích/nghiên cứu | ⭐ `[A] google/gemini-3.1-pro` · $2.00 / $12.00 | — |
+| viết/văn phong | ⭐ `[A] anthropic/claude-sonnet-5` · $2.00 / $10.00 | — |
+| vision (hiểu ảnh) | ⭐ `[A] google/gemini-3.8-flash` · $0.75 / $3.75<br>✦ `[L] nvidia/nemotron-3-nano-omni` · $0.05 / $0.20<br>· `[L] openai/gpt-6-luna` · $0.10 / $0.50 | ⭐ `qwen/qwen3-vl-plus:free` · 262.1K<br>✦ `qwen/qwen3.8-max:free` · 1M<br>· `qwen/qwen3.7-plus:free` · 1M |
+| omni | — | ⭐ `qwen/qwen3.8-omni-flash:free` · 1M<br>✦ `qwen/qwen3.5-omni-plus:free` · 262.1K<br>· `qwen/qwen3.5-omni-flash:free` · 262.1K |
+| dịch | — | ⭐ `cohere/command-a-translate` · 9K<br>✦ `cohere/north-small-translate` · 32.8K |
+| nhanh/subagent | ⭐ `[L] nvidia/nemotron-3-nano-omni` · $0.05 / $0.20<br>✦ `[L] xiaomi/mimo-v2.6-flash` · $0.14 / $0.28<br>· `[L] google/gemini-2.5-flash` · $0.30 / $2.50 | ⭐ `qwen/qwen3.5-flash:free` · 1M<br>✦ `qwen/qwen3.7-flash:free` · 1M<br>· `qwen/qwen3.8-omni-flash:free` · 1M |
+| soạn bài/PPTX | — | ⭐ `mistralai/mistral-large-4-0` · 524.3K |
+| flagship | ⭐ `[S] openai/gpt-6.1-sol` · $2.00 / $10.00<br>✦ `[S] openai/gpt-6-sol` · $2.00 / $10.00<br>· `[S] openai/gpt-5.6-sol` · $2.00 / $10.00 | — |
 <!-- END:recommend-stars -->
 
 > **Lưu ý chọn model:**

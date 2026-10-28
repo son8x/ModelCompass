@@ -32,6 +32,9 @@
 .PARAMETER Check
     KHÔNG ghi — chỉ so khối hiện có với nội dung vừa sinh; exit 1 nếu lệch (dùng cho CI).
 
+.PARAMETER Top
+    Số ứng viên mỗi mục đích/scope (1 ⭐ chính + dự phòng). Mặc định: 3.
+
 .PARAMETER SkipRun
     Chỉ nạp định nghĩa function (dùng cho test dot-source), không chạy.
 #>
@@ -43,7 +46,8 @@ param(
     [string]$CapabilitiesPath,
     [string[]]$Provider,
     [switch]$Check,
-    [switch]$SkipRun
+    [switch]$SkipRun,
+    [int]$Top = 3
 )
 Set-StrictMode -Version Latest
 
@@ -55,6 +59,7 @@ $urdConfig    = $ConfigPath
 $urdCatalog   = $CatalogPath
 $urdCapPath   = $CapabilitiesPath
 $urdProvider  = @($Provider)
+$urdTop       = [int]$Top
 
 . (Join-Path (Split-Path -Parent $PSScriptRoot) 'Common-Functions.ps1')
 # Format-Price (Compare-Prices) + Resolve-TierFromName / Resolve-TierFromPrice (Update-XKiroModels).
@@ -71,6 +76,7 @@ $ConfigPath       = $urdConfig
 $CatalogPath      = $urdCatalog
 $CapabilitiesPath = $urdCapPath
 $Provider         = $urdProvider
+$Top              = $urdTop
 
 # Marker bao vùng tự sinh (khớp cả khi có phần mô tả sau tên marker).
 $script:BlockBegin = '<!-- BEGIN:recommend-stars'
@@ -131,7 +137,7 @@ function New-RecommendStarsMarkdown {
 
     $lines = [System.Collections.Generic.List[string]]::new()
     $lines.Add("> Cập nhật tự động: **$Date** — **$($keys.Count) model** được khuyến nghị")
-    $lines.Add("> ($freeCount free + $paidCount trả phí) — ⭐ ở đầu ``name`` trong ``/model``. Sinh bởi")
+    $lines.Add("> ($freeCount free + $paidCount trả phí). Tiền tố trong ``/model``: ⭐ chính · ✦ dự phòng · · tham khảo. Sinh bởi")
     $lines.Add('> `scripts/recommend/Update-RecommendDocs.ps1`; chạy `mc recommend-docs` để cập nhật.')
     $lines.Add('')
     $lines.Add('**⭐ Theo nhóm** (⭐ = model mặc định nên chọn của nhóm):')
@@ -148,22 +154,35 @@ function New-RecommendStarsMarkdown {
         $lines.Add("| $tag | ``$($c.Id)`` | $(Format-RecommendPricePair $c) | $useLabel |")
     }
     $lines.Add('')
-    $lines.Add(('**⭐ Theo mục đích** (khớp đúng label trong `/model`):'))
+    $lines.Add('**⭐/✦/· Theo mục đích** (khớp đúng label trong `/model`):')
     $lines.Add('')
-    $lines.Add("| Mục đích | ⭐ Trả phí (``$MaxProvider``) | ⭐ Miễn phí (``$FreeProvider``) |")
+    $lines.Add("| Mục đích | ⭐/✦/· Trả phí (``$MaxProvider``) | ⭐/✦/· Miễn phí (``$FreeProvider``) |")
     $lines.Add('|---|---|---|')
+    $tierRank = @{ primary = 0; fallback = 1; alt = 2 }
+    $tierOf = {
+        param($Row)
+        $p = $Row.PSObject.Properties['Tier']
+        if ($null -ne $p -and -not [string]::IsNullOrWhiteSpace([string]$p.Value)) { return [string]$p.Value }
+        return 'primary'
+    }
     foreach ($spec in @($Purposes)) {
-        $paid = @($purposeRows | Where-Object { $_.Key -eq $spec.Id -and $_.Scope -eq 'paid' }) | Select-Object -First 1
-        $free = @($purposeRows | Where-Object { $_.Key -eq $spec.Id -and $_.Scope -eq 'free' }) | Select-Object -First 1
-        if ($null -eq $paid -and $null -eq $free) { continue }
+        $paidRows = @($purposeRows | Where-Object { $_.Key -eq $spec.Id -and $_.Scope -eq 'paid' } |
+            Sort-Object { $r = & $tierOf $_; if ($tierRank.ContainsKey($r)) { $tierRank[$r] } else { 9 } })
+        $freeRows = @($purposeRows | Where-Object { $_.Key -eq $spec.Id -and $_.Scope -eq 'free' } |
+            Sort-Object { $r = & $tierOf $_; if ($tierRank.ContainsKey($r)) { $tierRank[$r] } else { 9 } })
+        if ($paidRows.Count -eq 0 -and $freeRows.Count -eq 0) { continue }
         $paidCell = '—'; $freeCell = '—'
-        if ($null -ne $paid) {
-            $c = $paid.Candidate
-            $paidCell = "``[$($c.Group)] $($c.Id)`` · $(Format-RecommendPricePair $c)"
+        if ($paidRows.Count -gt 0) {
+            $paidCell = (@($paidRows | ForEach-Object {
+                $c = $_.Candidate
+                "$(Get-TierPrefix (& $tierOf $_)) ``[$($c.Group)] $($c.Id)`` · $(Format-RecommendPricePair $c)"
+            }) -join '<br>')
         }
-        if ($null -ne $free) {
-            $c = $free.Candidate
-            $freeCell = "``$($c.Id)`` · $(Format-RecommendContext $c)"
+        if ($freeRows.Count -gt 0) {
+            $freeCell = (@($freeRows | ForEach-Object {
+                $c = $_.Candidate
+                "$(Get-TierPrefix (& $tierOf $_)) ``$($c.Id)`` · $(Format-RecommendContext $c)"
+            }) -join '<br>')
         }
         $lines.Add("| $($spec.Label) | $paidCell | $freeCell |")
     }
@@ -240,9 +259,10 @@ Write-Step "TÀI LIỆU ⭐ xKiro — $mode"
 $capabilities = Read-ModelCapabilities -Path $CapabilitiesPath
 $configObj = Get-ConfigContent $ConfigPath
 $catalogModels = @((Get-Content -LiteralPath $CatalogPath -Raw -Encoding utf8 | ConvertFrom-Json).models)
+$healthPath = Join-Path $repo 'reports\model-health.json'
 
-$bundle = Get-ModelCandidates -ConfigObj $configObj -CatalogModels $catalogModels -ProviderKeys $selected
-$resolved = Resolve-StarRules -Candidates $bundle.Candidates -Capabilities $capabilities
+$bundle = Get-ModelCandidates -ConfigObj $configObj -CatalogModels $catalogModels -ProviderKeys $selected -HealthReportPath $healthPath
+$resolved = Resolve-StarRules -Candidates $bundle.Candidates -Capabilities $capabilities -Top $Top
 
 $body = New-RecommendStarsMarkdown -Rows $resolved.Rows -Groups $script:StarGroups -Purposes $script:StarPurposes
 $docsRaw = Get-Content -LiteralPath $DocsPath -Raw -Encoding utf8

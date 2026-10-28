@@ -429,6 +429,11 @@ Describe 'Remove-HandAnnotation' {
         Remove-HandAnnotation '⭐⚡Qwen3.8 Max · 1M' | Should -Be '⭐Qwen3.8 Max · 1M'
         Remove-HandAnnotation '🆕🐌Model E · 16K' | Should -Be '🆕Model E · 16K'
     }
+    It 'gỡ badge sức khoẻ NHƯNG giữ tier ✦/· (recommend quản lý)' {
+        Remove-HandAnnotation '✦ ⚡[L] Model F · 128K' | Should -Be '✦ [L] Model F · 128K'
+        Remove-HandAnnotation '· 🐌[A] Model G · 256K' | Should -Be '· [A] Model G · 256K'
+        Remove-HandAnnotation '⭐ ⛔[S] Model H · 512K' | Should -Be '⭐ [S] Model H · 512K'
+    }
 }
 
 Describe 'Set-ProviderNameLine' {
